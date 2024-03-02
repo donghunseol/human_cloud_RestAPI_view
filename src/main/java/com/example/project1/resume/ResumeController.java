@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
-    @GetMapping("resume" )
+    @GetMapping("/resume" )
     public String index() {
         return "resume/main";
     }
@@ -17,7 +17,7 @@ public class ResumeController {
         return "resume/saveForm";
     }
 
-    @GetMapping("resumeg/updateForm")
+    @GetMapping("/resume/updateForm")
     public String updateForm(){
         return "resume/updateForm";
     }
