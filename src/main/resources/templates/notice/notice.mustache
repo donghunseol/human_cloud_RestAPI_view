@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>companyDetail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header class="w-100 bg-white">
+        <nav class="navbar navbar-expand-sm bg-withe navbar-withe border-bottom d-flex justify-content-between pb-3 pt-3"
+            style="padding: 30px 150px;">
+            <div class="container-fluid mx-5">
+                <a class="navbar-brand" href="../index/index.html">
+                    <img src="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/img/shine_logo.png" style="height: 60px; width: 150px;">
+                </a>
+                <div class="d-flex justify-content-start">
+                    <form action="../index/index.html" class="d-flex justify-content-center">
+                        <input type="search" class="form-control border-0" placeholder="통합 검색">
+                        <button class="btn btn-outline-success border-0 text-black" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/user/joinForm.html">회원가입</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/user/loginForm.html">로그인</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index/index.html">로그아웃</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html">마이페이지</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../board/boardList1.html">게시판</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="bg-light mw-100 m-0 d-flex justify-content-center" style="padding: 30px 150px;">
+        <div class="container mx-5 border bg-white rounded-3 border-white pt-3 p-3">
+            <div>
+                <img src="/images/company_logo.png" style="width: 8%; height: 8%;">
+                <h2><b>어라운드더코너</b></h2>
+                <h5>Around The Corner</h5>
+            </div>
+            <div class="card" style="text-align: center; margin: 30px;">
+                <img src="/images/company.png" class="card-img-top" alt="...">
+                <div class="card text-center">
+    
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#a">기업 소개</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#b">구성원</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#c">기업 정보</a>
+                        </li>
+                    </ul>
+    
+    
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="a" style="margin: 10px;">
+                            <h5 class="card-title"><b>기업 문화</b></h5>
+                            <p class="card-text">
+                                - 자유로운 연차/반차 사용을 통해 팀의 생산성 향상을 지원합니다<br>
+                                - 주제에 상관없이 자유로운 의견 공유를 지향합니다<br>
+                                - 팀원 각자의 의견과 전문 영역을 존중하여 의사소통합니다<br>
+                            </p>
+                            <a href="https://www.arndcn.com" class="btn" style="background-color:#e7585f; color: azure;">회사
+                                홈페이지</a>
+                        </div>
+    
+                        <div class="tab-pane fade" id="b" style="margin: 10px;">
+                            <h5 class="card-title"><b>구성원</b></h5>
+                            <p class="card-text">
+                                - 구성원1<br>
+                                - 구성원2<br>
+                                - 구성원3<br>
+                                - 구성원4<br>
+                                - 구성원5<br>
+                            </p>
+                        </div>
+    
+                        <div class="tab-pane fade" id="c" style="margin: 10px;">
+                            <h5 class="card-title"><b>기업 정보</b></h5>
+                            <p class="card-text">
+                                - 있겠냐?
+                            </p>
+                            <a href="https://www.arndcn.com" class="btn" style="background-color:#e7585f; color: azure;">회사
+                                홈페이지</a>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer style="padding: 30px 200px;">
+        <div class="border-top border-top-0">
+            <span class="h4">Created by Team 3</span>
+            <hr>
+            <div class="d-flex lh-lg">
+                <a href="#" class="text-black text-decoration-none pe-3">회사소개</a>
+                <a href="#" class="text-black text-decoration-none pe-3">고객센터</a>
+                <a href="#" class="text-black text-decoration-none pe-3">오시는길</a>
+                <a href="#" class="text-black text-decoration-none pe-3">서비스 소개</a>
+                <a href="#" class="text-black text-decoration-none pe-3">서비스 약관</a>
+                <a href="#" class="text-black text-decoration-none pe-3">도움말</a>
+            </div>
+            <hr>
+            <div class="d-flex flex-column">
+                <span class="lh-lg">☎ 010-2222-7777</span>
+                <span class="fw-bold">© 2023. Alicorn, Inc. all rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
