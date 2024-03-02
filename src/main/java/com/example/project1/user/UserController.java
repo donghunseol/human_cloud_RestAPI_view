@@ -1,4 +1,4 @@
-gpackage com.example.project1.user;
+package com.example.project1.user;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
