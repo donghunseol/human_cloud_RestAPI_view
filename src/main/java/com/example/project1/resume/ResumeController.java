@@ -17,7 +17,7 @@ public class ResumeController {
         return "resume/saveForm";
     }
 
-    @GetMapping("board/updateForm")
+    @GetMapping("resume/updateForm")
     public String updateForm(){
         return "resume/updateForm";
     }
