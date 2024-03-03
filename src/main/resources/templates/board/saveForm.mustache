@@ -1,23 +1,23 @@
 {{> layout/header}}
 
-    <!-- boardWrite -->
-    <section style="padding: 20px; background-color: #f8f9fa; padding: 30px 200px;">
-        <div class="container bg-white p-3 rounded-3">
-            <header class="board_title">
-                <h1><strong>커뮤니티 게시판</strong></h1>
-                <p>여러분의 의견을 자유롭게 작성해 주세요!</p>
-            </header>
-            <div class="board_rewrite_wrap">
-                <div class="board_rewrite">
-                    <div class="title"
-                        style="padding: 20px 15px; border-top: 2px solid; border-bottom: 1px dashed #ddd; margin-left: 60px; font-size: 20px;">
-                        <dl>
-                            <dt>제목</dt>
-                            <dd><input type="text" placeholder="제목 입력" value=""></dd>
-                        </dl>
-                    </div>
-                    <div class="content"
-                        style="padding: 15px;border-bottom: 1px solid #000;line-height: 160%;font-size: 20px;">
+<!-- boardWrite -->
+<section style="padding: 20px; background-color: #f8f9fa; padding: 30px 200px;">
+    <div class="container bg-white p-3 rounded-3">
+        <header class="board_title">
+            <h1><strong>커뮤니티 게시판</strong></h1>
+            <p>여러분의 의견을 자유롭게 작성해 주세요!</p>
+        </header>
+        <div class="board_rewrite_wrap">
+            <div class="board_rewrite">
+                <div class="title"
+                     style="padding: 20px 15px; border-top: 2px solid; border-bottom: 1px dashed #ddd; margin-left: 60px; font-size: 20px;">
+                    <dl>
+                        <dt>제목</dt>
+                        <dd><input type="text" placeholder="제목 입력" value=""></dd>
+                    </dl>
+                </div>
+                <div class="content"
+                     style="padding: 15px;border-bottom: 1px solid #000;line-height: 160%;font-size: 20px;">
                         <textarea class="border" placeholder="내용 입력" style=" display: inline-block;
                     width: 100%;
                     height: 300px;
@@ -27,17 +27,17 @@
                     margin-right: 30px;
                     resize: vertical;">
                    </textarea>
-                    </div>
-                </div>
-                <div class="bt_wrap" style="text-align: center; margin-top: 15px;">
-                    <a href="boardList1.html" class="on"
-                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
-                    <a href="boardList1.html" class="on"
-                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">취소</a>
                 </div>
             </div>
+            <div class="bt_wrap" style="text-align: center; margin-top: 15px;">
+                <a href="/board" class="on"
+                   style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
+                <a href="/board" class="on"
+                   style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">취소</a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 {{> layout/footer}}

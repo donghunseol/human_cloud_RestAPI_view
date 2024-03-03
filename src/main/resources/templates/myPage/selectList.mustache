@@ -1,97 +1,82 @@
 {{> layout/header}}
 
-    <main class="box">
-        <div class="box_ui bg-light" style="padding: 30px 200px;">
-            <div class="ui_content d-flex justify-content-center">
-                <div class="content_list" style="width: calc(100% - 300px);">
-                    <!-- 지원 현황 -->
-                    <div id="list_user_modify"
-                        class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
-                        style="margin-right: 20px; padding: 20px;">
-                        <div class="item_resume">
-                            <span class="resume_correction h5 fw-bold">지원 현황</span>
-                            <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                                <form action="#" class="w-100">
-
-                                    <div class="card mb-3">
-                                        <div class="card-body d-flex justify-content-between text-secondary m-2">
-                                            <div>
-                                                <p class="mb-0"><small>엠디비(MDB)</small></p>
-                                                <p class="card-title mb-0"><strong>React(Next.js) 프론트 엔드 웹 개발자 -
-                                                        팀장</strong></p>
-                                                <p class="card-text mb-0"><small>4,000 - 5,600만원 / 경력</small></p>
-                                                <p class="card-text"><small> 03/31 마감 02/27 수정</small></p>
-                                            </div>
-                                            <div class="row">
-                                                <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary mb-1">상세보기</button>
-                                                <button onclick="location.href='../resume/updateForm.mustache'"
-                                                    type="button" class="btn btn-outline-secondary mb-1">수정</button>
-                                                <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary">삭제</button>
-                                            </div>
+<main class="box">
+    <div class="box_ui bg-light" style="padding: 30px 200px;">
+        <div class="ui_content d-flex justify-content-center">
+            <div class="content_list" style="width: calc(100% - 300px);">
+                <!-- 지원 현황 -->
+                <div id="list_user_modify"
+                     class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
+                     style="margin-right: 20px; padding: 20px;">
+                    <div class="item_resume">
+                        <span class="resume_correction h5 fw-bold">지원 현황</span>
+                        <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
+                            <form class="w-100">
+                                <div class="card mb-3">
+                                    <div class="card-body d-flex justify-content-between text-secondary m-2">
+                                        <div>
+                                            <p class="mb-0"><small>엠디비(MDB)</small></p>
+                                            <p class="card-title mb-0"><strong>React(Next.js) 프론트 엔드 웹 개발자 -
+                                                팀장</strong></p>
+                                            <p class="card-text mb-0"><small>4,000 - 5,600만원 / 경력</small></p>
+                                            <p class="card-text"><small> 03/31 마감 02/27 수정</small></p>
+                                        </div>
+                                        <div class="row">
+                                            <button onclick="location.href='#'" type="button"
+                                                    class="btn btn-outline-secondary mb-1">상세보기
+                                            </button>
+                                            <button onclick="location.href='/resume/updateForm'"
+                                                    type="button" class="btn btn-outline-secondary mb-1">수정
+                                            </button>
+                                            <button onclick="location.href='#'" type="button"
+                                                    class="btn btn-outline-secondary">삭제
+                                            </button>
                                         </div>
                                     </div>
-
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                </div>
 
-                    <!-- 지원 현황
-                    <div id="list_user_modify"
-                        class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
-                        style="margin-right: 20px; padding: 20px;">
-                        <div class="item_resume">
-                            <span class="resume_correction h5 fw-bold">지원 현황</span>
-                            <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                                <form action="#" class="w-100">
+                <!-- 지원 현황
+                <div id="list_user_modify"
+                    class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
+                    style="margin-right: 20px; padding: 20px;">
+                    <div class="item_resume">
+                        <span class="resume_correction h5 fw-bold">지원 현황</span>
+                        <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
+                            <form action="#" class="w-100">
 
-                                    <div class="card mb-3">
-                                        <div class="card-body d-flex justify-content-between text-secondary m-2">
-                                            <div>
-                                                <p class="mb-0"><small>엠디비(MDB)</small></p>
-                                                <p class="card-title mb-0"><strong>React(Next.js) 프론트 엔드 웹 개발자 -
-                                                        팀장</strong></p>
-                                                <p class="card-text mb-0"><small>4,000 - 5,600만원 / 경력</small></p>
-                                                <p class="card-text"><small> 03/31 마감 02/27 수정</small></p>
-                                                <p class="card-text"><small>지원자 : 김민수</small></p>
-                                            </div>
-                                            <div class="row">
-                                                <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary mb-1">상세보기</button>
-                                                <button onclick="location.href='../resume/update_resume.html'"
-                                                    type="button" class="btn btn-outline-secondary mb-1">합격</button>
-                                                <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary">불합격</button>
-                                            </div>
+                                <div class="card mb-3">
+                                    <div class="card-body d-flex justify-content-between text-secondary m-2">
+                                        <div>
+                                            <p class="mb-0"><small>엠디비(MDB)</small></p>
+                                            <p class="card-title mb-0"><strong>React(Next.js) 프론트 엔드 웹 개발자 -
+                                                    팀장</strong></p>
+                                            <p class="card-text mb-0"><small>4,000 - 5,600만원 / 경력</small></p>
+                                            <p class="card-text"><small> 03/31 마감 02/27 수정</small></p>
+                                            <p class="card-text"><small>지원자 : 김민수</small></p>
+                                        </div>
+                                        <div class="row">
+                                            <button onclick="location.href='#'" type="button"
+                                                class="btn btn-outline-secondary mb-1">상세보기</button>
+                                            <button onclick="location.href='../resume/update_resume.html'"
+                                                type="button" class="btn btn-outline-secondary mb-1">합격</button>
+                                            <button onclick="location.href='#'" type="button"
+                                                class="btn btn-outline-secondary">불합격</button>
                                         </div>
                                     </div>
+                                </div>
 
-                                </form>
-                            </div>
+                            </form>
                         </div>
-                    </div> -->
-
-
-                </div>
-                <!-- 사이드바 -->
-                <div class="content_sidebar d-flex flex-column bg-white rounded-3 h-100"
-                    style="width: 300px;margin: 0px 20px;padding: 20px;">
-                    <span class="h5 fw-bold pb-2">내 목록</span>
-                    <form class="sidebar_box d-flex flex-column mb-3" action="#">
-                        <a href="../user/updateForm.mustache"
-                            class="sidebar_link text-black text-decoration-none pb-3">회원 정보 수정</a>
-                        <a href="../resume/saveForm.mustache"
-                            class="sidebar_link text-black text-decoration-none pb-3">이력서 작성</a>
-                        <a href="../sclap/sclap.html" class="sidebar_link text-black text-decoration-none pb-3">스크랩</a>
-                        <a href="../userMyPage/myPagePickList.html"
-                            class="sidebar_link text-black text-decoration-none pb-3">지원 현황</a>
-                        <a href="../index/index.html" class="sidebar_link text-black text-decoration-none">회원탈퇴</a>
-                    </form>
-                </div>
+                    </div>
+                </div> -->
             </div>
+            {{> layout/sidebar}}
         </div>
-    </main>
+    </div>
+</main>
 
 {{> layout/footer}}

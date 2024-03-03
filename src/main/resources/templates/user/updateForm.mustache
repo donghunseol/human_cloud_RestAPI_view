@@ -1,74 +1,59 @@
 {{> layout/header}}
 
-    <main class="box">
-        <div class="box_ui bg-light" style="padding: 30px 200px;">
-            <div class="ui_content d-flex justify-content-center">
-                <div class="content_list" style="width: calc(100% - 300px);">
+<main class="box">
+    <div class="box_ui bg-light" style="padding: 30px 200px;">
+        <div class="ui_content d-flex justify-content-center">
+            <div class="content_list" style="width: calc(100% - 300px);">
 
-                    <!-- 회원 정보 수정 화면 -->
-                    <div id="list_user_modify"
-                        class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
-                        style="margin-right: 20px; padding: 20px;">
-                        <div class="item_resume">
-                            <span class="resume_correction h5 fw-bold">회원 정보 수정</span>
-                            <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                                <form action="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html" class="w-100">
-                                    <div class="list_name pb-3">
-                                        <div>이름</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                            name="username" id="username">
-                                    </div>
-                                    <div class="list_name pb-3">
-                                        <div>비밀번호</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                            name="password" id="password">
-                                    </div>
-                                    <div class="list_name pb-3">
-                                        <div>비밀번호 확인</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                            name="password" id="password">
-                                    </div>
-                                    <div class="list_phone pb-3">
-                                        <div>전화 번호</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="tel"
-                                            name="phone" id="phone">
-                                    </div>
-                                    <div class="list_email pb-3">
-                                        <div>email</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="email"
-                                            name="email" id="email">
-                                    </div>
-                                    <div class="list_address pb-3">
-                                        <div>주소</div>
-                                        <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                            name="address" id="address">
-                                    </div>
-                                    <button type="submit" class="btn btn-outline-dark">회원 정보 수정 완료</button>
-                                </form>
-                            </div>
+                <!-- 회원 정보 수정 화면 -->
+                <div id="list_user_modify"
+                     class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
+                     style="margin-right: 20px; padding: 20px;">
+                    <div class="item_resume">
+                        <span class="resume_correction h5 fw-bold">회원 정보 수정</span>
+                        <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
+                            <form action="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html"
+                                  class="w-100">
+                                <div class="list_name pb-3">
+                                    <div>이름</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="text"
+                                           name="username" id="username">
+                                </div>
+                                <div class="list_name pb-3">
+                                    <div>비밀번호</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="text"
+                                           name="password" id="password">
+                                </div>
+                                <div class="list_name pb-3">
+                                    <div>비밀번호 확인</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="text"
+                                           name="password" id="password">
+                                </div>
+                                <div class="list_phone pb-3">
+                                    <div>전화 번호</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="tel"
+                                           name="phone" id="phone">
+                                </div>
+                                <div class="list_email pb-3">
+                                    <div>email</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="email"
+                                           name="email" id="email">
+                                </div>
+                                <div class="list_address pb-3">
+                                    <div>주소</div>
+                                    <input class="w-100 py-1 border border-secondary rounded-1" type="text"
+                                           name="address" id="address">
+                                </div>
+                                <button type="submit" class="btn btn-outline-dark">회원 정보 수정 완료</button>
+                            </form>
                         </div>
                     </div>
-
-                </div>
-
-                <!-- 사이드바 -->
-                <div class="content_sidebar d-flex flex-column bg-white rounded-3 h-100"
-                    style="width: 300px;margin: 0px 20px;padding: 20px;">
-                    <span class="h5 fw-bold pb-2">내 목록</span>
-                    <form class="sidebar_box d-flex flex-column mb-3" action="#">
-                        <a href="../user/updateForm.html"
-                            class="sidebar_link text-black text-decoration-none pb-3">회원 정보 수정</a>
-                        <a href="../resume/saveForm.mustache"
-                            class="sidebar_link text-black text-decoration-none pb-3">이력서 작성</a>
-                        <a href="../sclap/sclap.html" class="sidebar_link text-black text-decoration-none pb-3">스크랩</a>
-                        <a href="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPagePickList.html"
-                            class="sidebar_link text-black text-decoration-none pb-3">지원 현황</a>
-                        <a href="../index/index.html" class="sidebar_link text-black text-decoration-none">회원탈퇴</a>
-                    </form>
                 </div>
             </div>
+            {{> layout/sidebar}}
         </div>
-    </main>
+    </div>
+</main>
 
 
 {{> layout/footer}}
