@@ -2,7 +2,7 @@
 
 <div class="mw-100 bg-light" style="padding: 30px 200px;">
     <div class="d-flex">
-        <div class="container">
+        <form action="/myPage" class="container">
             <h3 class="container d-flex pb-3">기업 공고 작성</h3>
             <!-- 기본 정보 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
@@ -79,16 +79,14 @@
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-center mt-3">
-                <button onclick="location.href='../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html'"
-                        type="button"
-                        class="btn btn-secondary">작성완료
+                <button type="submit" class="btn btn-secondary">작성완료
                 </button>
-                <button onclick="location.href='../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html'"
+                <button onclick="location.href='/myPage'"
                         type="button"
                         class="btn btn-outline-secondary">취소
                 </button>
             </div>
-        </div>
+        </form>
         {{> layout/sidebar}}
     </div>
 </div>
