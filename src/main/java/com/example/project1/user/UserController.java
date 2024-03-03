@@ -14,14 +14,19 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping("/loginForm")
+    @PostMapping("/user/loginForm")
     public String login(){
         return "user/loginForm";
     }
 
-    @GetMapping("/joinForm")
+    @PostMapping("/user/joinForm")
     public String join(){
         return "user/joinForm";
+    }
+
+    @GetMapping("/user/updateForm")
+    public String update(){
+        return "user/updateForm";
     }
 
     @GetMapping("/logout")

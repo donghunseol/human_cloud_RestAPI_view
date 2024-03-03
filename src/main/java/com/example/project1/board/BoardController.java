@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
-    @GetMapping("board" )
+    @GetMapping("/board" )
     public String index() {
         return "board/main";
     }
@@ -17,7 +17,7 @@ public class BoardController {
         return "board/saveForm";
     }
 
-    @GetMapping("board/updateForm")
+    @GetMapping("/board/updateForm")
     public String updateForm(){
         return "board/updateForm";
     }
