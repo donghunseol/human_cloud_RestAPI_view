@@ -33,8 +33,17 @@ public class NoticeRepository {
 
     // 저장
     @Transactional
-    public void save(){
+    public void save(NoticeRequest.SaveDTO requestDTO, int userId){
+        Query query = em.createNativeQuery("insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at) values (?, ?, ?, ?, ?, ?, ?, now())");
+        query.setParameter(1, userId);
+        query.setParameter(2, requestDTO.getTitle());
+        query.setParameter(3, requestDTO.getType());
+        query.setParameter(4, requestDTO.getField());
+        query.setParameter(5, requestDTO.getWork_place());
+        query.setParameter(6, requestDTO.getContent());
+        query.setParameter(7, requestDTO.getDeadline());
 
+        query.executeUpdate();
     }
 
     // 삭제

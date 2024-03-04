@@ -1,9 +1,12 @@
 package com.example.project1.notice;
 
+import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -11,6 +14,7 @@ import java.util.List;
 @Controller
 public class NoticeController {
 
+    private final HttpSession session;
     private final NoticeRepository noticeRepository;
 
     @GetMapping("/notice" )
@@ -23,7 +27,28 @@ public class NoticeController {
 
     @GetMapping("/notice/saveForm")
     public String saveForm() {
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//
+//        if(sessionUser == null){
+//            return "redirect:user/loginForm";
+//        }
+
         return "notice/saveForm";
+    }
+
+    @PostMapping("/notice/save")
+    public String save(NoticeRequest.SaveDTO requestDTO, HttpServletRequest request){
+        // 인증체크
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        if(sessionUser == null){
+//            return "redirect:user/loginForm";
+//        }
+
+        // Model 위임
+        noticeRepository.save(requestDTO, 1);
+
+        System.out.println(requestDTO);
+        return "redirect:/notice";
     }
 
     @GetMapping("/notice/1")
