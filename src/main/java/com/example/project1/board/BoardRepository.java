@@ -13,6 +13,9 @@ import java.util.List;
 public class BoardRepository {
     private final EntityManager em;
 
+    // 삭제 위한 부분 조회
+
+
     // 부분 조회
     public BoardResponse.DetailDTO findById(int idx) {
         Query query = em.createNativeQuery("select b.id, b.title, b.content, b.user_id, u.username from board_tb b inner join user_tb u on b.user_id = u.id where b.id = ?");
@@ -26,15 +29,15 @@ public class BoardRepository {
         String content = (String) row[3];
         String username = (String) row[4];
 
-        System.out.println("id: " +id);
-        System.out.println("userId: " +userId);
-        System.out.println("title: " +title);
-        System.out.println("content: " +content);
-        System.out.println("username: " +username);
+//        System.out.println("id: " +id);
+//        System.out.println("userId: " +userId);
+//        System.out.println("title: " +title);
+//        System.out.println("content: " +content);
+//        System.out.println("username: " +username);
 
         BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO();
         responseDTO.setId(id);
-        responseDTO.setUserId(userId);
+        responseDTO.setUser_id(userId);
         responseDTO.setTitle(title);
         responseDTO.setContent(content);
         responseDTO.setUsername(username);

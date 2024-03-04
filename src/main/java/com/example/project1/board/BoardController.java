@@ -18,6 +18,8 @@ public class BoardController {
     private final HttpSession session;
     private final BoardRepository boardRepository;
 
+
+
     @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request){
 
@@ -75,7 +77,7 @@ public class BoardController {
         if (sessionUser == null){
             pageOwner = false;
         } else {
-            int boardId = responseDTO.getUserId();
+            int boardId = responseDTO.getUser_id();
             int loginUserId = sessionUser.getId();
             pageOwner = boardId == loginUserId;
         }
