@@ -18,16 +18,16 @@ public class BoardController {
 
     @PutMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) {
-            return "redirect:/loginForm";
-        }
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        if (sessionUser == null) {
+//            return "redirect:/loginForm";
+//        }
 
-        Board board = boardRepository.findId(id);
-
-        if (board.getUser_id() != sessionUser.getId()){
-            return "error/403";
-        }
+//        Board board = boardRepository.findId(id);
+//
+//        if (board.getUser_id() != sessionUser.getId()){
+//            return "error/403";
+//        }
 
         boardRepository.update(requestDTO, id);
 
