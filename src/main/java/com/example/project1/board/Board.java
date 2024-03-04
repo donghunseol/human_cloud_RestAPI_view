@@ -22,5 +22,5 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }
