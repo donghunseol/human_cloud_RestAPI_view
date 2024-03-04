@@ -14,6 +14,13 @@ public class BoardRepository {
     private final EntityManager em;
 
     // 삭제 위한 부분 조회
+    public Board findByIdForDelete(int id){
+        Query query = em.createNativeQuery("select * from board_tb where id = ?", Board.class);
+        query.setParameter(1, id);
+
+        Board board = (Board) query.getSingleResult();
+        return board;
+    }
 
 
     // 부분 조회
@@ -65,8 +72,10 @@ public class BoardRepository {
 
     // 삭제
     @Transactional
-    public void deleteById(){
-
+    public void deleteById(int id){
+        Query query = em.createNativeQuery("delete from board_tb where id = ?");
+        query.setParameter(1, id);
+        query.executeUpdate();
     }
 
     // 수정

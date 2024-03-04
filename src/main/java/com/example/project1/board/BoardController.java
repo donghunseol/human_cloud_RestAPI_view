@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,26 @@ public class BoardController {
     private final HttpSession session;
     private final BoardRepository boardRepository;
 
+    @DeleteMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id, HttpServletRequest request){
 
+        // 인증
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+        // 권한
+        Board board = boardRepository.findByIdForDelete(id);
+//        if (board.getUser_id() != sessionUser.getId()) {
+//            request.setAttribute("status", 403);
+//            request.setAttribute("msg", "게시글 삭제 권한이 없습니다");
+//            return "error/40x";
+//        }
+
+        boardRepository.deleteById(id);
+        return "redirect:/";
+    }
 
     @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request){
