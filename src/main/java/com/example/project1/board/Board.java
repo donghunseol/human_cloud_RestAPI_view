@@ -23,6 +23,4 @@ public class Board {
     private String content;
 
     private Timestamp created_at;
-
-    private Integer view_count;
 }
