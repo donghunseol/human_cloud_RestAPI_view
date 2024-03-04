@@ -33,5 +33,5 @@ public class Notice {
     private String deadline;
 
     @Column(nullable = false)
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserController {
     @GetMapping("/")
-    public String index(){
+    public String index(HttpServletRequest request){
+        request.setAttribute("noticeList", 2);
+        request.setAttribute("isScrap", true);
+        request.setAttribute("scrapCount", 2);
+
         return "index";
     }
 
