@@ -29,7 +29,7 @@ public class BoardController {
         }
 
         // 권한
-        Board board = boardRepository.findByIdForDelete(id);
+        Board board = boardRepository.findId(id);
 //        if (board.getUser_id() != sessionUser.getId()) {
 //            request.setAttribute("status", 403);
 //            request.setAttribute("msg", "게시글 삭제 권한이 없습니다");
@@ -82,7 +82,22 @@ public class BoardController {
     }
 
     @GetMapping("/board/updateForm")
-    public String updateForm(){
+    public String updateForm(@PathVariable int id, HttpServletRequest request ){
+//        //인증
+//        User sessionUser = (User) session.getAttribute("sessionUser");
+//        if(sessionUser == null){
+//            return "redirect:/loginForm";
+//        }
+//
+//        //권한
+//        Board board = boardRepository.findId(id);
+//
+//        if(board.getUser_id() != sessionUser.getId()){
+//            return "error/403";
+//        }
+//        //담기
+//        request.setAttribute("board",board);
+
         return "board/updateForm";
     }
 

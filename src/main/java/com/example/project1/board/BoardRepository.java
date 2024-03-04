@@ -13,8 +13,8 @@ import java.util.List;
 public class BoardRepository {
     private final EntityManager em;
 
-    // 삭제 위한 부분 조회
-    public Board findByIdForDelete(int id){
+    // 수정, 삭제 위한 부분 조회
+    public Board findId(int id){
         Query query = em.createNativeQuery("select * from board_tb where id = ?", Board.class);
         query.setParameter(1, id);
 
