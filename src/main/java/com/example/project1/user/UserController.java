@@ -1,6 +1,7 @@
 package com.example.project1.user;
 
 import jdk.swing.interop.SwingInterOpUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,9 @@ public class UserController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public String index() {
+
+    public String index(HttpServletRequest request){
+        request.setAttribute("isScrap", true);
         return "index";
     }
 
