@@ -14,7 +14,7 @@ public class User {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer username;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -40,5 +40,5 @@ public class User {
     private Integer role;
 
     @Column(nullable = false)
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

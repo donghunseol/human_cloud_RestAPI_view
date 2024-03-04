@@ -20,5 +20,5 @@ public class Reply {
     @Column(nullable = false)
     private String comment;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

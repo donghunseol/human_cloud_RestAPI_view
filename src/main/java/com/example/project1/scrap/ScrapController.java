@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ScrapController {
     @GetMapping("/scrap" )
     public String index() {
-        System.out.println("테스트용 sout");
 
         return "scrap/main";
     }
