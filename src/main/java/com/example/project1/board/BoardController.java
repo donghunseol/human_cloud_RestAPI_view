@@ -17,6 +17,22 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @PutMapping("/board/{id}/update")
+    public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
+
+        Board board = boardRepository.findId(id);
+
+        if (board.getUser_id() != sessionUser.getId()){
+            return "error/403";
+        }
+
+        boardRepository.update(requestDTO, id);
+
+        return "redirect:/board/" + id;
+    }
 
     @DeleteMapping("/board/{id}/delete")
     public String delete(@PathVariable int id, HttpServletRequest request){
