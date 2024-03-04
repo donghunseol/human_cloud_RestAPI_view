@@ -17,5 +17,5 @@ public class Love {
     private Integer user_id;
     private Integer board_id;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

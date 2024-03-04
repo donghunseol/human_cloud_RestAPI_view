@@ -21,5 +21,5 @@ public class Scrap {
     @Column(nullable = false)
     private Integer role;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

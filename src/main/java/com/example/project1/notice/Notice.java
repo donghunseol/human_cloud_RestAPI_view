@@ -25,12 +25,12 @@ public class Notice {
     @Column(nullable = false)
     private String field;
 
-    private String workPlace;
+    private String work_place;
     private String content;
 
     @Column(nullable = false)
     private String deadline;
 
     @Column(nullable = false)
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

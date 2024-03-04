@@ -28,5 +28,5 @@ public class Resume {
     @Column(nullable = false)
     private Integer major;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }

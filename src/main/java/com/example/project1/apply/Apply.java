@@ -19,5 +19,5 @@ public class Apply {
     @Column(nullable = false)
     private Integer notice_id;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }
