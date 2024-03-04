@@ -6,9 +6,9 @@ insert into notice_tb(user_id, title, type, field, work_place, content, deadline
 values (2, '공고 제목3', '고용형태3', '개발분야3', '근무지3', '공고 내용3', '2024-05-05', now());
 
 
-insert into board_tb(user_id, title, content, created_at, viewCount) values (1, '제목1', '내용1', now(), 20);
-insert into board_tb(user_id, title, content, created_at, viewCount) values (1, '제목2', '내용2', now(), 20);
-insert into board_tb(user_id, title, content, created_at, viewCount) values (2, '제목3', '내용3', now(), 20);
-insert into board_tb(user_id, title, content, created_at, viewCount) values (2, '제목4', '내용4', now(), 20);
-insert into board_tb(user_id, title, content, created_at, viewCount) values (2, '제목5', '내용5', now(), 20);
-insert into board_tb(user_id, title, content, created_at, viewCount) values (2, '제목6', '내용6', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (1, '제목1', '내용1', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (1, '제목2', '내용2', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (2, '제목3', '내용3', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (2, '제목4', '내용4', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (2, '제목5', '내용5', now(), 20);
+insert into board_tb(user_id, title, content, created_at, view_count) values (2, '제목6', '내용6', now(), 20);
