@@ -4,7 +4,6 @@
     <div class="box_ui bg-light" style="padding: 30px 200px;">
         <div class="ui_content d-flex justify-content-center">
             <div class="content_list" style="width: calc(100% - 300px);">
-
                 <!-- 회원 정보 수정 화면 -->
                 <div id="list_user_modify"
                      class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
@@ -12,8 +11,7 @@
                     <div class="item_resume">
                         <span class="resume_correction h5 fw-bold">회원 정보 수정</span>
                         <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                            <form action="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html"
-                                  class="w-100">
+                            <form action="/myPage" class="w-100">
                                 <div class="list_name pb-3">
                                     <div>이름</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
@@ -43,6 +41,10 @@
                                     <div>주소</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
                                            name="address" id="address">
+                                </div>
+                                <div class="mb-3 mt-1">
+                                    <label class="form-label">이미지 업로드</label><br>
+                                    <input type="file" name="image" accept="image/*">
                                 </div>
                                 <button type="submit" class="btn btn-outline-dark">회원 정보 수정 완료</button>
                             </form>
