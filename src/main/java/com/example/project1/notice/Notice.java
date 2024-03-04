@@ -14,7 +14,7 @@ public class Notice {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 
     @Column(nullable = false)
     private String title;
@@ -27,6 +27,9 @@ public class Notice {
 
     private String workPlace;
     private String content;
+
+    @Column(nullable = false)
+    private String deadline;
 
     @Column(nullable = false)
     private Timestamp createdAt;

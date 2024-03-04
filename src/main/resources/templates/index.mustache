@@ -5,78 +5,31 @@
         <div class="content_list" style="width: calc(100% - 300px);">
             <div class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
                  style="margin-right: 20px;padding: 20px;">
-                <div class="item_result border-0 w-100 d-flex" style="padding: 20px 0px;">
-                    <div class="content_logo h-100" style="width: 100px;">
-                        <img class="logo_size mw-100 w-100"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMTA4MDRfMjk0/MDAxNjI4MDg2MDEwNTY4.TTh8QJAkzwBZZpKSw8OpIK83JQ8dBBI5qBu9uWvgrKUg.X2keaCQ5fJkyx05OOlVYwKPi3ynq0_oqHv-UFqLyGsQg.PNG.cha-cha97/%EC%B6%98%EC%8B%9D%EC%9D%B4%EF%BC%BF001.png?type=w800">
-                    </div>
-                    <div class="content_item" style="width: calc(100% - 120px);">
-                        <div class="item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
-                            <div class="logo_name">
-                                <a class="name_company h5 fs-5 text-black text-decoration-none"
-                                   href="/notice">회사이름1</a>
-                                <div class="name_intrd text-black-50">회사소개1</div>
+                {{#noticeList}}
+                    <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
+                        <div class="content_logo h-100" style="width: 100px;">
+                            <img class="logo_size mw-100 w-100"
+                                 src="https://mblogthumb-phinf.pstatic.net/MjAyMTA4MDRfMjk0/MDAxNjI4MDg2MDEwNTY4.TTh8QJAkzwBZZpKSw8OpIK83JQ8dBBI5qBu9uWvgrKUg.X2keaCQ5fJkyx05OOlVYwKPi3ynq0_oqHv-UFqLyGsQg.PNG.cha-cha97/%EC%B6%98%EC%8B%9D%EC%9D%B4%EF%BC%BF001.png?type=w800">
+                        </div>
+                        <div class="content_item" style="width: calc(100% - 120px);">
+                            <div class="item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
+                                <div class="logo_name">
+                                    <a class="name_company h5 fs-5 text-black text-decoration-none"
+                                       href="/notice">회사이름</a>
+                                    <div class="name_intrd text-black-50">회사소개</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="content_detail">
+                                <div class="detail_job_name">
+                                    <a class="text-black text-decoration-none"
+                                       href="/notice/1">{{title}}</a>
+                                </div>
+                                <div class="datail_job_dates">마감일 : {{deadline}}</div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="content_detail">
-                            <div class="detail_job_name">
-                                <a class="text-black text-decoration-none"
-                                   href="/notice/1">채용공고1</a>
-                            </div>
-                            <div class="detail_job_info">경력</div>
-                            <div class="datail_job_dates">3/22 마감</div>
-                        </div>
                     </div>
-                </div>
-                <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
-                    <div class="content_logo h-100" style="width: 100px;">
-                        <img class="logo_size mw-100 w-100"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMTA4MDRfMjk0/MDAxNjI4MDg2MDEwNTY4.TTh8QJAkzwBZZpKSw8OpIK83JQ8dBBI5qBu9uWvgrKUg.X2keaCQ5fJkyx05OOlVYwKPi3ynq0_oqHv-UFqLyGsQg.PNG.cha-cha97/%EC%B6%98%EC%8B%9D%EC%9D%B4%EF%BC%BF001.png?type=w800">
-                    </div>
-                    <div class="content_item" style="width: calc(100% - 120px);">
-                        <div class="item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
-                            <div class="logo_name">
-                                <a class="name_company h5 fs-5 text-black text-decoration-none"
-                                   href="/notice">회사이름2</a>
-                                <div class="name_intrd text-black-50">회사소개2</div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="content_detail">
-                            <div class="detail_job_name">
-                                <a class="text-black text-decoration-none"
-                                   href="/notice/1">채용공고2</a>
-                            </div>
-                            <div class="detail_job_info">신입/경력</div>
-                            <div class="datail_job_dates">4/5 마감</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
-                    <div class="content_logo h-100" style="width: 100px;">
-                        <img class="logo_size mw-100 w-100"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMTA4MDRfMjk0/MDAxNjI4MDg2MDEwNTY4.TTh8QJAkzwBZZpKSw8OpIK83JQ8dBBI5qBu9uWvgrKUg.X2keaCQ5fJkyx05OOlVYwKPi3ynq0_oqHv-UFqLyGsQg.PNG.cha-cha97/%EC%B6%98%EC%8B%9D%EC%9D%B4%EF%BC%BF001.png?type=w800">
-                    </div>
-                    <div class="content_item" style="width: calc(100% - 120px);">
-                        <div class="item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
-                            <div class="logo_name">
-                                <a class="name_company h5 fs-5 text-black text-decoration-none"
-                                   href="/notice">회사이름3</a>
-                                <div class="name_intrd text-black-50">회사소개3</div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="content_detail">
-                            <div class="detail_job_name">
-                                <a class="text-black text-decoration-none"
-                                   href="/notice/1">채용공고3</a>
-                            </div>
-                            <div class="detail_job_info">경력</div>
-                            <div class="datail_job_dates">7/11 마감</div>
-                        </div>
-                    </div>
-                </div>
+                {{/noticeList}}
             </div>
             <nav class="d-flex justify-content-center pt-3" aria-label="Page navigation example">
                 <ul class="pagination">
@@ -98,4 +51,5 @@
         </div>
     </div>
 </div>
+
 {{> layout/footer}}
