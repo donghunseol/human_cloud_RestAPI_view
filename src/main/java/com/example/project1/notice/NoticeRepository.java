@@ -48,8 +48,10 @@ public class NoticeRepository {
 
     // 삭제
     @Transactional
-    public void deleteById(){
-
+    public void deleteById(int id){
+        Query query = em.createNativeQuery("delete from notice_tb where id=?");
+        query.setParameter(1, id);
+        query.executeUpdate();
     }
 
     // 수정

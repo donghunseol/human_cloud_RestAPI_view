@@ -15,7 +15,7 @@ public class Notice {
 
     @JoinColumn()
     @Column(nullable = false)
-    private Integer userId;
+    private Integer user_id;
 
     @Column(nullable = false)
     private String title;

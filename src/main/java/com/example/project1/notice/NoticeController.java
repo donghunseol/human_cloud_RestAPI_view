@@ -1,11 +1,12 @@
 package com.example.project1.notice;
 
-import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -51,8 +52,23 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
-    @GetMapping("/notice/1")
-    public String detail() {
+    @GetMapping("/notice/{id}")
+    public String detail(@PathVariable int id, HttpServletRequest request) {
+        Notice notice = noticeRepository.findById(id);
+        request.setAttribute("notice", notice);
+
         return "notice/detail";
+    }
+
+    @PostMapping("/notice/{id}/delete")
+    public String delete(@PathVariable int id) {
+        noticeRepository.deleteById(id);
+
+        return "redirect:/notice";
+    }
+
+    @GetMapping("/notice/main")
+    public String main(@PathVariable int id){
+        return "notice/main";
     }
 }

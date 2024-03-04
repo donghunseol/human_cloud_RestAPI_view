@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     @GetMapping("/")
     public String index(HttpServletRequest request){
-        request.setAttribute("noticeList", 2);
         request.setAttribute("isScrap", true);
-        request.setAttribute("scrapCount", 2);
 
         return "index";
     }
