@@ -1,18 +1,18 @@
 -- user
 -- 개인
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('ssar', '1234', '쌀', '01012345678', '01-01-01', 'ssar@nate.com', '쌀도 쌀시 쌀구 쌀동', null, '0', now());
+values ('ssar', '1234', '쌀', '01012345678', '010101', 'ssar@nate.com', '쌀도 쌀시 쌀구 쌀동', null, 0, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('cos', '1234', '코스', '01087654321', '02-02-02', 'cos@nate.com', '코스도 코스시 코스구 코스동', null, '0', now());
+values ('cos', '1234', '코스', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', null, 0, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('love', '1234', '러브', '01012341234', '03-03-03', 'love@nate.com', '러브도 러브시 러브구 러브동', null, '0', now());
+values ('love', '1234', '러브', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', null, 0, now());
 -- 기업
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comssar', '1234', '쌀회사', '01012344321', '11-11-11', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', null, '1', now());
+values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', null, 1, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comcos', '1234', '코스회사', '01043211234', '11-02-22', 'cos@naver.com', '코스도 코스시 코스구 코스동', null, '1', now());
+values ('comcos', '1234', '코스회사', '01043211234', '110222', 'cos@naver.com', '코스도 코스시 코스구 코스동', null, 1, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comlove', '1234', '러브회사', '01011111111', '13-03-13', 'love@naver.com', '러브도 러브시 러브구 러브동', null, '1', now());
+values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.com', '러브도 러브시 러브구 러브동', null, 1, now());
 
 
 -- skill
@@ -40,18 +40,18 @@ insert into apply_tb(resume_id, notice_id, created_at)
 values (2, 2, now());
 
 -- board
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (1, '제목1', '내용1', now(), 20);
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (1, '제목2', '내용2', now(), 20);
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (2, '제목3', '내용3', now(), 20);
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (2, '제목4', '내용4', now(), 20);
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (2, '제목5', '내용5', now(), 20);
-insert into board_tb(user_id, title, content, created_at, view_count)
-values (2, '제목6', '내용6', now(), 20);
+insert into board_tb(user_id, title, content, created_at)
+values (1, '제목1', '내용1', now());
+insert into board_tb(user_id, title, content, created_at)
+values (1, '제목2', '내용2', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목3', '내용3', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목4', '내용4', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목5', '내용5', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목6', '내용6', now());
 
 -- love
 insert into love_tb(user_id, board_id, created_at)
