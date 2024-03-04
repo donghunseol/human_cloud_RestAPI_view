@@ -15,6 +15,8 @@ public class UserRepository {
     // 부분 조회
     public void findById() {
 
+        private String username;
+        private String password;
     }
 
     // 전체 조회

@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final HttpSession session;
 
     @GetMapping("/")
     public String index() {
@@ -28,6 +30,12 @@ public class UserController {
     public String joinForm() {
         return "user/joinForm";
     }
+
+    @PostMapping("/login")
+    public String login(UserRequest.LoginDTO requestDTO) {
+        System.out.println("정보 : " + requestDTO);
+        User user = userRepository.findById(requestDTO);
+
 
     @PostMapping("/user/join")
     public String join(UserRequest.JoinDTO requestDTO) {
@@ -50,6 +58,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout() {
+        session.invalidate();
         return "redirect:/";
     }
 
