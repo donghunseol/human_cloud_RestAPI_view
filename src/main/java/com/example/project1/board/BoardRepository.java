@@ -25,13 +25,13 @@ public class BoardRepository {
 
     // 부분 조회
     public BoardResponse.DetailDTO findById(int idx) {
-        Query query = em.createNativeQuery("select b.id, b.title, b.content, b.user_id, u.username from board_tb b inner join user_tb u on b.user_id = u.id where b.id = ?");
+        Query query = em.createNativeQuery("select b.id, b.user_id, b.title, b.content, u.username from board_tb b inner join user_tb u on b.user_id = u.id where b.id = ?");
         query.setParameter(1, idx);
 
         Object[] row = (Object[]) query.getSingleResult();
 
         Integer id = (Integer) row[0];
-        Integer userId = (Integer) row[1];
+        Integer user_id = (Integer) row[1];
         String title = (String) row[2];
         String content = (String) row[3];
         String username = (String) row[4];
@@ -44,7 +44,7 @@ public class BoardRepository {
 
         BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO();
         responseDTO.setId(id);
-        responseDTO.setUser_id(userId);
+        responseDTO.setUser_id(user_id);
         responseDTO.setTitle(title);
         responseDTO.setContent(content);
         responseDTO.setUsername(username);
@@ -80,7 +80,11 @@ public class BoardRepository {
 
     // 수정
     @Transactional
-    public void update(){
-
+    public void update(BoardRequest.UpdateDTO requestDTO, int id){
+        Query query = em.createNativeQuery("update board_tb set title = ? , content = ? where id = ?");
+        query.setParameter(1,requestDTO.getTitle());
+        query.setParameter(2,requestDTO.getContent());
+        query.setParameter(3,id);
+        query.executeUpdate();
     }
 }

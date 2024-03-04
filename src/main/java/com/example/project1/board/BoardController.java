@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,8 @@ public class BoardController {
 
     private final HttpSession session;
     private final BoardRepository boardRepository;
+
+    @PutMapping("/board/{id}/update")
 
     @DeleteMapping("/board/{id}/delete")
     public String delete(@PathVariable int id, HttpServletRequest request){
@@ -32,7 +31,7 @@ public class BoardController {
         Board board = boardRepository.findId(id);
 //        if (board.getUser_id() != sessionUser.getId()) {
 //            request.setAttribute("status", 403);
-//            request.setAttribute("msg", "게시글 삭제 권한이 없습니다");
+//            request.setAttribute("msg", "게시글 삭제 권한 X");
 //            return "error/40x";
 //        }
 
@@ -43,15 +42,18 @@ public class BoardController {
     @PostMapping("/board/save")
     public String save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request){
 
+        //인증
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             return "redirect:/loginForm";
         }
 //        System.out.println(requestDTO);
 
+
+          //권한
 //        if(requestDTO.getTitle().length() > 30){
 //            request.setAttribute("status", 400);
-//            request.setAttribute("msg", "제목의 길이가 30자를 초과해서는 안되요");
+//            request.setAttribute("msg", "제목의 길이가 50자를 초과해서는 안되요");
 //            return "error/40x";
 //        }
 
