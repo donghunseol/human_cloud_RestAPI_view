@@ -22,32 +22,32 @@
             {{#boardList}}
                 <tr style="border-bottom: 1px solid #ddd;">
                     <td style="padding: 10px; text-align: center;">{{id}}</td>
+
                     <td style="padding: 10px; text-align: center;"><a href="/board/{{id}}">{{content}}</a></td>
                     <td style="padding: 10px; text-align: center;">{{userId}}</td>
+
                     <td style="padding: 10px; text-align: center;">{{created_at}}</td>
                 </tr>
             {{/boardList}}
         </table>
 
-        <div class="board_page" style="text-align: center;  margin-bottom: 20px;">
-            <a href="#" class="bt_first" aria-label="첫 페이지로 이동"><<</a>
-            <a href="#" class="bt_prev" aria-label="이전 페이지로 이동"><</a>
-            <a href="#" class="num active" aria-label="페이지 1">1</a>
-            <a href="#" class="num" aria-label="페이지 2">2</a>
-            <a href="#" class="bt_next" aria-label="다음 페이지로 이동">></a>
-            <a href="#" class="bt_last" aria-label="마지막 페이지로 이동">>></a>
-        </div>
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}&keyword={{keyword}}">이전</a></li>
+            <li class="page-item"><a class="page-link text-black" href="?page=0">1</a></li>
+            <li class="page-item"><a class="page-link text-black" href="?page=1">2</a></li>
+            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}&keyword={{keyword}}">다음</a></li>
+        </ul>
         <div class="bt_wrap" style="text-align: center;">
             <a href="/board/saveForm" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
-            <a href="/board" class="on"
+            <a href="/" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">홈</a>
         </div>
 
-        <form action="/board/1" class="d-flex justify-content-end mb-30">
-            <input class="me-3" type="text" placeholder="제목을 입력하세요">
+        <form action="/board" method="get" class="d-flex justify-content-end mb-30">
+            <input class="me-3" type="text" placeholder="제목을 입력하세요" name="keyword">
             <button class="btn btn-primary" type="submit">검색</button>
         </form>
     </div>
 </section>
-{{> layout/footer}}}
+{{> layout/footer}}
