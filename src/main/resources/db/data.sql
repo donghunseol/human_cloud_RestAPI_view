@@ -41,7 +41,7 @@ values (2, 2, now());
 
 -- board
 insert into board_tb(user_id, title, content, created_at)
-values (1, '안녕하시렵니까', '처음 왔습니다 인사드립니다!', now());
+values (1, '안녕하십니까', '처음 왔습니다 인사드립니다!', now());
 insert into board_tb(user_id, title, content, created_at)
 values (1, '자소서는 어떻게 하면 잘 쓸 수 있을까?', '잘 쓰면 된다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ', now());
 insert into board_tb(user_id, title, content, created_at)
