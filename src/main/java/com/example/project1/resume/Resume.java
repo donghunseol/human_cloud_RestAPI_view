@@ -3,7 +3,6 @@ package com.example.project1.resume;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 
 import java.sql.Timestamp;
 

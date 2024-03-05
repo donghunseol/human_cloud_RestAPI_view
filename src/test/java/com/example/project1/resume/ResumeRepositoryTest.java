@@ -15,35 +15,35 @@ public class ResumeRepositoryTest {
     private ResumeRepository resumeRepository;
 
     @Test
-    public void testFindAll(){
-        List<ResumeResponse.ResumeListDTO> resumeList = resumeRepository.findAll();
+    public void testFindAll() {
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
 
         resumeList.forEach(System.out::println);
     }
 
     @Test
-    public void testFindAllByUserId(){
+    public void testFindAllByUserId() {
         Integer userId = 1;
 
-        List<ResumeResponse.ResumeListDTO> resumeList = resumeRepository.findAllByUserId(userId);
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findAllByUserId(userId);
 
         resumeList.forEach(System.out::println);
     }
 
     @Test
-    public void testFindByResumeId(){
+    public void testFindByResumeId() {
         Integer resumeId = 1;
 
         System.out.println(resumeRepository.findByResumeId(resumeId));
     }
 
     @Test
-    public void testDeleteByResumeId(){
+    public void testDeleteByResumeId() {
         Integer resumeId = 1;
 
         resumeRepository.deleteByResumeId(resumeId);
 
-        List<ResumeResponse.ResumeListDTO> resumeList = resumeRepository.findAll();
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
 
         resumeList.forEach(System.out::println);
 

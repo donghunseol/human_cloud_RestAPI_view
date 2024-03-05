@@ -6,7 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Repository
@@ -114,7 +117,7 @@ public class ResumeRepository {
 
         // 한줄 받아서
         Object[] resumeOb = rows.get(0);
-        
+
         // 파싱하기
         Integer id = (Integer) resumeOb[0];
         Integer userId = (Integer) resumeOb[1];
@@ -144,7 +147,7 @@ public class ResumeRepository {
                     skillId, skillName
             );
 
-            if (id!= null) resume.addSkill(skill);
+            if (id != null) resume.addSkill(skill);
         }
         return resume;
     }
