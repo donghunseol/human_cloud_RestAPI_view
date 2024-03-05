@@ -52,6 +52,23 @@ insert into board_tb(user_id, title, content, created_at)
 values (2, '제목5', '내용5', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목6', '내용6', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목7', '내용7', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목8', '내용8', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목9', '내용9', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목10', '내용10', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목11', '내용11', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목12', '내용12', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목13', '내용13', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목14', '내용14', now());
+
 
 -- love
 insert into love_tb(user_id, board_id, created_at)

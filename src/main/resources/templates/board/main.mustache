@@ -30,9 +30,10 @@
         </table>
 
         <ul class="pagination d-flex justify-content-center">
-            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}">이전</a></li>
+            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}&keyword={{keyword}}">이전</a></li>
             <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
-            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}">다음</a></li>
+            <li class="page-item"><a class="page-link text-black" href="#">2</a></li>
+            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}&keyword={{keyword}}">다음</a></li>
         </ul>
         <div class="bt_wrap" style="text-align: center;">
             <a href="/board/saveForm" class="on"
@@ -41,8 +42,8 @@
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">홈</a>
         </div>
 
-        <form action="/board/1" class="d-flex justify-content-end mb-30">
-            <input class="me-3" type="text" placeholder="제목을 입력하세요">
+        <form action="/board" method="get" class="d-flex justify-content-end mb-30">
+            <input class="me-3" type="text" placeholder="제목을 입력하세요" name="keyword">
             <button class="btn btn-primary" type="submit">검색</button>
         </form>
     </div>
