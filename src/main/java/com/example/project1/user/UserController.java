@@ -18,8 +18,8 @@ public class UserController {
     private final ResumeRepository resumeRepository;
 
     @GetMapping("/")
-
     public String index(HttpServletRequest request) {
+        List<User> user = userRepository.findAll();
         List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
         request.setAttribute("resumeList", resumeList);
         request.setAttribute("isScrap", true);

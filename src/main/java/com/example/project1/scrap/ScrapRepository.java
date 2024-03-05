@@ -6,68 +6,67 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class ScrapRepository {
     private final EntityManager em;
 
     // 스크랩 여부와 무엇을 스크랩했는지 확인하는 코드
-    public ScrapResponse.DetailDTO findScrap(int notice_id, int session_user_id) {
+    public List<ScrapResponse.ScrapDTO> findById(int user_id) {
         String q = """
-                SELECT
-                    id,
-                    CASE
-                        WHEN user_id IS NULL THEN FALSE
-                        ELSE TRUE
-                    END AS isScrap
-                FROM
-                    scrap_tb
-                WHERE
-                    notice_id = ? AND user_id = ?;
+                SELECT sut.scrap_id, sut.s_user_id, sut.username, nt.user_id AS n_user_id, ut2.name AS n_name, nt.content, nt.deadline, nt.field, nt.title, nt.type, sut.role
+                FROM (
+                    SELECT st.id AS scrap_id, st.user_id AS s_user_id, st.notice_id, ut.role, ut.username
+                    FROM scrap_tb st
+                    LEFT OUTER JOIN user_tb ut ON ut.id = st.user_id
+                    WHERE ut.role = 0
+                ) sut
+                LEFT OUTER JOIN notice_tb nt ON sut.notice_id = nt.id
+                LEFT OUTER JOIN user_tb ut2 ON nt.user_id = ut2.id
+                WHERE s_user_id = ?;
                 """;
+        Query query = em.createNativeQuery(q, ScrapResponse.ScrapDTO.class);
+        query.setParameter(1, user_id);
 
-        Query query = em.createNamedQuery(q);
-        query.setParameter(1, notice_id);
-        query.setParameter(2, notice_id);
-        query.setParameter(3, session_user_id);
-
-        Object[] row = (Object[]) query.getSingleResult();
-        Integer id = (Integer) row[0];
-        Boolean isScrap = (Boolean) row[1];
-
-        System.out.println("id : " + id);
-        System.out.println("isLove : " + isScrap);
-
-        ScrapResponse.DetailDTO responseDTO = new ScrapResponse.DetailDTO(id, isScrap);
-
-        return responseDTO;
+        return query.getResultList();
     }
 
     // 부분 조회
-    public void findById(){
+    public void findById() {
 
     }
 
     // 전체 조회
-    public void findAll(){
+    public void findAll() {
 
     }
 
-    // 저장
+    // 개인 회원 이력서 값 저장
     @Transactional
-    public void save(){
+    public void individualSave(ScrapRequest.IndividualDTO requestDTO) {
+        String q = "insert into scrap_tb (user_id, notice_id, role, created_at) value(?, ?, ?, now())";
+        Query query = em.createNamedQuery(q, Scrap.class);
+        query.setParameter(1, requestDTO.getUser_id());
+        query.setParameter(2, requestDTO.getNotice_id());
+        query.setParameter(3, requestDTO.getRole());
+        query.executeUpdate();
+    }
 
+    @Transactional
+    public void companySave(ScrapRequest.CompanyDTO requestDTO) {
+        String q = "insert into scrap_tb (user_id, resume_id, role, created_at) value(?, ?, ?, now())";
+        Query query = em.createNamedQuery(q, Scrap.class);
+        query.setParameter(1, requestDTO.getUser_id());
+        query.setParameter(2, requestDTO.getResume_id());
+        query.setParameter(3, requestDTO.getRole());
+        query.executeUpdate();
     }
 
     // 삭제
     @Transactional
-    public void deleteById(){
-
-    }
-
-    // 수정
-    @Transactional
-    public void update(){
+    public void deleteById() {
 
     }
 }

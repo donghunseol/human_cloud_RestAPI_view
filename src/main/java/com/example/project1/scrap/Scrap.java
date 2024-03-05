@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id; // 스크랩 ID
 
     @Column(nullable = false)
     private Integer userId;
@@ -19,7 +19,7 @@ public class Scrap {
     private Integer noticeId;
 
     @Column(nullable = false)
-    private Integer role;
+    private Integer role; // 기업인지 개인인지 구별 0, 1
 
     private Timestamp createdAt;
 }

@@ -5,6 +5,7 @@
         <div class="ui_content d-flex justify-content-center">
             <div class="content_list" style="width: calc(100% - 300px);">
 
+
                 <!-- 스크랩 페이지 화면 -->
                 <section class="content d-flex justify-content-center">
                     <div class="container"
@@ -17,41 +18,47 @@
                                 <p class="scrap_subtitle"
                                    style="display: inline-block; margin-right: 6px; font-size: 13px; color: #888; vertical-align: middle;">
                                     "전체 4개"
-                                    <span style="padding-left: 15px; color: #272727;">※ 최근 1년 동안 스크랩한 공고를 열람할
-                                            수
-                                            있습니다.</span>
+                                    <span style="padding-left: 15px; color: #272727;">※ 최근 1년 동안 스크랩한 공고를 열람할 수 있습니다.</span>
                                 </p>
                             </div>
                         </div>
                         <div class="script_item" style="width: 100%; margin-top: 25px;">
                             <hr>
-                            <div class="script_item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
-                                <div class="script_detail">
-                                    <div class="company_name h5 fs-5">(주)회사4</div>
-                                    <div class="company_notice" style="font-size: 18px; font-weight: bold;">개발자를 모집합니다
+
+                            {{#scrap_list}}
+                                <!-- 스크랩 목록 -->
+                                <form class="w-100">
+                                    <div class="card mb-3">
+                                        <div class="card-body d-flex justify-content-between text-secondary m-2">
+                                            <div>
+                                                <div class="company_name h5 fs-5">{{nName}}</div>
+                                                <div class="company_notice fw-bold" style="font-size: 18px;">{{title}}
+                                                </div>
+                                                <div class="company_request mt-2 mr-5"
+                                                     style="display: block; font-size: 13px; vertical-align: middle;">
+                                                    {{type}}
+                                                </div>
+                                                <div class="company_date mt-2 mr-5"
+                                                     style="display: block; color: #88A; vertical-align: middle;">
+                                                    기간 {{deadline}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <button onclick="location.href='/notice/1'" type="button"
+                                                        class="btn btn-outline-secondary mb-1">상세보기
+                                                </button>
+                                                <button onclick="location.href='/scrap'" type="button"
+                                                        class="btn btn-outline-secondary">삭제
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="company_request"
-                                         style="display: block; margin-top: 2px; margin-right: 6px; font-size: 13px; color: #888; vertical-align: middle;">
-                                        부산, 초대졸, 경력무관, 인턴
-                                    </div>
-                                    <div class="company_date"
-                                         style="display: block; margin-top: 2px; margin-right: 6px; font-size: 15px; color: #88A; vertical-align: middle;">
-                                        3/21까지
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bt_wrap" style="text-align: right; margin-top: 15px;">
-                                <a href="../notice/detail.mustache" class="on"
-                                   style="display: inline-block; padding: 10px 20px; background-color: #FF7A21; color: white; text-decoration: none; border: none; margin-right: 10px;">즉시지원</a>
-                                <a href="#" class="on"
-                                   style="display: inline-block; padding: 10px 20px; background-color: white; color: #EB407A; text-decoration: none; border: none;">삭제</a>
-                            </div>
-                            <hr>
+                                </form>
+                            {{/scrap_list}}
+
                         </div>
-
+                    </div>
                 </section>
-
-
             </div>
             {{> layout/sidebar}}
         </div>

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class UserRepository {
@@ -18,8 +20,10 @@ public class UserRepository {
     }
 
     // 전체 조회
-    public void findAll() {
-
+    public List<User> findAll() {
+        Query query = em.createNativeQuery("select * from user_tb", User.class);
+        List<User> userList = query.getResultList();
+        return userList;
     }
 
     // 저장
