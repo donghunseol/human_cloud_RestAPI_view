@@ -18,11 +18,23 @@ values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.
 -- skill
 -- 이력서 (개인)
 insert into skill_tb(resume_id, notice_id, name, role)
-values (1, null, 'java', 0);
+values (1, null, 'JAVA', 0);
 insert into skill_tb(resume_id, notice_id, name, role)
-values (2, null, 'java', 0);
+values (1, null, 'MySQL', 0);
 insert into skill_tb(resume_id, notice_id, name, role)
-values (2, null, 'html', 0);
+values (1, null, 'HTML', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (1, null, 'CSS', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'C#', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'C++', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'JAVA', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (5, null, 'PYTHON', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (5, null, 'MariaDB', 0);
 -- 공고 (회사)
 insert into skill_tb(resume_id, notice_id, name, role)
 values (null, 1, 'java', 0);
@@ -70,12 +82,18 @@ insert into reply_tb(user_id, board_id, comment, created_at)
 values (2, 1, '졸리네요', now());
 
 -- resume
-insert into resume_tb(user_id, career, license, education, major, created_at)
-values (1, '1년', '정보처리기사, SQLD', '쌀대학교, 졸업', '컴퓨터공학과', now());
-insert into resume_tb(user_id, career, license, education, major, created_at)
-values (2, '신입', '정보처리기사', '코스대학교, 졸업', '소프트웨어과', now());
-insert into resume_tb(user_id, career, license, education, major, created_at)
-values (3, '2년', 'SQLD', '러브대학교, 3학년', '정보처리데이터과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (1, '제목1', '1년', '정보처리기사, SQLD', '쌀대학교, 졸업', '컴퓨터공학과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (2, '제목2', '신입', '정보처리기사', '코스대학교, 졸업', '소프트웨어과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (1, '제목3', '2년', 'SQLD', '러브대학교, 3학년', '정보처리데이터과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (2, '제목4', '3년', '데이터분석기사', '러브대학교, 4학년', '시스템공학과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (1, '제목5', '4년', '전기기사', '러브대학교, 1학년', '전기공학과', now());
+insert into resume_tb(user_id, title, career, license, education, major, created_at)
+values (1, '제목6', '5년', '정보처리산업기사', '러브대학교, 2학년', '기계공학과', now());
 
 -- notice
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
