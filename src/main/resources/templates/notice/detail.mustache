@@ -1,58 +1,54 @@
 {{> layout/header}}
-
-<form action="/myPage/selectList" class="bg-light" method="get">
-    <div class="d-flex justify-content-center" style="padding: 30px 200px;">
-        <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
-            <div>
-                <h2><b>Geekble에서 사업운영부에서 세일즈 매니저를 채용합니다</b></h2>
-                <b>어라운드더코너 </b>Around The Corner
+{{#notice}}
+    <form action="/myPage/selectList" class="bg-light" method="get">
+        <div class="d-flex justify-content-center" style="padding: 30px 200px;">
+            <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
                 <div>
-                    <i class="fa-solid fa-calendar-days text-body-tertiary"></i>
-                    <span class="text-body-tertiary">03/12 마감</span>
-                    <span class="text-body-tertiary m-4">02/26 수정</span>
+                    <h2><b>{{title}}</b></h2>
+                    <b>{{username}} </b>
+                    <div>
+                        <i class="fa-solid fa-calendar-days text-body-tertiary"></i>
+                        <span class="text-body-tertiary">{{deadline}} 마감</span>
+                        <span class="text-body-tertiary m-4">02/26 수정</span>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <h5 class="mb-2">고용형태</h5>
-            <div>계약직</div>
-            <hr>
-            <h5 class="mb-2">업무 기술 / 활동 분야</h5>
-            <p class="d-inline-flex gap-1 mt-2">
-                <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">UI/UX
-                    디자인</a>
-                <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">Figma</a>
-                <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">Adobe
-                    Photoshop</a>
-            </p>
-            <hr>
-            <h5 class="mb-2">채용 상세</h5>
-            <div>
-                <div>연봉 : 3000만원</div>
-                <div>3년차 이상, IT서비스</div>
-                <p>1. 자유 양식의 이력서
-                    전공 및 업무와 관련된 이력 중심으로 작성해주세요.
-                    개인 인적사항(학교명, 사진, 나이, 가족 관계, 키, 몸무게 등)은 첨부하지 마시기 바랍니다.
-                    <br>
-                    2. 자유 양식의 자기소개서
-                    긱블이 세일즈 매니저로서 본인을 채용해야 하는 이유를 포함하여 자유롭게 작성해주세요.
-                </p>
-            </div>
-            <hr>
-            <h5 class="mb-2">근무지</h5>
-            <div><b>긱블 스튜디오</b></div>
-            <div>서울특별시 성동구 성수2가1동 성수이로7가길 8</div>
-            <hr>
-            <h5 class="mb-2">기업 주소</h5>
-            <div><i class="fa-solid fa-city me-1"></i><b>긱블 스튜디오</b></div>
-            <div>서울특별시 성동구 성수2가1동 성수이로7가길 8</div>
-            <hr>
-            <h5 class="mb-2">설립일</h5>
-            <div>2023년 3월 8일</div>
-        </div>
-    </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
-        <button type="submit" class="btn btn-secondary">이력서 제출</button>
-    </div>
-</form>
+                <hr>
+                <h5 class="mb-2">고용형태</h5>
+                <div>{{type}}</div>
+                <hr>
+                <h5 class="mb-2">업무 기술 / 활동 분야</h5>
 
+                <p class="d-inline-flex gap-1 mt-2">
+                    {{#field}}
+                        <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">{{field}}</a>
+                    {{/field}}
+                </p>
+                <hr>
+                <h5 class="mb-2">채용 상세</h5>
+                <div>
+                    {{content}}
+                </div>
+                <hr>
+                <h5 class="mb-2">근무지</h5>
+                <div><b>{{username}}</b></div>
+                <div>{{work_place}}</div>
+                <hr>
+                <h5 class="mb-2">기업 주소</h5>
+                <div><i class="fa-solid fa-city me-1"></i><b>{{username}}</b></div>
+                <div>{{address}}</div>
+                <hr>
+                <h5 class="mb-2">설립일</h5>
+                <div>{{birth}}</div>
+            </div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
+            <button type="submit" class="btn btn-secondary">이력서 제출</button>
+        </div>
+    </form>
+    <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
+        <form action="/notice/{{id}}/delete" method="post">
+            <button class="btn btn-secondary">공고 삭제</button>
+        </form>
+    </div>
+{{/notice}}
 {{> layout/footer}}
