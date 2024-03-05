@@ -144,20 +144,25 @@ public class ResumeRepository {
         return resume;
     }
 
-    // 부분 조회
-    public void findById() {
+    @Transactional
+    public void deleteByResumeId(Integer resumeId) {
+        String skill_delete_sql = """
+                delete from skill_tb where resume_id =?
+                """;
+        Query skill_delete = em.createNativeQuery(skill_delete_sql);
+        skill_delete.setParameter(1, resumeId);
 
+        String resume_delete_sql = """
+                delete from resume_tb where id = ?
+                """;
+        Query resume_delete = em.createNativeQuery(resume_delete_sql);
+        resume_delete.setParameter(1, resumeId);
+        resume_delete.executeUpdate();
     }
 
     // 저장
     @Transactional
     public void save() {
-
-    }
-
-    // 삭제
-    @Transactional
-    public void deleteById() {
 
     }
 
