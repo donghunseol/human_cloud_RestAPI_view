@@ -42,6 +42,8 @@ public class UserController {
         session.setAttribute("sessionUser" , user );
         System.out.println(user);
 
+        
+
         return "redirect:/";
     }
 
