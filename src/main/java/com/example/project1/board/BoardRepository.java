@@ -56,7 +56,7 @@ public class BoardRepository {
         Object[] row = (Object[]) query.getSingleResult();
 
         Integer id = (Integer) row[0];
-        Integer user_id = (Integer) row[1];
+        Integer userId = (Integer) row[1];
         String title = (String) row[2];
         String content = (String) row[3];
         String username = (String) row[4];
@@ -69,7 +69,7 @@ public class BoardRepository {
 
         BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO();
         responseDTO.setId(id);
-        responseDTO.setUser_id(user_id);
+        responseDTO.setUserId(userId);
         responseDTO.setTitle(title);
         responseDTO.setContent(content);
         responseDTO.setUsername(username);

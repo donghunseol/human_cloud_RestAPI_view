@@ -15,7 +15,7 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer user_id;
+    private Integer userId;
 
     private String title;
 
@@ -31,5 +31,5 @@ public class Resume {
     @Column(nullable = false)
     private String major;
 
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }

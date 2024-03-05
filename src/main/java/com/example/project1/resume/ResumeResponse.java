@@ -9,18 +9,18 @@ import java.util.List;
 
 public class ResumeResponse {
     @Data
-    public static class ResumeListDTO {
+    public static class DTO {
         private Integer id;
-        private Integer user_id;
+        private Integer userId;
         private String title;
         private String name;
         private String image;
 
         private List<SkillDTO> skills = new ArrayList<>();
 
-        public ResumeListDTO(Integer id, Integer user_id, String title, String name, String image) {
+        public DTO(Integer id, Integer userId, String title, String name, String image) {
             this.id = id;
-            this.user_id = user_id;
+            this.userId = userId;
             this.title = title;
             this.name = name;
             this.image = image;
@@ -32,9 +32,9 @@ public class ResumeResponse {
     }
 
     @Data
-    public static class ResumeDetailDTO {
+    public static class DetailDTO {
         private Integer id;
-        private Integer user_id;
+        private Integer userId;
         private String title;
         private String name;
         private String birth;
@@ -51,9 +51,9 @@ public class ResumeResponse {
 
         private List<SkillDTO> skills = new ArrayList<>();
 
-        public ResumeDetailDTO(Integer id, Integer user_id, String title, String name, String birth, String tel, String email, String address, String image, String education, String major, String license, String career, Integer role) {
+        public DetailDTO(Integer id, Integer userId, String title, String name, String birth, String tel, String email, String address, String image, String education, String major, String license, String career, Integer role) {
             this.id = id;
-            this.user_id = user_id;
+            this.userId = userId;
             this.title = title;
             this.name = name;
             this.birth = birth;
@@ -73,6 +73,7 @@ public class ResumeResponse {
         }
     }
 
+    // ResumeResponse 에서만 사용됨.
     @AllArgsConstructor
     @Data
     public static class SkillDTO {

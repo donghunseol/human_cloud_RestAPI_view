@@ -8,7 +8,7 @@ public class BoardResponse {
     @Data
     public static class DetailDTO{
         private Integer id;
-        private Integer user_id;
+        private Integer userId;
         private String title;
         private String content;
         private String username;

@@ -53,7 +53,7 @@ public class NoticeController {
     }
 
     @GetMapping("/notice/{id}")
-    public String detail(@PathVariable int id, HttpServletRequest request) {
+    public String detail(@PathVariable Integer id, HttpServletRequest request) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
         request.setAttribute("notice", responseDTO);
 
@@ -61,14 +61,14 @@ public class NoticeController {
     }
 
     @PostMapping("/notice/{id}/delete")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable Integer id) {
         noticeRepository.deleteById(id);
 
         return "redirect:/notice";
     }
 
     @GetMapping("/notice/main")
-    public String main(@PathVariable int id){
+    public String main(@PathVariable Integer id){
         return "notice/main";
     }
 }

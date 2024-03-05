@@ -15,7 +15,7 @@ public class Notice {
 
     @JoinColumn()
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 
     @Column(nullable = false)
     private String title;
@@ -26,12 +26,12 @@ public class Notice {
     @Column(nullable = false)
     private String field;
 
-    private String work_place;
+    private String workPlace;
     private String content;
 
     @Column(nullable = false)
     private String deadline;
 
     @Column(nullable = false)
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }
