@@ -17,6 +17,8 @@ public class Resume {
 
     private Integer user_id;
 
+    private String title;
+
     @Column(nullable = false)
     private String career;
 
