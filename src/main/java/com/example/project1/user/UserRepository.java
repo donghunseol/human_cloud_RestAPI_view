@@ -5,6 +5,7 @@ import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Repository
@@ -48,15 +49,19 @@ public class UserRepository {
 
     // 삭제
     @Transactional
-    public void deleteById() {
-
+    public void deleteById(UserResponse.DTO responseDTO) {
+        Query query = em.createNativeQuery("delete from user_tb where id=?");
+        query.setParameter(1, responseDTO.getId());
+        query.executeUpdate();
     }
+
+
+    //버튼으로 구현.
 
     // 수정
     @Transactional
-    public void update() {
 
-    }
+
 
     public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
           Query query = em.createNativeQuery("select * from user_tb where username=? and password=?",User.class);
