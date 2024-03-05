@@ -78,7 +78,6 @@ insert into resume_tb(user_id, career, license, education, major, created_at)
 values (3, '2년', 'SQLD', '러브대학교, 3학년', '정보처리데이터과', now());
 
 -- notice
-insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (4, '공고 제목1', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303',now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '공고 제목2', '고용형태2', '개발분야2', '근무지2', '공고 내용2', '20240404', now());
@@ -88,6 +87,7 @@ insert into notice_tb(user_id, title, type, field, work_place, content, deadline
 values (5, '공고 제목4', '고용형태4', '개발분야4', '근무지4', '공고 내용4', '20240606', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (6, '공고 제목5', '고용형태5', '개발분야5', '근무지5', '공고 내용5', '20240707', now());
+
 
 -- scrap
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(1, 1, null, 1, now());

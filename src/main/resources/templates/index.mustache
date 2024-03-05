@@ -12,12 +12,29 @@
                                  src="https://mblogthumb-phinf.pstatic.net/MjAyMTA4MDRfMjk0/MDAxNjI4MDg2MDEwNTY4.TTh8QJAkzwBZZpKSw8OpIK83JQ8dBBI5qBu9uWvgrKUg.X2keaCQ5fJkyx05OOlVYwKPi3ynq0_oqHv-UFqLyGsQg.PNG.cha-cha97/%EC%B6%98%EC%8B%9D%EC%9D%B4%EF%BC%BF001.png?type=w800">
                         </div>
                         <div class="content_item" style="width: calc(100% - 120px);">
-                            <div class="item_box d-flex justify-content-left ml-5" style="min-height: 10px;">
+                            <div class="item_box d-flex justify-content-between ml-5" style="min-height: 10px;">
                                 <div class="logo_name">
                                     <a class="name_company h5 fs-5 text-black text-decoration-none"
                                        href="/notice/main">회사이름</a>
                                     <div class="name_intrd text-black-50">회사소개</div>
                                 </div>
+                                <!--스크랩 부분-->
+                                <div>
+                                    <i onclick="scrap_btn()" id="scrap" class="fa-solid fa-bookmark text-warning"></i>
+                                </div>
+
+                                <script>
+                                    function scrap_btn() {
+                                        if ($("#scrap").hasClass("fa-solid")) {
+                                            $("#scrap").hasClass("fa-regular");
+                                            $("#scrap").removeClass("fa-solid");
+                                        } else if($("#scrap").hasClass("fa-regular")){ // 스크랩 취소 하기
+                                            $("#scrap").hasClass("fa-solid");
+                                            $("#scrap").removeClass("fa-regular");
+                                        }
+                                    }
+                                </script>
+
                             </div>
                             <hr>
                             <div class="content_detail">
@@ -29,6 +46,7 @@
                             </div>
                         </div>
                     </div>
+
                 {{/noticeList}}
             </div>
             <nav class="d-flex justify-content-center pt-3" aria-label="Page navigation example">

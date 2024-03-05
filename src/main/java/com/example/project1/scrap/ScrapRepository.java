@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ScrapRepository {
     private final EntityManager em;
 
-    // 스크랩
+    // 스크랩 여부와 무엇을 스크랩했는지 확인하는 코드
     public ScrapResponse.DetailDTO findScrap(int notice_id, int session_user_id) {
         String q = """
                 SELECT
@@ -19,8 +19,7 @@ public class ScrapRepository {
                     CASE
                         WHEN user_id IS NULL THEN FALSE
                         ELSE TRUE
-                    END AS isScrap,
-                    (SELECT COUNT(*) FROM scrap_tb WHERE notice_id = ?) AS scrapCount
+                    END AS isScrap
                 FROM
                     scrap_tb
                 WHERE
@@ -35,13 +34,11 @@ public class ScrapRepository {
         Object[] row = (Object[]) query.getSingleResult();
         Integer id = (Integer) row[0];
         Boolean isScrap = (Boolean) row[1];
-        Long scrapCount = (Long) row[2];
 
         System.out.println("id : " + id);
         System.out.println("isLove : " + isScrap);
-        System.out.println("scrapCount : " + scrapCount);
 
-        ScrapResponse.DetailDTO responseDTO = new ScrapResponse.DetailDTO(id, isScrap, scrapCount);
+        ScrapResponse.DetailDTO responseDTO = new ScrapResponse.DetailDTO(id, isScrap);
 
         return responseDTO;
     }

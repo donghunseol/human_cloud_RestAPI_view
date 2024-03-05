@@ -10,6 +10,7 @@ public class ScrapController {
     @GetMapping("/scrap" )
     public String index() {
 
+
         return "scrap/main";
     }
 }
