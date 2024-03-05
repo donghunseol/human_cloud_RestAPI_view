@@ -53,17 +53,34 @@ values (2, 2, now());
 
 -- board
 insert into board_tb(user_id, title, content, created_at)
-values (1, '제목1', '내용1', now());
+values (1, '안녕하십니까', '처음 왔습니다 인사드립니다!', now());
 insert into board_tb(user_id, title, content, created_at)
-values (1, '제목2', '내용2', now());
+values (1, '자소서는 어떻게 하면 잘 쓸 수 있을까?', '잘 쓰면 된다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목3', '내용3', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목4', '내용4', now());
 insert into board_tb(user_id, title, content, created_at)
-values (2, '제목5', '내용5', now());
+values (2, '로또 1등 되고 싶다~~~~~~~~', '언제 되려나요.......ㅜㅜㅜㅜㅜㅜㅜ', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목6', '내용6', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목7', '내용7', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목8', '내용8', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '3조 팀장 설동훈입니다', '팀장의 말이 법이다!!!!!', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '3조 오른팔 서지민 입니다', '열심히 합시다!!!!', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '3조의 왼팔 김완준 입니다', '담배 한대 피고 오겠습니다', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '3조의 왼다리 이소연 입니다', '너 되게 똑똑하구나~~~~~', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '3조의 오른다리 박동기 입니다', '토 할거 같아요 ㅜㅜㅜㅜㅜㅜㅜㅜ', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '최강 3조 화이팅!!!!!', '열심히 배우고 공부합시다!!!!!!!!', now());
+
 
 -- love
 insert into love_tb(user_id, board_id, created_at)

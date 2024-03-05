@@ -79,10 +79,39 @@ public class BoardController {
     }
 
     @GetMapping("/board" )
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request,
+                        @RequestParam(defaultValue = "0") Integer page,
+                        @RequestParam(defaultValue = "") String keyword) {
 
-        List<Board> boardList = boardRepository.findAll();
-        request.setAttribute("boardList", boardList);
+        if (keyword.isBlank()) {
+            List<Board> boardList = boardRepository.findAll(page);
+            // 전체 페이지 개수
+            int count = boardRepository.count().intValue();
+
+            int namerge = count % 3 == 0 ? 0 : 1;
+            int allPageCount = count / 3 + namerge;
+
+            request.setAttribute("boardList", boardList);
+            request.setAttribute("first", page == 0);
+            request.setAttribute("last", allPageCount == page + 1);
+            request.setAttribute("prev", page - 1);
+            request.setAttribute("next", page + 1);
+            request.setAttribute("keyword", "");
+        } else {
+            List<Board> boardList = boardRepository.findAll(page, keyword);
+            // 전체 페이지 개수
+            int count = boardRepository.count(keyword).intValue();
+
+            int namerge = count % 3 == 0 ? 0 : 1;
+            int allPageCount = count / 3 + namerge;
+
+            request.setAttribute("boardList", boardList);
+            request.setAttribute("first", page == 0);
+            request.setAttribute("last", allPageCount == page + 1);
+            request.setAttribute("prev", page - 1);
+            request.setAttribute("next", page + 1);
+            request.setAttribute("keyword", keyword);
+        }
 
         return "board/main";
     }

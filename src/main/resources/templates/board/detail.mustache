@@ -11,38 +11,22 @@
             <div class="board_view">
                 <div class="title"
                      style="padding: 20px 15px; border-top: 2px solid; border-bottom: 1px dashed #ddd; font-size: 2rem;">
-                    안녕하세요.
+                    {{board.title}}
                 </div>
                 <div class="info d-flex justify-content-between"
                      style="padding: 15px; border-bottom: 1px solid #999; font-size: 18px;">
-                    <dl class="">
-                        <dl style="display: inline-block; margin-left: 50px; margin-right: 150px;">
-                            <dt>번호</dt>
-                            <dd>1</dd>
-                            <dt>글쓴이</dt>
-                            <dd>김**</dd>
-                        </dl>
-                        <dl style="display: inline-block; margin-left: 200px; margin-right: 150px; margin-bottom: -10px;">
-                            <dt>작성일</dt>
-                            <dd>2024.2.20</dd>
-                        </dl>
-                    </dl>
                 </div>
                 <div class="content"
-                     style="padding: 15px;border-bottom: 1px solid #000;line-height: 160%;font-size: 20px;">
-                    안녕하세요.<br>
-                    처음 인사 드립니다.<br>
+                     style="padding: 15px; line-height: 160%; font-size: 25px;">
+                    {{board.content}}<br>
                     <br>
                     <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-
                 </div>
-                <div class="bt_wrap" style="text-align: center; margin-top: 15px;">
+                <div class="bt_list" style="text-align: center; margin-top: 15px;">
                     <a href="/board" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">목록</a>
+                </div>
+                <div class="bt_wrap" style="text-align: end; margin-top: 15px">
                     <a href="/board/updateForm" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">수정</a>
                     <a href="/board/delete" class="on"
