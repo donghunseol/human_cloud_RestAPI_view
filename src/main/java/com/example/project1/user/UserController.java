@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public String login( UserRequest.LoginDTO requestDTO , HttpServletRequest request) {
+    public String login( UserRequest.LoginDTO requestDTO) {
 
         User user = userRepository.findByUsernameAndPassword(requestDTO);
         System.out.println(user);

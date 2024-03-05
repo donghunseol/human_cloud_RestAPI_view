@@ -63,12 +63,7 @@ public class UserRepository {
           query.setParameter(1, requestDTO.getUsername());
           query.setParameter(2, requestDTO.getPassword());
 
-        try {
             User user = (User) query.getSingleResult();
             return user;
-        } catch (Exception e) {
-            throw new RuntimeException("id 혹은 password를 찾을 수 없습니다.");
-        }
-
     }
 }
