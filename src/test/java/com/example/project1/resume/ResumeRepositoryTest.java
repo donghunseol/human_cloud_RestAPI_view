@@ -36,4 +36,16 @@ public class ResumeRepositoryTest {
 
         System.out.println(resumeRepository.findByResumeId(resumeId));
     }
+
+    @Test
+    public void testDeleteByResumeId(){
+        Integer resumeId = 1;
+
+        resumeRepository.deleteByResumeId(resumeId);
+
+        List<ResumeResponse.ResumeListDTO> resumeList = resumeRepository.findAll();
+
+        resumeList.forEach(System.out::println);
+
+    }
 }
