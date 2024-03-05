@@ -12,4 +12,14 @@ public class NoticeRequest {
         private String content;
         private String deadline;
     }
+
+    @Data
+    public static class UpdateDTO{
+        private String title;
+        private String type;
+        private String field;
+        private String work_place;
+        private String content;
+        private String deadline;
+    }
 }

@@ -10,7 +10,7 @@ public class NoticeResponse {
     @AllArgsConstructor
     @Data
     public static class DetailDTO {
-        private Integer user_id;
+        private Integer user_id; //회원번호
         private String username; //회사명
         private String address; //회사 주소
         private String birth; //설립일
@@ -20,6 +20,8 @@ public class NoticeResponse {
         private String field; //분야
         private String content; //공고내용
         private String work_place; //근무지
+        private String email; //이메일
+        private String tel; //연락처
     }
 
 }
