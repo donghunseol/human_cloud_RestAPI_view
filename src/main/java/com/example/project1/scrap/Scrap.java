@@ -7,24 +7,19 @@ import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "scrap_tb", uniqueConstraints = {
-        @UniqueConstraint(
-                name = "scrap_uk", // 유니크 이름 설정
-                columnNames = {"user_id", "resume_id", "notice_id"} // 유니크 설정할 컬럼명
-        )
-})
+@Table(name = "scrap_tb")
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id; // 스크랩 ID
 
     @Column(nullable = false)
-    private Integer user_id;
-    private Integer resume_id;
-    private Integer notice_id;
+    private Integer user_id; // 유저
+    private Integer resume_id; // 이력서
+    private Integer notice_id; // 공고
 
     @Column(nullable = false)
-    private Integer role;
+    private Integer role; // 기업인지 개인인지 구별 0, 1
 
     private Timestamp created_at;
 }

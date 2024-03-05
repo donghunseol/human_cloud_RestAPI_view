@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -16,8 +18,9 @@ public class UserController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-
     public String index(HttpServletRequest request){
+        List<User> user = userRepository.findAll();
+
         request.setAttribute("isScrap", true);
         return "index";
     }
