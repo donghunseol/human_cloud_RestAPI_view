@@ -26,7 +26,7 @@ public class ResumeResponse {
             this.image = image;
         }
 
-        public void addSkill(SkillDTO skillDTO){
+        public void addSkill(SkillDTO skillDTO) {
             skills.add(skillDTO);
         }
     }
@@ -68,7 +68,7 @@ public class ResumeResponse {
             this.role = role;
         }
 
-        public void addSkill(SkillDTO skillDTO){
+        public void addSkill(SkillDTO skillDTO) {
             skills.add(skillDTO);
         }
     }
