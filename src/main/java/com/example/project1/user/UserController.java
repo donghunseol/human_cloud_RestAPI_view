@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
@@ -31,24 +33,28 @@ public class UserController {
         return "user/joinForm";
     }
 
-    @PostMapping("/login")
-    public String login(UserRequest.LoginDTO requestDTO) {
-        System.out.println("정보 : " + requestDTO);
-        User user = userRepository.findById(requestDTO);
+    @PostMapping("/user/login")
+    public String login( UserRequest.LoginDTO requestDTO , HttpServletRequest request) {
+
+        User user = userRepository.findByUsernameAndPassword(requestDTO);
+        System.out.println(user);
+
+        session.setAttribute("sessionUser" , user );
+        System.out.println(user);
+
+        return "redirect:/";
+    }
 
 
     @PostMapping("/user/join")
-    public String join(UserRequest.JoinDTO requestDTO) {
-        System.out.println("정보 : " + requestDTO);
-
+    public String join(UserRequest.JoinDTO requestDTO){
         userRepository.save(requestDTO);
 
-        System.out.println(requestDTO.getRole());
-
-        // repo db연결
+       // HttpSession s =request.getSession();
+//        System.out.println("정보 : " + requestDTO);
 
         return "redirect:/user/loginForm";
-    }
+   }
 
 
     @GetMapping("/user/updateForm")

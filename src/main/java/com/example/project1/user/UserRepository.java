@@ -13,11 +13,18 @@ public class UserRepository {
     private final EntityManager em;
 
     // 부분 조회
-    public void findById() {
-
-        private String username;
-        private String password;
+    public User findById(Integer id) {
+        Query query=em.createNativeQuery("select * from user_tb where id = ?");
+        query.setParameter(1, id);
+        return (User) query.getSingleResult();
     }
+
+    public void findByUsername(String username) {
+        Query query=em.createNativeQuery("select * from user_tb where username = ?");
+        query.setParameter(1, username);
+        query.executeUpdate();
+    }
+
 
     // 전체 조회
     public void findAll() {
@@ -35,7 +42,7 @@ public class UserRepository {
         query.setParameter(5, requestDTO.getBirth());
         query.setParameter(6, requestDTO.getAddress());
         query.setParameter(7, requestDTO.getEmail());
-        //query.setParameter(8, requestDTO.getRole());
+
         query.executeUpdate();
     }
 
@@ -48,6 +55,20 @@ public class UserRepository {
     // 수정
     @Transactional
     public void update() {
+
+    }
+
+    public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
+          Query query = em.createNativeQuery("select * from user_tb where username=? and password=?",User.class);
+          query.setParameter(1, requestDTO.getUsername());
+          query.setParameter(2, requestDTO.getPassword());
+
+        try {
+            User user = (User) query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException("id 혹은 password를 찾을 수 없습니다.");
+        }
 
     }
 }
