@@ -29,14 +29,11 @@
             {{/boardList}}
         </table>
 
-        <div class="board_page" style="text-align: center;  margin-bottom: 20px;">
-            <a href="#" class="bt_first" aria-label="첫 페이지로 이동"><<</a>
-            <a href="#" class="bt_prev" aria-label="이전 페이지로 이동"><</a>
-            <a href="#" class="num active" aria-label="페이지 1">1</a>
-            <a href="#" class="num" aria-label="페이지 2">2</a>
-            <a href="#" class="bt_next" aria-label="다음 페이지로 이동">></a>
-            <a href="#" class="bt_last" aria-label="마지막 페이지로 이동">>></a>
-        </div>
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}">이전</a></li>
+            <li class="page-item"><a class="page-link text-black" href="#">1</a></li>
+            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}">다음</a></li>
+        </ul>
         <div class="bt_wrap" style="text-align: center;">
             <a href="/board/saveForm" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
@@ -50,4 +47,4 @@
         </form>
     </div>
 </section>
-{{> layout/footer}}}
+{{> layout/footer}}
