@@ -1,12 +1,11 @@
 package com.example.project1.user;
 
-import jdk.swing.interop.SwingInterOpUtils;
+import com.example.project1.resume.ResumeRepository;
+import com.example.project1.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -16,12 +15,15 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final ResumeRepository resumeRepository;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request) {
         List<User> user = userRepository.findAll();
-
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
+        request.setAttribute("resumeList", resumeList);
         request.setAttribute("isScrap", true);
+
         return "index";
     }
 

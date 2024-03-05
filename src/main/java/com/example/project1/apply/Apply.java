@@ -14,10 +14,12 @@ public class Apply {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer resume_id;
+    private Integer resumeId; // 1
 
     @Column(nullable = false)
-    private Integer notice_id;
+    private Integer noticeId; // 2
 
-    private Timestamp created_at;
+    // 개인->기업 (지원)
+
+    private Timestamp createdAt;
 }

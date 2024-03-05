@@ -3,6 +3,7 @@
 <!-- boardList -->
 <section class="mw-1000 d-flex justify-content-center"
          style="padding: 20px; background-color: #f8f9fa; padding: 30px 200px;">
+
     <div class="container bg-white p-3 rounded-3">
         <div class="board_title">
             <h1><strong>커뮤니티 게시판</strong></h1>
@@ -14,78 +15,37 @@
             <tr style="background-color: antiquewhite; border-top: 1px solid #999; border-bottom:1px solid #999;">
                 <th style="padding: 10px; text-align: center;">번호</th>
                 <th style="padding: 10px; text-align: center;">제목</th>
-                <th style="padding: 10px; text-align: center;">글쓴이</th>
+                <th style="padding: 10px; text-align: center;">작성자</th>
                 <th style="padding: 10px; text-align: center;">작성일</th>
-                <th style="padding: 10px; text-align: center;">조회</th>
+
             </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">14</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">가입했습니다</a></td>
-                <td style="padding: 10px; text-align: center;">김**</td>
-                <td style="padding: 10px; text-align: center;">24.2.26</td>
-                <td style="padding: 10px; text-align: center;">20</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">13</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">구직을 어떻게 하면 좋을까?</a></td>
-                <td style="padding: 10px; text-align: center;">주**</td>
-                <td style="padding: 10px; text-align: center;">24.2.25</td>
-                <td style="padding: 10px; text-align: center;">22</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">12</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">제 자소서 평가좀 해주세요!</a></td>
-                <td style="padding: 10px; text-align: center;">김**</td>
-                <td style="padding: 10px; text-align: center;">24.2.25</td>
-                <td style="padding: 10px; text-align: center;">32</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">11</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">자소서 평가 부탁드려요!</a></td>
-                <td style="padding: 10px; text-align: center;">강**</td>
-                <td style="padding: 10px; text-align: center;">24.2.24</td>
-                <td style="padding: 10px; text-align: center;">62</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">10</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">빨리 취직해야지!!</a></td>
-                <td style="padding: 10px; text-align: center;">이**</td>
-                <td style="padding: 10px; text-align: center;">24.2.24</td>
-                <td style="padding: 10px; text-align: center;">66</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">9</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">반갑습니다.</a></td>
-                <td style="padding: 10px; text-align: center;">이**</td>
-                <td style="padding: 10px; text-align: center;">24.2.24</td>
-                <td style="padding: 10px; text-align: center;">77</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; text-align: center;">8</td>
-                <td style="padding: 10px; text-align: center;"><a href="/board/1">안녕하세요.</a></td>
-                <td style="padding: 10px; text-align: center;">김**</td>
-                <td style="padding: 10px; text-align: center;">24.2.23</td>
-                <td style="padding: 10px; text-align: center;">88</td>
-            </tr>
+            {{#boardList}}
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td style="padding: 10px; text-align: center;">{{id}}</td>
+
+                    <td style="padding: 10px; text-align: center;"><a href="/board/{{id}}">{{title}}</a></td>
+                    <td style="padding: 10px; text-align: center;">{{userId}}</td>
+
+                    <td style="padding: 10px; text-align: center;">{{created_at}}</td>
+                </tr>
+            {{/boardList}}
         </table>
 
-        <div class="board_page" style="text-align: center;  margin-bottom: 20px;">
-            <a href="#" class="bt_first" aria-label="첫 페이지로 이동"><<</a>
-            <a href="#" class="bt_prev" aria-label="이전 페이지로 이동"><</a>
-            <a href="#" class="num active" aria-label="페이지 1">1</a>
-            <a href="#" class="num" aria-label="페이지 2">2</a>
-            <a href="#" class="bt_next" aria-label="다음 페이지로 이동">></a>
-            <a href="#" class="bt_last" aria-label="마지막 페이지로 이동">>></a>
-        </div>
+        <ul class="pagination d-flex justify-content-center">
+            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}&keyword={{keyword}}">이전</a></li>
+            <li class="page-item"><a class="page-link text-black" href="?page=0">1</a></li>
+            <li class="page-item"><a class="page-link text-black" href="?page=1">2</a></li>
+            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}&keyword={{keyword}}">다음</a></li>
+        </ul>
         <div class="bt_wrap" style="text-align: center;">
             <a href="/board/saveForm" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
-            <a href="/board" class="on"
+            <a href="/" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">홈</a>
         </div>
 
-        <form action="/board/1" class="d-flex justify-content-end mb-30">
-            <input class="me-3" type="text" placeholder="제목을 입력하세요">
+        <form action="/board" method="get" class="d-flex justify-content-end mb-30">
+            <input class="me-3" type="text" placeholder="제목을 입력하세요" name="keyword">
             <button class="btn btn-primary" type="submit">검색</button>
         </form>
     </div>

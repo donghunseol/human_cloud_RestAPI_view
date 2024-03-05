@@ -13,6 +13,7 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JoinColumn()
     @Column(nullable = false)
     private Integer userId;
 
@@ -25,12 +26,12 @@ public class Notice {
     @Column(nullable = false)
     private String field;
 
-    private String work_place;
+    private String workPlace;
     private String content;
 
     @Column(nullable = false)
     private String deadline;
 
     @Column(nullable = false)
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }
