@@ -54,8 +54,8 @@ public class NoticeController {
 
     @GetMapping("/notice/{id}")
     public String detail(@PathVariable int id, HttpServletRequest request) {
-        Notice notice = noticeRepository.findById(id);
-        request.setAttribute("notice", notice);
+        NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
+        request.setAttribute("notice", responseDTO);
 
         return "notice/detail";
     }

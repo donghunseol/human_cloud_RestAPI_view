@@ -3,6 +3,7 @@ package com.example.project1.notice;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,15 @@ public class NoticeRepository {
     public List<Notice> findAll(){
         Query query = em.createNativeQuery("select * from notice_tb order by id desc", Notice.class);
         return query.getResultList();
+    }
+
+    public NoticeResponse.DetailDTO findNoticeById(int id){
+        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?;");
+        query.setParameter(1,id);
+
+        JpaResultMapper rm = new JpaResultMapper();
+        NoticeResponse.DetailDTO responseDTO = rm.uniqueResult(query, NoticeResponse.DetailDTO.class);
+        return responseDTO;
     }
 
     // 저장

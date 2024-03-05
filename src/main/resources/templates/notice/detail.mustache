@@ -5,7 +5,7 @@
             <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
                 <div>
                     <h2><b>{{title}}</b></h2>
-                    <b>어라운드더코너 </b>Around The Corner
+                    <b>{{username}} </b>
                     <div>
                         <i class="fa-solid fa-calendar-days text-body-tertiary"></i>
                         <span class="text-body-tertiary">{{deadline}} 마감</span>
@@ -17,37 +17,28 @@
                 <div>{{type}}</div>
                 <hr>
                 <h5 class="mb-2">업무 기술 / 활동 분야</h5>
+
                 <p class="d-inline-flex gap-1 mt-2">
-                    <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">UI/UX
-                        디자인</a>
-                    <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">Figma</a>
-                    <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">Adobe
-                        Photoshop</a>
+                    {{#field}}
+                        <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">{{field}}</a>
+                    {{/field}}
                 </p>
                 <hr>
                 <h5 class="mb-2">채용 상세</h5>
                 <div>
-                    <div>연봉 : 3000만원</div>
-                    <div>3년차 이상, IT서비스</div>
-                    <p>1. 자유 양식의 이력서
-                        전공 및 업무와 관련된 이력 중심으로 작성해주세요.
-                        개인 인적사항(학교명, 사진, 나이, 가족 관계, 키, 몸무게 등)은 첨부하지 마시기 바랍니다.
-                        <br>
-                        2. 자유 양식의 자기소개서
-                        긱블이 세일즈 매니저로서 본인을 채용해야 하는 이유를 포함하여 자유롭게 작성해주세요.
-                    </p>
+                    {{content}}
                 </div>
                 <hr>
                 <h5 class="mb-2">근무지</h5>
-                <div><b>긱블 스튜디오</b></div>
-                <div>서울특별시 성동구 성수2가1동 성수이로7가길 8</div>
+                <div><b>{{username}}</b></div>
+                <div>{{work_place}}</div>
                 <hr>
                 <h5 class="mb-2">기업 주소</h5>
-                <div><i class="fa-solid fa-city me-1"></i><b>긱블 스튜디오</b></div>
-                <div>서울특별시 성동구 성수2가1동 성수이로7가길 8</div>
+                <div><i class="fa-solid fa-city me-1"></i><b>{{username}}</b></div>
+                <div>{{address}}</div>
                 <hr>
                 <h5 class="mb-2">설립일</h5>
-                <div>2023년 3월 8일</div>
+                <div>{{birth}}</div>
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
