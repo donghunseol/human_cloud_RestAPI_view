@@ -8,7 +8,7 @@ public class NoticeRequest {
         private String title;
         private String type;
         private String field;
-        private String work_place;
+        private String workPlace;
         private String content;
         private String deadline;
     }

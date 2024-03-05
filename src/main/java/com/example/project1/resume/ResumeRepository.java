@@ -14,7 +14,7 @@ public class ResumeRepository {
     private final EntityManager em;
 
     // 전체 조회(모든 유저가 작성된 이력서)
-    public List<ResumeResponse.ResumeListDTO> findAll() {
+    public List<ResumeResponse.DTO> findAll() {
         String sql = """
                 select r.id resume_id, u.id user_id, r.title, u.name, u.image, s.id, s.name, 
                 from resume_tb r 
@@ -24,28 +24,28 @@ public class ResumeRepository {
         Query query = em.createNativeQuery(sql);
 
         List<Object[]> rows = query.getResultList();
-        Map<Integer, ResumeResponse.ResumeListDTO> resumeMap = new HashMap<>();
+        Map<Integer, ResumeResponse.DTO> resumeMap = new HashMap<>();
 
         for (Object[] row : rows) {
             Integer id = (Integer) row[0];
-            Integer user_id = (Integer) row[1];
+            Integer userId = (Integer) row[1];
             String title = (String) row[2];
             String name = (String) row[3];
             String image = (String) row[4];
 
-            ResumeResponse.ResumeListDTO resume = resumeMap.get(id);
+            ResumeResponse.DTO resume = resumeMap.get(id);
             if (resume == null) {
-                resume = new ResumeResponse.ResumeListDTO(
-                        id, user_id, title, name, image
+                resume = new ResumeResponse.DTO(
+                        id, userId, title, name, image
                 );
                 resumeMap.put(id, resume);
             }
 
-            Integer skill_id = (Integer) row[5];
-            String skill_name = (String) row[6];
-            if (skill_id != null && skill_name != null) {
+            Integer skillId = (Integer) row[5];
+            String skillName = (String) row[6];
+            if (skillId != null && skillName != null) {
                 ResumeResponse.SkillDTO skill = new ResumeResponse.SkillDTO(
-                        skill_id, skill_name
+                        skillId, skillName
                 );
                 resume.addSkill(skill);
             }
@@ -55,7 +55,7 @@ public class ResumeRepository {
     }
 
     // 전체 조회(해당 유저가 작성된 이력서)
-    public List<ResumeResponse.ResumeListDTO> findAllByUserId(Integer idx) {
+    public List<ResumeResponse.DTO> findAllByUserId(Integer idx) {
         String sql = """
                 select r.id resume_id, u.id user_id, r.title, u.name, u.image, s.id, s.name, 
                 from resume_tb r 
@@ -67,19 +67,19 @@ public class ResumeRepository {
         query.setParameter(1, idx);
 
         List<Object[]> rows = query.getResultList();
-        Map<Integer, ResumeResponse.ResumeListDTO> resumeMap = new HashMap<>();
+        Map<Integer, ResumeResponse.DTO> resumeMap = new HashMap<>();
 
         for (Object[] row : rows) {
             Integer id = (Integer) row[0];
-            Integer user_id = (Integer) row[1];
+            Integer userId = (Integer) row[1];
             String title = (String) row[2];
             String name = (String) row[3];
             String image = (String) row[4];
 
-            ResumeResponse.ResumeListDTO resume = resumeMap.get(id);
+            ResumeResponse.DTO resume = resumeMap.get(id);
             if (resume == null) {
-                resume = new ResumeResponse.ResumeListDTO(
-                        id, user_id, title, name, image
+                resume = new ResumeResponse.DTO(
+                        id, userId, title, name, image
                 );
                 resumeMap.put(id, resume);
             }
@@ -98,7 +98,7 @@ public class ResumeRepository {
     }
 
     // 상세 조회(해당 유저가 선택한 작성된 이력서)
-    public ResumeResponse.ResumeDetailDTO findByResumeId(Integer resumeId) {
+    public ResumeResponse.DetailDTO findByResumeId(Integer resumeId) {
         String sql = """
                 select r.id resume_id, u.id user_id, r.title, u.name, u.birth, u.tel, u.email, u.address, u.image, r.education, r.major, r.license, r.career, u.role, s.id, s.name 
                 from resume_tb r 
@@ -111,32 +111,37 @@ public class ResumeRepository {
 
         List<Object[]> rows = (List<Object[]>) query.getResultList();
 
-        Integer id = (Integer) rows.get(0)[0];
-        Integer user_id = (Integer) rows.get(0)[1];
-        String title = (String) rows.get(0)[2];
-        String name = (String) rows.get(0)[3];
-        String birth = (String) rows.get(0)[4];
-        String tel = (String) rows.get(0)[5];
-        String email = (String) rows.get(0)[6];
-        String address = (String) rows.get(0)[7];
-        String image = (String) rows.get(0)[8];
-        String education = (String) rows.get(0)[9];
-        String major = (String) rows.get(0)[10];
-        String license = (String) rows.get(0)[11];
-        String career = (String) rows.get(0)[12];
-        Integer role = (Integer) rows.get(0)[13];
+
+        // 한줄 받아서
+        Object[] resumeOb = rows.get(0);
+        
+        // 파싱하기
+        Integer id = (Integer) resumeOb[0];
+        Integer userId = (Integer) resumeOb[1];
+        String title = (String) resumeOb[2];
+        String name = (String) resumeOb[3];
+        String birth = (String) resumeOb[4];
+        String tel = (String) resumeOb[5];
+        String email = (String) resumeOb[6];
+        String address = (String) resumeOb[7];
+        String image = (String) resumeOb[8];
+        String education = (String) resumeOb[9];
+        String major = (String) resumeOb[10];
+        String license = (String) resumeOb[11];
+        String career = (String) resumeOb[12];
+        Integer role = (Integer) resumeOb[13];
 
 
-        ResumeResponse.ResumeDetailDTO resume = new ResumeResponse.ResumeDetailDTO(
-                id, user_id, title, name, birth, tel, email, address, image, education, major, license, career, role
+        ResumeResponse.DetailDTO resume = new ResumeResponse.DetailDTO(
+                id, userId, title, name, birth, tel, email, address, image, education, major, license, career, role
         );
 
         for (Object[] row : rows) {
-            Integer skill_id = (Integer) row[14];
-            String skill_name = (String) row[15];
+            Integer skillId = (Integer) row[14];
+            String skillName = (String) row[15];
 
             ResumeResponse.SkillDTO skill = new ResumeResponse.SkillDTO(
-                    skill_id, skill_name
+                    skillId, skillName
             );
 
             if (id!= null) resume.addSkill(skill);

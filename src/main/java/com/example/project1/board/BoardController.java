@@ -16,7 +16,7 @@ public class BoardController {
     private final HttpSession session;
     private final BoardRepository boardRepository;
 
-    @PutMapping("/board/{id}/update")
+    @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
 //        User sessionUser = (User) session.getAttribute("sessionUser");
 //        if (sessionUser == null) {
@@ -34,7 +34,7 @@ public class BoardController {
         return "redirect:/board/" + id;
     }
 
-    @DeleteMapping("/board/{id}/delete")
+    @PostMapping("/board/{id}/delete")
     public String delete(@PathVariable int id, HttpServletRequest request){
 
         // 인증
@@ -99,8 +99,8 @@ public class BoardController {
         }
     }
 
-    @GetMapping("/board/updateForm")
-    public String updateForm(@PathVariable int id, HttpServletRequest request ){
+    @GetMapping("/board/{id}/updateForm")
+    public String updateForm(@PathVariable Integer id, HttpServletRequest request ){
 //        //인증
 //        User sessionUser = (User) session.getAttribute("sessionUser");
 //        if(sessionUser == null){
@@ -120,7 +120,7 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable int id , HttpServletRequest request) {
+    public String detail(@PathVariable Integer id , HttpServletRequest request) {
 
         BoardResponse.DetailDTO responseDTO = boardRepository.findById(id);
 
@@ -130,7 +130,7 @@ public class BoardController {
         if (sessionUser == null){
             pageOwner = false;
         } else {
-            int boardId = responseDTO.getUser_id();
+            int boardId = responseDTO.getUserId();
             int loginUserId = sessionUser.getId();
             pageOwner = boardId == loginUserId;
         }

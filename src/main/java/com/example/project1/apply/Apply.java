@@ -14,10 +14,10 @@ public class Apply {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer resume_id;
+    private Integer resumeId;
 
     @Column(nullable = false)
-    private Integer notice_id;
+    private Integer noticeId;
 
     private Timestamp created_at;
 }

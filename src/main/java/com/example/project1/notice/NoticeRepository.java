@@ -33,7 +33,7 @@ public class NoticeRepository {
     }
 
     public NoticeResponse.DetailDTO findNoticeById(int id){
-        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?;");
+        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?");
         query.setParameter(1,id);
 
         JpaResultMapper rm = new JpaResultMapper();
@@ -49,7 +49,7 @@ public class NoticeRepository {
         query.setParameter(2, requestDTO.getTitle());
         query.setParameter(3, requestDTO.getType());
         query.setParameter(4, requestDTO.getField());
-        query.setParameter(5, requestDTO.getWork_place());
+        query.setParameter(5, requestDTO.getWorkPlace());
         query.setParameter(6, requestDTO.getContent());
         query.setParameter(7, requestDTO.getDeadline());
 

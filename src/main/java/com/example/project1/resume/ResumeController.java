@@ -1,5 +1,6 @@
 package com.example.project1.resume;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController
 @Controller
 public class ResumeController {
     private final ResumeRepository resumeRepository;
@@ -20,7 +20,9 @@ public class ResumeController {
     }
 
     @GetMapping("/resume/saveForm")
-    public String saveForm() {
+    public String saveForm(HttpServletRequest request) {
+        
+        request.setAttribute("skillList", "디비에서조회된 모든 스킬들 컬렉션");
         return "resume/saveForm";
     }
 
@@ -36,17 +38,17 @@ public class ResumeController {
 
     // REST API
     @GetMapping("/api/resume")
-    public List<ResumeResponse.ResumeListDTO> findAll() {
+    public List<ResumeResponse.DTO> findAll() {
         return resumeRepository.findAll();
     }
 
     @GetMapping("/api/user/resume/{id}")
-    public List<ResumeResponse.ResumeListDTO> findAllByUserId(@PathVariable Integer id) {
+    public List<ResumeResponse.DTO> findAllByUserId(@PathVariable Integer id) {
         return resumeRepository.findAllByUserId(id);
     }
 
     @GetMapping("/api/resume/{id}")
-    public ResumeResponse.ResumeDetailDTO findByResumeId(@PathVariable Integer id) {
+    public ResumeResponse.DetailDTO findByResumeId(@PathVariable Integer id) {
         return resumeRepository.findByResumeId(id);
     }
 }
