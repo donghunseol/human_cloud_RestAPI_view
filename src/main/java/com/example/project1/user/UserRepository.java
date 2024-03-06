@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class UserRepository {
@@ -28,8 +30,10 @@ public class UserRepository {
 
 
     // 전체 조회
-    public void findAll() {
-
+    public List<User> findAll() {
+        Query query = em.createNativeQuery("select * from user_tb", User.class);
+        List<User> userList = query.getResultList();
+        return userList;
     }
 
     // 저장
@@ -66,9 +70,6 @@ public class UserRepository {
         query.setParameter(2,id);
 
     }
-
-
-
 
     public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
           Query query = em.createNativeQuery("select * from user_tb where username=? and password=?",User.class);

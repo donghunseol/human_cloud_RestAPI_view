@@ -2,7 +2,7 @@
 
 <div class="mw-100 bg-light" style="padding: 30px 200px;">
     <div class="d-flex">
-        <form action="/myPage" class="container">
+        <form action="/notice/save" method="post" class="container">
             <h3 class="container d-flex pb-3">기업 공고 작성</h3>
             <!-- 기본 정보 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
@@ -20,8 +20,8 @@
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">연락처</label>
-                    <input type="number" class="form-control" id="phonenumber" placeholder="연락처를 입력하세요."
-                           name="phonenumber">
+                    <input type="number" class="form-control" id="tel" placeholder="연락처를 입력하세요."
+                           name="tel">
                 </div>
 
                 <div class="mb-3 mt-1">
@@ -31,12 +31,12 @@
 
                 <label class="form-label">설립일</label>
                 <div class="col-sm-5 mb-3">
-                    <input type="date" class="form-control">
+                    <input type="text" class="form-control" id="birth" name="birth">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">이미지 업로드</label><br>
-                    <input type="file" name="image" accept="image/*">
+                    <input type="file" id="image" accept="image/*" name="image">
                 </div>
             </div>
 
@@ -45,13 +45,13 @@
                 <h4>공고 내용</h4>
                 <div class="mb-3 mt-1">
                     <label class="form-label">공고 제목</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="mb-3 mt-1 row">
                     <label class="form-label">고용 형태</label>
                     <div class="col-sm-5">
-                        <select class="form-select">
+                        <select class="form-select" id="type" name="type" required>
                             <option selected>고용 형태</option>
                             <option value="1">계약직</option>
                             <option value="2">정규직</option>
@@ -62,19 +62,25 @@
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">분야</label>
-                    <input type="text" class="form-control" placeholder="예: 백엔드 개발자, 프론트엔드 개발자">
+                    <input type="text" class="form-control" id="field" placeholder="예: 백엔드 개발자, 프론트엔드 개발자" name="field" required>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">근무지</label>
-                    <input type="text" class="form-control" id="work_address" placeholder="근무지를 입력하세요."
-                           name="work_address">
+                    <input type="text" class="form-control" id="work_place" placeholder="근무지를 입력하세요."
+                           name="workPlace" >
+                </div>
+
+                <div class="mb-3 mt-1">
+                    <label class="form-label">공고 마감일</label>
+                    <input type="text" class="form-control" id="deadline" placeholder="예: 20240506"
+                           name="deadline" >
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">상세 내용</label>
-                    <textarea class="form-control" id="notice_detail" placeholder="상세 내용을 입력하세요."
-                              name="notice_detail"></textarea>
+                    <textarea class="form-control" id="content" placeholder="상세 내용을 입력하세요."
+                              name="content"></textarea>
                 </div>
             </div>
 

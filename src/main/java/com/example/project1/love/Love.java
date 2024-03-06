@@ -14,8 +14,8 @@ public class Love {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer user_id;
-    private Integer board_id;
+    private Integer userId;
+    private Integer boardId;
 
     private Timestamp createdAt;
 }

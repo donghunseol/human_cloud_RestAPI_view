@@ -13,6 +13,7 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JoinColumn()
     @Column(nullable = false)
     private Integer userId;
 

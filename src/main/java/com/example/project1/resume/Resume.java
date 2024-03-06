@@ -14,7 +14,9 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer user_id;
+    private Integer userId;
+
+    private String title;
 
     @Column(nullable = false)
     private String career;
@@ -23,10 +25,10 @@ public class Resume {
     private String license;
 
     @Column(nullable = false)
-    private Integer education;
+    private String education;
 
     @Column(nullable = false)
-    private Integer major;
+    private String major;
 
     private Timestamp createdAt;
 }

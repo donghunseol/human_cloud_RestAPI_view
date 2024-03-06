@@ -3,20 +3,28 @@ package com.example.project1.user;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
+import com.example.project1.resume.ResumeRepository;
+import com.example.project1.resume.ResumeResponse;
+
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-
     private final UserRepository userRepository;
     private final HttpSession session;
+    private final ResumeRepository resumeRepository;
 
     @GetMapping("/")
-    public String index() {
+    public String index(HttpServletRequest request) {
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
+        request.setAttribute("resumeList", resumeList);
+
         return "index";
     }
 

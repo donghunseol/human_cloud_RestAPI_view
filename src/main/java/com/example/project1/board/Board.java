@@ -14,7 +14,7 @@ public class Board {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer user_id;
+    private Integer userId;
 
     @Column(nullable = false)
     private String title;
@@ -22,5 +22,5 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
-    private Timestamp createdAt;
+    private Timestamp created_at;
 }
