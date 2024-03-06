@@ -63,10 +63,4 @@ public class NoticeRepository {
         query.setParameter(1, id);
         query.executeUpdate();
     }
-
-    // 수정
-    @Transactional
-    public void update(){
-
-    }
 }
