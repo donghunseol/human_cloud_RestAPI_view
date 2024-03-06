@@ -25,4 +25,11 @@ public class UserRequest {
         private String email;
         private String tel;
     }
+  
+    @Data
+    public static class LoginDTO{
+        private String username;
+        private String password;
+
+    }
 }
