@@ -20,6 +20,8 @@ public class NoticeResponse {
         private String field; //분야
         private String content; //공고내용
         private String workPlace; //근무지
+        private String email; //이메일
+        private String tel; //연락처
     }
 
 }

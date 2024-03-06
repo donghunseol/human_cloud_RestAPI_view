@@ -16,4 +16,11 @@ public class UserRequest {
         private String address;
         private Integer role;
     }
+
+    @Data
+    public static class UpdateNoticeDTO{
+        private String username;
+        private String birth;
+        private String address;
+    }
 }

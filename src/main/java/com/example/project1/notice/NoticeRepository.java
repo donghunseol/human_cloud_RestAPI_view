@@ -1,5 +1,6 @@
 package com.example.project1.notice;
 
+import com.example.project1.user.UserRequest;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,7 @@ public class NoticeRepository {
     }
 
     public NoticeResponse.DetailDTO findNoticeById(int id){
-        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?");
+        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place, ut.email, ut.tel from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?;");
         query.setParameter(1,id);
 
         JpaResultMapper rm = new JpaResultMapper();
@@ -53,6 +54,7 @@ public class NoticeRepository {
         query.setParameter(6, requestDTO.getContent());
         query.setParameter(7, requestDTO.getDeadline());
 
+
         query.executeUpdate();
     }
 
@@ -65,42 +67,37 @@ public class NoticeRepository {
     }
 
     // 수정
-    @Transactional
-    public void updateById(int id){
-        Query query = em.createNativeQuery("""
-                BEGIN
-                TRANSACTION;
+    public void updateById(NoticeRequest.UpdateDTO updateDTO_n, UserRequest.UpdateNoticeDTO updateDTO_u, int id){
+        Query query1 = em.createNativeQuery("""
                 UPDATE user_tb
-                SET username = ?, address = ?, birth = ?
-                WHERE id IN (
-                    SELECT ut.id
-                    FROM notice_tb nt
-                    LEFT OUTER JOIN user_tb ut ON ut.id = nt.user_id
-                    WHERE ut.role = 1 AND nt.id = ?
-                              );
-                UPDATE notice_tb
-                SET title = ?, deadline = ?, type = ?, field = ?, content = ?, work_place = ?
-                WHERE id = ?;
-                COMMIT;
+        SET username = ?, address = ?, birth = ?
+        WHERE id IN (SELECT ut.id
+                     FROM user_tb ut
+                     LEFT OUTER JOIN notice_tb nt ON ut.id = nt.user_id
+                     WHERE ut.role = 1 AND nt.id = ?);
         """);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
-        query.setParameter(1, id);
+        query1.setParameter(1, updateDTO_u.getUsername());
+        query1.setParameter(2, updateDTO_u.getAddress());
+        query1.setParameter(3, updateDTO_u.getBirth());
+        query1.setParameter(4, id);
+        query1.executeUpdate();
+
+        Query query2 = em.createNativeQuery("""
+                UPDATE notice_tb
+        SET title = ?, deadline = ?, type = ?, field = ?,
+            content = ?, work_place = ?
+        WHERE user_id IN (SELECT ut.id
+                          FROM user_tb ut
+                          LEFT OUTER JOIN notice_tb nt ON ut.id = nt.user_id
+                          WHERE ut.role = 1 AND nt.id = ?);
+        """);
+        query2.setParameter(1, updateDTO_n.getTitle());
+        query2.setParameter(2, updateDTO_n.getDeadline());
+        query2.setParameter(3, updateDTO_n.getType());
+        query2.setParameter(4, updateDTO_n.getField());
+        query2.setParameter(5, updateDTO_n.getContent());
+        query2.setParameter(6, updateDTO_n.getWork_place());
+        query2.setParameter(7, id);
+        query2.executeUpdate();
     }
 }

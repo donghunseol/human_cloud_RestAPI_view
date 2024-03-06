@@ -10,28 +10,28 @@
                 <div class="mb-3 mt-1">
                     <label class="form-label">기업 이름</label>
                     <input type="text" class="form-control" id="company_name" placeholder="기업 이름을 입력하세요."
-                           name="company_name">
+                           name="company_name" value="{{notice.username}}">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요." name="email">
+                    <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요." name="email" value="{{notice.email}}">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">연락처</label>
                     <input type="number" class="form-control" id="tel" placeholder="연락처를 입력하세요."
-                           name="tel">
+                           name="tel" value="{{notice.tel}}">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">기업 주소</label>
-                    <input type="text" class="form-control" id="address" placeholder="기업 주소를 입력하세요." name="address">
+                    <input type="text" class="form-control" id="address" placeholder="기업 주소를 입력하세요." name="address" value="{{notice.address}}">
                 </div>
 
                 <label class="form-label">설립일</label>
                 <div class="col-sm-5 mb-3">
-                    <input type="text" class="form-control" id="birth" name="birth">
+                    <input type="text" class="form-control" id="birth" name="birth" value="{{notice.birth}}">
                 </div>
 
                 <div class="mb-3 mt-1">
@@ -45,42 +45,35 @@
                 <h4>공고 내용</h4>
                 <div class="mb-3 mt-1">
                     <label class="form-label">공고 제목</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" class="form-control" id="title" name="title" value="{{notice.title}}" required>
                 </div>
 
-                <div class="mb-3 mt-1 row">
+                <div class="mb-3 mt-1">
                     <label class="form-label">고용 형태</label>
-                    <div class="col-sm-5">
-                        <select class="form-select" id="type" name="type" required>
-                            <option selected>고용 형태</option>
-                            <option value="1">계약직</option>
-                            <option value="2">정규직</option>
-                            <option value="3">파견직</option>
-                        </select>
-                    </div>
+                    <input type="text" class="form-control" id="type" placeholder="예: 계약직, 정규직, 파견직" name="type" value="{{notice.type}}" required>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">분야</label>
-                    <input type="text" class="form-control" id="field" placeholder="예: 백엔드 개발자, 프론트엔드 개발자" name="field" required>
+                    <input type="text" class="form-control" id="field" placeholder="예: 백엔드 개발자, 프론트엔드 개발자" name="field" value="{{notice.field}}" required>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">근무지</label>
                     <input type="text" class="form-control" id="work_place" placeholder="근무지를 입력하세요."
-                           name="workPlace" >
+                           name="workPlace" value="{{notice.work_place}}">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">공고 마감일</label>
                     <input type="text" class="form-control" id="deadline" placeholder="예: 20240506"
-                           name="deadline" >
+                           name="deadline" value="{{notice.deadline}}">
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">상세 내용</label>
                     <textarea class="form-control" id="content" placeholder="상세 내용을 입력하세요."
-                              name="content"></textarea>
+                              name="content">{{notice.content}}</textarea>
                 </div>
             </div>
 

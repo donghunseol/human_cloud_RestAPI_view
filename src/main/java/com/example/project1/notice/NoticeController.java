@@ -1,5 +1,6 @@
 package com.example.project1.notice;
 
+import com.example.project1.user.UserRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,7 @@ public class NoticeController {
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
         request.setAttribute("notice", responseDTO);
+        System.out.println(responseDTO);
 
         return "notice/detail";
     }
@@ -66,11 +68,19 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
-    @PostMapping("/notice/{id}/update")
-    public String update(@PathVariable Integer id) {
-        noticeRepository.updateById(id);
+    @GetMapping("/notice/updateForm/{id}")
+    public String updateForm(@PathVariable int id, HttpServletRequest request) {
+        NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
+        request.setAttribute("notice", responseDTO);
 
-        return "redirect:/notice";
+        return "/notice/saveForm";
+    }
+
+    @PostMapping("/notice/{id}/update")
+    public String update(NoticeRequest.UpdateDTO updateDTO_n, UserRequest.UpdateNoticeDTO updateDTO_u, @PathVariable int id) {
+        noticeRepository.updateById(updateDTO_n, updateDTO_u, id);
+
+        return "redirect:/notice/{id}";
     }
 
     @GetMapping("/notice/main")
