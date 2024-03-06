@@ -22,5 +22,7 @@ public class UserRequest {
         private String username;
         private String birth;
         private String address;
+        private String email;
+        private String tel;
     }
 }

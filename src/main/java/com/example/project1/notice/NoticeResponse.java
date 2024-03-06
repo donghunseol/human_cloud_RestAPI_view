@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 public class NoticeResponse {
 
     @NoArgsConstructor
@@ -22,6 +24,9 @@ public class NoticeResponse {
         private String workPlace; //근무지
         private String email; //이메일
         private String tel; //연락처
+        private Integer role; //역할
+        private Integer boardId;
+        private Timestamp createdAt;
     }
 
 }

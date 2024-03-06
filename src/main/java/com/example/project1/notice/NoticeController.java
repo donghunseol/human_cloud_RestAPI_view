@@ -48,12 +48,11 @@ public class NoticeController {
         // Model 위임
         noticeRepository.save(requestDTO, 1);
 
-        System.out.println(requestDTO);
         return "redirect:/notice";
     }
 
     @GetMapping("/notice/{id}")
-    public String detail(@PathVariable Integer id, HttpServletRequest request) {
+    public String detail(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
         request.setAttribute("notice", responseDTO);
         System.out.println(responseDTO);
@@ -68,23 +67,25 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
-    @GetMapping("/notice/updateForm/{id}")
-    public String updateForm(@PathVariable int id, HttpServletRequest request) {
+    @GetMapping("/notice/{id}/updateForm")
+    public String updateForm(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
         request.setAttribute("notice", responseDTO);
 
-        return "/notice/saveForm";
+        return "/notice/updateForm";
     }
 
     @PostMapping("/notice/{id}/update")
-    public String update(NoticeRequest.UpdateDTO updateDTO_n, UserRequest.UpdateNoticeDTO updateDTO_u, @PathVariable int id) {
-        noticeRepository.updateById(updateDTO_n, updateDTO_u, id);
+    public String update(NoticeRequest.UpdateDTO updateDTO_n, UserRequest.UpdateNoticeDTO updateDTO_u, @PathVariable(name = "id") Integer id) {
+        System.out.println(updateDTO_n);
+        System.out.println(updateDTO_u);
+        noticeRepository.update(updateDTO_n, updateDTO_u, id);
 
-        return "redirect:/notice/{id}";
+        return "redirect:/notice/"+id;
     }
 
     @GetMapping("/notice/main")
-    public String main(@PathVariable Integer id){
+    public String main(@PathVariable(name = "id") Integer id){
         return "notice/main";
     }
 }
