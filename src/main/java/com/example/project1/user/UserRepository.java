@@ -15,8 +15,11 @@ public class UserRepository {
     private final EntityManager em;
 
     // 부분 조회
-    public void findById() {
-
+    public User findById(Integer id) {
+        String q = "select * from user_tb where id = ?";
+        Query query = em.createNativeQuery(q, User.class);
+        query.setParameter(1, id);
+        return (User) query.getSingleResult();
     }
 
     // 전체 조회

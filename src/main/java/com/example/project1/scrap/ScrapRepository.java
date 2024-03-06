@@ -67,6 +67,8 @@ public class ScrapRepository {
     // 삭제
     @Transactional
     public void deleteById() {
-
+        String q = "delete from scrap_tb where user_id = ?";
+        Query query = em.createNativeQuery(q);
+        query.executeUpdate();
     }
 }
