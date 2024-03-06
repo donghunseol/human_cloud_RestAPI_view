@@ -21,9 +21,9 @@ public class ScrapController {
     private final HttpSession session;
 
     @GetMapping("/scrap/{id}")
-    public String index(@PathVariable Integer id, HttpServletRequest request) {
+    public String index(@PathVariable Integer id) {
         List<ScrapResponse.ScrapDTO> scrapList = scrapRepository.findById(id);
-        request.setAttribute("scrapList", scrapList);
+        session.setAttribute("scrapList", scrapList);
         System.out.println(scrapList);
 //
 //        boolean owner = false; // 페이지 주인 여부 체크
@@ -55,6 +55,9 @@ public class ScrapController {
             System.out.println(companyDTO);
             scrapRepository.companySave(companyDTO);
         }
+
+        List<ScrapResponse.ScrapDTO> scrapDTOList = (List<ScrapResponse.ScrapDTO>) session.getAttribute("scrapList");
+        System.out.println(scrapDTOList);
 
         System.out.println("test4");
         return "redirect:/notice/"+id;
