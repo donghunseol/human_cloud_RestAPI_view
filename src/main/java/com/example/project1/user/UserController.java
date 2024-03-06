@@ -40,14 +40,11 @@ public class UserController {
 
     @PostMapping("/user/login")
     public String login( UserRequest.LoginDTO requestDTO) {
-
         User user = userRepository.findByUsernameAndPassword(requestDTO);
         System.out.println(user);
 
-        session.setAttribute("sessionUser" , user );
+        session.setAttribute("sessionUser" , user);
         System.out.println(user);
-
-
 
         return "redirect:/";
     }
@@ -74,7 +71,7 @@ public class UserController {
     public String updateForm (@PathVariable int id, HttpServletRequest request){
         User sessionUser = (User) session.getAttribute("sessionUser");
         if(sessionUser ==null){
-            return "redirect/loginForm";}
+            return "redirect:/loginForm";}
 
         return "user/updateForm";
     }

@@ -50,5 +50,19 @@
             <button class="btn btn-secondary">공고 삭제</button>
         </form>
     </div>
+    <!--스크랩 부분-->
+    <i onclick="scrap_btn(); location.href='/scrap/{{sessionUser.id}}/save'" id="resume_scrap"
+       class="fa-regular fa-bookmark text-warning border-0"></i>
+    <script>
+        function scrap_btn() {
+            if ($("#resume_scrap").hasClass("fa-solid")) { // 스크랩 하기
+                $("#resume_scrap").addClass("fa-regular");
+                $("#resume_scrap").removeClass("fa-solid");
+            } else if ($("#resume_scrap").hasClass("fa-regular")) { // 스크랩 취소 하기
+                $("#resume_scrap").addClass("fa-solid");
+                $("#resume_scrap").removeClass("fa-regular");
+            }
+        }
+    </script>
 {{/notice}}
 {{> layout/footer}}
