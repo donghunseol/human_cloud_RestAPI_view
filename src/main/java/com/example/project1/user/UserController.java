@@ -20,6 +20,10 @@ public class UserController {
     private final HttpSession session;
     private final ResumeRepository resumeRepository;
 
+
+
+
+
     @GetMapping("/")
     public String index(HttpServletRequest request) {
         List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
@@ -64,24 +68,24 @@ public class UserController {
    }
 
     //업데이트 창 (사용자 정보 담기 전,)
-
     @GetMapping("/user/updateForm")
     public String updateForm() {
         return "user/updateForm";
     }
+
     //업데이트 (사용자 정보 담긴 update4)
-    @PostMapping("/user/updateForm")
-    public String updateForm (@PathVariable int id, HttpServletRequest request){
+    @PostMapping("/user/{id}/updateForm")
+    public String update (@PathVariable Integer  id, HttpServletRequest request){
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if(sessionUser ==null){
+        if(sessionUser == null){
             return "redirect/loginForm";}
 
-        return "user/updateForm";
+        return "user/myPage";
     }
 
 
 
-    @GetMapping("/logout")
+    @GetMapping("/user/logout")
     public String logout() {
         session.invalidate();
         return "redirect:/";
