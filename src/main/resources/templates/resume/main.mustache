@@ -3,7 +3,26 @@
 <div class="mw-100 bg-light" style="padding: 30px 200px;">
     <div class="d-flex">
         <div class="container">
-            <h3 class="container d-flex pb-3">이력서 상세보기</h3>
+            <div>
+                <h3 class="container d-flex pb-3">이력서 상세보기</h3>
+                <!--스크랩 부분-->
+                <div>
+                    <i onclick="scrap_btn()" id="resume_scrap"
+                       class="fa-solid fa-bookmark text-warning"></i>
+                </div>
+                <script>
+                    function scrap_btn() {
+                        if ($("#resume_scrap").hasClass("fa-solid")) { // 스크랩 하기
+                            $("#resume_scrap").addClass("fa-regular");
+                            $("#resume_scrap").removeClass("fa-solid");
+                        } else if ($("#resume_scrap").hasClass("fa-regular")) { // 스크랩 취소 하기
+                            $("#resume_scrap").addClass("fa-solid");
+                            $("#resume_scrap").removeClass("fa-regular");
+                        }
+                    }
+                </script>
+            </div>
+
             <!-- 기본 정보 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
                 <h4>기본정보</h4>

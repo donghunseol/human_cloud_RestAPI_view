@@ -1,5 +1,9 @@
 package com.example.project1.resume;
 
+import com.example.project1.scrap.ScrapRepository;
+import com.example.project1.scrap.ScrapRequest;
+import com.example.project1.user.User;
+import com.example.project1.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,9 +16,17 @@ import java.util.List;
 @Controller
 public class ResumeController {
     private final ResumeRepository resumeRepository;
+    private final ScrapRepository scrapRepository;
+    private final UserRepository userRepository;
 
-    @GetMapping("/resume")
-    public String index() {
+    @GetMapping("/resume/{id}")
+    public String index(@PathVariable Integer id, ScrapRequest.CompanyDTO companyDTO, ScrapRequest.IndividualDTO individualDTO) {
+        User user = userRepository.findById(id);
+        if (user.getRole() == 0){
+
+        }
+        scrapRepository.companySave(companyDTO);
+        scrapRepository.individualSave(individualDTO);
         return "resume/main";
     }
 
