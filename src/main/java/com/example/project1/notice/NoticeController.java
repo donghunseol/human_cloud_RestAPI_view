@@ -66,6 +66,13 @@ public class NoticeController {
         return "redirect:/notice";
     }
 
+    @PostMapping("/notice/{id}/update")
+    public String update(@PathVariable Integer id) {
+        noticeRepository.updateById(id);
+
+        return "redirect:/notice";
+    }
+
     @GetMapping("/notice/main")
     public String main(@PathVariable Integer id){
         return "notice/main";

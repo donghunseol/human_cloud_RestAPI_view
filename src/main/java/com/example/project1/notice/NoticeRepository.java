@@ -66,7 +66,41 @@ public class NoticeRepository {
 
     // 수정
     @Transactional
-    public void update(){
-
+    public void updateById(int id){
+        Query query = em.createNativeQuery("""
+                BEGIN
+                TRANSACTION;
+                UPDATE user_tb
+                SET username = ?, address = ?, birth = ?
+                WHERE id IN (
+                    SELECT ut.id
+                    FROM notice_tb nt
+                    LEFT OUTER JOIN user_tb ut ON ut.id = nt.user_id
+                    WHERE ut.role = 1 AND nt.id = ?
+                              );
+                UPDATE notice_tb
+                SET title = ?, deadline = ?, type = ?, field = ?, content = ?, work_place = ?
+                WHERE id = ?;
+                COMMIT;
+        """);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
+        query.setParameter(1, id);
     }
 }
