@@ -25,7 +25,7 @@ public class ScrapController {
         List<ScrapResponse.ScrapDTO> scrapList = scrapRepository.findById(id);
         session.setAttribute("scrapList", scrapList);
         System.out.println(scrapList);
-//
+
 //        boolean owner = false; // 페이지 주인 여부 체크
 //        User session_user = (User) request.getAttribute("session_user");
 //
@@ -36,7 +36,6 @@ public class ScrapController {
 //        }
 
         System.out.println(scrapList);
-        //request.setAttribute("owner", owner);
 
         return "/scrap/main";
     }
