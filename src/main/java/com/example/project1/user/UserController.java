@@ -64,6 +64,11 @@ public class UserController {
         return "user/updateForm";
     }
 
+    @PostMapping("/user/updateForm")
+    public String update(UserRequest.JoinDTO requestDTO) {
+        return "/";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         session.invalidate();

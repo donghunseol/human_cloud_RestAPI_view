@@ -60,6 +60,10 @@ public class UserRepository {
 
     // 수정
     @Transactional
+    public void update(UserRequest.JoinDTO requsetDTO){
+        
+    }
+
 
 
 
@@ -68,7 +72,13 @@ public class UserRepository {
           query.setParameter(1, requestDTO.getUsername());
           query.setParameter(2, requestDTO.getPassword());
 
-            User user = (User) query.getSingleResult();
+        User user = null;
+        try {
+            user = (User) query.getSingleResult();
             return user;
+        } catch (Exception e) {
+           return null;
+        }
+
     }
 }
