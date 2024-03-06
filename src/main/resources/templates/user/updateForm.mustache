@@ -11,43 +11,39 @@
                     <div class="item_resume">
                         <span class="resume_correction h5 fw-bold">회원 정보 수정</span>
                         <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                            <form action="/myPage" class="w-100">
+                            <form action="/myPage" class="w-100" method="post">
                                 <div class="list_name pb-3">
-                                    <div>{{user.id}}</div>
+                                    <div>아이디</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                           name="username" id="username">
+                                           name="username" id="username" value ="userid">
                                 </div>
                                 <div class="list_name pb-3">
-                                    <div>{{user.password}}</div>
+                                    <div>패스워드</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                           name="password" id="password">
-                                </div>
-                                <div class="list_name pb-3">
-                                    <div>비밀번호 확인</div>
-                                    <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                           name="password" id="password">
+                                           name="password" id="password"value= "12345">
                                 </div>
                                 <div class="list_phone pb-3">
-                                    <div>{{user.tel}}</div>
+                                    <div>tel</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="tel"
-                                           name="phone" id="phone">
+                                           name="phone" id="phone"value="12345">
                                 </div>
                                 <div class="list_email pb-3">
-                                    <div>{{user.email}}</div>
+                                    <div>이메일</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="email"
-                                           name="email" id="email">
+                                           name="email" id="email"value="ssar@nate.com">
                                 </div>
                                 <div class="list_address pb-3">
-                                    <div>{{user.address}}</div>
+                                    <div>주소</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
-                                           name="address" id="address">
+                                           name="address" id="address" value="부산">
                                 </div>
                                 <div class="mb-3 mt-1">
                                     <label class="form-label">이미지 업로드</label><br>
-                                    <input type="file" name="image" accept="image/*">
+                                    <img src="/images/userImage_01.png" style="height: 250px; width: 200px;" class="rounded mx-auto d-block border border-dark">
+                                    <input type="file" name="image" accept=/images/userImage_01.png" style="margin-top: 20px;">
                                 </div>
                                 <button type="submit" class="btn btn-outline-dark">회원 정보 수정 완료</button>
-                                <button type="submit" class="btn btn-outline-dark">회원 탈퇴</button>
+
                             </form>
                         </div>
                     </div>

@@ -6,6 +6,8 @@ insert into user_tb(username, password, name, tel, birth, email, address, image,
 values ('cos', '1234', '코스', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', null, 0, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
 values ('love', '1234', '러브', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', null, 0, now());
+insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
+values ('hello', '1234', 'hi', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', null, 0, now());
 -- 기업
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
 values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', null, 1, now());

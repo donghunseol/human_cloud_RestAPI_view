@@ -64,17 +64,25 @@ public class UserRepository {
 
     // 수정
     @Transactional
-    public void update(UserRequest.JoinDTO requsetDTO, int id) {
-        Query query = em.createNativeQuery("UPDATE user_tb set address=? where id =?", User.class);
-        query.setParameter(1, requsetDTO.getAddress());
-        query.setParameter(2, id);
+    public void update(UserRequest.UpdateDTO requestDTO, Integer id){
+        Query query = em.createNativeQuery("UPDATE user_tb set username=?, password=?, name=?, tel =?, birth=?, email=?,address=?, image=?, created_at where id =?",User.class);
+        query.setParameter(1, requestDTO.getUsername());
+        query.setParameter(2, requestDTO.getPassword());
+        query.setParameter(3, requestDTO.getName());
+        query.setParameter(4, requestDTO.getTel());
+        query.setParameter(5, requestDTO.getBirth());
+        query.setParameter(6, requestDTO.getEmail());
+        query.setParameter(7, requestDTO.getAddress());
+        query.setParameter(8, requestDTO.getImage());
+        query.setParameter(9, id);
         query.executeUpdate();
     }
 
     public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
-        Query query = em.createNativeQuery("select * from user_tb where username=? and password=?", User.class);
-        query.setParameter(1, requestDTO.getUsername());
-        query.setParameter(2, requestDTO.getPassword());
-        return (User) query.getSingleResult();
+          Query query = em.createNativeQuery("select * from user_tb where username=? and password=?",User.class);
+          query.setParameter(1, requestDTO.getUsername());
+          query.setParameter(2, requestDTO.getPassword());
+          User user = (User) query.getSingleResult();
+          return  user;
     }
 }

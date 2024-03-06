@@ -3,28 +3,24 @@
 <div class="mx-100 bg-light d-flex justify-content-center" style="padding: 30px 150px;">
     <div class="container bg-white rounded-3 border border-white p-3" style="margin: 0px 60px;">
         <h2>로그인</h2>
-        <div class="form-check ps-0">
-            <input name="user_check" type="radio" value="0">개인
-            <input name="user_check" type="radio" value="1">기업
+
+
+        <div class="btn-group">
+            <div class="form-check ps-0">
+                <input name="user_check" type="radio" value="0" checked>개인
+                <input name="user_check" type="radio" value="1">기업
+            </div>
         </div>
-<!--        <div class="btn-group">-->
-<!--            <button onclick="location.href='#'" type="button"-->
-<!--                    class="btn btn-primary">개인회원-->
-<!--            </button>-->
-<!--            <button onclick="location.href='#'" type="button"-->
-<!--                    class="btn btn-primary">기업회원-->
-<!--            </button>-->
-<!--        </div>-->
 
         <form action="/user/login" method="post">
             <div class="mb-3 mt-3">
                 <label for="text">ID:</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter id" name="username">
+                <input type="text" class="form-control" id="username" placeholder="Enter id" name="username" value="ssarid">
             </div>
 
             <div class="mb-3">
                 <label for="pwd">비밀번호:</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password"  value="12345">
             </div>
             <button type="submit" method="post"
                     class="btn btn-primary">Submit
