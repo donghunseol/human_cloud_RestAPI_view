@@ -113,6 +113,7 @@ insert into resume_tb(user_id, title, career, license, education, major, created
 values (1, '제목6', '5년', '정보처리산업기사', '러브대학교, 2학년', '기계공학과', now());
 
 -- notice
+insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (4, '공고 제목1', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303',now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '공고 제목2', '고용형태2', '개발분야2', '근무지2', '공고 내용2', '20240404', now());
