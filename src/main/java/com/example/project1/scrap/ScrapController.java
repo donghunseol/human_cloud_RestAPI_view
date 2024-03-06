@@ -42,18 +42,22 @@ public class ScrapController {
     }
 
     @PostMapping("/scrap/{id}/save")
-    public String save(@PathVariable Integer id, ScrapRequest.IndividualDTO individualDTO, ScrapRequest.CompanyDTO companyDTO){
-        User user = userRepository.findById(1);
-        System.out.println(user);
+    public String save(@PathVariable(name = "id") Integer id, ScrapRequest.IndividualDTO individualDTO, ScrapRequest.CompanyDTO companyDTO){
+        System.out.println("test1");
+        User user = (User) session.getAttribute("sessionUser");
+        System.out.println("test1-1");
         if (user.getRole() == 0) {
-            scrapRepository.individualSave(individualDTO);
+            System.out.println("test2");
             System.out.println(individualDTO);
+            scrapRepository.individualSave(individualDTO);
         }else if(user.getRole() == 1) {
-            scrapRepository.companySave(companyDTO);
+            System.out.println("test3");
             System.out.println(companyDTO);
+            scrapRepository.companySave(companyDTO);
         }
 
-        return "redirect:/scrap";
+        System.out.println("test4");
+        return "redirect:/notice/"+id;
     }
 
 
@@ -61,6 +65,6 @@ public class ScrapController {
     public String delete(@PathVariable(name = "id") Integer id){
         // System.out.println(id);
         scrapRepository.deleteById(id);
-        return "redirect:/scrap";
+        return "redirect:/notice/"+id;
     }
 }

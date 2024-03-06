@@ -46,8 +46,8 @@ public class ScrapRepository {
     // 개인 회원 이력서 값 저장
     @Transactional
     public void individualSave(ScrapRequest.IndividualDTO requestDTO) {
-        String q = "insert into scrap_tb (user_id, notice_id, role, created_at) value(?, ?, ?, now())";
-        Query query = em.createNamedQuery(q, Scrap.class);
+        String q = "insert into scrap_tb (user_id, notice_id, role, created_at) values (?, ?, ?, now())";
+        Query query = em.createNativeQuery(q, Scrap.class);
         query.setParameter(1, requestDTO.getUserId());
         query.setParameter(2, requestDTO.getNoticeId());
         query.setParameter(3, requestDTO.getRole());
@@ -56,8 +56,8 @@ public class ScrapRepository {
 
     @Transactional
     public void companySave(ScrapRequest.CompanyDTO requestDTO) {
-        String q = "insert into scrap_tb (user_id, resume_id, role, created_at) value(?, ?, ?, now())";
-        Query query = em.createNamedQuery(q, Scrap.class);
+        String q = "insert into scrap_tb (user_id, resume_id, role, created_at) values (?, ?, ?, now())";
+        Query query = em.createNativeQuery(q, Scrap.class);
         query.setParameter(1, requestDTO.getUserId());
         query.setParameter(2, requestDTO.getResumeId());
         query.setParameter(3, requestDTO.getRole());
