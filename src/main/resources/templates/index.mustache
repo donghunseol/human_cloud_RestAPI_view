@@ -8,7 +8,7 @@
                 <span class="resume_correction h5 fw-bold">지원자 이력서</span>
                 <div class="correction_list p-3 pt-0 border-top pt-3 mt-3">
                     {{#resumeList}}
-                        <form class="w-100">
+                        <div class="w-100">
                             <div class="card mb-3">
                                 <div class="card-body d-flex justify-content-between text-secondary m-2">
                                     <div class="d-flex justify-content-start">
@@ -23,17 +23,17 @@
                                                 [ {{name}} ] {{/skills}}</small></p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <button onclick="location.href='#'" type="button"
-                                                class="btn btn-outline-secondary mb-1">상세보기
-                                        </button>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <a href="/resume/{{id}}/detailForm"
+                                           class="btn btn-outline-secondary">상세보기
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     {{/resumeList}}
                 </div>
-                
+
                 {{#noticeList}}
                     <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
                         <div class="content_logo h-100" style="width: 100px;">

@@ -13,9 +13,11 @@ import java.util.List;
 public class ResumeController {
     private final ResumeRepository resumeRepository;
 
-    @GetMapping("/resume")
-    public String index() {
-        return "resume/main";
+    @GetMapping("/resume/{id}/detailForm")
+    public String detailForm(HttpServletRequest request, @PathVariable Integer id) {
+        ResumeResponse.DetailDTO resumeDetail = resumeRepository.findByResumeId(id);
+        request.setAttribute("resumeDetail", resumeDetail);
+        return "/resume/detailForm";
     }
 
     @GetMapping("/resume/saveForm")
