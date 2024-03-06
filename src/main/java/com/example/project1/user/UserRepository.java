@@ -60,8 +60,11 @@ public class UserRepository {
 
     // 수정
     @Transactional
-    public void update(UserRequest.JoinDTO requsetDTO){
-        
+    public void update(UserRequest.JoinDTO requsetDTO, int id){
+        Query query = em.createNativeQuery("UPDATE user_tb set address=? where id =?",User.class);
+        query.setParameter(1, requsetDTO.getAddress());
+        query.setParameter(2,id);
+
     }
 
 

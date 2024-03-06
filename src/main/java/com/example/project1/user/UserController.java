@@ -6,10 +6,7 @@ import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.sql.exec.spi.StandardEntityInstanceResolver;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -42,7 +39,7 @@ public class UserController {
         session.setAttribute("sessionUser" , user );
         System.out.println(user);
 
-        
+
 
         return "redirect:/";
     }
@@ -58,16 +55,23 @@ public class UserController {
         return "redirect:/user/loginForm";
    }
 
+    //업데이트 창 (사용자 정보 담기 전,)
 
     @GetMapping("/user/updateForm")
-    public String update() {
+    public String updateForm() {
+        return "user/updateForm";
+    }
+    //업데이트 (사용자 정보 담긴 update4)
+    @PostMapping("/user/updateForm")
+    public String updateForm (@PathVariable int id, HttpServletRequest request){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser ==null){
+            return "redirect/loginForm";}
+
         return "user/updateForm";
     }
 
-    @PostMapping("/user/updateForm")
-    public String update(UserRequest.JoinDTO requestDTO) {
-        return "/";
-    }
+
 
     @GetMapping("/logout")
     public String logout() {

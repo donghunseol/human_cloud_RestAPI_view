@@ -15,12 +15,12 @@
                             <form action="../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html"
                                   class="w-100">
                                 <div class="list_name pb-3">
-                                    <div>이름</div>
+                                    <div>{{user.id}}</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
                                            name="username" id="username">
                                 </div>
                                 <div class="list_name pb-3">
-                                    <div>비밀번호</div>
+                                    <div>{{user.password}}</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
                                            name="password" id="password">
                                 </div>
@@ -30,21 +30,22 @@
                                            name="password" id="password">
                                 </div>
                                 <div class="list_phone pb-3">
-                                    <div>전화 번호</div>
+                                    <div>{{user.tel}}</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="tel"
                                            name="phone" id="phone">
                                 </div>
                                 <div class="list_email pb-3">
-                                    <div>email</div>
+                                    <div>{{user.email}}</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="email"
                                            name="email" id="email">
                                 </div>
                                 <div class="list_address pb-3">
-                                    <div>주소</div>
+                                    <div>{{user.address}}</div>
                                     <input class="w-100 py-1 border border-secondary rounded-1" type="text"
                                            name="address" id="address">
                                 </div>
                                 <button type="submit" class="btn btn-outline-dark">회원 정보 수정 완료</button>
+                                <button type="submit" class="btn btn-outline-dark">회원 탈퇴</button>
                             </form>
                         </div>
                     </div>
