@@ -9,7 +9,7 @@
                     <div>
                         <i class="fa-solid fa-calendar-days text-body-tertiary"></i>
                         <span class="text-body-tertiary">{{deadline}} 마감</span>
-                        <span class="text-body-tertiary m-4">02/26 수정</span>
+                        <span class="text-body-tertiary m-4">{{createdAt}} 수정</span>
                     </div>
                 </div>
                 <hr>
@@ -39,16 +39,29 @@
                 <hr>
                 <h5 class="mb-2">설립일</h5>
                 <div>{{birth}}</div>
+                <hr>
+                <h5 class="mb-2">email</h5>
+                <div>{{email}}</div>
+                <hr>
+                <h5 class="mb-2">tel</h5>
+                <div>{{tel}}</div>
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
             <button type="submit" class="btn btn-secondary">이력서 제출</button>
         </div>
     </form>
-    <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
-        <form action="/notice/{{id}}/delete" method="post">
-            <button class="btn btn-secondary">공고 삭제</button>
-        </form>
-    </div>
+    {{#notice.role}}
+        <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
+            <form action="/notice/{{boardId}}/updateForm">
+                <button class="btn btn-secondary">공고 수정</button>
+            </form>
+
+            <form action="/notice/{{boardId}}/delete" method="post">
+                <button class="btn btn-secondary">공고 삭제</button>
+            </form>
+        </div>
+    {{/notice.role}}
+
 {{/notice}}
 {{> layout/footer}}

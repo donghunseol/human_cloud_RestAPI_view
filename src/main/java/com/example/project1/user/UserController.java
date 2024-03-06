@@ -92,7 +92,9 @@ public class UserController {
     }
 
     @GetMapping("/myPage")
-    public String myPage() {
+    public String myPage(HttpServletRequest request) {
+        List<ResumeResponse.DTO> myResumeList = resumeRepository.findAllByUserId(1);
+        request.setAttribute("myResumeList", myResumeList);
         return "myPage/main";
     }
 

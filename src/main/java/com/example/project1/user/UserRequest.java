@@ -19,9 +19,19 @@ public class UserRequest {
     }
 
     @Data
+    public static class UpdateNoticeDTO{
+        private String username;
+        private String birth;
+        private String address;
+        private String email;
+        private String tel;
+    }
+  
+    @Data
     public static class LoginDTO{
         private String username;
         private String password;
+
     }
 
     @Data
