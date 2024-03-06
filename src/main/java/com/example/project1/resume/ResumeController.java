@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -31,6 +32,12 @@ public class ResumeController {
         ResumeResponse.DetailDTO resumeDetail = resumeRepository.findByResumeId(id);
         request.setAttribute("resumeDetail", resumeDetail);
         return "/resume/detailForm";
+    }
+
+    @PostMapping("/resume/{id}/delete")
+    public String delete(HttpServletRequest request, @PathVariable Integer id) {
+        resumeRepository.deleteByResumeId(id);
+        return "redirect:/myPage";
     }
 
     @GetMapping("/resume/saveForm")
