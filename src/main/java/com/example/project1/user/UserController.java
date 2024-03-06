@@ -1,12 +1,15 @@
 package com.example.project1.user;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jdk.swing.interop.SwingInterOpUtils;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.resume.ResumeResponse;
-import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
 @Controller
 public class UserController {
     private final UserRepository userRepository;
+    private final HttpSession session;
     private final ResumeRepository resumeRepository;
 
     @GetMapping("/")
@@ -34,27 +38,52 @@ public class UserController {
         return "user/joinForm";
     }
 
-    @PostMapping("/user/join")
-    public String join(UserRequest.JoinDTO requestDTO) {
-        System.out.println("정보 : " + requestDTO);
+    @PostMapping("/user/login")
+    public String login( UserRequest.LoginDTO requestDTO) {
 
-        userRepository.save(requestDTO);
+        User user = userRepository.findByUsernameAndPassword(requestDTO);
+        System.out.println(user);
 
-        System.out.println(requestDTO.getRole());
+        session.setAttribute("sessionUser" , user );
+        System.out.println(user);
 
-        // repo db연결
 
-        return "redirect:/user/loginForm";
+
+        return "redirect:/";
     }
 
 
+    @PostMapping("/user/join")
+    public String join(UserRequest.JoinDTO requestDTO){
+        userRepository.save(requestDTO);
+
+       // HttpSession s =request.getSession();
+//        System.out.println("정보 : " + requestDTO);
+
+        return "redirect:/user/loginForm";
+   }
+
+    //업데이트 창 (사용자 정보 담기 전,)
+
     @GetMapping("/user/updateForm")
-    public String update() {
+    public String updateForm() {
+        return "user/updateForm";
+    }
+    //업데이트 (사용자 정보 담긴 update4)
+    @PostMapping("/user/updateForm")
+    public String updateForm (@PathVariable int id, HttpServletRequest request){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser ==null){
+            return "redirect/loginForm";}
+
         return "user/updateForm";
     }
 
+
+
     @GetMapping("/logout")
     public String logout() {
+        session.invalidate();
         return "redirect:/";
     }
 

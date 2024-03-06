@@ -1,12 +1,11 @@
 package com.example.project1.user;
 
-import jakarta.persistence.EntityManager;
 import lombok.Data;
-import org.springframework.stereotype.Repository;
 
-public class UserRequest {
+public class UserResponse {
     @Data
-    public static class JoinDTO{
+    public static class DTO{
+        private Integer id;
         private String username;
         private String password;
         private String name;
@@ -15,11 +14,5 @@ public class UserRequest {
         private String email;
         private String address;
         private Integer role;
-    }
-
-    @Data
-    public static class LoginDTO{
-        private String username;
-        private String password;
     }
 }

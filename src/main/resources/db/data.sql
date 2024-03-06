@@ -52,7 +52,6 @@ insert into apply_tb(resume_id, notice_id, created_at)
 values (2, 2, now());
 
 -- board
-insert into board_tb(user_id, title, content, created_at)
 values (1, '안녕하십니까', '처음 왔습니다 인사드립니다!', now());
 insert into board_tb(user_id, title, content, created_at)
 values (1, '자소서는 어떻게 하면 잘 쓸 수 있을까?', '잘 쓰면 된다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ', now());
@@ -61,6 +60,9 @@ values (2, '제목3', '내용3', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목4', '내용4', now());
 insert into board_tb(user_id, title, content, created_at)
+values (2, '제목5', '내용5', now());
+insert into board_tb(user_id, title, content, created_at)
+values (2, '제목6', '내용6', now());
 values (2, '로또 1등 되고 싶다~~~~~~~~', '언제 되려나요.......ㅜㅜㅜㅜㅜㅜㅜ', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '제목6', '내용6', now());
@@ -80,7 +82,6 @@ insert into board_tb(user_id, title, content, created_at)
 values (2, '3조의 오른다리 박동기 입니다', '토 할거 같아요 ㅜㅜㅜㅜㅜㅜㅜㅜ', now());
 insert into board_tb(user_id, title, content, created_at)
 values (2, '최강 3조 화이팅!!!!!', '열심히 배우고 공부합시다!!!!!!!!', now());
-
 
 -- love
 insert into love_tb(user_id, board_id, created_at)
@@ -124,7 +125,7 @@ values (5, '공고 제목4', '고용형태4', '개발분야4', '근무지4', '�
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (6, '공고 제목5', '고용형태5', '개발분야5', '근무지5', '공고 내용5', '20240707', now());
 
--- scrap
+
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(1, null, 1, 1, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(1, null, 2, 1, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(2, null, 3, 1, now());
@@ -132,4 +133,5 @@ insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(4, 
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(4, 2, null, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(5, 2, null, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(5, 3, null, 0, now());
+
 
