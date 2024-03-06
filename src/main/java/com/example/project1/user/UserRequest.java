@@ -29,6 +29,7 @@ public class UserRequest {
   
     @Data
     public static class LoginDTO{
+        private Integer id;
         private String username;
         private String password;
 

@@ -17,13 +17,13 @@ public class UserRepository {
 
     // 부분 조회
     public User findById(Integer id) {
-        Query query=em.createNativeQuery("select * from user_tb where id = ?");
+        Query query = em.createNativeQuery("select * from user_tb where id = ?");
         query.setParameter(1, id);
         return (User) query.getSingleResult();
     }
 
     public void findByUsername(String username) {
-        Query query=em.createNativeQuery("select * from user_tb where username = ?");
+        Query query = em.createNativeQuery("select * from user_tb where username = ?");
         query.setParameter(1, username);
         query.executeUpdate();
     }
@@ -65,7 +65,7 @@ public class UserRepository {
     // 수정
     @Transactional
     public void update(UserRequest.UpdateDTO requestDTO, Integer id){
-        Query query = em.createNativeQuery("UPDATE user_tb set username=?, password=?, name=?, tel =?, birth=?, email=?,address=?, image=?, created_at where id =?",User.class);
+        Query query = em.createNativeQuery("UPDATE user_tb set username=?, password=?, name=?, tel =?, birth=?, email=?,address=?, image=?, created_at=now() where id =?",User.class);
         query.setParameter(1, requestDTO.getUsername());
         query.setParameter(2, requestDTO.getPassword());
         query.setParameter(3, requestDTO.getName());
@@ -76,9 +76,6 @@ public class UserRepository {
         query.setParameter(8, requestDTO.getImage());
         query.setParameter(9, id);
         query.executeUpdate();
-
-
-
     }
 
     public User findByUsernameAndPassword(UserRequest.LoginDTO requestDTO) {
@@ -87,6 +84,5 @@ public class UserRepository {
           query.setParameter(2, requestDTO.getPassword());
           User user = (User) query.getSingleResult();
           return  user;
-
     }
 }

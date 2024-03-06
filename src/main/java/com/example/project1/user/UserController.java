@@ -45,12 +45,12 @@ public class UserController {
 
     @PostMapping("/user/login")
     public String login( UserRequest.LoginDTO requestDTO) {
-
         User user = userRepository.findByUsernameAndPassword(requestDTO);
         System.out.println(user);
 
-        session.setAttribute("sessionUser" , user );
+        session.setAttribute("sessionUser" , user);
         System.out.println(user);
+
         return "redirect:/";
     }
 //    @GetMapping("/board/{id}")
@@ -97,8 +97,11 @@ public class UserController {
     @PostMapping("/user/{id}/updateForm")
     public String update (@PathVariable Integer  id, HttpServletRequest request){
         User sessionUser = (User) session.getAttribute("sessionUser");
+
         if(sessionUser == null){
-            return "redirect/loginForm";}
+            return "redirect/loginForm";
+        }
+
 
         return "user/myPage";
     }

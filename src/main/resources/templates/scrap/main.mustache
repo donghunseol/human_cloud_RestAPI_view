@@ -22,9 +22,9 @@
                         </div>
                         <div class="script_item" style="width: 100%; margin-top: 25px;">
                             <hr>
-                            {{#scrap_list}}
+                            {{#scrapList}}
                                 <!-- 스크랩 목록 -->
-                                <form class="w-100">
+                                <div class="w-100">
                                     <div class="card mb-3">
                                         <div class="card-body d-flex justify-content-between text-secondary m-2">
                                             <div>
@@ -40,31 +40,31 @@
                                                     기간 {{deadline}}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <button onclick="location.href='/notice/1'" type="button"
-                                                        class="btn btn-outline-secondary mb-1">상세보기
-                                                </button>
-                                                <button onclick="location.href='/scrap'" type="button"
-                                                        class="btn btn-outline-secondary">삭제
-                                                </button>
+                                            <div class="d-flex flex-column h-100">
+                                                <form action="/notice/{{id}}" method="get">
+                                                    <button class="btn btn-outline-secondary mb-1 w-100">상세보기</button>
+                                                </form>
+                                                <form action="/scrap/{{scrapId}}/delete" method="post">
+                                                    <button class="btn btn-outline-secondary w-100">삭제</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            {{/scrap_list}}
+                                </div>
+                            {{/scrapList}}
                         </div>
                     </div>
                 </section>
             </div>
             {{> layout/sidebar}}
         </div>
-        <div class="scrap_page d-flex justify-content-center" style="margin-top: 20px; margin-right: 300px;">
-            <a href="#" class="bt_first" aria-label="첫 페이지로 이동"><<</a>
-            <a href="#" class="bt_prev" aria-label="이전 페이지로 이동"><</a>
-            <a href="#" class="num active" aria-label="페이지 1">1</a>
-            <a href="#" class="bt_next" aria-label="다음 페이지로 이동">></a>
-            <a href="#" class="bt_last" aria-label="마지막 페이지로 이동">>></a>
-        </div>
+<!--        <div class="scrap_page d-flex justify-content-center" style="margin-top: 20px; margin-right: 300px;">-->
+<!--            <a href="#" class="bt_first" aria-label="첫 페이지로 이동"><<</a>-->
+<!--            <a href="#" class="bt_prev" aria-label="이전 페이지로 이동"><</a>-->
+<!--            <a href="#" class="num active" aria-label="페이지 1">1</a>-->
+<!--            <a href="#" class="bt_next" aria-label="다음 페이지로 이동">></a>-->
+<!--            <a href="#" class="bt_last" aria-label="마지막 페이지로 이동">>></a>-->
+<!--        </div>-->
     </div>
 </main>
 

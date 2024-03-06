@@ -9,8 +9,8 @@ public class ScrapRequest {
     @AllArgsConstructor
     @Data
     public static class CompanyDTO{
-        private Integer user_id;
-        private Integer resume_id;
+        private Integer userId;
+        private Integer resumeId;
         private Integer role;
     }
 
@@ -18,8 +18,8 @@ public class ScrapRequest {
     @AllArgsConstructor
     @Data
     public static class IndividualDTO{
-        private Integer user_id;
-        private Integer notice_id;
+        private Integer userId;
+        private Integer noticeId;
         private Integer role;
     }
 }
