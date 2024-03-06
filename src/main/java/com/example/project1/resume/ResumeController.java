@@ -22,12 +22,19 @@ public class ResumeController {
     @GetMapping("/resume/{id}")
     public String index(@PathVariable Integer id, ScrapRequest.CompanyDTO companyDTO, ScrapRequest.IndividualDTO individualDTO) {
         User user = userRepository.findById(id);
-        if (user.getRole() == 0){
+        if (user.getRole() == 0) {
 
         }
         scrapRepository.companySave(companyDTO);
         scrapRepository.individualSave(individualDTO);
         return "resume/main";
+    }
+
+    @GetMapping("/resume/{id}/detailForm")
+    public String detailForm(HttpServletRequest request, @PathVariable Integer id) {
+        ResumeResponse.DetailDTO resumeDetail = resumeRepository.findByResumeId(id);
+        request.setAttribute("resumeDetail", resumeDetail);
+        return "/resume/detailForm";
     }
 
     @GetMapping("/resume/saveForm")

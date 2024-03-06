@@ -13,12 +13,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class UserController {
-
     private final UserRepository userRepository;
     private final ResumeRepository resumeRepository;
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
+        List<User> user = userRepository.findAll();
         List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
         request.setAttribute("resumeList", resumeList);
 
