@@ -64,7 +64,7 @@ public class UserRepository {
 
     // 수정
     @Transactional
-    public void update(UserRequest.JoinDTO requsetDTO, int id){
+    public void update(UserRequest.JoinDTO requsetDTO, Integer id){
         Query query = em.createNativeQuery("UPDATE user_tb set address=? where id =?",User.class);
         query.setParameter(1, requsetDTO.getAddress());
         query.setParameter(2,id);
@@ -75,14 +75,17 @@ public class UserRepository {
           Query query = em.createNativeQuery("select * from user_tb where username=? and password=?",User.class);
           query.setParameter(1, requestDTO.getUsername());
           query.setParameter(2, requestDTO.getPassword());
+          User user = (User) query.getSingleResult();
+          return  user;
 
-        User user = null;
-        try {
-            user = (User) query.getSingleResult();
-            return user;
-        } catch (Exception e) {
-           return null;
-        }
+
+//        User user = null;
+//        try {
+//            user = (User) query.getSingleResult();
+//            return user;
+//        } catch (Exception e) {
+//           return null;
+//        }
 
     }
 }
