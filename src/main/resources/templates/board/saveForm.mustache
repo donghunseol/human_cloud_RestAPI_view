@@ -8,37 +8,23 @@
             <h1><strong>커뮤니티 게시판</strong></h1>
             <p>여러분의 의견을 자유롭게 작성해 주세요!</p>
         </header>
-        <div class="board_write_wrap">
-            <form action="/board/saveForm" method="post" enctype="application/x-www-form-urlencoded">
-            <div class="board_write">
-                <div class="title"
-                     style="padding: 20px 15px; border-top: 2px solid; border-bottom: 1px dashed #ddd; margin-left: 60px; font-size: 20px;">
-                    <dl>
-                        <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
-                    </dl>
-                </div>
-                <div class="content"
-                     style="padding: 15px;border-bottom: 1px solid #000;line-height: 160%;font-size: 20px;">
-                        <textarea class="border" placeholder="내용 입력" style=" display: inline-block;
-                    width: 100%;
-                    height: 300px;
-                    padding: 15px;
-                    box-sizing: border-box;
-                    border: 0;
-                    margin-right: 30px;
-                    resize: vertical;">
-                   </textarea>
-                </div>
-
+        <div class="card border-danger">
+            <div class="card-header"><b>자유롭게 의견을 내주세요</b></div>
+            <div class="card-body">
+                <form action="/board/save" method="post" enctype="application/x-www-form-urlencoded">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="10" name="content" placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-control">등록</button>
+                </form>
             </div>
-            <div class="bt_wrap" style="text-align: center; margin-top: 15px;">
-                <a href="/board" class="on"
-                   style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
-                <a href="/board" class="on"
-                   style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">취소</a>
-            </div>
-            </form>
+        </div>
+        <div class="bt_wrap" style="text-align: center; margin-top: 15px;">
+            <a href="/board" class="on"
+               style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">취소</a>
         </div>
     </div>
 

@@ -28,9 +28,9 @@
 
                 </div>
                 <div class="bt_wrap" style="text-align: end; margin-top: 15px">
-                    <a href="/board/1/updateForm" class="on"
+                    <a href="/board/{{board.id}}/updateForm" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: 2px solid; margin-right: 10px;">수정</a>
-                    <form action="/board/1/delete" method="post" style="display: inline-block; margin-right: 10px;">
+                    <form action="/board/{{board.id}}/delete" method="post" style="display: inline-block; margin-right: 10px;">
                         <button class="on text-white border-white" style="padding: 9px 18px; background-color: #f999b7">삭제</button>
                     </form>
                 </div>
