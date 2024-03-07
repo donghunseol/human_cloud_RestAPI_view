@@ -3,7 +3,7 @@ package com.example.project1.reply;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Table(name = "reply_tb")
 @Data
@@ -14,11 +14,11 @@ public class Reply {
     private Integer id;
 
     @Column(nullable = false)
+    private String comment;
+
+    @Column(nullable = false)
     private Integer userId;
     private Integer boardId;
 
-    @Column(nullable = false)
-    private String comment;
-
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 }

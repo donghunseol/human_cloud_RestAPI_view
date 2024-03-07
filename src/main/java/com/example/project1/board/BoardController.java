@@ -1,10 +1,12 @@
 package com.example.project1.board;
 
+import com.example.project1.reply.ReplyRepository;
 import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +17,7 @@ public class BoardController {
 
     private final HttpSession session;
     private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
@@ -151,21 +154,14 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id , HttpServletRequest request) {
 
-        BoardResponse.DetailDTO responseDTO = boardRepository.findById(id);
-
         User sessionUser = (User) session.getAttribute("sessionUser");
+        BoardResponse.DetailDTO boardDTO = boardRepository.findByIdWithUser(id);
+        boardDTO.isBoardOwner(sessionUser);
 
-        boolean pageOwner;
-        if (sessionUser == null){
-            pageOwner = false;
-        } else {
-            int boardId = responseDTO.getUserId();
-            int loginUserId = sessionUser.getId();
-            pageOwner = boardId == loginUserId;
-        }
+        List<BoardResponse.ReplyDTO> replyDTOList = replyRepository.findByBoardId(id ,sessionUser);
+        request.setAttribute("board", boardDTO);
+        request.setAttribute("replyList", replyDTOList);
 
-        request.setAttribute("board", responseDTO);
-        request.setAttribute("pageOwner", pageOwner);
         return "board/detail";
     }
 }
