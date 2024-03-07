@@ -45,6 +45,14 @@ public class ResumeController {
         return "resume/saveForm";
     }
 
+    @PostMapping("/resume/save")
+    public String save(ResumeRequest.SaveDTO requestDTO, HttpServletRequest request) {
+
+
+
+        return "resume/saveForm";
+    }
+
     @GetMapping("/resume/updateForm")
     public String updateForm() {
         return "resume/updateForm";
