@@ -51,6 +51,7 @@
             <button type="submit" class="btn btn-secondary">이력서 제출</button>
         </div>
     </form>
+
     {{#notice.role}}
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
             <form action="/notice/{{boardId}}/updateForm">
@@ -61,7 +62,25 @@
                 <button class="btn btn-secondary">공고 삭제</button>
             </form>
         </div>
+        <!--스크랩 부분-->
+        <form action="/scrap/{{sessionUser.id}}/save" method="post">
+            <button onclick="scrap_btn()" id="resume_scrap" class="fa-regular fa-bookmark text-warning border-0"></button>
+            <input id="userId" name="userId" type="hidden" value="{{notice.userId}}"></input>
+            <input id="noticeId" name="noticeId" type="hidden" value="{{notice.boardId}}"></input>
+            <input id="role" name="role" type="hidden" value="{{notice.role}}"></input>
+        </form>
+        <script>
+            function scrap_btn() {
+                if ($("#resume_scrap").hasClass("fa-solid") ) { // 스크랩 하기
+                    $("#resume_scrap").addClass("fa-regular");
+                    $("#resume_scrap").removeClass("fa-solid");
+                } else if ($("#resume_scrap").hasClass("fa-regular")) { // 스크랩 취소 하기
+                    $("#resume_scrap").addClass("fa-solid");
+                    $("#resume_scrap").removeClass("fa-regular");
+                }
+            }
+        </script>
     {{/notice.role}}
-
 {{/notice}}
+
 {{> layout/footer}}

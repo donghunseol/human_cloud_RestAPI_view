@@ -21,7 +21,7 @@ public class NoticeRepository {
     private final EntityManager em;
 
     // 부분 조회
-    public Notice findById(int id){
+    public Notice findById(Integer id){
         Query query = em.createNativeQuery("select * from notice_tb where id=?;", Notice.class);
         query.setParameter(1, id);
 
@@ -35,8 +35,8 @@ public class NoticeRepository {
         return query.getResultList();
     }
 
-    public NoticeResponse.DetailDTO findNoticeById(int id){
-        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place, ut.email, ut.tel, ut.role, nt.id, nt.created_at from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where nt.id=?;");
+    public NoticeResponse.DetailDTO findNoticeById(Integer id){
+        Query query = em.createNativeQuery("select ut.id, ut.username, ut.address, ut.birth, nt.title, nt.deadline, nt.type, nt.field, nt.content, nt.work_place, ut.email, ut.tel, ut.role, nt.id, nt.created_at from notice_tb nt left outer join user_tb ut on ut.id = nt.user_id where ut.role=1 and nt.id=?;");
         query.setParameter(1,id);
 
         JpaResultMapper rm = new JpaResultMapper();
@@ -45,8 +45,7 @@ public class NoticeRepository {
     }
 
     @Transactional
-    // 저장
-    public void save(NoticeRequest.SaveDTO requestDTO, int userId){
+    public void save(NoticeRequest.SaveDTO requestDTO, Integer userId){
         Query query = em.createNativeQuery("insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at) values (?, ?, ?, ?, ?, ?, ?, now());");
         query.setParameter(1, userId);
         query.setParameter(2, requestDTO.getTitle());
@@ -82,5 +81,6 @@ public class NoticeRepository {
         query.setParameter(8, id);
 
         query.executeUpdate();
+
     }
 }
