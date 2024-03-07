@@ -1,12 +1,6 @@
 package com.example.project1.resume;
 
 import com.example.project1.scrap.ScrapRepository;
-<<<<<<< HEAD
-import com.example.project1.scrap.ScrapRequest;
-import com.example.project1.skill.SkillRepository;
-import com.example.project1.skill.SkillRequest;
-=======
->>>>>>> 90d2172f5a17319dc7cc2f6d9e9186904a932643
 import com.example.project1.user.User;
 import com.example.project1.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,11 +20,7 @@ public class ResumeController {
     private final ResumeRepository resumeRepository;
     private final ScrapRepository scrapRepository;
     private final UserRepository userRepository;
-<<<<<<< HEAD
-    private final SkillRepository skillRepository;
-=======
     private final HttpSession session;
->>>>>>> 90d2172f5a17319dc7cc2f6d9e9186904a932643
 
     @GetMapping("/resume/{id}")
     public String index(@PathVariable Integer id) {

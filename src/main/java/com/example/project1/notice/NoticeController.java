@@ -1,5 +1,7 @@
 package com.example.project1.notice;
 
+import com.example.project1.resume.ResumeRepository;
+import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -7,12 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 public class NoticeController {
 
+    private final ResumeRepository resumeRepository;
     private final HttpSession session;
     private final NoticeRepository noticeRepository;
 
@@ -37,13 +42,15 @@ public class NoticeController {
     }
 
     @PostMapping("/notice/save")
-    public String save(NoticeRequest.SaveDTO requestDTO, HttpServletRequest request) {
+    public String save(NoticeRequest.SaveDTO requestDTO, HttpServletRequest request, @RequestParam(name = "skillNames") List<String> skillNames) {
         // 인증체크
 //        User sessionUser = (User) session.getAttribute("sessionUser");
 //        if(sessionUser == null){
 //            return "redirect:user/loginForm";
 //        }
 
+        User userInfo = (User) session.getAttribute("sessionUser");
+        noticeRepository.save(userInfo.getId(), requestDTO, skillNames);
         // Model 위임
         noticeRepository.save(requestDTO, 1);
 

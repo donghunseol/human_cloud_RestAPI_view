@@ -45,7 +45,7 @@ public class NoticeRepository {
     }
 
     @Transactional
-    public void save(NoticeRequest.SaveDTO requestDTO, Integer userId){
+    public void save(NoticeRequest.SaveDTO requestDTO, Integer userId, List<String> skillNames){
         Query query = em.createNativeQuery("insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at) values (?, ?, ?, ?, ?, ?, ?, now());");
         query.setParameter(1, userId);
         query.setParameter(2, requestDTO.getTitle());
