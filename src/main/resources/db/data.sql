@@ -6,6 +6,8 @@ insert into user_tb(username, password, name, tel, birth, email, address, image,
 values ('cos', '1234', '코스', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', null, 0, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
 values ('love', '1234', '러브', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', null, 0, now());
+insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
+values ('hello', '1234', 'hi', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', null, 0, now());
 -- 기업
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
 values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', null, 1, now());
@@ -115,11 +117,11 @@ values (1, '제목6', '5년', '정보처리산업기사', '러브대학교, 2학
 
 -- notice
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
-values (4, '공고 제목1', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303',now());
+values (7, '공고 제목1', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303',now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '공고 제목2', '고용형태2', '개발분야2', '근무지2', '공고 내용2', '20240404', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
-values (4, '공고 제목3', '고용형태3', '개발분야3', '근무지3', '공고 내용3', '20240505', now());
+values (7, '공고 제목3', '고용형태3', '개발분야3', '근무지3', '공고 내용3', '20240505', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '공고 제목4', '고용형태4', '개발분야4', '근무지4', '공고 내용4', '20240606', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)

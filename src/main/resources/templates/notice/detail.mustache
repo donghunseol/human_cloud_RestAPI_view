@@ -1,6 +1,7 @@
 {{> layout/header}}
 {{#notice}}
-    <form action="/myPage/selectList" class="bg-light" method="get">
+    <form action="/apply/{{id}}/save" class="bg-light" method="post">
+        <input hidden="hidden" id="noticeId" name="noticeId" value="{{id}}"></input>
         <div class="d-flex justify-content-center" style="padding: 30px 200px;">
             <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
                 <div>
@@ -9,7 +10,7 @@
                     <div>
                         <i class="fa-solid fa-calendar-days text-body-tertiary"></i>
                         <span class="text-body-tertiary">{{deadline}} 마감</span>
-                        <span class="text-body-tertiary m-4">02/26 수정</span>
+                        <span class="text-body-tertiary m-4">{{createdAt}} 수정</span>
                     </div>
                 </div>
                 <hr>
@@ -39,16 +40,48 @@
                 <hr>
                 <h5 class="mb-2">설립일</h5>
                 <div>{{birth}}</div>
+                <hr>
+                <h5 class="mb-2">email</h5>
+                <div>{{email}}</div>
+                <hr>
+                <h5 class="mb-2">tel</h5>
+                <div>{{tel}}</div>
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
             <button type="submit" class="btn btn-secondary">이력서 제출</button>
         </div>
     </form>
-    <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
-        <form action="/notice/{{id}}/delete" method="post">
-            <button class="btn btn-secondary">공고 삭제</button>
+
+    {{#notice.role}}
+        <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
+            <form action="/notice/{{boardId}}/updateForm">
+                <button class="btn btn-secondary">공고 수정</button>
+            </form>
+
+            <form action="/notice/{{boardId}}/delete" method="post">
+                <button class="btn btn-secondary">공고 삭제</button>
+            </form>
+        </div>
+        <!--스크랩 부분-->
+        <form action="/scrap/{{sessionUser.id}}/save" method="post">
+            <button onclick="scrap_btn()" id="resume_scrap" class="fa-regular fa-bookmark text-warning border-0"></button>
+            <input id="userId" name="userId" type="hidden" value="{{notice.userId}}"></input>
+            <input id="noticeId" name="noticeId" type="hidden" value="{{notice.boardId}}"></input>
+            <input id="role" name="role" type="hidden" value="{{notice.role}}"></input>
         </form>
-    </div>
+        <script>
+            function scrap_btn() {
+                if ($("#resume_scrap").hasClass("fa-solid") ) { // 스크랩 하기
+                    $("#resume_scrap").addClass("fa-regular");
+                    $("#resume_scrap").removeClass("fa-solid");
+                } else if ($("#resume_scrap").hasClass("fa-regular")) { // 스크랩 취소 하기
+                    $("#resume_scrap").addClass("fa-solid");
+                    $("#resume_scrap").removeClass("fa-regular");
+                }
+            }
+        </script>
+    {{/notice.role}}
 {{/notice}}
+
 {{> layout/footer}}

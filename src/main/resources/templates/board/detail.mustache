@@ -24,15 +24,47 @@
                 </div>
                 <div class="bt_list" style="text-align: center; margin-top: 15px;">
                     <a href="/board" class="on"
-                    style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">목록</a>
+                       style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">목록</a>
 
                 </div>
                 <div class="bt_wrap" style="text-align: end; margin-top: 15px">
                     <a href="/board/1/updateForm" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: 2px solid; margin-right: 10px;">수정</a>
                     <form action="/board/1/delete" method="post" style="display: inline-block; margin-right: 10px;">
-                        <button class="on" style="padding: 9px 18px; background-color: #FF7A21" >삭제</button>
+                        <button class="on" style="padding: 9px 18px; background-color: #FF7A21">삭제</button>
                     </form>
+                </div>
+                <div class="card-body" style="margin-top: 30px;">
+                <!--댓글-->
+                    <form action="/reply/save" method="post">
+                        <input type="hidden" name="boardId" value="{{board.id}}">
+                        <textarea class="form-control" rows="2" name="comment"></textarea>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
+                        </div>
+                    </form>
+                </div>
+                <!--댓글 목록-->
+                <div class="card-footer">
+                    <b>댓글리스트</b>
+                </div>
+                <div class="list-group">
+
+                    {{#replyList}}
+                        <!-- 댓글아이템 -->
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex">
+                                <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
+                                <div>{{comment}}</div>
+                            </div>
+
+                            {{#replyOwner}}
+                                <form action="/reply/{{id}}/delete" method="post">
+                                    <button class="btn">🗑</button>
+                                </form>
+                            {{/replyOwner}}
+                        </div>
+                    {{/replyList}}
                 </div>
             </div>
         </div>

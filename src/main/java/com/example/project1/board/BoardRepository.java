@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,29 +50,29 @@ public class BoardRepository {
 
 
     // 부분 조회
-    public BoardResponse.DetailDTO findById(int idx) {
-        Query query = em.createNativeQuery("select b.id, b.user_id, b.title, b.content, u.username from board_tb b inner join user_tb u on b.user_id = u.id where b.id = ?");
+    public BoardResponse.DetailDTO findByIdWithUser(int idx){
+        Query query = em.createNativeQuery("select b.id, b.title, b.content, b.user_id, u.username from board_tb b inner join user_tb u on b.user_id = u.id where b.id = ?");
         query.setParameter(1, idx);
 
         Object[] row = (Object[]) query.getSingleResult();
 
         Integer id = (Integer) row[0];
-        Integer userId = (Integer) row[1];
-        String title = (String) row[2];
-        String content = (String) row[3];
+        String title = (String) row[1];
+        String content = (String) row[2];
+        int userId = (Integer) row[3];
         String username = (String) row[4];
 
-//        System.out.println("id: " +id);
-//        System.out.println("userId: " +userId);
-//        System.out.println("title: " +title);
-//        System.out.println("content: " +content);
-//        System.out.println("username: " +username);
+        System.out.println("id : "+id);
+        System.out.println("title : "+title);
+        System.out.println("content : "+content);
+        System.out.println("userId : "+userId);
+        System.out.println("username : "+username);
 
         BoardResponse.DetailDTO responseDTO = new BoardResponse.DetailDTO();
         responseDTO.setId(id);
-        responseDTO.setUserId(userId);
         responseDTO.setTitle(title);
         responseDTO.setContent(content);
+        responseDTO.setUserId(userId);
         responseDTO.setUsername(username);
 
         return responseDTO;

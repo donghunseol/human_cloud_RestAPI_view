@@ -21,13 +21,9 @@ public class ResumeController {
     private final UserRepository userRepository;
 
     @GetMapping("/resume/{id}")
-    public String index(@PathVariable Integer id, ScrapRequest.CompanyDTO companyDTO, ScrapRequest.IndividualDTO individualDTO) {
+    public String index(@PathVariable Integer id) {
         User user = userRepository.findById(id);
-        if (user.getRole() == 0) {
 
-        }
-        scrapRepository.companySave(companyDTO);
-        scrapRepository.individualSave(individualDTO);
         return "resume/main";
     }
 

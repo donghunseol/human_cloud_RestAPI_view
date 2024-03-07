@@ -8,7 +8,7 @@ public class ScrapResponse {
     @AllArgsConstructor
     @Data
     public static class ScrapDTO{
-        private Integer scrap_id;
+        private Integer scrapId;
         private Integer sUserId;
         private String username;
         private Integer nUserId;
