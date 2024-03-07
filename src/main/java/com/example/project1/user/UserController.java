@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import com.example.project1._core.util.ApiUtil;
 import com.example.project1.apply.ApplyRepository;
 import com.example.project1.apply.ApplyRequest;
 import com.example.project1.apply.ApplyResponse;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -138,6 +140,15 @@ public class UserController {
 //        List<UserRequest.DeleteDTO> myDeleteList = userRepository.findAllWithDelete()
 //    }
 
+    @GetMapping("/api/username-same-check")
+    public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
+        User user = userRepository.findByUsername(username);
+        if (user == null){
+            return new ApiUtil<>(true);
+        }else{
+            return new ApiUtil<>(false);
+        }
+    }
 }
 
 

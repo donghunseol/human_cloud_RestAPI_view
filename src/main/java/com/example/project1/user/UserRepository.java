@@ -22,10 +22,16 @@ public class UserRepository {
         return (User) query.getSingleResult();
     }
 
-    public void findByUsername(String username) {
-        Query query = em.createNativeQuery("select * from user_tb where username = ?");
+    public User findByUsername(String username) {
+        Query query = em.createNativeQuery("select * from user_tb where username = ?", User.class);
         query.setParameter(1, username);
-        query.executeUpdate();
+
+        try {
+            User user = (User) query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

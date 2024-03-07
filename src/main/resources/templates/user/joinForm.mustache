@@ -4,12 +4,8 @@
     <div class="container bg-white rounded-3 border border-white pt-3" style="margin: 0px 60px;">
         <h3>회원가입</h3>
         <div class="card-body">
-
-
-
-            <form action="/user/join" method="POST" enctype="application/x-www-form-urlencoded">
-
-                <div class="btn-group" >
+            <form action="/user/join" method="post" onsubmit="return vaild()">
+                <div class="btn-group">
                     <div class="form-check ps-0">
                         <input id="role" name="role" type="radio" value="0" checked>개인
                         <input id="role" name="role" type="radio" value="1">기업
@@ -24,15 +20,16 @@
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="username" class="form-label">ID:</label>
-                    <input type="text" class="form-control" id="username" value="ssarid" placeholder="Enter username"
+                    <input type="text" class="form-control" id="username" placeholder="아이디를 입력하세요"
                            name="username"
                            required>
+                    <button type="button" onclick="usernameSameCheck()" class="btn btn-warning">중복체크</button>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">비밀번호:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password"
+                    <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요"
                            name="password"
                            value="12345"
                            required>
@@ -42,9 +39,9 @@
 
                 <div class="mb-3">
                     <label for="tel" class="form-label">전화번호:</label>
-                    <input type="text" class="form-control" id="tel" placeholder="Enter tel" name="tel"
-                           value="12345"
-                           required>
+                    <input type="tel" class="form-control" id="tel" placeholder="휴대폰 번호를 입력하세요" name="tel"
+                           required
+                    pattern="[0-1]{3}[0-9]{4}[0-9]{4}">
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
@@ -59,7 +56,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="birth" class="form-label">생년월일:</label>
-                    <input type="text" class="form-control" id="birth" name="birth"  value="0101" required>
+                    <input type="date" class="form-control" id="birth" name="birth" required>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
@@ -76,11 +73,45 @@
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Check this checkbox to continue.</div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">회원가입</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>
+    let isCheck = false;
+
+    function valid(){
+        if (isSameCheck == false){
+            alert("아이디 중복체크를 해야 합니다.");
+        }
+        return isCheck;
+    }
+
+
+    function usernameSameCheck(){
+        let username = $("#username").val();
+
+        $.ajax({
+           url: "/api/username-same-check?username="+username,
+           type: "get"
+        }).done((res)=>{
+            console.log(res);
+            if(res.body == true){
+                isCheck = true;
+                alert("아이디 중복 체크 완료");
+            }else{
+                isCheck = false;
+                alert("동일한 아이디가 존재합니다");
+            }
+        }).fail((res)=>{
+            alert(res.responseJSON.msg);
+        });
+    }
+
+
+
+</script>
 
 {{> layout/footer}}
