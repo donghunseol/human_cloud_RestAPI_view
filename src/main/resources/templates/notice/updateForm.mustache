@@ -6,38 +6,39 @@
             <h3 class="container d-flex pb-3">기업 공고 수정</h3>
             <!-- 기본 정보 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
-                <h4>기본정보</h4>
+                <h4>기본 정보</h4>
                 <div class="mb-3 mt-1">
                     <label class="form-label">기업 이름</label>
                     <input type="text" class="form-control" id="username" placeholder="기업 이름을 입력하세요."
-                           name="username" value="{{notice.username}}">
+                           name="username" value="{{notice.username}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요." name="email" value="{{notice.email}}">
+                    <input type="email" class="form-control" id="email" placeholder="이메일을 입력하세요." name="email" value="{{notice.email}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">연락처</label>
                     <input type="number" class="form-control" id="tel" placeholder="연락처를 입력하세요."
-                           name="tel" value="{{notice.tel}}">
+                           name="tel" value="{{notice.tel}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">기업 주소</label>
-                    <input type="text" class="form-control" id="address" placeholder="기업 주소를 입력하세요." name="address" value="{{notice.address}}">
+                    <input type="text" class="form-control" id="address" placeholder="기업 주소를 입력하세요." name="address" value="{{notice.address}}" disabled>
                 </div>
 
                 <label class="form-label">설립일</label>
                 <div class="col-sm-5 mb-3">
-                    <input type="text" class="form-control" id="birth" name="birth" value="{{notice.birth}}">
+                    <input type="text" class="form-control" id="birth" name="birth" value="{{notice.birth}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">이미지 업로드</label><br>
-                    <input type="file" id="image" accept="image/*" name="image">
+                    <input type="file" id="image" accept="image/*" name="image" disabled>
                 </div>
+                <h5 style="color: #8888AA">* [마이페이지] - [회원 정보 수정]에서 기본 정보를 수정할 수 있습니다</h5>
             </div>
 
             <!-- 공고 내용 -->
