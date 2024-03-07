@@ -5,6 +5,7 @@ import lombok.Data;
 public class ResumeRequest {
     @Data
     public static class resumeDTO {
+        public Integer resumeId;
         public String title;
         public String education;
         public String major;

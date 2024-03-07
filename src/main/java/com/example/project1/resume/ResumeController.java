@@ -2,6 +2,8 @@ package com.example.project1.resume;
 
 import com.example.project1.scrap.ScrapRepository;
 import com.example.project1.scrap.ScrapRequest;
+import com.example.project1.skill.SkillRepository;
+import com.example.project1.skill.SkillRequest;
 import com.example.project1.user.User;
 import com.example.project1.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ public class ResumeController {
     private final ResumeRepository resumeRepository;
     private final ScrapRepository scrapRepository;
     private final UserRepository userRepository;
+    private final SkillRepository skillRepository;
 
     @GetMapping("/resume/{id}")
     public String index(@PathVariable Integer id) {
@@ -46,10 +49,12 @@ public class ResumeController {
     }
 
     @PostMapping("/resume/save")
-    public String save(HttpServletRequest request, ResumeRequest.resumeDTO resume) {
+    public String save(HttpServletRequest request, ResumeRequest.resumeDTO resume, SkillRequest.skillDTO skill) {
         System.out.println(11111);
         resumeRepository.resumeSave(1, resume);
         System.out.println(222222);
+        skillRepository.skillSave(resume.getResumeId(), skill);
+
         return "redirect:/myPage";
     }
 

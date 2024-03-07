@@ -1,6 +1,7 @@
 package com.example.project1.skill;
 
-import jakarta.persistence.EntityManager;
+import com.example.project1.resume.ResumeRequest;
+import jakarta.persistence.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +23,17 @@ public class SkillRepository {
 
     // 저장
     @Transactional
-    public void save(){
+    public void skillSave(Integer resumeId,  SkillRequest.skillDTO skill){
+        String sql = """
+                insert into skill_tb (resume_id, name)
+                values (?,?)
+                """;
 
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, resumeId);
+        query.setParameter(2, skill.getName());
+
+        query.executeUpdate();
     }
 
     // 삭제
