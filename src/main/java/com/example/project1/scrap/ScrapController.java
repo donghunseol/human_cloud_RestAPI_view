@@ -22,51 +22,40 @@ public class ScrapController {
 
     @GetMapping("/scrap/{id}")
     public String index(@PathVariable Integer id) {
-        List<ScrapResponse.ScrapDTO> scrapList = scrapRepository.findById(id);
+        User user = (User) session.getAttribute("sessionUser");
+        List<ScrapResponse.ScrapDTO> scrapList = scrapRepository.findById(id, user.getRole());
         session.setAttribute("scrapList", scrapList);
-        System.out.println(scrapList);
-
-//        boolean owner = false; // 페이지 주인 여부 체크
-//        User session_user = (User) request.getAttribute("session_user");
-//
-//        if(session_user != null){
-//            if (1 == session_user.getId()){
-//                owner = true;
-//            }
-//        }
-
         System.out.println(scrapList);
 
         return "/scrap/main";
     }
 
     @PostMapping("/scrap/{id}/save")
-    public String save(@PathVariable(name = "id") Integer id, ScrapRequest.IndividualDTO individualDTO, ScrapRequest.CompanyDTO companyDTO){
-        System.out.println("test1");
+    public String save(@PathVariable(name = "id") Integer id, ScrapRequest.UserDTO UserDTO, ScrapRequest.CompanyDTO companyDTO){
         User user = (User) session.getAttribute("sessionUser");
-        System.out.println("test1-1");
-        if (user.getRole() == 0) {
-            System.out.println("test2");
-            System.out.println(individualDTO);
-            scrapRepository.individualSave(individualDTO);
-        }else if(user.getRole() == 1) {
-            System.out.println("test3");
-            System.out.println(companyDTO);
-            scrapRepository.companySave(companyDTO);
-        }
 
-        List<ScrapResponse.ScrapDTO> scrapDTOList = (List<ScrapResponse.ScrapDTO>) session.getAttribute("scrapList");
-        System.out.println(scrapDTOList);
+        // false 는 스크랩 비활성화 / true 는
+        Boolean isScrap = false;
+
+        if(isScrap == false){
+            scrapRepository.deleteById(id);
+        }else {
+            if (user.getRole() == 0) {
+                System.out.println(UserDTO);
+                scrapRepository.userSave(user.getId(), UserDTO);
+            }else if(user.getRole() == 1) {
+                System.out.println(companyDTO);
+                scrapRepository.companySave(user.getId(), companyDTO);
+            }
+        }
 
         System.out.println("test4");
         return "redirect:/notice/"+id;
     }
 
-
     @PostMapping("/scrap/{id}/delete")
     public String delete(@PathVariable(name = "id") Integer id){
-        // System.out.println(id);
         scrapRepository.deleteById(id);
-        return "redirect:/notice/"+id;
+        return "redirect:/scrap/"+id;
     }
 }
