@@ -35,7 +35,7 @@
                     </form>
                 </div>
                 <div class="card-body" style="margin-top: 30px;">
-
+                <!--댓글-->
                     <form action="/reply/save" method="post">
                         <input type="hidden" name="boardId" value="{{board.id}}">
                         <textarea class="form-control" rows="2" name="comment"></textarea>
@@ -43,6 +43,28 @@
                             <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
                         </div>
                     </form>
+                </div>
+                <!--댓글 목록-->
+                <div class="card-footer">
+                    <b>댓글리스트</b>
+                </div>
+                <div class="list-group">
+
+                    {{#replyList}}
+                        <!-- 댓글아이템 -->
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="d-flex">
+                                <div class="px-1 me-1 bg-primary text-white rounded">{{username}}</div>
+                                <div>{{comment}}</div>
+                            </div>
+
+                            {{#replyOwner}}
+                                <form action="/reply/{{id}}/delete" method="post">
+                                    <button class="btn">🗑</button>
+                                </form>
+                            {{/replyOwner}}
+                        </div>
+                    {{/replyList}}
                 </div>
             </div>
         </div>
