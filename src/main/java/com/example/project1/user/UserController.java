@@ -102,11 +102,8 @@ public class UserController {
             return "redirect:/loginForm";
         }
 
-
         return "myPage/main";
     }
-
-
 
     @GetMapping("/user/logout")
     public String logout() {
@@ -129,7 +126,7 @@ public class UserController {
         session.setAttribute("applyList", applyList);
         System.out.println("지원한 공고 : " + applyList);
 
-        return "myPage/selectList";
+        return "/myPage/selectList";
     }
 
 }
