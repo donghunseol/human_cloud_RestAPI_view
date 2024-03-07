@@ -5,7 +5,7 @@
         <div class="container">
             <div class="d-flex">
                 <h3 class="container d-flex pb-3">이력서 상세보기</h3>
-<!--                추가 수정 필요-->
+                <!--                추가 수정 필요-->
                 <!--스크랩 부분-->
                 <form action="/scrap/{{sessionUser.id}}/save" method="post" class="pe-3">
                     <button onclick="scrap_btn()" id="resume_scrap"
@@ -142,8 +142,10 @@
                         <!--                        </div>-->
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-3 mt-4">
-                        <button onclick="location.href='#'" type="button" class="btn btn-secondary">수정하기</button>
-                        <button onclick="location.href='../../../../../../../Users/ehdgn/OneDrive/Desktop/project_team3/project_team3/userMyPage/myPageIndex.html'"
+                        <form action="/resume/{{resumeDetail.id}}/updateForm" method="get">
+                            <button class="btn btn-secondary">수정하기</button>
+                        </form>
+                        <button onclick="history.back()"
                                 type="button"
                                 class="btn btn-outline-secondary">이전
                         </button>

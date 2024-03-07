@@ -46,7 +46,6 @@ public class ResumeController {
     public String saveForm(HttpServletRequest request) {
         User userInfo = (User) session.getAttribute("sessionUser");
         request.setAttribute("userInfo", userInfo);
-        System.out.println(userInfo);
         return "resume/saveForm";
     }
 
@@ -66,17 +65,25 @@ public class ResumeController {
 //    }
 
     @PostMapping("/resume/save")
-    public String save(HttpServletRequest request, ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
+    public String save(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
         User userInfo = (User) session.getAttribute("sessionUser");
         resumeRepository.resumeSave(userInfo.getId(), resume, skillNames);
         return "redirect:/myPage";
     }
 
-    @GetMapping("/resume/updateForm")
-    public String updateForm() {
+    @GetMapping("/resume/{id}/updateForm")
+    public String updateForm(HttpServletRequest request, @PathVariable Integer id) {
+        ResumeResponse.DetailDTO updateDetail = resumeRepository.findByResumeId(id);
+        request.setAttribute("updateDetail", updateDetail);
+        System.out.println(updateDetail);
         return "resume/updateForm";
     }
 
+    @PostMapping("/resume/{id}/updateForm")
+    public String update(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames, @PathVariable Integer id) {
+        resumeRepository.resumeUpdate(id, resume, skillNames);
+        return "redirect:/myPage";
+    }
 
     // REST API
     @GetMapping("/api/resume")

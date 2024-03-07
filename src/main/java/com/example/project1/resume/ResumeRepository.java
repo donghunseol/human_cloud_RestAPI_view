@@ -235,14 +235,31 @@ public class ResumeRepository {
         }
     }
 
-    @Transactional
-    public void skillSave(Long resumeId) {
-
-    }
-
     // 수정
     @Transactional
-    public void update() {
+    public void resumeUpdate(Integer resumeId, ResumeRequest.ResumeDTO resume, List<String> skillNames) {
+        String resumeSql = """
+                update resume_tb set title = ?, education = ?, major = ?, license = ?, career = ? 
+                where id = ?
+                """;
+        Query resumeQuery = em.createNativeQuery(resumeSql);
+        resumeQuery.setParameter(1, resume.getTitle());
+        resumeQuery.setParameter(2, resume.getEducation());
+        resumeQuery.setParameter(3, resume.getMajor());
+        resumeQuery.setParameter(4, resume.getLicense());
+        resumeQuery.setParameter(5, resume.getCareer());
+        resumeQuery.setParameter(6, resumeId);
+        resumeQuery.executeUpdate();
 
+        for (String skillName : skillNames) {
+            String skillSql = """
+                    update skill_tb set name = ? 
+                    where resume_id = ?
+                    """;
+            Query skillQuery = em.createNativeQuery(skillSql);
+            skillQuery.setParameter(1, skillName);
+            skillQuery.setParameter(2, resumeId);
+            skillQuery.executeUpdate();
+        }
     }
 }
