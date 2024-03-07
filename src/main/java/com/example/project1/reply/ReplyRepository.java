@@ -51,8 +51,19 @@ public class ReplyRepository {
 
     // 삭제
     @Transactional
-    public void deleteById(){
+    public void deleteById(int id){
+        String q = "delete from reply_tb where id=?";
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, id);
 
+        query.executeUpdate();
+    }
+    public Reply findById(int id){
+        String q = "select * from reply_tb where id = ?";
+        Query query = em.createNativeQuery(q, Reply.class);
+        query.setParameter(1, id);
+
+        return (Reply)  query.getSingleResult();
     }
 
     // 수정

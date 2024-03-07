@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import com.example.project1._core.util.ApiUtil;
 import com.example.project1.apply.ApplyRepository;
 import com.example.project1.apply.ApplyResponse;
 import com.example.project1.resume.ResumeRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class UserController {
 
         return "redirect:/";
     }
+
 //    @GetMapping("/board/{id}")
 //    public String detail(@PathVariable int id, HttpServletRequest request) {
 //        // 1. 모델 진입 - 상세보기 데이터 가져오기
@@ -76,6 +79,7 @@ public class UserController {
     @PostMapping("/user/join")
     public String join(UserRequest.JoinDTO requestDTO) {
         userRepository.save(requestDTO);
+        System.out.println(requestDTO);
 
         // HttpSession s =request.getSession();
 //        System.out.println("정보 : " + requestDTO);
@@ -126,6 +130,20 @@ public class UserController {
         return "/myPage/selectList";
     }
 
+//    @PostMapping("/user/{id}/delete")
+//    public String DeleteAll(UserRequest.DeleteDTO requestDTO){
+//        List<UserRequest.DeleteDTO> myDeleteList = userRepository.findAllWithDelete()
+//    }
+
+    @GetMapping("/api/username-same-check")
+    public @ResponseBody ApiUtil<?> usernameSameCheck(String username){
+        User user = userRepository.findByUsername(username);
+        if (user == null){
+            return new ApiUtil<>(true);
+        }else{
+            return new ApiUtil<>(false);
+        }
+    }
 }
 
 
