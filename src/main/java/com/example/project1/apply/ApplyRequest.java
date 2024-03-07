@@ -12,7 +12,7 @@ public class ApplyRequest {
     }
 
     @Data
-    public static class ApplyDTO{
+    public static class CompanyListDTO{
         private Integer userId; // 유저 번호
         private Integer noticeUserId; // 공고 유저 번호
         private Integer noticeId; // 공고 번호
