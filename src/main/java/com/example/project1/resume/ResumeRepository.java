@@ -170,8 +170,19 @@ public class ResumeRepository {
 
     // 저장
     @Transactional
-    public void save() {
-
+    public void resumeSave(Integer userId, ResumeRequest.resumeDTO resume) {
+        String sql = """
+                insert into resume_tb (user_id, title, education, major, license, career, created_at)
+                values (?,?,?,?,?,?,now())
+                """;
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, userId);
+        query.setParameter(2, resume.getTitle());
+        query.setParameter(3, resume.getEducation());
+        query.setParameter(4, resume.getMajor());
+        query.setParameter(5, resume.getLicense());
+        query.setParameter(6, resume.getCareer());
+        query.executeUpdate();
     }
 
     // 수정

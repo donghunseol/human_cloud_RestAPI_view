@@ -49,6 +49,15 @@ public class ResumeController {
         return "resume/saveForm";
     }
 
+    @PostMapping("/resume/save")
+    public String save(HttpServletRequest request, ResumeRequest.resumeDTO
+            resume) {
+        System.out.println(11111);
+        resumeRepository.resumeSave(1, resume);
+        System.out.println(222222);
+        return "redirect:/myPage";
+    }
+
     @GetMapping("/resume/updateForm")
     public String updateForm() {
         return "resume/updateForm";

@@ -4,66 +4,78 @@
     <div class="d-flex">
         <div class="container">
             <h3 class="container d-flex pb-3">이력서 작성</h3>
+
             <!-- 기본 정보 -->
-            <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
+            <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
                 <h4>기본정보</h4>
                 <div class="mb-3 mt-1">
                     <label class="form-label">이름</label>
-                    <input type="text" class="form-control" id="username" placeholder="이름을 입력하세요." name="username">
+                    <input type="text" class="form-control" id="username" placeholder="이름을 입력하세요." name="username"
+                           value="" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="email을 입력하세요." name="email">
+                    <input type="email" class="form-control" id="email" placeholder="email을 입력하세요." name="email"
+                           value="" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">휴대전화</label>
-                    <input type="number" class="form-control" id="phonenumber" placeholder="전화번호를 입력하세요."
-                           name="phonenumber">
+                    <input type="number" class="form-control" id="tel" placeholder="전화번호를 입력하세요."
+                           name="tel" value="" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">거주지</label>
-                    <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요." name="address">
+                    <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요." name="address"
+                           value="" disabled>
+                </div>
+
+                <div class="mb-3 mt-1">
+                    <label class="form-label" disabled>이미지 업로드</label><br>
+                    <input type="file" id="image" accept="image/*" name="image">
+                </div>
+                <div class="mb-3 mt-1">
+                    <span class="fw-small color-danger">※기본 정보는 회원정보 수정에서 변경하여 주세요</span>
                 </div>
             </div>
 
-            <!-- 학력 -->
-            <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
-                <h4>학력</h4>
-                <div class="mb-3 mt-1">
-                    <label class="form-label">학교</label>
-                    <div>
-                        <input type="text" class="form-control" id="text" placeholder="학교명을 입력하세요." name="text">
+            <form action="/resume/save" method="post">
+                <!-- 이력서 제목 -->
+                <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
+                    <h4>제목</h4>
+                    <div class="mb-3 mt-1">
+                        <input type="text" class="form-control" id="title" placeholder="이름을 입력하세요." name="title">
+                    </div>
+                    <h4>학력</h4>
+                    <div class="mb-3 mt-1">
+                        <label class="form-label">학교명</label>
+                        <div>
+                            <input type="text" class="form-control" id="education" placeholder="학교명을 입력하세요."
+                                   name="education">
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-1">
+                        <label class="form-label">전공</label>
+                        <div>
+                            <input type="text" class="form-control" id="major" placeholder="전공을 입력하세요."
+                                   name="major">
+                        </div>
+                    </div>
+                    <h4>경력</h4>
+                    <div class="mb-3 mt-1">
+                        <input type="text" class="form-control" id="career" placeholder="기업명을 입력하세요." name="career">
+                    </div>
+                    <h4>자격증</h4>
+                    <div class="mb-3 mt-1">
+                        <input type="text" class="form-control" id="license" placeholder="자격증명을 입력하세요." name="license">
+                    </div>
+                    <div class="mb-3 mt-1 d-md-flex justify-content-center">
+                        <button class="btn btn-secondary">이력서 저장</button>
                     </div>
                 </div>
-                <div class="mb-3 mt-1">
-                    <label class="form-label">전공</label>
-                    <div>
-                        <input type="text" class="form-control" id="text" placeholder="전공 또는 학과를 입력하세요."
-                               name="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 경력 -->
-            <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
-                <h4>경력</h4>
-                <div class="mb-3 mt-1">
-                    <label class="form-label">기업명</label>
-                    <input type="text" class="form-control" placeholder="기업명을 입력하세요.">
-                </div>
-            </div>
-
-            <!-- 자격증 -->
-            <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
-                <h4>자격증</h4>
-                <div class="mb-3 mt-1">
-                    <label class="form-label">자격증명</label>
-                    <input type="text" class="form-control" placeholder="자격증명을 입력하세요.">
-                </div>
-            </div>
+            </form>
 
             <!-- 보유 기술 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
@@ -71,42 +83,41 @@
                 <label class="form-label">보유 기술 선택</label>
                 <div class="mb-3 mt-1 row-cols-6">
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="Java">
                         <label class="form-check-label">Java</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="JavaScript">
                         <label class="form-check-label">JavaScript</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="jQuery">
                         <label class="form-check-label">jQuery</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="Spring">
                         <label class="form-check-label">Spring</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="Git">
                         <label class="form-check-label">Git</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="JSP">
                         <label class="form-check-label">JSP</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="Android">
                         <label class="form-check-label">Android</label>
                     </div>
                     <div class="form-check form-check-inline col">
-                        <input class="form-check-input" type="checkbox" value="">
+                        <input class="form-check-input" type="checkbox" value="MySQL">
                         <label class="form-check-label">MySQL</label>
                     </div>
                 </div>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-center mt-3">
-                <button type="button" class="btn btn-secondary">작성완료</button>
-                <button type="button" class="btn btn-outline-secondary">취소</button>
+                <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 mb-3">
+                    <button type="button" class="btn btn-secondary">선택 완료</button>
+                </div>
             </div>
         </div>
         {{> layout/sidebar}}
