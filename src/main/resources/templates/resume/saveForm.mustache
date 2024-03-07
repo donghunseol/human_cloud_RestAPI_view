@@ -11,25 +11,25 @@
                 <div class="mb-3 mt-1">
                     <label class="form-label">이름</label>
                     <input type="text" class="form-control" id="username" placeholder="이름을 입력하세요." name="username"
-                           value="" disabled>
+                           value="{{userInfo.name}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="email" placeholder="email을 입력하세요." name="email"
-                           value="" disabled>
+                           value="{{userInfo.email}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">휴대전화</label>
                     <input type="number" class="form-control" id="tel" placeholder="전화번호를 입력하세요."
-                           name="tel" value="" disabled>
+                           name="tel" value="{{userInfo.tel}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
                     <label class="form-label">거주지</label>
                     <input type="text" class="form-control" id="address" placeholder="주소를 입력하세요." name="address"
-                           value="" disabled>
+                           value="{{userInfo.address}}" disabled>
                 </div>
 
                 <div class="mb-3 mt-1">
@@ -71,14 +71,26 @@
                     <div class="mb-3 mt-1">
                         <input type="text" class="form-control" id="license" placeholder="자격증명을 입력하세요." name="license">
                     </div>
+<<<<<<< HEAD
                 </div>
 
                 <!-- 보유 기술 -->
+=======
+                    <div class="mb-3 mt-1 d-md-flex justify-content-center">
+                        <!--                        <button class="btn btn-secondary">이력서 저장</button>-->
+                    </div>
+                </div>
+
+
+                <!-- 보유 기술 -->
+
+>>>>>>> 90d2172f5a17319dc7cc2f6d9e9186904a932643
                 <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
                     <h4>기술</h4>
                     <label class="form-label">보유 기술 선택</label>
                     <div class="mb-3 mt-1 row-cols-6">
                         <div class="form-check form-check-inline col">
+<<<<<<< HEAD
                             <input class="form-check-input" type="checkbox" value="Java">
                             <label class="form-check-label">Java</label>
                         </div>
@@ -108,11 +120,46 @@
                         </div>
                         <div class="form-check form-check-inline col">
                             <input class="form-check-input" type="checkbox" value="MySQL">
+=======
+                            <input class="form-check-input" type="checkbox" value="Java" name="skillNames">
+                            <label class="form-check-label">Java</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="JavaScript" name="skillNames">
+                            <label class="form-check-label">JavaScript</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="jQuery" name="skillNames">
+                            <label class="form-check-label">jQuery</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="Spring" name="skillNames">
+                            <label class="form-check-label">Spring</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="Git" name="skillNames">
+                            <label class="form-check-label">Git</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="JSP" name="skillNames">
+                            <label class="form-check-label">JSP</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="Android" name="skillNames">
+                            <label class="form-check-label">Android</label>
+                        </div>
+                        <div class="form-check form-check-inline col">
+                            <input class="form-check-input" type="checkbox" value="MySQL" name="skillNames">
+>>>>>>> 90d2172f5a17319dc7cc2f6d9e9186904a932643
                             <label class="form-check-label">MySQL</label>
                         </div>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 mb-3">
+<<<<<<< HEAD
                         <button class="btn btn-secondary">이력서 저장</button>
+=======
+                        <button class="btn btn-secondary">선택 완료</button>
+>>>>>>> 90d2172f5a17319dc7cc2f6d9e9186904a932643
                     </div>
                 </div>
             </form>
