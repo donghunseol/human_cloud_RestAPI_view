@@ -55,6 +55,7 @@ public class UserController {
 
         return "redirect:/";
     }
+
 //    @GetMapping("/board/{id}")
 //    public String detail(@PathVariable int id, HttpServletRequest request) {
 //        // 1. 모델 진입 - 상세보기 데이터 가져오기
@@ -82,6 +83,7 @@ public class UserController {
     @PostMapping("/user/join")
     public String join(UserRequest.JoinDTO requestDTO) {
         userRepository.save(requestDTO);
+        System.out.println(requestDTO);
 
         // HttpSession s =request.getSession();
 //        System.out.println("정보 : " + requestDTO);
@@ -130,6 +132,11 @@ public class UserController {
 
         return "/myPage/selectList";
     }
+
+//    @PostMapping("/user/{id}/delete")
+//    public String DeleteAll(UserRequest.DeleteDTO requestDTO){
+//        List<UserRequest.DeleteDTO> myDeleteList = userRepository.findAllWithDelete()
+//    }
 
 }
 

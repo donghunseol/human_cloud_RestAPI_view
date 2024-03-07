@@ -36,10 +36,16 @@ public class UserRepository {
         return userList;
     }
 
+    public List<User> findAllWithDelete() {
+        Query query = em.createNativeQuery("select * from user_tb", User.class);
+        List<User> userList = query.getResultList();
+        return userList;
+    }
+
     // 저장
     @Transactional
     public void save(UserRequest.JoinDTO requestDTO) {
-        Query query = em.createNativeQuery("insert into user_tb(username, password, name, tel, birth, address, email, role, created_at) values (?, ?, ?, ?, ?, ?, ?, 1, now())");
+        Query query = em.createNativeQuery("insert into user_tb(username, password, name, tel, birth, address, email, role, created_at) values (?, ?, ?, ?, ?, ?, ?, ?, now())");
         query.setParameter(1, requestDTO.getUsername());
         query.setParameter(2, requestDTO.getPassword());
         query.setParameter(3, requestDTO.getName());
@@ -47,6 +53,7 @@ public class UserRepository {
         query.setParameter(5, requestDTO.getBirth());
         query.setParameter(6, requestDTO.getAddress());
         query.setParameter(7, requestDTO.getEmail());
+        query.setParameter(8, requestDTO.getRole());
 
         query.executeUpdate();
     }
