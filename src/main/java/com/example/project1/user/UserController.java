@@ -2,12 +2,7 @@ package com.example.project1.user;
 
 import com.example.project1._core.util.ApiUtil;
 import com.example.project1.apply.ApplyRepository;
-import com.example.project1.apply.ApplyRequest;
 import com.example.project1.apply.ApplyResponse;
-import com.example.project1.board.BoardResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jdk.swing.interop.SwingInterOpUtils;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.resume.ResumeResponse;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,11 +43,11 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public String login( UserRequest.LoginDTO requestDTO) {
+    public String login(UserRequest.LoginDTO requestDTO) {
         User user = userRepository.findByUsernameAndPassword(requestDTO);
         System.out.println(user);
 
-        session.setAttribute("sessionUser" , user);
+        session.setAttribute("sessionUser", user);
         System.out.println(user);
 
         return "redirect:/";
@@ -81,7 +76,6 @@ public class UserController {
 //    }
 
 
-
     @PostMapping("/user/join")
     public String join(UserRequest.JoinDTO requestDTO) {
         userRepository.save(requestDTO);
@@ -101,10 +95,10 @@ public class UserController {
 
     //업데이트 (사용자 정보 담긴 update4)
     @PostMapping("/user/{id}/updateForm")
-    public String update (@PathVariable Integer  id, HttpServletRequest request){
+    public String update(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-        if(sessionUser == null){
+        if (sessionUser == null) {
             return "redirect:/loginForm";
         }
 
@@ -119,7 +113,8 @@ public class UserController {
 
     @GetMapping("/myPage")
     public String myPage(HttpServletRequest request) {
-        List<ResumeResponse.DTO> myResumeList = resumeRepository.findAllByUserId(1);
+        User user = (User) session.getAttribute("sessionUser");
+        List<ResumeResponse.DTO> myResumeList = resumeRepository.findAllByUserId(user.getId());
         request.setAttribute("myResumeList", myResumeList);
         return "myPage/main";
     }

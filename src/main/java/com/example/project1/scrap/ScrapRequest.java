@@ -17,7 +17,7 @@ public class ScrapRequest {
     // 개인 스크랩 DTO
     @AllArgsConstructor
     @Data
-    public static class IndividualDTO{
+    public static class UserDTO{
         private Integer userId;
         private Integer noticeId;
         private Integer role;
