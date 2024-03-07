@@ -66,7 +66,6 @@
         <!--스크랩 부분-->
         <form action="/scrap/{{sessionUser.id}}/save" method="post">
             <button onclick="scrap_btn()" id="resume_scrap" class="fa-regular fa-bookmark text-warning border-0"></button>
-            <input id="userId" name="userId" type="hidden" value="{{notice.userId}}"></input>
             <input id="noticeId" name="noticeId" type="hidden" value="{{notice.boardId}}"></input>
             <input id="role" name="role" type="hidden" value="{{notice.role}}"></input>
         </form>
