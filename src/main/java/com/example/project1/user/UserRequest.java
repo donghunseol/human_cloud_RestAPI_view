@@ -46,8 +46,19 @@ public class UserRequest {
         private String address;
         private String  image;
         private Integer role;
-
-
-
     }
+
+    public static class DeleteDTO{
+        private String username;
+        private String password;
+        private String name;
+        private String tel;
+        private String birth;
+        private String email;
+        private String address;
+        private String  image;
+        private Integer role;
+    }
+
+
 }

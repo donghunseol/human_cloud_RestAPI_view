@@ -55,7 +55,7 @@ public class BoardController {
 //        }
 
         boardRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/board";
     }
 
     @PostMapping("/board/save")
