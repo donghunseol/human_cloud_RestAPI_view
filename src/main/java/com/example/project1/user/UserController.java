@@ -9,11 +9,13 @@ import jakarta.servlet.http.HttpSession;
 import jdk.swing.interop.SwingInterOpUtils;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.resume.ResumeResponse;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -78,14 +80,14 @@ public class UserController {
 
 
     @PostMapping("/user/join")
-    public String join(UserRequest.JoinDTO requestDTO){
+    public String join(UserRequest.JoinDTO requestDTO) {
         userRepository.save(requestDTO);
 
-       // HttpSession s =request.getSession();
+        // HttpSession s =request.getSession();
 //        System.out.println("정보 : " + requestDTO);
 
         return "redirect:/user/loginForm";
-   }
+    }
 
     //업데이트 창 (사용자 정보 담기 전,)
     @GetMapping("/user/updateForm")
