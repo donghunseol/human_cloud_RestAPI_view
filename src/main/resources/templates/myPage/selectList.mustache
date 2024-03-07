@@ -11,30 +11,33 @@
                     <div class="item_resume">
                         <span class="resume_correction h5 fw-bold">지원 현황</span>
                         <div class="correction_list p-3 d-flex pt-0 border-top pt-3 mt-3">
-                            <form class="w-100">
-                                <div class="card mb-3">
-                                    <div class="card-body d-flex justify-content-between text-secondary m-2">
-                                        <div>
-                                            <p class="mb-0"><small>엠디비(MDB)</small></p>
-                                            <p class="card-title mb-0"><strong>React(Next.js) 프론트 엔드 웹 개발자 -
-                                                팀장</strong></p>
-                                            <p class="card-text mb-0"><small>4,000 - 5,600만원 / 경력</small></p>
-                                            <p class="card-text"><small> 03/31 마감 02/27 수정</small></p>
-                                        </div>
-                                        <div class="row">
-                                            <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary mb-1">상세보기
-                                            </button>
-                                            <button onclick="location.href='/resume/updateForm'"
-                                                    type="button" class="btn btn-outline-secondary mb-1">수정
-                                            </button>
-                                            <button onclick="location.href='#'" type="button"
-                                                    class="btn btn-outline-secondary">삭제
-                                            </button>
+                            {{#applyList}}
+                                <div class="w-100">
+                                    <div class="card mb-3">
+                                        <div class="card-body d-flex justify-content-between text-secondary m-2">
+                                            <div>
+                                                <p class="mb-0"><small>{{name}}</small></p>
+                                                <p class="card-title mb-0"><strong>{{title}}</strong></p>
+                                                <p class="card-text mb-0"><small>{{type}}</small></p>
+                                                <p class="card-text"><small>마감일 : {{deadline}}</small></p>
+                                            </div>
+                                            <div class="d-flex flex-column w-100">
+                                                <form class="d-flex justify-content-end" action="/notice/{{noticeId}}" method="post">
+                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">상세보기
+                                                    </button>
+                                                </form>
+                                                <form class="d-flex justify-content-end" action="/resume/updateForm" method="post">
+                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">수정
+                                                    </button>
+                                                </form>
+                                                <form class="d-flex justify-content-end" action="/apply/{{applyId}}/delete" method="post">
+                                                    <button type="submit" class="btn btn-outline-secondary w-50">삭제</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            {{/applyList}}
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,8 @@
 package com.example.project1.user;
 
+import com.example.project1.apply.ApplyRepository;
+import com.example.project1.apply.ApplyRequest;
+import com.example.project1.apply.ApplyResponse;
 import com.example.project1.board.BoardResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -20,10 +23,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final HttpSession session;
     private final ResumeRepository resumeRepository;
-
-
-
-
+    private final ApplyRepository applyRepository;
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
@@ -99,11 +99,11 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         if(sessionUser == null){
-            return "redirect/loginForm";
+            return "redirect:/loginForm";
         }
 
 
-        return "user/myPage";
+        return "myPage/main";
     }
 
 
@@ -123,6 +123,12 @@ public class UserController {
 
     @GetMapping("/myPage/selectList")
     public String myPageList() {
+        User user = (User) session.getAttribute("sessionUser");
+        System.out.println("user 정보 : " + user);
+        List<ApplyResponse.UserListDTO> applyList = applyRepository.findUserApplyById(user.getId());
+        session.setAttribute("applyList", applyList);
+        System.out.println("지원한 공고 : " + applyList);
+
         return "myPage/selectList";
     }
 
