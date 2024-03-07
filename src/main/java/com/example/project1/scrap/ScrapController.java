@@ -34,12 +34,10 @@ public class ScrapController {
     public String save(@PathVariable(name = "id") Integer id, ScrapRequest.UserDTO UserDTO, ScrapRequest.CompanyDTO companyDTO){
         User user = (User) session.getAttribute("sessionUser");
 
-        // false 는 스크랩 비활성화 / true 는
+        // false 는 스크랩 비활성화 / true 는 스크랩 활성화
         Boolean isScrap = false;
 
-        if(isScrap == false){
-            scrapRepository.deleteById(id);
-        }else {
+        if(isScrap != false){
             if (user.getRole() == 0) {
                 System.out.println(UserDTO);
                 scrapRepository.userSave(user.getId(), UserDTO);
@@ -47,9 +45,11 @@ public class ScrapController {
                 System.out.println(companyDTO);
                 scrapRepository.companySave(user.getId(), companyDTO);
             }
+
+        }else {
+            scrapRepository.deleteById(id);
         }
 
-        System.out.println("test4");
         return "redirect:/notice/"+id;
     }
 

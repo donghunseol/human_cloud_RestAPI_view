@@ -71,12 +71,16 @@
         </form>
         <script>
             function scrap_btn() {
-                if ($("#resume_scrap").hasClass("fa-solid") ) { // 스크랩 하기
-                    $("#resume_scrap").addClass("fa-regular");
-                    $("#resume_scrap").removeClass("fa-solid");
-                } else if ($("#resume_scrap").hasClass("fa-regular")) { // 스크랩 취소 하기
+                var isScraped = {{isScrap}};
+
+                if (isScraped) {
+                    // 스크랩한 경우
                     $("#resume_scrap").addClass("fa-solid");
                     $("#resume_scrap").removeClass("fa-regular");
+                } else {
+                    // 스크랩하지 않은 경우
+                    $("#resume_scrap").addClass("fa-regular");
+                    $("#resume_scrap").removeClass("fa-solid");
                 }
             }
         </script>
