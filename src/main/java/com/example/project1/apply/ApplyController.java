@@ -13,9 +13,19 @@ public class ApplyController {
     private final ApplyRepository applyRepository;
     @PostMapping("/apply/{id}/delete")
     public String delete(@PathVariable Integer id) {
-        System.out.println(111);
         applyRepository.deleteById(id);
-        System.out.println(22222);
+
+        return "redirect:/myPage/selectList";
+    }
+
+    @PostMapping("/apply/{id}/save")
+    public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO){
+        System.out.println(1111);
+        System.out.println(requestDTO);
+        requestDTO.setResumeId(1);
+
+        applyRepository.save(requestDTO);
+        System.out.println(222222);
 
         return "redirect:/myPage/selectList";
     }

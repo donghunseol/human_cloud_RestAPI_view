@@ -1,6 +1,7 @@
 {{> layout/header}}
 {{#notice}}
-    <form action="/myPage/selectList" class="bg-light" method="get">
+    <form action="/apply/{{id}}/save" class="bg-light" method="post">
+        <input hidden="hidden" id="noticeId" name="noticeId" value="{{id}}"></input>
         <div class="d-flex justify-content-center" style="padding: 30px 200px;">
             <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
                 <div>
