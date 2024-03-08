@@ -35,7 +35,8 @@ public class ScrapController {
         User user = (User) session.getAttribute("sessionUser");
 
         // false 는 스크랩 비활성화 / true 는 스크랩 활성화
-        Boolean isScrap = false;
+        Boolean isScrap = null;
+        session.setAttribute("isScrap", isScrap);
 
         if(isScrap != false){
             if (user.getRole() == 0) {
@@ -45,9 +46,6 @@ public class ScrapController {
                 System.out.println(companyDTO);
                 scrapRepository.companySave(user.getId(), companyDTO);
             }
-
-        }else {
-            scrapRepository.deleteById(id);
         }
 
         return "redirect:/notice/"+id;

@@ -20,12 +20,7 @@ public class ApplyController {
 
     @PostMapping("/apply/{id}/save")
     public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO){
-        System.out.println(1111);
-        System.out.println(requestDTO);
-        requestDTO.setResumeId(1);
-
         applyRepository.save(requestDTO);
-        System.out.println(222222);
 
         return "redirect:/myPage/selectList";
     }
