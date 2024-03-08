@@ -21,12 +21,12 @@ public class BoardController {
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
-//        User sessionUser = (User) session.getAttribute("sessionUser");
-//        if (sessionUser == null) {
-//            return "redirect:/loginForm";
-//        }
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null) {
+            return "redirect:/loginForm";
+        }
 
-//        Board board = boardRepository.findId(id);
+        Board board = boardRepository.findId(id);
 //
 //        if (board.getUser_id() != sessionUser.getId()){
 //            return "error/403";
@@ -78,7 +78,7 @@ public class BoardController {
 
         boardRepository.save(requestDTO, sessionUser.getId());
 
-        return "redirect:/";
+        return "redirect:/board";
     }
 
     @GetMapping("/board" )
@@ -133,20 +133,20 @@ public class BoardController {
 
     @GetMapping("/board/{id}/updateForm")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request ){
-//        //인증
-//        User sessionUser = (User) session.getAttribute("sessionUser");
-//        if(sessionUser == null){
-//            return "redirect:/loginForm";
-//        }
-//
-//        //권한
-//        Board board = boardRepository.findId(id);
+        //인증
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if(sessionUser == null){
+            return "redirect:/loginForm";
+        }
+
+        //권한
+        Board board = boardRepository.findId(id);
 //
 //        if(board.getUser_id() != sessionUser.getId()){
 //            return "error/403";
 //        }
-//        //담기
-//        request.setAttribute("board",board);
+        //담기
+        request.setAttribute("board",board);
 
         return "board/updateForm";
     }
