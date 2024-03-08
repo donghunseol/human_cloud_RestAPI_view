@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.time.LocalTime.now;
 
@@ -29,17 +32,76 @@ public class NoticeRepository {
     }
 
     // 전체 조회
-    public List<Notice> findAll() {
+    public List<NoticeResponse.DTO> findSearchAll(String keyword) {
         String sql = """
-                    select n.noticeId, u.username, n.title, n.deadline
+                    select n.id, u.username, n.title, n.deadline
                     from notice_tb n
-                    left outer join skill_tb s on n.id = s.noticeId
+                    left outer join user_tb u on u.id = n.user_id
+                    where s.name like ? 
+                """;
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, "%" + keyword + "%");
+
+        List<Object[]> rows = query.getResultList();
+        Map<Integer, NoticeResponse.DTO> noticeMap = new HashMap<>();
+
+        for (Object[] row : rows) {
+            Integer id = (Integer) row[0];
+            String username = (String) row[1];
+            String title = (String) row[2];
+            String deadline = (String) row[3];
+            String image = (String) row[4];
+
+            NoticeResponse.DTO notice = noticeMap.get(id);
+            if (notice == null) {
+                notice = new NoticeResponse.DTO(
+                        id, username, title, deadline, image
+                );
+                noticeMap.put(id, notice);
+            }
+
+            Integer skillId = (Integer) row[5];
+            String skillName = (String) row[6];
+            if (skillId != null && skillName != null) {
+                NoticeResponse.SKillDTO skill = new NoticeResponse.SKillDTO(
+                        skillId, skillName
+                );
+                notice.addSkill(skill);
+            }
+        }
+
+        return new ArrayList<>(noticeMap.values());
+    }
+
+    // 전체 조회
+    public List<NoticeResponse.DTO> findAll() {
+        String sql = """
+                    select n.id, u.username, n.title, n.deadline, u.image
+                    from notice_tb n
                     left outer join user_tb u on u.id = n.user_id
                 """;
         Query query = em.createNativeQuery(sql);
 
+        List<Object[]> rows = query.getResultList();
+        Map<Integer, NoticeResponse.DTO> noticeMap = new HashMap<>();
 
-        return query.getResultList();
+        for (Object[] row : rows) {
+            Integer id = (Integer) row[0];
+            String username = (String) row[1];
+            String title = (String) row[2];
+            String deadline = (String) row[3];
+            String image = (String) row[4];
+
+            NoticeResponse.DTO notice = noticeMap.get(id);
+            if (notice == null) {
+                notice = new NoticeResponse.DTO(
+                        id, username, title, deadline, image
+                );
+                noticeMap.put(id, notice);
+            }
+        }
+
+        return new ArrayList<>(noticeMap.values());
     }
 
     // 상세 조회(해당 유저가 선택한 공고)
