@@ -25,7 +25,7 @@ public class NoticeResponse {
         private String email; //이메일
         private String tel; //연락처
         private Integer role; //역할
-        private Integer boardId;
+        private Integer noticeId;
         private Timestamp createdAt;
     }
 

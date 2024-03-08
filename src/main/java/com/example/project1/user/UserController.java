@@ -5,6 +5,10 @@ import com.example.project1.apply.ApplyRepository;
 import com.example.project1.apply.ApplyResponse;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.resume.ResumeResponse;
+import com.example.project1.scrap.Scrap;
+import com.example.project1.scrap.ScrapRepository;
+import com.example.project1.scrap.ScrapRequest;
+import com.example.project1.scrap.ScrapResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,7 @@ public class UserController {
     private final HttpSession session;
     private final ResumeRepository resumeRepository;
     private final ApplyRepository applyRepository;
+    private final ScrapRepository scrapRepository;
 
     @GetMapping("/")
     public String index(HttpServletRequest request) {
@@ -143,6 +148,19 @@ public class UserController {
         }else{
             return new ApiUtil<>(false);
         }
+    }
+
+    @GetMapping("/scrap/{id}")
+    public String scrapList(@PathVariable Integer id){
+        User user = (User) session.getAttribute("sessionUser");
+        List<ScrapResponse.ScrapDTO> scrapList= scrapRepository.findByIdList(id, user.getRole());
+        System.out.println(scrapList);
+
+        session.setAttribute("scrapList", scrapList);
+
+        System.out.println(scrapList);
+
+        return "/scrap/main";
     }
 }
 
