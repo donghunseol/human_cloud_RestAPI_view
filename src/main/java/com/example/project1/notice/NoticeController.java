@@ -1,7 +1,6 @@
 package com.example.project1.notice;
 
 import com.example.project1.resume.ResumeRepository;
-import com.example.project1.resume.ResumeResponse;
 import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -25,31 +24,11 @@ public class NoticeController {
 
     @GetMapping("/notice")
     public String index(HttpServletRequest request, @RequestParam(defaultValue = "") String keyword) {
-        List<ResumeResponse.DTO> resumeList = new ArrayList<>();
         List<NoticeResponse.DTO> noticeList = new ArrayList<>();
         User user = (User) session.getAttribute("sessionUser");
-
-        if (user == null) {
-            return "user/loginForm";
-        }
-
-        if (user.getRole() == 0) {
-            if (keyword.isBlank()) {
-                resumeList = resumeRepository.findAll();
-            } else {
-                resumeList = resumeRepository.findSearchAll(keyword);
-            }
-            request.setAttribute("resumeList", resumeList);
-            return "index";
-        }
-
-        if (keyword.isBlank()) {
-            noticeList = noticeRepository.findAll();
-        } else {
-            noticeList = noticeRepository.findSearchAll(keyword);
-        }
+        noticeList = noticeRepository.findAll();
         request.setAttribute("noticeList", noticeList);
-        
+
         return "index";
     }
 
