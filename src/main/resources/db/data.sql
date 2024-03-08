@@ -86,12 +86,29 @@ insert into board_tb(user_id, title, content, created_at)
 values (2, '최강 3조 화이팅!!!!!', '열심히 배우고 공부합시다!!!!!!!!', now());
 
 -- love
-insert into love_tb(user_id, board_id, created_at)
+insert into love_tb(board_id, user_id, created_at)
 values (1, 1, now());
-insert into love_tb(user_id, board_id, created_at)
+insert into love_tb(board_id, user_id, created_at)
 values (1, 2, now());
-insert into love_tb(user_id, board_id, created_at)
-values (2, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (3, 2, now());
+insert into love_tb(board_id, user_id, created_at)
+values (4, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (5, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (6, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (7, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (8, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (9, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (10, 1, now());
+insert into love_tb(board_id, user_id, created_at)
+values (11, 1, now());
+
 
 -- reply
 insert into reply_tb(user_id, board_id, comment, created_at)
