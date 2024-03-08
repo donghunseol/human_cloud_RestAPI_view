@@ -152,20 +152,22 @@ public class ResumeRepository {
         return resume;
     }
 
+    // 이력서 삭제
     @Transactional
     public void deleteByResumeId(Integer resumeId) {
-        String skill_delete_sql = """
+        String skillDeleteSql = """
                 delete from skill_tb where resume_id =?
                 """;
-        Query skill_delete = em.createNativeQuery(skill_delete_sql);
-        skill_delete.setParameter(1, resumeId);
+        Query skillDelete = em.createNativeQuery(skillDeleteSql);
+        skillDelete.setParameter(1, resumeId);
+        skillDelete.executeUpdate();
 
-        String resume_delete_sql = """
+        String resumeDeleteSql = """
                 delete from resume_tb where id = ?
                 """;
-        Query resume_delete = em.createNativeQuery(resume_delete_sql);
-        resume_delete.setParameter(1, resumeId);
-        resume_delete.executeUpdate();
+        Query resumeDelete = em.createNativeQuery(resumeDeleteSql);
+        resumeDelete.setParameter(1, resumeId);
+        resumeDelete.executeUpdate();
     }
 
 //    // 저장
@@ -201,7 +203,7 @@ public class ResumeRepository {
 //        }
 //    }
 
-    // 저장
+    // 이력서 저장
     @Transactional
     public void resumeSave(Integer userId, ResumeRequest.ResumeDTO resume, List<String> skillNames) {
         String resumeSql = """
@@ -235,14 +237,40 @@ public class ResumeRepository {
         }
     }
 
+    // 이력서 수정
     @Transactional
-    public void skillSave(Long resumeId) {
+    public void resumeUpdate(Integer resumeId, ResumeRequest.ResumeDTO resume, List<String> skillNames) {
+        String skillDeleteSql = """
+                delete from skill_tb where resume_id =?
+                """;
+        Query skillDelete = em.createNativeQuery(skillDeleteSql);
+        skillDelete.setParameter(1, resumeId);
+        skillDelete.executeUpdate();
 
-    }
+        String resumeSql = """
+                update resume_tb set title = ?, education = ?, major = ?, license = ?, career = ? 
+                where id = ?
+                """;
+        Query resumeQuery = em.createNativeQuery(resumeSql);
+        resumeQuery.setParameter(1, resume.getTitle());
+        resumeQuery.setParameter(2, resume.getEducation());
+        resumeQuery.setParameter(3, resume.getMajor());
+        resumeQuery.setParameter(4, resume.getLicense());
+        resumeQuery.setParameter(5, resume.getCareer());
+        resumeQuery.setParameter(6, resumeId);
+        resumeQuery.executeUpdate();
 
-    // 수정
-    @Transactional
-    public void update() {
-
+        for (String skillName : skillNames) {
+            String skillSql = """
+                    INSERT INTO skill_tb (resume_id, notice_id, name, role)
+                    VALUES (?,?,?,?)
+                    """;
+            Query skillQuery = em.createNativeQuery(skillSql);
+            skillQuery.setParameter(1, resumeId);
+            skillQuery.setParameter(2, null);
+            skillQuery.setParameter(3, skillName);
+            skillQuery.setParameter(4, 1);
+            skillQuery.executeUpdate();
+        }
     }
 }
