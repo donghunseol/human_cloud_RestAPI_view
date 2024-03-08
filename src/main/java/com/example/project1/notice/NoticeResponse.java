@@ -2,14 +2,34 @@ package com.example.project1.notice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoticeResponse {
 
-    @NoArgsConstructor
-    @AllArgsConstructor
+    @Data
+    public static class DTO {
+        private Integer noticeId;
+        private String username;
+        private String title;
+        private String deadline;
+
+        private List<SKillDTO> skills = new ArrayList<>();
+
+        public DTO(Integer noticeId, String username, String title, String deadline, String image) {
+            this.noticeId = noticeId;
+            this.username = username;
+            this.title = title;
+            this.deadline = deadline;
+        }
+
+        public void addSkill(SKillDTO sKillDTO) {
+            skills.add(sKillDTO);
+        }
+    }
+
     @Data
     public static class DetailDTO {
         private Integer userId;
@@ -25,8 +45,39 @@ public class NoticeResponse {
         private String email; //이메일
         private String tel; //연락처
         private Integer role; //역할
-        private Integer boardId;
+        private Integer noticeId;
         private Timestamp createdAt;
+
+        private List<SKillDTO> skills = new ArrayList<>();
+
+        public DetailDTO(Integer userId, String username, String address, String birth, String title, String deadline, String type, String field, String content, String workPlace, String email, String tel, Integer role, Integer noticeId, Timestamp createdAt) {
+            this.userId = userId;
+            this.username = username;
+            this.address = address;
+            this.birth = birth;
+            this.title = title;
+            this.deadline = deadline;
+            this.type = type;
+            this.field = field;
+            this.content = content;
+            this.workPlace = workPlace;
+            this.email = email;
+            this.tel = tel;
+            this.role = role;
+            this.noticeId = noticeId;
+            this.createdAt = createdAt;
+        }
+
+        public void addSkill(SKillDTO sKillDTO) {
+            skills.add(sKillDTO);
+        }
+    }
+
+    @AllArgsConstructor
+    @Data
+    public static class SKillDTO {
+        private Integer id;
+        private String name;
     }
 
 }

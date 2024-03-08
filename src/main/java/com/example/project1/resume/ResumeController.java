@@ -46,52 +46,28 @@ public class ResumeController {
     public String saveForm(HttpServletRequest request) {
         User userInfo = (User) session.getAttribute("sessionUser");
         request.setAttribute("userInfo", userInfo);
-        System.out.println(userInfo);
         return "resume/saveForm";
     }
 
-//    @PostMapping("/resume/save")
-//    public String save(HttpServletRequest request, ResumeRequest.ResumeDTO resume) {
-//        User userInfo = (User) session.getAttribute("sessionUser");
-//        System.out.println(11111);
-//        resumeRepository.resumeSave(userInfo.getId(), resume);
-//        System.out.println(222222);
-//        return "redirect:/myPage";
-//    }
-//
-//    @PostMapping("/resume/skillSave")
-//    public String skillSave(HttpServletRequest request, @RequestParam(name = "skillNames") List<String> skillNames) {
-//        resumeRepository.skillSave(skillNames);
-//        return "redirect:/myPage";
-//    }
-
     @PostMapping("/resume/save")
-    public String save(HttpServletRequest request, ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
+    public String save(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
         User userInfo = (User) session.getAttribute("sessionUser");
         resumeRepository.resumeSave(userInfo.getId(), resume, skillNames);
 
         return "redirect:/myPage";
     }
 
-    @GetMapping("/resume/updateForm")
-    public String updateForm() {
+    @GetMapping("/resume/{id}/updateForm")
+    public String updateForm(HttpServletRequest request, @PathVariable Integer id) {
+        ResumeResponse.DetailDTO updateDetail = resumeRepository.findByResumeId(id);
+        request.setAttribute("updateDetail", updateDetail);
+        System.out.println(updateDetail);
         return "resume/updateForm";
     }
 
-
-    // REST API
-    @GetMapping("/api/resume")
-    public List<ResumeResponse.DTO> findAll() {
-        return resumeRepository.findAll();
-    }
-
-    @GetMapping("/api/user/resume/{id}")
-    public List<ResumeResponse.DTO> findAllByUserId(@PathVariable Integer id) {
-        return resumeRepository.findAllByUserId(id);
-    }
-
-    @GetMapping("/api/resume/{id}")
-    public ResumeResponse.DetailDTO findByResumeId(@PathVariable Integer id) {
-        return resumeRepository.findByResumeId(id);
+    @PostMapping("/resume/{id}/updateForm")
+    public String update(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames, @PathVariable Integer id) {
+        resumeRepository.resumeUpdate(id, resume, skillNames);
+        return "redirect:/myPage";
     }
 }

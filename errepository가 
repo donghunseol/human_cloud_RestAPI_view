@@ -1,0 +1,539 @@
+[33mcommit 06c76f043b7efebe6138c82c57d5cb39b56ffe19[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mLsy_1[m[33m, [m[1;31morigin/Lsy_1[m[33m)[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 16:41:05 2024 +0900
+
+    ã아이디 중복체크
+
+[33mcommit 4563391b09fee1c86544ef89a09767a5e2715519[m
+Merge: 654fdca b6d6fa8
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 16:35:51 2024 +0900
+
+    Merge branch 'master' into Lsy_1
+
+[33mcommit 654fdca21128edb518ee5d806f43c42e7dcc476b[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 16:35:22 2024 +0900
+
+    중복확인 진행중
+
+[33mcommit b6d6fa8a93fc6802adfabdabedffc0eae5939db8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 90d2172 949f687
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 16:33:45 2024 +0900
+
+    Merge sdh_2 : 스크랩 버튼 빼고 완료
+    
+    스크랩 버튼 빼고 완료
+
+[33mcommit 949f6875ebaf98407425201cb1a6d44fccca71b0[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Thu Mar 7 16:32:31 2024 +0900
+
+    스크랩 버튼 뺴고 완료
+
+[33mcommit 90d2172f5a17319dc7cc2f6d9e9186904a932643[m
+Merge: f4b7b75 ed0b9e1
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 16:07:56 2024 +0900
+
+    Merge kwj_5 : 마이페이지 이력서 등록 버튼 구현
+    
+    마이페이지 이력서 등록 버튼 구현
+
+[33mcommit ed0b9e1e35fe5fd92cc0cd76c2fda622eb017840[m
+Author: vips1025 <vips1025@gmail.com>
+Date:   Thu Mar 7 15:41:02 2024 +0900
+
+    마이페이지 이력서 등록 버튼 구현
+
+[33mcommit 18d83c139ed8091d8d5f49e9b95aa0adb58f4dec[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 15:19:24 2024 +0900
+
+    ê°role 구현진짜 완료
+
+[33mcommit 42bd5bc8807808ad714330c5269ad397510fdc27[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 14:20:51 2024 +0900
+
+    게시글 ë삭ì 수삭제ì 완료와 댓글삭제 완료
+
+[33mcommit 331b156294d098201f72d03d23af5166304ea75a[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 12:52:12 2024 +0900
+
+    삭제진행중
+
+[33mcommit 00ec80d1892413d3496fc950fa044d58bff3e65f[m
+Merge: 9a4a277 f4b7b75
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 12:39:00 2024 +0900
+
+    Merge branch 'master' into Lsy_1
+
+[33mcommit 9a4a277a1701f0e8e26d16098393c8b46c7e546a[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 12:37:28 2024 +0900
+
+    ë게시판버튼 스타일 수정
+
+[33mcommit f4b7b756c51d61e8ea32ad98cab706a923a519ab[m
+Merge: 5c3a673 d8b4c99
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 12:33:23 2024 +0900
+
+    Merge kwj_4 : 이력서 저장 진행중
+    
+    이력서 저장 진행중
+
+[33mcommit d8b4c9969fb8c741d5a447b65d145aaed44fd466[m
+Merge: 9e2bd51 5c3a673
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 12:33:09 2024 +0900
+
+    Merge branch 'master' into kwj_4
+
+[33mcommit 9e2bd51f6d1cae91a85378f04e08ddfb05e3b8e6[m
+Author: vips1025 <vips1025@gmail.com>
+Date:   Thu Mar 7 12:24:23 2024 +0900
+
+    이력서 저장 진행중
+
+[33mcommit 5c3a67342937269224f23044f97d08aa46624675[m
+Merge: 6cb5106 6c86b48
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 12:23:35 2024 +0900
+
+    Merge sdh_2 : 지원하기 ResumeId session 값 가져오기 외 완료
+    
+    지원하기 ResumeId session 값 가져오기 외 완료
+
+[33mcommit 6c86b48658303dc7dc1e4ec22bd32ed4842c5a18[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Thu Mar 7 12:16:51 2024 +0900
+
+    지원하기 session Resume 제외 완료
+
+[33mcommit 94d519b7043e3cddf4fafd260c82c783776c2f4d[m
+Merge: 7ea5256 6cb5106
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Thu Mar 7 12:11:50 2024 +0900
+
+    Merge branch 'master' of https://github.com/donghunseol/human_cloud_web_project1 into sdh_2
+
+[33mcommit 7ea52564714ec24637a050edcaaee24381f836ae[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Thu Mar 7 12:11:39 2024 +0900
+
+    지원하기 이력서 선택 진행중
+
+[33mcommit 6cb5106abaa077fe30f2f9e33f9fdc4cd066b5e8[m
+Merge: 27946e9 57d4fd8
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 12:10:21 2024 +0900
+
+    Merge Lsy_1 : 게시판 댓글 등록 ,댓글 LIST
+    
+    게시판 댓글 등록 ,댓글 LIST까지
+
+[33mcommit 57d4fd8cfbfe5a2a385991a623f946d0c29e9c4e[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Thu Mar 7 12:07:15 2024 +0900
+
+    게시ãí판에 댓글등록 완료
+
+[33mcommit 27946e9323b45d002531ea7be08205952ef9ca1d[m
+Merge: 57e17f7 4f36a3b
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 11:35:12 2024 +0900
+
+    Merge sjm_3 : notice의 update 구현
+    
+    notice의 update 구현
+
+[33mcommit 4f36a3b73147516953ed824a271ef451f4fadf6b[m
+Merge: 3fccc0d 57e17f7
+Author: minmeanmin <118310514+minmeanmin@users.noreply.github.com>
+Date:   Thu Mar 7 11:33:28 2024 +0900
+
+    Merge branch 'master' into sjm_3
+
+[33mcommit 3fccc0dca04dde23fffbd76ae7c4603853c0d230[m
+Author: unknown <wed1604@naver.com>
+Date:   Thu Mar 7 11:28:14 2024 +0900
+
+    notice의 update 구현
+
+[33mcommit 57e17f77b2a897bec38e3971b0a9138accf2cb1e[m
+Merge: eaf11a2 311be9d
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Thu Mar 7 10:57:22 2024 +0900
+
+    Merge sdh_2 : 지원 리스트 출력 및 삭제 완료
+    
+    지원 리스트 출력 및 삭제 완료
+
+[33mcommit 311be9da5333c1241a44b2737926251eb1d46465[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Thu Mar 7 10:55:09 2024 +0900
+
+    지원 리스트 출력및 삭제 완료
+
+[33mcommit eaf11a2aab02d00c0275b47cae218fe56a3204e4[m
+Merge: c8390c1 accce20
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 21:51:27 2024 +0900
+
+    Merge sdh_2 : 지원 기본 세팅
+    
+    지원 기본 세팅
+
+[33mcommit accce20531e31cdfa50718bb9ab5112de79699ee[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 21:48:52 2024 +0900
+
+    지원 기본 세팅
+
+[33mcommit c8390c1b8dc356ace8bb1cab8bff6ed440d627f5[m
+Merge: eb04e33 1aa0445
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 21:00:36 2024 +0900
+
+    Merge pull request #27 from donghunseol/sdh_2
+    
+    스크랩 미완성 (추가 작업 필요)
+
+[33mcommit 1aa044559a9a29a4b08dab4da42447c1db04b7c4[m
+Merge: 448233e eb04e33
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 20:57:01 2024 +0900
+
+    Merge branch 'master' of https://github.com/donghunseol/human_cloud_web_project1 into sdh_2
+
+[33mcommit eb04e33dcf0225e407436445e0891da743847c8d[m
+Merge: 9b1c814 d2f21ac
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 20:56:11 2024 +0900
+
+    Merge Lsy_1 : 로그인,회원가입 완료
+    
+    로그인,회원가입 완료
+
+[33mcommit 448233ea806b168353abd479edc5dd6ea4b159d7[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 20:55:00 2024 +0900
+
+    스크랩 미완성
+
+[33mcommit d2f21acf2c96a335fad1c42b70d2705d4246982e[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 17:50:46 2024 +0900
+
+    로그인,회원가입 완료
+
+[33mcommit 986fd2ead39f85b178f406cc401dcd0171f10eeb[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 17:23:24 2024 +0900
+
+    더미데이터 변경
+
+[33mcommit 9e42e2c426047123f1ebd9a37586905422ffce0e[m
+Merge: fe5dc7d 9b1c814
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 16:41:34 2024 +0900
+
+    결합완료
+
+[33mcommit fe5dc7d0f422897d8db8c676fb3e104da1239107[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 16:38:52 2024 +0900
+
+    스크랩 삭제까지 완료
+
+[33mcommit 9b1c8143f1a25599971863bdacf628fe5ab317d8[m
+Merge: affa6cf 340bff4
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 16:37:06 2024 +0900
+
+    Merge Lsy_1 : 회원가입, 로그인, 로그아웃, 삭제
+    
+    회원가입, 로그인, 로그아웃, 삭제
+
+[33mcommit 340bff49afc2dd6ffdac6f5ead09ea9c08a1279d[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 16:28:25 2024 +0900
+
+    로그인, 회원가입
+
+[33mcommit 44bc26c1dfc81b9272378fe327a20cbad740b59b[m
+Merge: e13c198 affa6cf
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 15:06:06 2024 +0900
+
+    Merge branch 'master' into Lsy_1
+
+[33mcommit e13c198e3d7fadf20270e4a7f6eb7e00fcebf6a3[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 15:03:29 2024 +0900
+
+    이회원ê정보 수정 이미지 구현중ã
+
+[33mcommit 303391c7267e78cc1a5b4892249e61ab8d806629[m
+Merge: e0d414c affa6cf
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 14:52:11 2024 +0900
+
+    수정완
+
+[33mcommit e0d414c3a61f11fbe8c842ae81d7dca94170bad4[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 14:51:00 2024 +0900
+
+    저장용
+
+[33mcommit affa6cf196722b458cc6ef2c9a8dde9f72565f72[m
+Merge: 5871dfa ce014cc
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 14:46:19 2024 +0900
+
+    Merge sjm_2 : notice의 update 구현 + 다른 기능 수정
+
+[33mcommit ce014ccfa57a3005ebe8952dc33707edddea69d2[m
+Merge: f279c1b 5871dfa
+Author: minmeanmin <118310514+minmeanmin@users.noreply.github.com>
+Date:   Wed Mar 6 14:45:01 2024 +0900
+
+    Merge branch 'master' into sjm_2
+
+[33mcommit f279c1bf57ff92771cbc26824d2299aaddeb4c08[m
+Author: unknown <wed1604@naver.com>
+Date:   Wed Mar 6 14:41:21 2024 +0900
+
+    notice의 update 구현 + 다른 기능 수정
+
+[33mcommit dbacb1dea471c154d541986069e3ba637e2a57a8[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 11:20:17 2024 +0900
+
+    ì로그인ì ê±구현중
+
+[33mcommit 4063d659e3679c5ada019f6cc57a49a7611bc3b0[m
+Merge: f487dca 5871dfa
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 11:08:07 2024 +0900
+
+    Merge branch 'master' of https://github.com/donghunseol/human_cloud_web_project1 into sdh_2
+
+[33mcommit 5871dfa6124b457ebef4e7a3eb071f053d76546a[m
+Merge: 5d24715 3cf0475
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 11:03:31 2024 +0900
+
+    Merge kwj_3 : 마이페이지 이력서 삭제 버튼 구현
+    
+    마이페이지 이력서 삭제 버튼 구현
+
+[33mcommit 3cf0475fe89033e1abf69a85045eca389094009e[m
+Author: vips1025 <vips1025@gmail.com>
+Date:   Wed Mar 6 11:01:37 2024 +0900
+
+    마이페이지 이력서 삭제 버튼 구현
+
+[33mcommit f487dca4bf50247fcb26f8cb6a378e710b24cf55[m
+Merge: 73c590b 5d24715
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 10:41:46 2024 +0900
+
+    Merge branch 'master' of https://github.com/donghunseol/human_cloud_web_project1 into sdh_2
+
+[33mcommit 73c590b3dedd214c2639ab8663cfb059ef15cade[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 10:41:36 2024 +0900
+
+    스크랩 로직 구현중
+
+[33mcommit 5d24715d1f129e66bcdc49d872f2725dea8caa6a[m
+Merge: ded8288 9298e58
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 10:39:26 2024 +0900
+
+    Merge Lsy_1 : 회원가입, 로그인 구현 완료
+    
+    Lsy 1
+
+[33mcommit 9298e58fb154ccdaa6204c2669ee46fa6938847e[m
+Merge: f8822ce ded8288
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 10:38:40 2024 +0900
+
+    Merge branch 'master' into Lsy_1
+
+[33mcommit f8822ce9de1fc079a8e13ba1ea165bdf7a1b8ef4[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 10:30:53 2024 +0900
+
+    ãupdqte쿼리문 ã완료
+
+[33mcommit ded8288d58f6cf8a2592dcbbb1e188ebb2885876[m
+Merge: c79cb84 a750107
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 10:22:51 2024 +0900
+
+    Merge sdh_2 : 스크랩 및 userController 수정
+    
+    스크랩 및 userController 수정
+
+[33mcommit 4ad547cd096bd142579eebba746f5fd900fffefc[m
+Merge: 6210ab4 c5344c2
+Author: unknown <wed1604@naver.com>
+Date:   Wed Mar 6 10:22:25 2024 +0900
+
+    sjm_1 코드 pull
+
+[33mcommit a750107a0b6a9656bd5aeb3140d652d41461ab2c[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 10:21:48 2024 +0900
+
+    스크랩 및 userController 수정
+
+[33mcommit 1849c5d387dc595416dbf605a9e9108b3258d618[m
+Merge: 3a9d95d c79cb84
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 10:21:04 2024 +0900
+
+    test
+
+[33mcommit 3a9d95dda4496b122589ad128a671fc1a1c724ee[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 10:15:56 2024 +0900
+
+    스크랩 작업중
+
+[33mcommit 6210ab42ba359c96cc5c48d630f4af94f87f6b5a[m
+Author: unknown <wed1604@naver.com>
+Date:   Wed Mar 6 10:15:11 2024 +0900
+
+    temp
+
+[33mcommit c79cb84e97516d8e9a9d00c9e14d60f349259a71[m
+Merge: 5b6e8d6 8e11b4b
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 09:36:52 2024 +0900
+
+    Merge kwj_2 : resume 뿌리기 완료
+
+[33mcommit 9bb3381759fd8b3cc46922ef0a3a73d2c55df9eb[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Wed Mar 6 09:35:55 2024 +0900
+
+    수정화면 하는 중
+
+[33mcommit 8e11b4bc600f870d4b7f24f9591604882e07c1c8[m
+Author: vips1025 <vips1025@gmail.com>
+Date:   Wed Mar 6 09:32:26 2024 +0900
+
+    이력서 상세보기(메인) 화면 뿌리기
+
+[33mcommit 5b6e8d60ccf43061071ab3298f415048a3565167[m
+Merge: e91be82 0d6c83c
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 09:30:47 2024 +0900
+
+    Merge sjm_2 : 더미 데이터 수정
+    
+    더미 데이터 수정
+
+[33mcommit 0d6c83c1cc625fd44b302f196cd07fd0fbf4892f[m
+Author: unknown <wed1604@naver.com>
+Date:   Wed Mar 6 09:28:51 2024 +0900
+
+    더미 데이터 수정
+
+[33mcommit e91be824911efc950b36fd677eeed1a025418b40[m
+Merge: 95c53fe 6757585
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 00:10:12 2024 +0900
+
+    Merge sdh_2 : 스크랩 화면 출력하기
+    
+    스크랩 화면 출력하기
+
+[33mcommit 6757585060ad92b6212258e1e554f604b878ca7f[m
+Merge: 06e587a 95c53fe
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Wed Mar 6 00:09:51 2024 +0900
+
+    Merge branch 'master' into sdh_2
+
+[33mcommit 06e587a21acd18f401f1fa9ca6b1c61dd88a0471[m
+Author: seoldonghun <ehdgns5647@gmail.com>
+Date:   Wed Mar 6 00:00:57 2024 +0900
+
+    Scrap 화면 뿌리기
+
+[33mcommit 95c53fe17d46c33333c8dce860fc0cded0fa24fc[m
+Merge: 7b4045e c7596f6
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Tue Mar 5 23:20:41 2024 +0900
+
+    Merge pdk_2 : 머스태치 재재수정
+    
+    Pdk 2 - 머스태치 재재수정
+
+[33mcommit 7b4045e688f49fb4038be70ef203219a178e406f[m
+Merge: 3d8d8b9 7c9fe57
+Author: donghunseol <153582315+donghunseol@users.noreply.github.com>
+Date:   Tue Mar 5 23:19:49 2024 +0900
+
+    Merge kwj_2 : 이력서 전체 리스트 화면 뿌리기, 코드 정리
+    
+    이력서 전체 리스트 화면 뿌리기, 코드 정리
+
+[33mcommit d88ada602715ac359cbb8d2c7d042b8628000174[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Tue Mar 5 21:24:42 2024 +0900
+
+    수정, 삭제 연습중
+
+[33mcommit 1ed613eb804fe551ead5cd86bbd627a774ec54a5[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Tue Mar 5 20:17:20 2024 +0900
+
+    로그인 완료
+
+[33mcommit 5fc0510f0dce89eb54ebaaad0cfa3ef8dae01a8d[m
+Author: thdus1323 <thdus1323@naver.com>
+Date:   Tue Mar 5 19:38:46 2024 +0900
+
+    로그인연습중
+
+[33mcommit c7596f6c5cbb453db94fbe94317857f0ee8a85ac[m
+Author: khh <khh8500@naver.com>
+Date:   Tue Mar 5 17:57:55 2024 +0900
+
+    [fix] 머스태치 재재수정
+
+[33mcommit 7c9fe576eb77d3d74b82f1a93afdeda5167d0969[m
+Author: vips1025 <vips1025@gmail.com>
+Date:   Tue Mar 5 17:46:13 2024 +0900
+
+    이력서 전체 리스트 화면 뿌리기, 코드 정리
+
+[33mcommit 130ef09421529fb514ffa054ef4da0d7a7b4a1c3[m
+Author: khh <khh8500@naver.com>
+Date:   Tue Mar 5 17:39:02 2024 +0900
+
+    삭제 버튼 모양 수정
+
+[33mcommit c272d40d539c99be2e04b8763285257948bec1e8[m
+Author: khh <khh8500@naver.com>
+Date:   Tue Mar 5 17:33:16 2024 +0900
+
+    상세보기 버튼 위치 수정
+
+[33mcommit c5344c234c948b6b6687712f3cdc98673e117c52[m
+Author: minmeanmin <wed1604@naver.com>
+Date:   Tue Mar 5 17:28:08 2024 +0900
+
+    ãtemp

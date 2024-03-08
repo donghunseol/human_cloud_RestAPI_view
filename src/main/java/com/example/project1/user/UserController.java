@@ -1,5 +1,6 @@
 package com.example.project1.user;
 
+import com.example.project1._core.util.ApiUtil;
 import com.example.project1.apply.ApplyRepository;
 import com.example.project1.apply.ApplyResponse;
 import com.example.project1.resume.ResumeRepository;
@@ -8,10 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,8 +23,14 @@ public class UserController {
     private final ApplyRepository applyRepository;
 
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
-        List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
+    public String index(HttpServletRequest request, @RequestParam(defaultValue = "") String keyword) {
+
+        List<ResumeResponse.DTO> resumeList = new ArrayList<>();
+        if (keyword.isBlank()) {
+            resumeList = resumeRepository.findAll();
+        } else {
+            resumeList = resumeRepository.findSearchAll(keyword);
+        }
         request.setAttribute("resumeList", resumeList);
 
         return "index";
@@ -50,6 +56,7 @@ public class UserController {
 
         return "redirect:/";
     }
+
 //    @GetMapping("/board/{id}")
 //    public String detail(@PathVariable int id, HttpServletRequest request) {
 //        // 1. 모델 진입 - 상세보기 데이터 가져오기
@@ -76,6 +83,7 @@ public class UserController {
     @PostMapping("/user/join")
     public String join(UserRequest.JoinDTO requestDTO) {
         userRepository.save(requestDTO);
+        System.out.println(requestDTO);
 
         // HttpSession s =request.getSession();
 //        System.out.println("정보 : " + requestDTO);
@@ -86,7 +94,7 @@ public class UserController {
     //업데이트 창 (사용자 정보 담기 전,)
     @GetMapping("/user/updateForm")
     public String updateForm() {
-        return "user/updateForm";
+        return "/user/updateForm";
     }
 
     //업데이트 (사용자 정보 담긴 update4)
@@ -95,10 +103,10 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         if (sessionUser == null) {
-            return "redirect:/loginForm";
+            return "redirect:/user/loginForm";
         }
 
-        return "myPage/main";
+        return "/myPage/main";
     }
 
     @GetMapping("/user/logout")
@@ -126,6 +134,20 @@ public class UserController {
         return "/myPage/selectList";
     }
 
+//    @PostMapping("/user/{id}/delete")
+//    public String DeleteAll(UserRequest.DeleteDTO requestDTO){
+//        List<UserRequest.DeleteDTO> myDeleteList = userRepository.findAllWithDelete()
+//    }
+
+    @GetMapping("/api/username-same-check")
+    public @ResponseBody ApiUtil<?> usernameSameCheck(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return new ApiUtil<>(true);
+        } else {
+            return new ApiUtil<>(false);
+        }
+    }
 }
 
 

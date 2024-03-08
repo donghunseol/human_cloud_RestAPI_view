@@ -5,7 +5,11 @@ import lombok.Data;
 
 import java.sql.Timestamp;
 
-@Table(name = "love_tb")
+@Table(name="love_tb", uniqueConstraints = {
+        @UniqueConstraint(
+                name="love_uk",
+                columnNames={"board_id","user_id"}
+        )})
 @Data
 @Entity
 public class Love {
@@ -14,8 +18,9 @@ public class Love {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer userId;
     private Integer boardId;
+    private Integer userId;
+
 
     private Timestamp createdAt;
 }
