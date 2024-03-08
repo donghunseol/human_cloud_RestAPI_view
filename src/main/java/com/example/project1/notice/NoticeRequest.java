@@ -2,11 +2,11 @@ package com.example.project1.notice;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 public class NoticeRequest {
     @Data
-    public static class SaveDTO{
+    public static class NoticeDTO {
         private String title;
         private String type;
         private String field;
@@ -16,12 +16,8 @@ public class NoticeRequest {
     }
 
     @Data
-    public static class UpdateDTO{
-        private String title;
-        private String type;
-        private String field;
-        private String workPlace;
-        private String content;
-        private String deadline;
+    public static class SkillNameDTO {
+        private List<String> skillNames;
     }
+
 }
