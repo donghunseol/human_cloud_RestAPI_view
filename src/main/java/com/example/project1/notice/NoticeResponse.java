@@ -15,7 +15,6 @@ public class NoticeResponse {
         private String username;
         private String title;
         private String deadline;
-        private String image;
 
         private List<SKillDTO> skills = new ArrayList<>();
 
@@ -24,7 +23,6 @@ public class NoticeResponse {
             this.username = username;
             this.title = title;
             this.deadline = deadline;
-            this.image = image;
         }
 
         public void addSkill(SKillDTO sKillDTO) {

@@ -1,5 +1,6 @@
 package com.example.project1.notice;
 
+import com.example.project1.resume.ResumeRepository;
 import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -18,11 +20,14 @@ public class NoticeController {
 
     private final HttpSession session;
     private final NoticeRepository noticeRepository;
+    private final ResumeRepository resumeRepository;
 
     @GetMapping("/notice")
-    public String index() {
-        List<Notice> noticeList = noticeRepository.findAll();
-        session.setAttribute("noticeList", noticeList);
+    public String index(HttpServletRequest request, @RequestParam(defaultValue = "") String keyword) {
+        List<NoticeResponse.DTO> noticeList = new ArrayList<>();
+        User user = (User) session.getAttribute("sessionUser");
+        noticeList = noticeRepository.findAll();
+        request.setAttribute("noticeList", noticeList);
 
         return "index";
     }
