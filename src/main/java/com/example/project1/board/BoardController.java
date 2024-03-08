@@ -1,5 +1,7 @@
 package com.example.project1.board;
 
+import com.example.project1.love.LoveRepository;
+import com.example.project1.love.LoveResponse;
 import com.example.project1.reply.ReplyRepository;
 import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ public class BoardController {
     private final HttpSession session;
     private final BoardRepository boardRepository;
     private final ReplyRepository replyRepository;
+    private final LoveRepository loveRepository;
 
     @PostMapping("/board/{id}/update")
     public String update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
@@ -69,7 +72,7 @@ public class BoardController {
 //        System.out.println(requestDTO);
 
 
-          //권한
+        //권한
 //        if(requestDTO.getTitle().length() > 30){
 //            request.setAttribute("status", 400);
 //            request.setAttribute("msg", "제목의 길이가 50자를 초과해서는 안되요");
@@ -91,8 +94,8 @@ public class BoardController {
             // 전체 페이지 개수
             int count = boardRepository.count().intValue();
 
-            int namerge = count % 3 == 0 ? 0 : 1;
-            int allPageCount = count / 3 + namerge;
+            int namerge = count % 7 == 0 ? 0 : 1;
+            int allPageCount = count / 7 + namerge;
 
             request.setAttribute("boardList", boardList);
             request.setAttribute("first", page == 0);
@@ -105,8 +108,8 @@ public class BoardController {
             // 전체 페이지 개수
             int count = boardRepository.count(keyword).intValue();
 
-            int namerge = count % 3 == 0 ? 0 : 1;
-            int allPageCount = count / 3 + namerge;
+            int namerge = count % 7 == 0 ? 0 : 1;
+            int allPageCount = count / 7 + namerge;
 
             request.setAttribute("boardList", boardList);
             request.setAttribute("first", page == 0);
@@ -161,6 +164,19 @@ public class BoardController {
         List<BoardResponse.ReplyDTO> replyDTOList = replyRepository.findByBoardId(id ,sessionUser);
         request.setAttribute("board", boardDTO);
         request.setAttribute("replyList", replyDTOList);
+
+        if(sessionUser == null){
+            LoveResponse.DetailDTO loveDetailDTO = loveRepository.findLove(id);
+            request.setAttribute("love", loveDetailDTO);
+        }else {
+            LoveResponse.DetailDTO loveDetailDTO = loveRepository.findLove(id, sessionUser.getId());
+            request.setAttribute("love", loveDetailDTO);
+        }
+
+
+
+//        request.setAttribute("isLove", true);
+//        request.setAttribute("loveCount", 2);
 
         return "board/detail";
     }
