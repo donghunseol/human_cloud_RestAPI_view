@@ -213,39 +213,6 @@ public class ResumeRepository {
         resumeDelete.executeUpdate();
     }
 
-//    // 저장
-//    @Transactional
-//    public void resumeSave(Integer userId, ResumeRequest.ResumeDTO resume) {
-//        String sql = """
-//                insert into resume_tb (user_id, title, education, major, license, career, created_at)
-//                values (?,?,?,?,?,?,now())
-//                """;
-//        Query query = em.createNativeQuery(sql);
-//        query.setParameter(1, userId);
-//        query.setParameter(2, resume.getTitle());
-//        query.setParameter(3, resume.getEducation());
-//        query.setParameter(4, resume.getMajor());
-//        query.setParameter(5, resume.getLicense());
-//        query.setParameter(6, resume.getCareer());
-//        query.executeUpdate();
-//    }
-//
-//    @Transactional
-//    public void skillSave(List<String> skillNames) {
-//        for (String skillName : skillNames) {
-//            String sql = """
-//                    INSERT INTO skill_tb (resume_id, notice_id, name, role)
-//                    VALUES (?,?,?,?)
-//                    """;
-//            Query query = em.createNativeQuery(sql);
-//            query.setParameter(1, 1);
-//            query.setParameter(2, null);
-//            query.setParameter(3, skillName);
-//            query.setParameter(4, 1);
-//            query.executeUpdate();
-//        }
-//    }
-
     // 이력서 저장
     @Transactional
     public void resumeSave(Integer userId, ResumeRequest.ResumeDTO resume, List<String> skillNames) {
@@ -275,7 +242,7 @@ public class ResumeRepository {
             skillQuery.setParameter(1, resumeId);
             skillQuery.setParameter(2, null);
             skillQuery.setParameter(3, skillName);
-            skillQuery.setParameter(4, 1);
+            skillQuery.setParameter(4, 0);
             skillQuery.executeUpdate();
         }
     }
@@ -312,7 +279,7 @@ public class ResumeRepository {
             skillQuery.setParameter(1, resumeId);
             skillQuery.setParameter(2, null);
             skillQuery.setParameter(3, skillName);
-            skillQuery.setParameter(4, 1);
+            skillQuery.setParameter(4, 0);
             skillQuery.executeUpdate();
         }
     }
