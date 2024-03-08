@@ -16,6 +16,49 @@ import java.util.Map;
 public class ResumeRepository {
     private final EntityManager em;
 
+    // 전체 검색 조회(검색한 키워드의 모든 유저가 작성된 이력서)
+    public List<ResumeResponse.DTO> findSearchAll(String keyword) {
+        String sql = """
+                select r.id resume_id, u.id user_id, r.title, u.name, u.image, s.id, s.name, 
+                from resume_tb r 
+                left outer join skill_tb s on r.id = s.resume_id 
+                left outer join user_tb u on u.id = r.user_id 
+                where s.name like ? 
+                """;
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, "%" + keyword + "%");
+
+        List<Object[]> rows = query.getResultList();
+        Map<Integer, ResumeResponse.DTO> resumeMap = new HashMap<>();
+
+        for (Object[] row : rows) {
+            Integer id = (Integer) row[0];
+            Integer userId = (Integer) row[1];
+            String title = (String) row[2];
+            String name = (String) row[3];
+            String image = (String) row[4];
+
+            ResumeResponse.DTO resume = resumeMap.get(id);
+            if (resume == null) {
+                resume = new ResumeResponse.DTO(
+                        id, userId, title, name, image
+                );
+                resumeMap.put(id, resume);
+            }
+
+            Integer skillId = (Integer) row[5];
+            String skillName = (String) row[6];
+            if (skillId != null && skillName != null) {
+                ResumeResponse.SkillDTO skill = new ResumeResponse.SkillDTO(
+                        skillId, skillName
+                );
+                resume.addSkill(skill);
+            }
+        }
+
+        return new ArrayList<>(resumeMap.values());
+    }
+
     // 전체 조회(모든 유저가 작성된 이력서)
     public List<ResumeResponse.DTO> findAll() {
         String sql = """
