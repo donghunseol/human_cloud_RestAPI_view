@@ -94,7 +94,7 @@ public class UserController {
     //업데이트 창 (사용자 정보 담기 전,)
     @GetMapping("/user/updateForm")
     public String updateForm() {
-        return "user/updateForm";
+        return "/user/updateForm";
     }
 
     //업데이트 (사용자 정보 담긴 update4)
@@ -103,10 +103,10 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
         if (sessionUser == null) {
-            return "redirect:/loginForm";
+            return "redirect:/user/loginForm";
         }
 
-        return "myPage/main";
+        return "/myPage/main";
     }
 
     @GetMapping("/user/logout")
