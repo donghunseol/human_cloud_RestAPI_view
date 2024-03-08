@@ -49,8 +49,13 @@
                 <h5 class="mb-2">이런 기술을 가진 지원자들에게 추천합니다!</h5>
                 <div class="d-inline-flex gap-1 mt-2">
                     {{#skills}}
-                        <a class="btn disabled" aria-disabled="true" role="button"
-                           data-bs-toggle="button">{{name}}</a>
+                        {{#name}}
+                            <a class="btn disabled" aria-disabled="true" role="button"
+                               data-bs-toggle="button">{{.}}</a>
+                        {{/name}}
+                        {{^name}}
+                            <div>요구하는 기술 없음</div>
+                        {{/name}}
                     {{/skills}}
                 </div>
             </div>

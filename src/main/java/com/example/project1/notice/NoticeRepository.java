@@ -190,10 +190,20 @@ public class NoticeRepository {
 
     // 삭제
     @Transactional
-    public void deleteById(Integer id) {
-        Query query = em.createNativeQuery("delete from notice_tb where id=?;");
-        query.setParameter(1, id);
-        query.executeUpdate();
+    public void deleteById(Integer noticeId) {
+        String skillDeleteSql = """
+                delete from skill_tb where notice_id =?
+                """;
+        Query skillDelete = em.createNativeQuery(skillDeleteSql);
+        skillDelete.setParameter(1, noticeId);
+        skillDelete.executeUpdate();
+
+        String noticeDeleteSql = """
+                delete from notice_tb where id = ?
+                """;
+        Query noticeDelete = em.createNativeQuery(noticeDeleteSql);
+        noticeDelete.setParameter(1, noticeId);
+        noticeDelete.executeUpdate();
     }
 
     // 수정
