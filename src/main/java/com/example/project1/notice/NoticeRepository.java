@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.time.LocalTime.now;
-
 @Component
 @RequiredArgsConstructor
 @Repository
@@ -208,18 +206,40 @@ public class NoticeRepository {
 
     // 수정
     @Transactional
-    public void update(NoticeRequest.NoticeDTO notice, int id) {
-        Query query = em.createNativeQuery("UPDATE notice_tb SET title = ?, deadline = ?, type = ?, field = ?, content = ?, work_place = ?, created_at=? WHERE id = ?;");
-        query.setParameter(1, notice.getTitle());
-        query.setParameter(2, notice.getDeadline());
-        query.setParameter(3, notice.getType());
-        query.setParameter(4, notice.getField());
-        query.setParameter(5, notice.getContent());
-        query.setParameter(6, notice.getWorkPlace());
-        query.setParameter(7, now());
-        query.setParameter(8, id);
+    public void update(Integer noticeId, NoticeRequest.NoticeDTO notice, List<String> skillNames) {
+        String skillDeleteSql = """
+                delete from skill_tb where notice_id =?
+                """;
+        Query skillDelete = em.createNativeQuery(skillDeleteSql);
+        skillDelete.setParameter(1, noticeId);
+        skillDelete.executeUpdate();
 
-        query.executeUpdate();
+        String noticeSql = """
+                update notice_tb set title = ?, type = ?, field = ?, work_place = ?, deadline = ? , content = ?
+                where id = ?
+                """;
+        Query resumeQuery = em.createNativeQuery(noticeSql);
+        resumeQuery.setParameter(1, notice.getTitle());
+        resumeQuery.setParameter(2, notice.getType());
+        resumeQuery.setParameter(3, notice.getField());
+        resumeQuery.setParameter(4, notice.getWorkPlace());
+        resumeQuery.setParameter(5, notice.getDeadline());
+        resumeQuery.setParameter(6, notice.getContent());
+        resumeQuery.setParameter(7, noticeId);
+        resumeQuery.executeUpdate();
+
+        for (String skillName : skillNames) {
+            String skillSql = """
+                    INSERT INTO skill_tb (resume_id, notice_id, name, role)
+                    VALUES (?,?,?,?)
+                    """;
+            Query skillQuery = em.createNativeQuery(skillSql);
+            skillQuery.setParameter(1, null);
+            skillQuery.setParameter(2, noticeId);
+            skillQuery.setParameter(3, skillName);
+            skillQuery.setParameter(4, 1);
+            skillQuery.executeUpdate();
+        }
 
     }
 }

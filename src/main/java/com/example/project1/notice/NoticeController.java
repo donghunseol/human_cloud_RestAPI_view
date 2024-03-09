@@ -75,8 +75,8 @@ public class NoticeController {
     }
 
     @PostMapping("/notice/{id}/update")
-    public String update(NoticeRequest.NoticeDTO notice, @PathVariable(name = "id") Integer id) {
-        noticeRepository.update(notice, id);
+    public String update(NoticeRequest.NoticeDTO notice, @PathVariable(name = "id") Integer id,  @RequestParam(name = "skillNames") List<String> skillNames) {
+        noticeRepository.update(id, notice, skillNames);
 
         return "redirect:/notice/" + id;
     }
