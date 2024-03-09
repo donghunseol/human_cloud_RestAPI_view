@@ -53,6 +53,9 @@
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
+            {{#selectResume}}
+            <input id="resumeId" name="resumeId" value="{{selectResume.id}}" type="hidden">
+            {{/selectResume}}
             <button type="submit" class="btn btn-secondary">이력서 제출</button>
         </div>
     </form>

@@ -27,6 +27,11 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
+                                                <form action="/apply/{{id}}/resumeSave" method="get">
+                                                    <input id="resumeId" name="resumeId" type="hidden" value="{{id}}">
+                                                    <button id="resumeBtn" class="btn btn-outline-secondary w-100">선택하기</button>
+                                                </form>
+
                                                 <a href="/resume/{{id}}/detailForm"
                                                    class="btn btn-outline-secondary w-100 mb-2">상세보기
                                                 </a>
