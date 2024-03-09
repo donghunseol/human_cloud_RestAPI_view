@@ -15,6 +15,13 @@ public class ResumeRepositoryTest {
     private ResumeRepository resumeRepository;
 
     @Test
+    public void testFindSearchAll() {
+        List<ResumeResponse.DTO> resumeList = resumeRepository.findSearchAll("J");
+
+        resumeList.forEach(System.out::println);
+    }
+
+    @Test
     public void testFindAll() {
         List<ResumeResponse.DTO> resumeList = resumeRepository.findAll();
 

@@ -44,7 +44,7 @@
                             <div class="item_box d-flex justify-content-between ml-5" style="min-height: 10px;">
                                 <div class="logo_name">
                                     <a class="name_company h5 fs-5 text-black text-decoration-none"
-                                       href="/notice/{{id}}">회사이름</a>
+                                       href="/notice/{{noticeId}}">회사이름</a>
                                     <div class="name_intrd text-black-50">회사소개</div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                             <div class="content_detail">
                                 <div class="detail_job_name">
                                     <a class="text-black text-decoration-none"
-                                       href="/notice/{{id}}">{{title}}</a>
+                                       href="/notice/{{noticeId}}">{{title}}</a>
                                 </div>
                                 <div class="detail_job_dates">마감일 : {{deadline}}</div>
                             </div>
@@ -70,9 +70,9 @@
         </div>
         <div class="content_sidebar d-flex flex-column bg-white rounded-3"
              style="width: 300px;height: 120px;margin: 0px 20px;padding: 20px;">
-            <span class="h5 fw-bold">채용 정보 검색</span>
-            <form class="sidebar_box d-flex justify-content-center" action="../index/index.html">
-                <input type="search" class="sidebar_box_input form-control mr-5" placeholder="검색">
+            <span class="h5 fw-bold">보유 기술 검색</span>
+            <form class="sidebar_box d-flex justify-content-center" action="/" method="get">
+                <input type="search" class="sidebar_box_input form-control mr-5" placeholder="검색" name="keyword">
                 <button class="btn btn-outline-success border-0" type="submit">
                     <i class="fas fa-search text-black"></i>
                 </button>

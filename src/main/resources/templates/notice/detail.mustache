@@ -22,12 +22,11 @@
                 <div>{{type}}</div>
                 <hr>
                 <h5 class="mb-2">업무 기술 / 활동 분야</h5>
-
-                <p class="d-inline-flex gap-1 mt-2">
+                <div class="d-inline-flex gap-1 mt-2">
                     {{#field}}
                         <a class="btn disabled" aria-disabled="true" role="button" data-bs-toggle="button">{{field}}</a>
                     {{/field}}
-                </p>
+                </div>
                 <hr>
                 <h5 class="mb-2">채용 상세</h5>
                 <div>
@@ -50,6 +49,19 @@
                 <hr>
                 <h5 class="mb-2">tel</h5>
                 <div>{{tel}}</div>
+                <hr>
+                <h5 class="mb-2">이런 기술을 가진 지원자들에게 추천합니다!</h5>
+                <div class="d-inline-flex gap-1 mt-2">
+                    {{#skills}}
+                        {{#name}}
+                            <a class="btn disabled" aria-disabled="true" role="button"
+                               data-bs-toggle="button">{{.}}</a>
+                        {{/name}}
+                        {{^name}}
+                            <div>요구하는 기술 없음</div>
+                        {{/name}}
+                    {{/skills}}
+                </div>
             </div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
