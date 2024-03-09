@@ -1,5 +1,7 @@
 package com.example.project1.notice;
 
+import com.example.project1.scrap.ScrapRepository;
+import com.example.project1.scrap.ScrapResponse;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.user.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ public class NoticeController {
 
     private final HttpSession session;
     private final NoticeRepository noticeRepository;
+    private final ScrapRepository scrapRepository;
     private final ResumeRepository resumeRepository;
 
     @GetMapping("/notice")
@@ -54,6 +57,7 @@ public class NoticeController {
     @GetMapping("/notice/{id}")
     public String detail(@PathVariable Integer id) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
+        System.out.println(responseDTO);
         session.setAttribute("notice", responseDTO);
 
         return "notice/detail";
@@ -62,7 +66,6 @@ public class NoticeController {
     @PostMapping("/notice/{id}/delete")
     public String delete(@PathVariable Integer id) {
         noticeRepository.deleteById(id);
-
         return "redirect:/notice";
     }
 
