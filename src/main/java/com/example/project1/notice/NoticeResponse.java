@@ -16,7 +16,7 @@ public class NoticeResponse {
         private String title;
         private String deadline;
 
-        private List<SKillDTO> skills = new ArrayList<>();
+        private List<SkillDTO> skills = new ArrayList<>();
 
         public DTO(Integer noticeId, String username, String title, String deadline, String image) {
             this.noticeId = noticeId;
@@ -25,7 +25,7 @@ public class NoticeResponse {
             this.deadline = deadline;
         }
 
-        public void addSkill(SKillDTO sKillDTO) {
+        public void addSkill(SkillDTO sKillDTO) {
             skills.add(sKillDTO);
         }
     }
@@ -48,7 +48,7 @@ public class NoticeResponse {
         private Integer noticeId;
         private Timestamp createdAt;
 
-        private List<SKillDTO> skills = new ArrayList<>();
+        private List<SkillDTO> skills = new ArrayList<>();
 
         public DetailDTO(Integer userId, String username, String address, String birth, String title, String deadline, String type, String field, String content, String workPlace, String email, String tel, Integer role, Integer noticeId, Timestamp createdAt) {
             this.userId = userId;
@@ -68,14 +68,14 @@ public class NoticeResponse {
             this.createdAt = createdAt;
         }
 
-        public void addSkill(SKillDTO sKillDTO) {
-            skills.add(sKillDTO);
+        public void addSkill(SkillDTO skillDTO) {
+            skills.add(skillDTO);
         }
     }
 
     @AllArgsConstructor
     @Data
-    public static class SKillDTO {
+    public static class SkillDTO {
         private Integer id;
         private String name;
     }

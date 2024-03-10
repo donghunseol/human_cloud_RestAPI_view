@@ -53,6 +53,7 @@ public class ResumeController {
     public String save(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
         User userInfo = (User) session.getAttribute("sessionUser");
         resumeRepository.resumeSave(userInfo.getId(), resume, skillNames);
+
         return "redirect:/myPage";
     }
 
