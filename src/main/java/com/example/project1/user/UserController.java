@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +55,17 @@ public class UserController {
     @PostMapping("/user/login")
     public String login(UserRequest.LoginDTO requestDTO) {
         User user = userRepository.findByUsernameAndPassword(requestDTO);
-        System.out.println(user);
-
         session.setAttribute("sessionUser", user);
-        System.out.println(user);
+
+        // false 는 개인 true 는 기업
+        Boolean isLogin = false;
+        if(user.getRole() == 1){
+            isLogin = true;
+        }else {
+            isLogin = false;
+        }
+        session.setAttribute("isLogin", isLogin);
+
 
         return "redirect:/";
     }
