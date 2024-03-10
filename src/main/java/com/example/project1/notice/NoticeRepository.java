@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.time.LocalTime.now;
+
 @Component
 @RequiredArgsConstructor
 @Repository
@@ -20,16 +22,7 @@ public class NoticeRepository {
 
     private final EntityManager em;
 
-    // 부분 조회
-    public Notice findById(Integer id) {
-        Query query = em.createNativeQuery("select * from notice_tb where id=?;", Notice.class);
-        query.setParameter(1, id);
-
-        Notice notice = (Notice) query.getSingleResult();
-        return notice;
-    }
-
-    // 전체 조회
+    // 전체 검색 조회(검색한 키워드의 모든 유저가 작성한 공고)
     public List<NoticeResponse.DTO> findSearchAll(String keyword) {
         String sql = """
                     select n.id, u.username, n.title, n.deadline
@@ -61,7 +54,7 @@ public class NoticeRepository {
             Integer skillId = (Integer) row[5];
             String skillName = (String) row[6];
             if (skillId != null && skillName != null) {
-                NoticeResponse.SKillDTO skill = new NoticeResponse.SKillDTO(
+                NoticeResponse.SkillDTO skill = new NoticeResponse.SkillDTO(
                         skillId, skillName
                 );
                 notice.addSkill(skill);
@@ -71,7 +64,7 @@ public class NoticeRepository {
         return new ArrayList<>(noticeMap.values());
     }
 
-    // 전체 조회
+    // 전체 조회(모든 유저가 작성한 공고)
     public List<NoticeResponse.DTO> findAll() {
         String sql = """
                     select n.id, u.username, n.title, n.deadline, u.image
@@ -96,6 +89,48 @@ public class NoticeRepository {
                         id, username, title, deadline, image
                 );
                 noticeMap.put(id, notice);
+            }
+        }
+
+        return new ArrayList<>(noticeMap.values());
+    }
+
+    // 전체 조회(해당 유저가 작성한 공고)
+    public List<NoticeResponse.DTO> findAllByUserId(Integer idx) {
+        String sql = """
+                    select n.id, u.username, n.title, n.deadline, u.image
+                    from notice_tb n
+                    left outer join user_tb u on u.id = n.user_id
+                    where n.user_id = ?;
+                """;
+        Query query = em.createNativeQuery(sql);
+        query.setParameter(1, idx);
+
+        List<Object[]> rows = query.getResultList();
+        Map<Integer, NoticeResponse.DTO> noticeMap = new HashMap<>();
+
+        for (Object[] row : rows) {
+            Integer id = (Integer) row[0];
+            String username = (String) row[1];
+            String title = (String) row[2];
+            String deadline = (String) row[3];
+            String image = (String) row[4];
+
+            NoticeResponse.DTO notice = noticeMap.get(id);
+            if (notice == null) {
+                notice = new NoticeResponse.DTO(
+                        id, username, title, deadline, image
+                );
+                noticeMap.put(id, notice);
+            }
+
+            Integer skill_id = (Integer) row[5];
+            String skill_name = (String) row[6];
+            if (skill_id != null && skill_name != null) {
+                NoticeResponse.SkillDTO skill = new NoticeResponse.SkillDTO(
+                        skill_id, skill_name
+                );
+                notice.addSkill(skill);
             }
         }
 
@@ -142,7 +177,7 @@ public class NoticeRepository {
             Integer skillId = (Integer) row[15];
             String skillName = (String) row[16];
 
-            NoticeResponse.SKillDTO skill = new NoticeResponse.SKillDTO(
+            NoticeResponse.SkillDTO skill = new NoticeResponse.SkillDTO(
                     skillId, skillName
             );
 
@@ -215,7 +250,7 @@ public class NoticeRepository {
         skillDelete.executeUpdate();
 
         String noticeSql = """
-                update notice_tb set title = ?, type = ?, field = ?, work_place = ?, deadline = ? , content = ?
+                update notice_tb set title = ?, type = ?, field = ?, work_place = ?, deadline = ? , content = ?, created_at = ?
                 where id = ?
                 """;
         Query resumeQuery = em.createNativeQuery(noticeSql);
@@ -225,7 +260,8 @@ public class NoticeRepository {
         resumeQuery.setParameter(4, notice.getWorkPlace());
         resumeQuery.setParameter(5, notice.getDeadline());
         resumeQuery.setParameter(6, notice.getContent());
-        resumeQuery.setParameter(7, noticeId);
+        resumeQuery.setParameter(7, now());
+        resumeQuery.setParameter(8, noticeId);
         resumeQuery.executeUpdate();
 
         for (String skillName : skillNames) {
