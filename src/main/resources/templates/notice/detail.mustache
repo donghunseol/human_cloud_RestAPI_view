@@ -66,9 +66,13 @@
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
             {{#selectResume}}
-            <input id="resumeId" name="resumeId" value="{{selectResume.id}}" type="hidden">
+                <input id="resumeId" name="resumeId" value="{{selectResume.id}}" type="hidden">
+                <button type="submit" class="btn btn-secondary">이력서 제출</button>
             {{/selectResume}}
-            <button type="submit" class="btn btn-secondary">이력서 제출</button>
+            {{^selectResume}}
+                <button type="submit" class="btn btn-secondary" disabled>이력서 제출</button>
+                <span>※ 마이페이지에서 이력서를 선택해주세요.</span>
+            {{/selectResume}}
         </div>
     </form>
 
