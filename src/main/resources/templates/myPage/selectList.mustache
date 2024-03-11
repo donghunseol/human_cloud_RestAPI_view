@@ -22,22 +22,36 @@
                                                 <p class="card-text"><small>마감일 : {{deadline}}</small></p>
                                             </div>
                                             <div class="d-flex flex-column w-100">
-                                                <form class="d-flex justify-content-end" action="/notice/{{noticeId}}"
-                                                      method="post">
-                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">
-                                                        상세보기
-                                                    </button>
-                                                </form>
-                                                <form class="d-flex justify-content-end"
-                                                      action="/resume/{{resumeId}}/updateForm" method="post">
-                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">수정
-                                                    </button>
-                                                </form>
-                                                <form class="d-flex justify-content-end"
-                                                      action="/apply/{{applyId}}/delete" method="post">
-                                                    <button type="submit" class="btn btn-outline-secondary w-50">삭제
-                                                    </button>
-                                                </form>
+                                                {{#applyList}}
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/resume/{{resumeId}}/updateForm" method="get">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary mb-1 w-50" disabled>
+                                                            합격입니다 축하합니다
+                                                        </button>
+                                                    </form>
+                                                {{/applyList}}
+                                                {{^applyList}}
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/notice/{{noticeId}}"
+                                                          method="get">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary mb-1 w-50">
+                                                            상세보기
+                                                        </button>
+                                                    </form>
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/resume/{{resumeId}}/updateForm" method="get">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary mb-1 w-50">수정
+                                                        </button>
+                                                    </form>
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/apply/{{applyId}}/delete" method="post">
+                                                        <button type="submit" class="btn btn-outline-secondary w-50">삭제
+                                                        </button>
+                                                    </form>
+                                                {{/applyList}}
                                             </div>
                                         </div>
                                     </div>

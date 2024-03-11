@@ -13,7 +13,7 @@ import java.util.List;
 public class ScrapRepository {
     private final EntityManager em;
 
-    public Scrap findById(Integer userId){
+    public Scrap findById(Integer userId) {
         String q = "SELECT * FROM scrap_tb WHERE id = ?";
         Query query = em.createNativeQuery(q, Scrap.class);
         query.setParameter(1, userId);
@@ -45,7 +45,7 @@ public class ScrapRepository {
 
     // 개인 회원 공고 정보 저장
     @Transactional
-    public Scrap userSave(Integer sessionUserId, ScrapRequest.UserDTO requestDTO) {
+    public Scrap save(Integer sessionUserId, ScrapRequest.UserDTO requestDTO) {
         String q1 = "insert into scrap_tb (user_id, notice_id, role, created_at) values (?, ?, 1, now())";
         Query query1 = em.createNativeQuery(q1, Scrap.class);
         query1.setParameter(1, sessionUserId);
@@ -54,7 +54,7 @@ public class ScrapRepository {
         query1.executeUpdate();
 
         String q2 = "SELECT * FROM scrap_tb WHERE id = (SELECT max(id) FROM scrap_tb)";
-        Query query2= em.createNativeQuery(q2, Scrap.class);
+        Query query2 = em.createNativeQuery(q2, Scrap.class);
 
         Scrap scrap = (Scrap) query2.getSingleResult();
 
@@ -72,7 +72,7 @@ public class ScrapRepository {
         query.executeUpdate();
 
         String q2 = "SELECT * FROM scrap_tb WHERE id = (SELECT max(id) FROM scrap_tb)";
-        Query query2= em.createNativeQuery(q2, Scrap.class);
+        Query query2 = em.createNativeQuery(q2, Scrap.class);
 
         Scrap scrap = (Scrap) query2.getSingleResult();
 
@@ -89,7 +89,7 @@ public class ScrapRepository {
     }
 
     // 로그인 안했을때 안됨.
-    public ScrapResponse.DetailDTO findScrap(Integer noticeId){
+    public ScrapResponse.DetailDTO findScrap(Integer noticeId) {
         Integer id = 0;
         Boolean isScrap = false;
 
@@ -101,7 +101,7 @@ public class ScrapRepository {
     }
 
     // 로그인했다!
-    public ScrapResponse.DetailDTO findScrap(Integer noticeId, Integer sessionUserId){
+    public ScrapResponse.DetailDTO findScrap(Integer noticeId, Integer sessionUserId) {
         String q = """
                 SELECT
                     id,
