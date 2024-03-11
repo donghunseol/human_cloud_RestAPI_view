@@ -19,8 +19,27 @@ public class ApplyController {
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
 
+    @PostMapping("/apply/{id}/pass")
+    public String resumePass(@PathVariable Integer id) {
+        System.out.println(id);
+        ApplyResponse.UserListDTO apply = applyRepository.findPassById(id);
+
+        Boolean isPass = null;
+
+        // 1 합격 0 불합격
+        if (apply.getPass() == 1) {
+            isPass = true;
+        } else {
+            isPass = false;
+        }
+
+        session.setAttribute("isPass", isPass);
+
+        return "redirect:/myPage/selectList";
+    }
+
     @GetMapping("/apply/{id}/resumeSave")
-    public String resumeSave(@PathVariable Integer id, HttpServletRequest request){
+    public String resumeSave(@PathVariable Integer id) {
         session.setAttribute("selectResume", resumeRepository.findByResumeId(id));
         System.out.println(resumeRepository.findByResumeId(id));
         return "redirect:/myPage";
@@ -34,7 +53,7 @@ public class ApplyController {
     }
 
     @PostMapping("/apply/{id}/save")
-    public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO){
+    public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO) {
         applyRepository.save(requestDTO);
 
         return "redirect:/myPage/selectList";

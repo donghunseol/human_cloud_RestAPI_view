@@ -18,5 +18,6 @@ public class ApplyResponse {
         private String title; // 공고 타이틀
         private String deadline; // 마감일
         private String type; // 고용 형태
+        private Integer pass; // 합격 여부
     }
 }
