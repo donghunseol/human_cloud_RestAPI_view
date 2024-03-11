@@ -159,11 +159,11 @@ public class UserController {
     }
 
     @GetMapping("/myPage/selectList")
-    public String myPageList() {
+    public String myPageList(HttpServletRequest request) {
         User user = (User) session.getAttribute("sessionUser");
         System.out.println("user 정보 : " + user);
         List<ApplyResponse.UserListDTO> applyList = applyRepository.findUserApplyById(user.getId());
-        session.setAttribute("applyList", applyList);
+        request.setAttribute("applyList", applyList);
         System.out.println("지원한 공고 : " + applyList);
 
         return "/myPage/selectList";

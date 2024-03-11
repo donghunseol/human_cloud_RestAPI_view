@@ -46,12 +46,12 @@ insert into skill_tb(resume_id, notice_id, name, role)
 values (null, 2, 'sql', 0);
 
 -- apply
-insert into apply_tb(resume_id, notice_id, created_at)
-values (1, 1, now());
-insert into apply_tb(resume_id, notice_id, created_at)
-values (2, 1, now());
-insert into apply_tb(resume_id, notice_id, created_at)
-values (2, 2, now());
+insert into apply_tb(resume_id, notice_id, pass, created_at)
+values (1, 1, false, now());
+insert into apply_tb(resume_id, notice_id, pass, created_at)
+values (2, 1, false, now());
+insert into apply_tb(resume_id, notice_id, pass, created_at)
+values (2, 2, false, now());
 
 -- board
 values (1, '안녕하십니까', '처음 왔습니다 인사드립니다!', now());
@@ -145,12 +145,19 @@ insert into notice_tb(user_id, title, type, field, work_place, content, deadline
 values (6, '(주)KAKAO', '고용형태5', '개발분야5', '근무지5', '공고 내용5', '20240707', now());
 
 
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(1, null, 1, 1, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(1, null, 2, 1, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(2, null, 3, 1, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(4, 1, null, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(4, 2, null, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(5, 2, null, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at) values(5, 3, null, 0, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (1, null, 1, 1, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (1, null, 2, 1, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (2, null, 3, 1, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (4, 1, null, 0, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (4, 2, null, 0, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (5, 2, null, 0, now());
+insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
+values (5, 3, null, 0, now());
 
 

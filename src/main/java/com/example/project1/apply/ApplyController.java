@@ -1,11 +1,7 @@
 package com.example.project1.apply;
 
-import com.example.project1.notice.NoticeRepository;
 import com.example.project1.resume.ResumeRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +15,21 @@ public class ApplyController {
     private final ResumeRepository resumeRepository;
     private final HttpSession session;
 
+    @PostMapping("/apply/{id}")
+    public String resumePass(@PathVariable Integer id, Integer pass) {
+
+        System.out.println("pass : " + pass);
+        if (pass == 1) {
+            applyRepository.pass(id, true);
+        } else {
+            applyRepository.pass(id, false);
+        }
+
+        return "redirect:/myPage/selectList";
+    }
+
     @GetMapping("/apply/{id}/resumeSave")
-    public String resumeSave(@PathVariable Integer id, HttpServletRequest request){
+    public String resumeSave(@PathVariable Integer id) {
         session.setAttribute("selectResume", resumeRepository.findByResumeId(id));
         System.out.println(resumeRepository.findByResumeId(id));
         return "redirect:/myPage";
@@ -34,7 +43,7 @@ public class ApplyController {
     }
 
     @PostMapping("/apply/{id}/save")
-    public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO){
+    public String save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO) {
         applyRepository.save(requestDTO);
 
         return "redirect:/myPage/selectList";
