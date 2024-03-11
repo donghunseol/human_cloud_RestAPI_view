@@ -7,7 +7,7 @@ public class ApplyResponse {
 
     @AllArgsConstructor
     @Data
-    public static class UserListDTO{
+    public static class UserListDTO {
         private Integer resumeUserId; // 이력서 유저 번호
         private Integer noticeUserId; // 공고 유저 번호
         private Integer applyId; // 지원 번호
@@ -18,6 +18,6 @@ public class ApplyResponse {
         private String title; // 공고 타이틀
         private String deadline; // 마감일
         private String type; // 고용 형태
-        private Integer pass; // 합격 여부
+        private Boolean pass; // 합격 여부
     }
 }

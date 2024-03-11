@@ -22,16 +22,21 @@
                                                 <p class="card-text"><small>마감일 : {{deadline}}</small></p>
                                             </div>
                                             <div class="d-flex flex-column w-100">
-                                                <form class="d-flex justify-content-end" action="/notice/{{noticeId}}" method="post">
-                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">상세보기
+                                                <form class="d-flex justify-content-end" action="/notice/{{noticeId}}"
+                                                      method="post">
+                                                    <button type="submit" class="btn btn-outline-secondary mb-1 w-50">
+                                                        상세보기
                                                     </button>
                                                 </form>
-                                                <form class="d-flex justify-content-end" action="/resume/{{resumeId}}/updateForm" method="post">
+                                                <form class="d-flex justify-content-end"
+                                                      action="/resume/{{resumeId}}/updateForm" method="post">
                                                     <button type="submit" class="btn btn-outline-secondary mb-1 w-50">수정
                                                     </button>
                                                 </form>
-                                                <form class="d-flex justify-content-end" action="/apply/{{applyId}}/delete" method="post">
-                                                    <button type="submit" class="btn btn-outline-secondary w-50">삭제</button>
+                                                <form class="d-flex justify-content-end"
+                                                      action="/apply/{{applyId}}/delete" method="post">
+                                                    <button type="submit" class="btn btn-outline-secondary w-50">삭제
+                                                    </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -49,26 +54,26 @@
                                                 <p class="card-text"><small>마감일 : {{deadline}}</small></p>
                                             </div>
                                             <div class="d-flex flex-column w-100">
-                                                {{#applyList.pass}}
-                                                    {{#isPass}}
-                                                        <button type="button" class="btn btn-outline-secondary mb-1 w-50 bg-success" disabled>합격
-                                                        </button>
-                                                    {{/isPass}}
-                                                    {{^isPass}}
-                                                        <button type="button" class="btn btn-outline-secondary mb-1 w-50 bg-danger" disabled>불합격</button>
-                                                    {{/isPass}}
-                                                {{/applyList.pass}}
-                                                {{^applyList.pass}}
-                                                    <form class="d-flex justify-content-end" action="/apply/{{applyId}}/pass" method="post">
-                                                        <input id="pass" name="pass" type="hidden" value="1">
-                                                        <button type="submit" class="btn btn-outline-secondary mb-1 w-50">합격</button>
-                                                    </form>
-                                                    <form class="d-flex justify-content-end" action="/apply/{{applyId}}/pass" method="post">
+                                                {{#pass}}
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/apply/{{applyId}}" method="post">
                                                         <input id="pass" name="pass" type="hidden" value="0">
-                                                        <button type="submit" class="btn btn-outline-secondary mb-1 w-50">불합격</button>
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary mb-1 w-50">합격
+                                                        </button>
                                                     </form>
-                                                {{/applyList.pass}}
-                                                <form class="d-flex justify-content-end" action="/resume/{{resumeId}}" method="post">
+                                                {{/pass}}
+                                                {{^pass}}
+                                                    <form class="d-flex justify-content-end"
+                                                          action="/apply/{{applyId}}" method="post">
+                                                        <input id="pass" name="pass" type="hidden" value="1">
+                                                        <button type="submit"
+                                                                class="btn btn-outline-secondary mb-1 w-50">불합격
+                                                        </button>
+                                                    </form>
+                                                {{/pass}}
+                                                <form class="d-flex justify-content-end" action="/resume/{{resumeId}}"
+                                                      method="post">
                                                     <button type="submit" class="btn btn-outline-secondary w-50">상세보기
                                                     </button>
                                                 </form>

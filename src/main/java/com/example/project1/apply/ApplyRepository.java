@@ -32,21 +32,24 @@ public class ApplyRepository {
         return query.getResultList();
     }
 
-    public ApplyResponse.UserListDTO findPassById(Integer id) {
-        String q = "select * from apply_tb where id = ?";
-        Query query = em.createNativeQuery(q);
-        query.setParameter(1, id);
-
-        return (ApplyResponse.UserListDTO) query.getSingleResult();
-    }
-
     // 부분 조회
     public Apply findById(Integer id) {
         String q = "select * from apply_tb where id = ?";
-        Query query = em.createNativeQuery(q);
+        Query query = em.createNativeQuery(q, Apply.class);
         query.setParameter(1, id);
 
         return (Apply) query.getSingleResult();
+    }
+
+    // 부분 조회
+    @Transactional
+    public void pass(Integer id, Boolean passValue) {
+        String q = "update apply_tb set pass = ? where id = ?";
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, passValue);
+        query.setParameter(2, id);
+
+        query.executeUpdate();
     }
 
     // 전체 조회
