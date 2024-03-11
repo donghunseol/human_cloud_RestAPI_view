@@ -62,7 +62,7 @@ public class ResumeRepository {
     // 전체 조회(모든 유저가 작성된 이력서)
     public List<ResumeResponse.DTO> findAll() {
         String sql = """
-                select r.id resume_id, u.id user_id, r.title, u.name, u.image, s.id, s.name, 
+                select r.id resume_id, u.id user_id, r.title, u.name, u.image, s.id, s.name
                 from resume_tb r 
                 left outer join skill_tb s on r.id = s.resume_id 
                 left outer join user_tb u on u.id = r.user_id
