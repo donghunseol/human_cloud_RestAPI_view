@@ -56,6 +56,7 @@ public class UserController {
                 noticeList = noticeRepository.findSearchAll(keyword);
             }
         }
+        System.out.println(noticeList);
 
         request.setAttribute("resumeList", resumeList);
         request.setAttribute("noticeList", noticeList);
