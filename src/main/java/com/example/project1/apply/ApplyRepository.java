@@ -11,14 +11,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Repository
 public class ApplyRepository {
-
     private final EntityManager em;
 
     // 지원자 입장 지원 공고 리스트 출력
     public List<ApplyResponse.UserListDTO> findUserApplyById(Integer id) {
         String q = """
                 SELECT rt.user_id resume_user_id, nt.user_id notice_user_id, at.id apply_id, at.notice_id, at.resume_id,
-                ut.name, nt.title, nt.deadline, nt.type FROM apply_tb at
+                ut.name, nt.title, nt.deadline, nt.type, at.pass FROM apply_tb at
                 LEFT OUTER JOIN notice_tb nt
                 ON at.notice_id = nt.id
                 LEFT OUTER JOIN resume_tb rt
@@ -36,10 +35,21 @@ public class ApplyRepository {
     // 부분 조회
     public Apply findById(Integer id) {
         String q = "select * from apply_tb where id = ?";
-        Query query = em.createNativeQuery(q);
+        Query query = em.createNativeQuery(q, Apply.class);
         query.setParameter(1, id);
 
         return (Apply) query.getSingleResult();
+    }
+
+    // 부분 조회
+    @Transactional
+    public void pass(Integer id, Boolean passValue) {
+        String q = "update apply_tb set pass = ? where id = ?";
+        Query query = em.createNativeQuery(q);
+        query.setParameter(1, passValue);
+        query.setParameter(2, id);
+
+        query.executeUpdate();
     }
 
     // 전체 조회

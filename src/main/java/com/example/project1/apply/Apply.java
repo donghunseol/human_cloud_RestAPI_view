@@ -21,7 +21,7 @@ public class Apply {
 
     // 개인->기업 (지원)
 
-    private Integer pass;
+    private Boolean pass;
 
     private Timestamp createdAt;
 }
