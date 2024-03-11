@@ -3,11 +3,11 @@ package com.example.project1.user;
 import com.example.project1._core.util.ApiUtil;
 import com.example.project1.apply.ApplyRepository;
 import com.example.project1.apply.ApplyResponse;
+import com.example.project1.notice.NoticeRepository;
+import com.example.project1.notice.NoticeResponse;
 import com.example.project1.resume.ResumeRepository;
 import com.example.project1.resume.ResumeResponse;
-import com.example.project1.scrap.Scrap;
 import com.example.project1.scrap.ScrapRepository;
-import com.example.project1.scrap.ScrapRequest;
 import com.example.project1.scrap.ScrapResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.StyledEditorKit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +26,39 @@ public class UserController {
     private final ResumeRepository resumeRepository;
     private final ApplyRepository applyRepository;
     private final ScrapRepository scrapRepository;
+    private final NoticeRepository noticeRepository;
 
     @GetMapping("/")
     public String index(HttpServletRequest request, @RequestParam(defaultValue = "") String keyword) {
-
+        User user = (User) session.getAttribute("sessionUser");
         List<ResumeResponse.DTO> resumeList = new ArrayList<>();
-        if (keyword.isBlank()) {
-            resumeList = resumeRepository.findAll();
-        } else {
-            resumeList = resumeRepository.findSearchAll(keyword);
+        List<NoticeResponse.DTO> noticeList = new ArrayList<>();
+
+        if (user != null) {
+            if (user.getRole() == 0) { // 개인 로그인
+                if (keyword.isBlank()) {
+                    noticeList = noticeRepository.findAll();
+                } else {
+                    noticeList = noticeRepository.findSearchAll(keyword);
+                }
+            } else if (user.getRole() == 1) { // 기업 로그인
+                if (keyword.isBlank()) {
+                    resumeList = resumeRepository.findAll();
+                } else {
+                    resumeList = resumeRepository.findSearchAll(keyword);
+                }
+            }
         }
+        if (user == null) {
+            if (keyword.isBlank()) {
+                noticeList = noticeRepository.findAll();
+            } else {
+                noticeList = noticeRepository.findSearchAll(keyword);
+            }
+        }
+
         request.setAttribute("resumeList", resumeList);
+        request.setAttribute("noticeList", noticeList);
 
         return "index";
     }
@@ -59,9 +80,9 @@ public class UserController {
 
         // false 는 개인 true 는 기업
         Boolean isLogin = false;
-        if(user.getRole() == 1){
+        if (user.getRole() == 1) {
             isLogin = true;
-        }else {
+        } else {
             isLogin = false;
         }
         session.setAttribute("isLogin", isLogin);
@@ -163,9 +184,9 @@ public class UserController {
     }
 
     @GetMapping("/scrap/{id}")
-    public String scrapList(@PathVariable Integer id){
+    public String scrapList(@PathVariable Integer id) {
         User user = (User) session.getAttribute("sessionUser");
-        List<ScrapResponse.ScrapDTO> scrapList= scrapRepository.findByIdList(id, user.getRole());
+        List<ScrapResponse.ScrapDTO> scrapList = scrapRepository.findByIdList(id, user.getRole());
         System.out.println(scrapList);
 
         session.setAttribute("scrapList", scrapList);
