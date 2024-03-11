@@ -3,18 +3,24 @@
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
 values ('ssar', '1234', '김진환', '01012345678', '010101', 'ssar@nate.com', '쌀도 쌀시 쌀구 쌀동', '/images/google.png', 0, now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('cos', '1234', '온빛나', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', '/images/google.png', 0, now());
+values ('cos', '1234', '온빛나', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', '/images/google.png', 0,
+        now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('love', '1234', '제갈민지', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', '/images/google.png', 0, now());
+values ('love', '1234', '제갈민지', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', '/images/google.png', 0,
+        now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('hello', '1234', '남궁채', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', '/images/google.png', 0, now());
+values ('hello', '1234', '남궁채', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', '/images/google.png', 0,
+        now());
 -- 기업
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', '/images/google.png', 1, now());
+values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', '/images/google.png', 1,
+        now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comcos', '1234', '코스회사', '01043211234', '110222', 'cos@naver.com', '코스도 코스시 코스구 코스동', '/images/kakao.jpg', 1, now());
+values ('comcos', '1234', '코스회사', '01043211234', '110222', 'cos@naver.com', '코스도 코스시 코스구 코스동', '/images/kakao.jpg', 1,
+        now());
 insert into user_tb(username, password, name, tel, birth, email, address, image, role, created_at)
-values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.com', '러브도 러브시 러브구 러브동', '/images/naver.png', 1, now());
+values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.com', '러브도 러브시 러브구 러브동', '/images/naver.png', 1,
+        now());
 
 
 -- skill
@@ -134,7 +140,7 @@ values (1, '생각하고 배울 자세가 되어있습니다.', '5년', '정보�
 
 -- notice
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
-values (7, '(주)네이버', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303',now());
+values (7, '(주)네이버', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '구글', '고용형태2', '개발분야2', '근무지2', '공고 내용2', '20240404', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
@@ -146,18 +152,16 @@ values (6, '(주)KAKAO', '고용형태5', '개발분야5', '근무지5', '공고
 
 
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (1, null, 1, 1, now());
+values (1, null, 1, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (1, null, 2, 1, now());
+values (1, null, 2, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (2, null, 3, 1, now());
+values (2, null, 3, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
 values (4, 1, null, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
 values (4, 2, null, 0, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (5, 2, null, 0, now());
+values (5, 2, null, 1, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (5, 3, null, 0, now());
-
-
+values (5, 3, null, 1, now());
