@@ -82,16 +82,7 @@
                 </div>
             </div>
 
-            <div class="d-grid gap-2 d-md-flex justify-content-center mt-3">
-                <button type="submit" class="btn btn-secondary">작성 완료
-                </button>
-                <button onclick="location.href='/myPage'"
-                        type="button"
-                        class="btn btn-outline-secondary">취소
-                </button>
-            </div>
             <!-- 보유 기술 -->
-
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
                 <h4>기술</h4>
                 <label class="form-label">보유 기술 선택</label>
@@ -129,9 +120,14 @@
                         <label class="form-check-label">MySQL</label>
                     </div>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 mb-3">
-                    <button class="btn btn-secondary">선택 완료</button>
-                </div>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-secondary">등록 완료
+                </button>
+                <button onclick="location.href='/notice'"
+                        type="button"
+                        class="btn btn-outline-secondary">취소
+                </button>
             </div>
         </form>
         {{> layout/sidebar}}
