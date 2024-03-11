@@ -9,10 +9,10 @@
 
 
 # 발표자료
-
+[3조_이력서_홈페이지_제작_PPT.pdf](https://drive.usercontent.google.com/u/0/uc?id=1MbFXF5yFTtzqYftx6La-jFZwx9N559hm&export=download)
 
 # 프로젝트 기간
-- 2023-02-26 ~ 2023.03.05
+- 2023-02-21 ~ 2023.03.05
 
 # 팀원 소개
 - 설동훈
