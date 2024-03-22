@@ -1,0 +1,62 @@
+package com.example.project_v2.user;
+
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
+
+@Table(name = "user_tb")
+@Data
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String tel;
+
+    @Column(nullable = false)
+    private String birth;
+
+    @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String address;
+
+    private String image;
+
+    @Column(nullable = false)
+    private Integer role;
+
+    @Column(nullable = false)
+    @CreationTimestamp
+    private Timestamp created_at;
+
+    @Builder
+    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String image, Integer role, Timestamp created_at) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.tel = tel;
+        this.birth = birth;
+        this.email = email;
+        this.address = address;
+        this.image = image;
+        this.role = role;
+        this.created_at = created_at;
+    }
+}
