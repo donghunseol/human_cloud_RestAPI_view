@@ -1,73 +1,40 @@
 package com.example.project_v2.resume;
 
-import com.example.project_v2.scrap.ScrapRepository;
-import com.example.project_v2.user.User;
-import com.example.project_v2.user.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.project_v2._core.util.ApiUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
-    private final ResumeRepository resumeRepository;
-    private final ScrapRepository scrapRepository;
-    private final UserRepository userRepository;
+
+    private final ResumeJPARepository resumeJPARepository;
     private final HttpSession session;
 
-    @GetMapping("/resume/{id}")
-    public String index(@PathVariable Integer id) {
-        User user = userRepository.findById(id);
-
-        return "resume/main";
+    // 이력서 회원 리스트 출력
+    @GetMapping("/api/resumes/{id}")
+    public ResponseEntity<?> index(@PathVariable Integer id) {
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    @GetMapping("/resume/{id}/detailForm")
-    public String detailForm(HttpServletRequest request, @PathVariable Integer id) {
-        ResumeResponse.DetailDTO resumeDetail = resumeRepository.findByResumeId(id);
-        request.setAttribute("resumeDetail", resumeDetail);
-        return "/resume/detailForm";
+    // 이력서 작성
+    @PostMapping("/api/resumes")
+    public ResponseEntity<?> save( ) {
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    @PostMapping("/resume/{id}/delete")
-    public String delete(HttpServletRequest request, @PathVariable Integer id) {
-        resumeRepository.deleteByResumeId(id);
-        return "redirect:/myPage";
+    // 이력서 삭제
+    @DeleteMapping("/api/resumes/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    @GetMapping("/resume/saveForm")
-    public String saveForm(HttpServletRequest request) {
-        User userInfo = (User) session.getAttribute("sessionUser");
-        request.setAttribute("userInfo", userInfo);
-        return "resume/saveForm";
-    }
-
-    @PostMapping("/resume/save")
-    public String save(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
-        User userInfo = (User) session.getAttribute("sessionUser");
-        resumeRepository.resumeSave(userInfo.getId(), resume, skillNames);
-
-        return "redirect:/myPage";
-    }
-
-    @GetMapping("/resume/{id}/updateForm")
-    public String updateForm(HttpServletRequest request, @PathVariable Integer id) {
-        ResumeResponse.DetailDTO updateDetail = resumeRepository.findByResumeId(id);
-        request.setAttribute("updateDetail", updateDetail);
-        System.out.println(updateDetail);
-        return "resume/updateForm";
-    }
-
-    @PostMapping("/resume/{id}/updateForm")
-    public String update(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames, @PathVariable Integer id) {
-        resumeRepository.resumeUpdate(id, resume, skillNames);
-        return "redirect:/myPage";
+    // 이력서 수정
+    @PutMapping("/api/resumes/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id) {
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
