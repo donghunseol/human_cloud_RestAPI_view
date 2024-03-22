@@ -23,6 +23,7 @@ public class Skill {
     private Integer role;
 
     @Builder
+
     public Skill(Integer id, Integer resumeId, Integer noticeId, String name, Integer role) {
         this.id = id;
         this.resumeId = resumeId;

@@ -1,49 +1,30 @@
 package com.example.project_v2.love;
 
 import com.example.project_v2._core.util.ApiUtil;
-import com.example.project_v2.user.User;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
 public class LoveController {
 
-    private final LoveRepository loveRepository;
+    private final LoveJPARepository loveJPARepository;
     private final HttpSession session;
 
-    @DeleteMapping("/api/love/{id}")
-    public ApiUtil<?> delete(@PathVariable Integer id, HttpServletRequest response){
-//         인증
-        User sessionUser = (User) session.getAttribute("sessionUser");
-//        if (sessionUser == null) {
-//            response.setStatus(401);
-//            return new ApiUtil<>(401, "인증안됨");
-//        }
-
-//         2. 권한 체크
-        Love love = loveRepository.findById(id);
-//        if(love.getUserId() != sessionUser.getId()){
-//            response.setStatus(403);
-//            return new ApiUtil<>(403, "권한없음");
-//        }
-
-        loveRepository.deleteById(id);
-        return new ApiUtil<>(null);
+    // 좋아요 입력
+    @PostMapping("/api/loves")
+    public ResponseEntity<?> save(){
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    @PostMapping("/api/love")
-    public ApiUtil<?> save(@RequestBody LoveRequest.SaveDTO requestDTO, HttpServletRequest response){
-        // 인증
-        User sessionUser = (User) session.getAttribute("sessionUser");
-//        if (sessionUser == null) {
-//            response.setStatus(401);
-//            return new ApiUtil<>(401, "인증안됨");
-//        }
-
-        Love love = loveRepository.save(requestDTO, sessionUser.getId());
-        return new ApiUtil<>(love);
+    // 좋아요 삭제
+    @DeleteMapping("/api/loves/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
