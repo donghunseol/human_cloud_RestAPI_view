@@ -1,7 +1,9 @@
 package com.example.project1.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -40,5 +42,21 @@ public class User {
     private Integer role;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private Timestamp created_at;
+
+    @Builder
+    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String image, Integer role, Timestamp created_at) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.tel = tel;
+        this.birth = birth;
+        this.email = email;
+        this.address = address;
+        this.image = image;
+        this.role = role;
+        this.created_at = created_at;
+    }
 }
