@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,8 +22,9 @@ public class UserController {
 
     // 회원 가입
     @PostMapping("/users/join")
-    public ResponseEntity<?> join() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
+        User user = userService.join(reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(user));
     }
 
     // 로그인
