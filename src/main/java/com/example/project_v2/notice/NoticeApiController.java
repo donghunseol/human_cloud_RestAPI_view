@@ -23,7 +23,7 @@ public class NoticeApiController {
     private final NoticeRepository noticeRepository;
 
     // 공고 목록 보기
-    @GetMapping("/notice")
+    @GetMapping("/notices")
     public ResponseEntity<?> index(HttpServletRequest request, @RequestParam(defaultValue = "") String keyword) {
         List<NoticeResponse.DTO> noticeList = new ArrayList<>();
         User user = (User) session.getAttribute("sessionUser");
@@ -34,7 +34,7 @@ public class NoticeApiController {
     }
 
     // 공고 작성
-    @PostMapping("/api/notice/save")
+    @PostMapping("/api/notices")
     public ResponseEntity<?> save(HttpServletRequest request, NoticeRequest.NoticeDTO notice, @RequestParam(name = "skillNames") List<String> skillNames) {
         User userInfo = (User) session.getAttribute("sessionUser");
         noticeRepository.save(userInfo.getId(), notice, skillNames);
@@ -43,7 +43,7 @@ public class NoticeApiController {
     }
 
     // 공고 상세 보기
-    @GetMapping("/notice/{id}")
+    @GetMapping("/notices/{id}")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
         NoticeResponse.DetailDTO responseDTO = noticeRepository.findNoticeById(id);
         System.out.println(responseDTO);
@@ -53,14 +53,14 @@ public class NoticeApiController {
     }
 
     // 공고 삭제
-    @DeleteMapping("/api/notice/{id}")
+    @DeleteMapping("/api/notices/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         noticeRepository.deleteById(id);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 공고 수정
-    @PutMapping("/api/notice/{id}")
+    @PutMapping("/api/notices/{id}")
     public ResponseEntity<?> update(NoticeRequest.NoticeDTO notice, @PathVariable(name = "id") Integer id,  @RequestParam(name = "skillNames") List<String> skillNames) {
         noticeRepository.update(id, notice, skillNames);
 

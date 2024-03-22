@@ -25,7 +25,7 @@ public class BoardApiController {
     private final LoveRepository loveRepository;
 
     // 게시글 수정
-    @PutMapping("/api/board/{id}")
+    @PutMapping("/api/boards/{id}")
     public ResponseEntity<?> update(@PathVariable int id, BoardRequest.UpdateDTO requestDTO){
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
@@ -40,7 +40,7 @@ public class BoardApiController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/api/board/{id}")
+    @DeleteMapping("/api/boards/{id}")
     public ResponseEntity<?> delete(@PathVariable int id, HttpServletRequest request){
 
         // 인증
@@ -57,7 +57,7 @@ public class BoardApiController {
     }
 
     // 게시글 작성
-    @PostMapping("/api/board/save")
+    @PostMapping("/api/boards")
     public ResponseEntity<?> save(BoardRequest.SaveDTO requestDTO, HttpServletRequest request){
 
         //인증
@@ -72,7 +72,7 @@ public class BoardApiController {
     }
 
     // 게시글 목록 보기
-    @GetMapping("/board")
+    @GetMapping("/boards")
     public ResponseEntity<?> index(HttpServletRequest request,
                         @RequestParam(defaultValue = "0") Integer page,
                         @RequestParam(defaultValue = "") String keyword) {
@@ -111,7 +111,7 @@ public class BoardApiController {
     }
 
     // 게시글 상세 보기
-    @GetMapping("/board/{id}")
+    @GetMapping("/boards/{id}")
     public ResponseEntity<?> detail(@PathVariable Integer id , HttpServletRequest request) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");

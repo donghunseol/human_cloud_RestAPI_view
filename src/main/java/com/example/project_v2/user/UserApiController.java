@@ -28,50 +28,50 @@ public class UserApiController {
     private final HttpSession session;
 
     // 메인 화면
-    @GetMapping("/")
+    @GetMapping("/index")
     public ResponseEntity<?> index() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 회원 가입
-    @PostMapping("/user/join")
+    @PostMapping("/users/join")
     public ResponseEntity<?> join(UserRequest.JoinDTO requestDTO) {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 로그인
-    @PostMapping("/user/login")
+    @PostMapping("/users/login")
     public ResponseEntity<?> login(UserRequest.LoginDTO requestDTO) {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 회원 정보 수정
-    @PutMapping("/api/user/{id}")
+    @PutMapping("/api/users/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, HttpServletRequest request) {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 로그아웃
-    @GetMapping("/api/user/logout")
+    @GetMapping("/api/users/logout")
     public ResponseEntity<?> logout() {
         session.invalidate();
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 마이페이지 메인 (공고, 이력서 출력)
-    @GetMapping("/api/myPage")
+    @GetMapping("/api/myPages")
     public ResponseEntity<?> myPage() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
-    @GetMapping("/api/myPage/selectList")
+    @GetMapping("/api/myPages/selectList")
     public ResponseEntity<?> myPageList() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 회원가입(username) 중복 확인
-    @GetMapping("/api/username-same-check")
+    @GetMapping("/api/username-same-checks")
     public ResponseEntity<?> usernameSameCheck(String username) {
         User user = userRepository.findByUsername(username);
         if (user == null) {
@@ -82,7 +82,7 @@ public class UserApiController {
     }
 
     // 스크랩 여부 확인
-    @GetMapping("/api/scrap/{id}")
+    @GetMapping("/api/scraps/{id}")
     public ResponseEntity<?> scrapList(@PathVariable Integer id) {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }

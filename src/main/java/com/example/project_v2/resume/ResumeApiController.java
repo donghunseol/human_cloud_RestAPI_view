@@ -23,7 +23,7 @@ public class ResumeApiController {
     private final HttpSession session;
 
     // 이력서 회원 리스트 출력
-    @GetMapping("/api/resume/{id}")
+    @GetMapping("/api/resumes/{id}")
     public ResponseEntity<?> index(@PathVariable Integer id) {
         User user = userRepository.findById(id);
 
@@ -31,7 +31,7 @@ public class ResumeApiController {
     }
 
     // 이력서 작성
-    @PostMapping("/api/resume")
+    @PostMapping("/api/resumes")
     public ResponseEntity<?> save(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames) {
         User userInfo = (User) session.getAttribute("sessionUser");
         resumeRepository.resumeSave(userInfo.getId(), resume, skillNames);
@@ -40,14 +40,14 @@ public class ResumeApiController {
     }
 
     // 이력서 삭제
-    @DeleteMapping("/api/resume/{id}")
+    @DeleteMapping("/api/resumes/{id}")
     public ResponseEntity<?> delete(HttpServletRequest request, @PathVariable Integer id) {
         resumeRepository.deleteByResumeId(id);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 이력서 수정
-    @PutMapping("/api/resume/{id}")
+    @PutMapping("/api/resumes/{id}")
     public ResponseEntity<?> update(ResumeRequest.ResumeDTO resume, @RequestParam(name = "skillNames") List<String> skillNames, @PathVariable Integer id) {
         resumeRepository.resumeUpdate(id, resume, skillNames);
         return ResponseEntity.ok(new ApiUtil<>(null));

@@ -16,7 +16,7 @@ public class ScrapApiController {
     private final HttpSession session;
 
     // 스크랩 삭제
-    @DeleteMapping("/api/scrap/{id}")
+    @DeleteMapping("/api/scraps/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         scrapRepository.deleteById(id);
@@ -25,7 +25,7 @@ public class ScrapApiController {
     }
 
     // 스크랩 등록
-    @PostMapping("/api/scrap")
+    @PostMapping("/api/scraps")
     public ResponseEntity<?> save(@RequestBody ScrapRequest.UserDTO userDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ScrapResponse.DetailDTO scrapDTO = scrapRepository.findScrap(sessionUser.getId(), sessionUser.getId());
