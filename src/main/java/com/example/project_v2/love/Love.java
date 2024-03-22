@@ -1,5 +1,7 @@
 package com.example.project_v2.love;
 
+import com.example.project_v2.board.Board;
+import com.example.project_v2.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -21,18 +23,20 @@ public class Love {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer boardId;
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Board board;
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public Love(Integer id, Integer boardId, Integer userId, Timestamp createdAt) {
+    public Love(Integer id, Board board, User user, Timestamp createdAt) {
         this.id = id;
-        this.boardId = boardId;
-        this.userId = userId;
+        this.board = board;
+        this.user = user;
         this.createdAt = createdAt;
     }
 }

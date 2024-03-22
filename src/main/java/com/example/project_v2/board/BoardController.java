@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
 
     private final BoardJPARepository boardJPARepository;
+    private final BoardService boardService;
     private final HttpSession session;
 
     // 게시글 수정
@@ -39,9 +40,10 @@ public class BoardController {
     }
 
     // 게시글 상세 보기
-    @GetMapping("/boards/{id}")
+    @GetMapping("/api/boards/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        BoardResponse.DetailDTO reqDTO = boardService.boardDetail(id);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 }
 
