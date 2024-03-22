@@ -1,5 +1,7 @@
 package com.example.project_v2.reply;
 
+import com.example.project_v2.board.Board;
+import com.example.project_v2.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Table(name = "reply_tb")
@@ -21,19 +22,20 @@ public class Reply {
     @Column(nullable = false)
     private String comment;
 
-    @Column(nullable = false)
-    private Integer userId;
-    private Integer boardId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Board board;
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public Reply(Integer id, String comment, Integer userId, Integer boardId, Timestamp createdAt) {
+    public Reply(Integer id, String comment, User user, Board board) {
         this.id = id;
         this.comment = comment;
-        this.userId = userId;
-        this.boardId = boardId;
-        this.createdAt = createdAt;
+        this.user = user;
+        this.board = board;
     }
 }

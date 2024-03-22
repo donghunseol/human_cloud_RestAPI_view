@@ -42,9 +42,10 @@ public class BoardController {
     }
 
     // 게시글 상세 보기
-    @GetMapping("/boards/{id}")
+    @GetMapping("/api/boards/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        BoardResponse.DetailDTO reqDTO = boardService.boardDetail(id);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 }
 
