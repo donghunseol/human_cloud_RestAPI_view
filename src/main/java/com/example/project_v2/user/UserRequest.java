@@ -28,4 +28,11 @@ public class UserRequest {
                     .build();
         }
     }
+
+    @Data
+    public static class LoginDTO {
+        private Integer id; // 유저 번호 (PK)
+        private String username; // 로그인 ID
+        private String password; // 비밀번호
+    }
 }
