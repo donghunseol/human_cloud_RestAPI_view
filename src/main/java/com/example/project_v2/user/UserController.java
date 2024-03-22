@@ -26,6 +26,7 @@ public class UserController {
     // 회원 가입
     @PostMapping("/users/join")
     public ResponseEntity<?> join() {
+
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
