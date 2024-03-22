@@ -3,10 +3,12 @@ package com.example.project_v2.user;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @Table(name = "user_tb")
 @Data
 @Entity

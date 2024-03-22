@@ -60,6 +60,7 @@ insert into apply_tb(resume_id, notice_id, pass, created_at)
 values (2, 2, false, now());
 
 -- board
+insert into board_tb(user_id, title, content, created_at)
 values (1, '안녕하십니까', '처음 왔습니다 인사드립니다!', now());
 insert into board_tb(user_id, title, content, created_at)
 values (1, '자소서는 어떻게 하면 잘 쓸 수 있을까?', '잘 쓰면 된다 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ', now());
