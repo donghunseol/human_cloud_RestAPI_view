@@ -20,7 +20,7 @@ public class ReplyApiController {
 
 
     // 댓글 작성
-    @PostMapping("/api/reply/save")
+    @PostMapping("/api/replies")
     public ResponseEntity<?> save(ReplyRequest.WriteDTO requestDTO) {
         System.out.println(requestDTO);
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -35,7 +35,7 @@ public class ReplyApiController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/api/reply/{id}")
+    @DeleteMapping("/api/replies/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {

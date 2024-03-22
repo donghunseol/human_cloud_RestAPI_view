@@ -19,7 +19,7 @@ public class ApplyApiController {
     private final HttpSession session;
 
     // 지원 합격 불합격 (지원하기 결과 값 입력)
-    @PostMapping("/api/apply/{id}")
+    @PostMapping("/api/applies/pass/{id}")
     public ResponseEntity<?> resumePass(@PathVariable Integer id, Integer pass) {
 
         System.out.println("pass : " + pass);
@@ -33,7 +33,7 @@ public class ApplyApiController {
     }
 
     // 지원할 이력서 선택
-    @GetMapping("/api/apply/{id}/resumeSave")
+    @GetMapping("/api/applies/{id}/resume-save")
     public ResponseEntity<?> resumeSave(@PathVariable Integer id) {
         session.setAttribute("selectResume", resumeRepository.findByResumeId(id));
         System.out.println(resumeRepository.findByResumeId(id));
@@ -41,7 +41,7 @@ public class ApplyApiController {
     }
 
     // 지원 취소
-    @DeleteMapping("/api/apply/{id}")
+    @DeleteMapping("/api/applies/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         applyRepository.deleteById(id);
 
@@ -49,7 +49,7 @@ public class ApplyApiController {
     }
 
     // 지원하기
-    @PostMapping("/api/apply/{id}")
+    @PostMapping("/api/applies/{id}")
     public ResponseEntity<?> save(@PathVariable Integer id, ApplyRequest.SaveDTO requestDTO) {
         applyRepository.save(requestDTO);
 

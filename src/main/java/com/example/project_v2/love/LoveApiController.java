@@ -17,7 +17,7 @@ public class LoveApiController {
     private final HttpSession session;
 
     // 좋아요 입력
-    @PostMapping("/api/love")
+    @PostMapping("/api/loves")
     public ResponseEntity<?> save(@RequestBody LoveRequest.SaveDTO requestDTO, HttpServletRequest response){
         // 인증
         User sessionUser = (User) session.getAttribute("sessionUser");
@@ -27,7 +27,7 @@ public class LoveApiController {
     }
 
     // 좋아요 삭제
-    @DeleteMapping("/api/love/{id}")
+    @DeleteMapping("/api/loves/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id, HttpServletRequest response){
 //         인증
         User sessionUser = (User) session.getAttribute("sessionUser");
