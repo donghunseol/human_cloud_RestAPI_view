@@ -44,6 +44,7 @@ public class User {
     private Integer role;
 
     @Column(nullable = false)
+
     @CreationTimestamp
     private Timestamp created_at;
 

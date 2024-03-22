@@ -1,7 +1,9 @@
 package com.example.project_v2.notice;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -33,5 +35,19 @@ public class Notice {
     private String deadline;
 
     @Column(nullable = false)
+    @CreationTimestamp
     private Timestamp createdAt;
+
+    @Builder
+    public Notice(Integer id, Integer userId, String title, String type, String field, String workPlace, String content, String deadline, Timestamp createdAt) {
+        this.id = id;
+        this.userId = userId;
+        this.title = title;
+        this.type = type;
+        this.field = field;
+        this.workPlace = workPlace;
+        this.content = content;
+        this.deadline = deadline;
+        this.createdAt = createdAt;
+    }
 }
