@@ -7,11 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
 
-    private final BoardJPARepository boardJPARepository;
     private final BoardService boardService;
     private final HttpSession session;
 
@@ -36,7 +37,8 @@ public class BoardController {
     // 게시글 목록 보기
     @GetMapping("/boards")
     public ResponseEntity<?> index() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        List<BoardResponse.MainDTO> respDTO = boardService.게시글목록보기();
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 게시글 상세 보기
