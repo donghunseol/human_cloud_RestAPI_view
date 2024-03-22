@@ -1,6 +1,7 @@
 package com.example.project_v2.board;
 
 import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,12 @@ public class BoardController {
     }
 
     // 게시글 작성
-    @PostMapping("/api/boards")
-    public ResponseEntity<?> save(){
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    @PostMapping("/boards/test")
+    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO requestDTO){
+        //User sessionUser = (User) session.getAttribute("sessionUser");
+        // 로그인 여부 체크
+        Board board = boardService.save(requestDTO);
+        return ResponseEntity.ok(new ApiUtil(board));
     }
 
     // 게시글 목록 보기
