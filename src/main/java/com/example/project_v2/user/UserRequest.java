@@ -3,7 +3,6 @@ package com.example.project_v2.user;
 import lombok.Data;
 
 public class UserRequest {
-
     @Data
     public static class JoinDTO{
         private Integer id; // 유저 번호 (PK)
