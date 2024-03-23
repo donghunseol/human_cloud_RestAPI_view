@@ -16,7 +16,7 @@ public class ReplyController {
 
     private final ReplyJPARepository replyJPARepository;
     private final HttpSession session;
-
+    private final ReplyService replyService;
     // 댓글 작성
     @PostMapping("/api/replies")
     public ResponseEntity<?> save() {
@@ -26,6 +26,8 @@ public class ReplyController {
     // 댓글 삭제
     @DeleteMapping("/api/replies/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        replyService.댓글삭제(id,sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
