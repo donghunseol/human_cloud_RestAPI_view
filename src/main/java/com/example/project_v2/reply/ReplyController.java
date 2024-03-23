@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 @Controller
 public class ReplyController {
-
+    private final ReplyService replyService;
     private final ReplyJPARepository replyJPARepository;
     private final HttpSession session;
 
