@@ -9,18 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @Controller
 public class ReplyController {
-
+    private final ReplyService replyService;
     private final ReplyJPARepository replyJPARepository;
     private final HttpSession session;
-    private final ReplyService replyService;
     // 댓글 작성
     @PostMapping("/api/replies")
-    public ResponseEntity<?> save() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ResponseEntity<?> save(@RequestBody ReplyRequest.SaveDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Reply reply = replyService.댓글쓰기(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(reply));
     }
 
     // 댓글 삭제
