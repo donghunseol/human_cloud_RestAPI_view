@@ -10,10 +10,11 @@ public class BoardRequest {
         private String content;
 
         // 빌더 패턴
-        public Board toEntity() {
+        public Board toEntity(User user) {
             return Board.builder()
                     .title(title)
                     .content(content)
+                    .user(user)
                     .build();
         }
     }

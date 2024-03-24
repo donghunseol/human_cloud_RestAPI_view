@@ -41,8 +41,8 @@ public class BoardService {
     }
 
     @Transactional
-    public Board save(BoardRequest.SaveDTO reqDTO) {
-        Board board = boardJPARepository.save(reqDTO.toEntity());
+    public Board save(BoardRequest.SaveDTO reqDTO, User sessionUser) {
+        Board board = boardJPARepository.save(reqDTO.toEntity(sessionUser));
         return board;
     }
 
