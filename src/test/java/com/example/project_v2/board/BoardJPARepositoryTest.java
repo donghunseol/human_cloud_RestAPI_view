@@ -1,13 +1,23 @@
 package com.example.project_v2.board;
 
+import com.example.project_v2._core.errors.exception.Exception403;
+import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.user.User;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class BoardJPARepositoryTest {
@@ -20,7 +30,25 @@ public class BoardJPARepositoryTest {
 
 
     @Test
-    public void deleteById_test(){
+    public void findById_test(){
+        // given
+        int id = 1;
+
+        // when
+        Optional<Board> boardOP = boardJPARepository.findById(id);
+
+
+        // then
+        if (boardOP.isPresent()) {
+            Board board = boardOP.get();
+            Assertions.assertThat(board.getTitle()).isEqualTo("안녕하십니까");
+        }
+
+
+    }
+
+    @Test
+    public void delete_test(){
         // given
         int id = 1;
 

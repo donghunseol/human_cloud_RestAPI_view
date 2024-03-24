@@ -17,10 +17,13 @@ public class BoardController {
     private final BoardService boardService;
     private final HttpSession session;
 
+
     // 게시글 수정
-    @PutMapping("/api/boards/{id}")
-    public ResponseEntity<?> update(@PathVariable int id){
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    @PutMapping("/boards/{id}/updateTest")
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Board board = boardService.update(id, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(board));
     }
 
     // 게시글 삭제
