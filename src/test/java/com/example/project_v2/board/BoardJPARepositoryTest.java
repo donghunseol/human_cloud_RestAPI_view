@@ -1,5 +1,6 @@
 package com.example.project_v2.board;
 
+import org.assertj.core.api.Assertions;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,22 @@ public class BoardJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
+
+
+    @Test
+    public void deleteById_test(){
+        // given
+        int id = 1;
+
+        // when
+        boardJPARepository.deleteById(id);
+        em.flush();
+
+        List<Board> boardList = boardJPARepository.findAll();
+
+        // then
+        Assertions.assertThat(boardList.size()).isEqualTo(14);
+    }
 
     @Test
     public void findAll_test(){
