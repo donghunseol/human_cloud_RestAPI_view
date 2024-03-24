@@ -2,10 +2,14 @@ package com.example.project_v2.board;
 
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2.user.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -13,6 +17,18 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
+
+
+    @Transactional
+    public Board update(Integer boardId, BoardRequest.UpdateDTO reqDTO){
+        Board board = boardJPARepository.findById(boardId)
+                .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+
+        board.setTitle(reqDTO.getTitle());
+        board.setContent(reqDTO.getContent());
+
+        return board;
+    } // 더티 체킹
 
     @Transactional
     public void delete(int boardId, Integer sessionUserId){

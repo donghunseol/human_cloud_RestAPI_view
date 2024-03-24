@@ -3,6 +3,7 @@ package com.example.project_v2.board;
 import com.example.project_v2.love.Love;
 import com.example.project_v2.reply.Reply;
 import com.example.project_v2.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -28,16 +29,19 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
+    // @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @CreationTimestamp
     private Timestamp created_at;
 
+    // @JsonIgnore
     @OrderBy("id desc")
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Reply> replies = new ArrayList<>();
 
+    // @JsonIgnore
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Love> loves = new ArrayList<>();
 
