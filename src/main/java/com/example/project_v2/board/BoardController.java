@@ -36,10 +36,10 @@ public class BoardController {
 
     // 게시글 작성
     @PostMapping("/boards/test")
-    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO requestDTO){
-        //User sessionUser = (User) session.getAttribute("sessionUser");
+    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO){
+        User sessionUser = (User) session.getAttribute("sessionUser");
         // 로그인 여부 체크
-        Board board = boardService.save(requestDTO);
+        Board board = boardService.save(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil(board));
     }
 

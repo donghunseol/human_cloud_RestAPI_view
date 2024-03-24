@@ -30,6 +30,23 @@ public class BoardJPARepositoryTest {
 
 
     @Test
+    public void save_test(){
+        // given
+        User sessionUser = User.builder().id(1).build();
+        Board board = Board.builder()
+                .title("제목5")
+                .content("내용5")
+                .user(sessionUser)
+                .build();
+
+        // when
+        boardJPARepository.save(board);
+
+        // then
+        Assertions.assertThat(board.getId()).isEqualTo(16);
+    }
+
+    @Test
     public void findById_test(){
         // given
         int id = 1;
