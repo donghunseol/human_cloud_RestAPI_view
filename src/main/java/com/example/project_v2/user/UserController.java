@@ -15,7 +15,7 @@ public class UserController {
     private final HttpSession session;
 
     // 메인 화면
-    @GetMapping("/index")
+    @GetMapping("/")
     public ResponseEntity<?> index() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
@@ -37,8 +37,12 @@ public class UserController {
 
     // 회원 정보 수정
     @PutMapping("/api/users/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id) {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
+        session.setAttribute("sessionUser", newSessionUser);
+        UserResponse.DTO respDTO = new UserResponse.DTO(sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 로그아웃
