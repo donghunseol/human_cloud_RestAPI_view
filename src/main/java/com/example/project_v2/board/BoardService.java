@@ -1,6 +1,7 @@
 package com.example.project_v2.board;
 
-import com.example.project_v2.user.User;
+import com.example.project_v2._core.errors.exception.Exception403;
+import com.example.project_v2._core.errors.exception.Exception404;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -12,6 +13,16 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
+
+    @Transactional
+    public void delete(int boardId, Integer sessionUserId){
+        Board board = boardJPARepository.findById(boardId)
+                        .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
+        if(sessionUserId != board.getUser().getId()) {
+            throw new Exception403("게시글을 삭제할 권한이 없습니다.");
+        }
+        boardJPARepository.deleteById(boardId);
+    }
 
     @Transactional
     public Board save(BoardRequest.SaveDTO reqDTO) {

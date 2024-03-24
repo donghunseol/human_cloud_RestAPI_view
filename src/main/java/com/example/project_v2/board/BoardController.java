@@ -24,8 +24,10 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/api/boards/{id}")
+    @DeleteMapping("/boards/{id}/test")
     public ResponseEntity<?> delete(@PathVariable int id){
+        User sessionUSer = (User) session.getAttribute("sessionUser");
+        boardService.delete(id, sessionUSer.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
