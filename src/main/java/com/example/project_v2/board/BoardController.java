@@ -22,7 +22,7 @@ public class BoardController {
     @PutMapping("/boards/{id}/updateTest")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Board board = boardService.update(id, reqDTO);
+        Board board = boardService.update(id, sessionUser.getId(), reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(board));
     }
 
