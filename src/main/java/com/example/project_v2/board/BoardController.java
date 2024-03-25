@@ -46,7 +46,7 @@ public class BoardController {
     // 게시글 목록 보기
     @GetMapping("/boards")
     public ResponseEntity<?> index() {
-        List<BoardResponse.MainDTO> respDTO = boardService.게시글목록보기();
+        List<BoardResponse.MainDTO> respDTO = boardService.boardMain();
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 

@@ -54,7 +54,7 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, sessionUser);
     }
 
-    public List<BoardResponse.MainDTO> 게시글목록보기() {
+    public List<BoardResponse.MainDTO> boardMain() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Board> boardList = boardJPARepository.findAll(sort);
         return boardList.stream().map(board -> new BoardResponse.MainDTO(board)).toList();
