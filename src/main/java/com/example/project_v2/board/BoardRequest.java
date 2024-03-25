@@ -6,6 +6,7 @@ import lombok.Data;
 public class BoardRequest {
     @Data
     public static class SaveDTO{
+        private Integer id; // board의 pk
         private String title;
         private String content;
 
