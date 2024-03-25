@@ -41,8 +41,7 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
-        UserResponse.DTO respDTO = new UserResponse.DTO(sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 로그아웃
