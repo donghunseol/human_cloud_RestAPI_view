@@ -20,7 +20,7 @@ public class BoardController {
 
     // 게시글 수정
     @PutMapping("/boards/{id}/updateTest")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Board board = boardService.update(id, reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(board));
@@ -28,7 +28,7 @@ public class BoardController {
 
     // 게시글 삭제
     @DeleteMapping("/boards/{id}/test")
-    public ResponseEntity<?> delete(@PathVariable int id){
+    public ResponseEntity<?> delete(@PathVariable int id) {
         User sessionUSer = (User) session.getAttribute("sessionUser");
         boardService.delete(id, sessionUSer.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
@@ -36,7 +36,7 @@ public class BoardController {
 
     // 게시글 작성
     @PostMapping("/boards/test")
-    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO){
+    public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 로그인 여부 체크
         Board board = boardService.save(reqDTO, sessionUser);
@@ -53,7 +53,8 @@ public class BoardController {
     // 게시글 상세 보기
     @GetMapping("/api/boards/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
-        BoardResponse.DetailDTO reqDTO = boardService.boardDetail(id);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        BoardResponse.DetailDTO reqDTO = boardService.boardDetail(id, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 }
