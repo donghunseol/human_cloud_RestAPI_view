@@ -22,12 +22,7 @@ public class Notice {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @JoinColumn()
-    @Column(nullable = false)
-    private Integer userId;
 
     @Column(nullable = false)
     private String title;
@@ -53,10 +48,9 @@ public class Notice {
 
 
     @Builder
-    public Notice(Integer id, User user, Integer userId, String title, String type, String field, String workPlace, String content, String deadline, List<Skill> skills) {
+    public Notice(Integer id, User user, String title, String type, String field, String workPlace, String content, String deadline, List<Skill> skills) {
         this.id = id;
         this.user = user;
-        this.userId = userId;
         this.title = title;
         this.type = type;
         this.field = field;
