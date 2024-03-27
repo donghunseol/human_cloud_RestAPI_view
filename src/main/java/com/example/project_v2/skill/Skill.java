@@ -1,5 +1,7 @@
 package com.example.project_v2.skill;
 
+import com.example.project_v2.notice.Notice;
+import com.example.project_v2.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +16,11 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer resumeId;
-    private Integer noticeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Resume resume;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Notice notice;
 
     @Column(nullable = false)
     private String name;
@@ -23,11 +28,10 @@ public class Skill {
     private Integer role;
 
     @Builder
-
-    public Skill(Integer id, Integer resumeId, Integer noticeId, String name, Integer role) {
+    public Skill(Integer id, Resume resume, Notice notice, String name, Integer role) {
         this.id = id;
-        this.resumeId = resumeId;
-        this.noticeId = noticeId;
+        this.resume = resume;
+        this.notice = notice;
         this.name = name;
         this.role = role;
     }
