@@ -1,6 +1,7 @@
 package com.example.project_v2.resume;
 
 import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ResumeController {
 
-    private final ResumeJPARepository resumeJPARepository;
+    private final ResumeService resumeService;
     private final HttpSession session;
 
     // 이력서 회원 리스트 출력
@@ -22,7 +23,7 @@ public class ResumeController {
 
     // 이력서 작성
     @PostMapping("/api/resumes")
-    public ResponseEntity<?> save( ) {
+    public ResponseEntity<?> save() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
@@ -36,5 +37,13 @@ public class ResumeController {
     @PutMapping("/api/resumes/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id) {
         return ResponseEntity.ok(new ApiUtil<>(null));
+    }
+
+    // 이력서 상세 보기
+    @GetMapping("/api/resumes/{id}/detail")
+    public ResponseEntity<?> detail(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        ResumeResponse.DetailDTO reqDTO = resumeService.resumeDetail(id, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 }

@@ -23,34 +23,6 @@ values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.
         now());
 
 
--- skill
--- 이력서 (개인)
-insert into skill_tb(resume_id, notice_id, name, role)
-values (1, null, 'JAVA', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (1, null, 'MySQL', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (1, null, 'HTML', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (1, null, 'CSS', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (3, null, 'C#', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (3, null, 'C++', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (3, null, 'JAVA', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (5, null, 'PYTHON', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (5, null, 'MariaDB', 0);
--- 공고 (회사)
-insert into skill_tb(resume_id, notice_id, name, role)
-values (null, 1, 'java', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (null, 2, 'java', 0);
-insert into skill_tb(resume_id, notice_id, name, role)
-values (null, 2, 'sql', 0);
-
 -- apply
 insert into apply_tb(resume_id, notice_id, pass, created_at)
 values (1, 1, false, now());
@@ -166,3 +138,34 @@ insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
 values (5, 2, null, 1, now());
 insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
 values (5, 3, null, 1, now());
+
+
+
+
+-- skill
+-- 이력서 (개인)
+insert into skill_tb(resume_id, notice_id, name, role)
+values (1, null, 'JAVA', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (1, null, 'MySQL', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (1, null, 'HTML', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (1, null, 'CSS', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'C#', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'C++', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (3, null, 'JAVA', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (5, null, 'PYTHON', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (5, null, 'MariaDB', 0);
+-- 공고 (회사)
+insert into skill_tb(resume_id, notice_id, name, role)
+values (null, 1, 'java', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (null, 2, 'java', 0);
+insert into skill_tb(resume_id, notice_id, name, role)
+values (null, 2, 'sql', 0);
