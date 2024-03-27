@@ -19,16 +19,15 @@ public class ResumeService {
     @Transactional
     public Resume save(ResumeRequest.SaveDTO reqDTO, User sessionUser){
         // 이력서 정보 저장
-        Resume resume = reqDTO.toEntity(sessionUser);
-        resume = resumeJPARepository.save(resume);
+        Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
 
         // 스킬 정보를 생성
         List<Skill> skills = new ArrayList<>();
         for (ResumeRequest.SaveDTO.SkillDTO skillDTO : reqDTO.getSkills()) {
             Skill skill = Skill.builder()
-                    .resume(resume)
                     .name(skillDTO.getName())
                     .role(skillDTO.getRole())
+                    .resume(resume)
                     .build();
             skills.add(skill);
         }
