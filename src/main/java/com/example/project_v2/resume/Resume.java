@@ -1,5 +1,7 @@
 package com.example.project_v2.resume;
 
+import com.example.project_v2.skill.Skill;
+import com.example.project_v2.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Table(name = "resume_tb")
@@ -15,9 +19,10 @@ import java.sql.Timestamp;
 public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     private String title;
 
@@ -33,18 +38,21 @@ public class Resume {
     @Column(nullable = false)
     private String major;
 
+    @OneToMany(mappedBy = "resume", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Skill> skills = new ArrayList<>();
+
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public Resume(Integer id, Integer userId, String title, String career, String license, String education, String major, Timestamp createdAt) {
+    public Resume(int id, User user, String title, String career, String license, String education, String major, List<Skill> skills) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.title = title;
         this.career = career;
         this.license = license;
         this.education = education;
         this.major = major;
-        this.createdAt = createdAt;
+        this.skills = skills;
     }
 }
