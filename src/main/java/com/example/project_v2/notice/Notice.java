@@ -1,5 +1,7 @@
 package com.example.project_v2.notice;
 
+import com.example.project_v2.skill.Skill;
+import com.example.project_v2.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Table(name = "notice_tb")
@@ -17,9 +21,8 @@ public class Notice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn()
-    @Column(nullable = false)
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Column(nullable = false)
     private String title;
@@ -40,16 +43,20 @@ public class Notice {
     @CreationTimestamp
     private Timestamp createdAt;
 
+    @OneToMany(mappedBy = "notice", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Skill> skills = new ArrayList<>();
+
+
     @Builder
-    public Notice(Integer id, Integer userId, String title, String type, String field, String workPlace, String content, String deadline, Timestamp createdAt) {
+    public Notice(Integer id, User user, String title, String type, String field, String workPlace, String content, String deadline, List<Skill> skills) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.title = title;
         this.type = type;
         this.field = field;
         this.workPlace = workPlace;
         this.content = content;
         this.deadline = deadline;
-        this.createdAt = createdAt;
+        this.skills = skills;
     }
 }

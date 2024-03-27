@@ -33,7 +33,6 @@ public class UserService {
         user.setEmail(reqDTO.getEmail());
         user.setAddress(reqDTO.getAddress());
         user.setImage(reqDTO.getImage());
-
-        return null;
+        return user;
     }
 }
