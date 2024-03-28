@@ -68,7 +68,9 @@ public class NoticeResponse {
             this.noticeId = notice.getId();
             this.isNoticeOwner = false;
             if (sessionUser != null){
-                if (sessionUser.getId() == userId) isNoticeOwner = true;
+                if (sessionUser.getId() == userId) {
+                    isNoticeOwner = true;
+                }
             }
             this.skills = notice.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
