@@ -1,5 +1,6 @@
 package com.example.project_v2.resume;
 
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
 import com.example.project_v2.user.User;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,16 @@ import java.util.List;
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
     private final SkillJPARepository skillJPARepository;
+
+    @Transactional
+    public void delete(Integer resumeId, Integer sessionUserId){
+        Resume resume = resumeJPARepository.findById(resumeId)
+                .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
+        if(sessionUserId != resume.getUser().getId()){
+            throw new Exception403("이력서를 삭제할 권한이 없습니다.");
+        }
+        resumeJPARepository.deleteById(resumeId);
+    }
 
     @Transactional
     public Resume save(ResumeRequest.SaveDTO reqDTO, User sessionUser){
