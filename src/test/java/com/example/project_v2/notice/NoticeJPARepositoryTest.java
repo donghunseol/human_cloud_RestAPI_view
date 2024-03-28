@@ -16,11 +16,22 @@ public class NoticeJPARepositoryTest {
     @Autowired
     private NoticeJPARepository noticeJPARepository;
 
-    @Autowired
-    private UserJPARepository userJPARepository;
 
     @Autowired
     private EntityManager em;
+
+    @Test
+    public void delete_test(){
+        // given
+        Integer id = 1;
+
+        // when
+        noticeJPARepository.deleteById(id); // LAZY 로 skill 과 같이 지워지는지 테스트
+        em.flush();
+
+        // then
+
+    }
 
     @Test
     public void findByIdJoinSkill_test(){

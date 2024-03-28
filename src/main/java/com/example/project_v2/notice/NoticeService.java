@@ -1,5 +1,6 @@
 package com.example.project_v2.notice;
 
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillJPARepository;
@@ -23,6 +24,16 @@ public class NoticeService {
                 .orElseThrow(() -> new Exception404("공고 글을 찾을 수 없음"));
 
         return new NoticeResponse.DetailDTO(notice, sessionUser);
+    }
+
+    public void delete(Integer noticeId, Integer sessionUserId){
+        Notice notice = noticeJPARepository.findById(noticeId)
+                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
+
+        if(sessionUserId != notice.getUser().getId()){
+            throw new Exception403("공고를 삭제할 권한이 없습니다");
+        }
+        noticeJPARepository.deleteById(noticeId);
     }
 
     @Transactional

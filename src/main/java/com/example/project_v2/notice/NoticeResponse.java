@@ -81,7 +81,7 @@ public class NoticeResponse {
         public SkillDTO(Skill skill) {
             this.id = skill.getId();
             this.noticeId = skill.getNotice().getId();
-            this.name = getName();
+            this.name = skill.getName();
         }
     }
 }
