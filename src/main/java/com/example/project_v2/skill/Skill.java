@@ -7,8 +7,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-@JsonIgnoreProperties({"resume", "notice"})
 @NoArgsConstructor
 @Table(name = "skill_tb")
 @Data
