@@ -35,7 +35,7 @@ public class ResumeJPARepositoryTest {
     }
 
     @Test
-    public void testFindByUser_test() {
+    public void findByUser_test() {
         // Given
         User user = new User();
         user.setId(1);
@@ -45,5 +45,14 @@ public class ResumeJPARepositoryTest {
 
         // Then
         assertEquals(4, result.size()); // 해당 사용자에 대한 이력서 개수를 확인
+    }
+
+    @Test
+    public void findAll_test() {
+        // When
+        List<Resume> result = resumeJPARepository.findAll();
+
+        // Then
+        assertEquals(6, result.size()); // 전체 이력서 개수를 확인
     }
 }
