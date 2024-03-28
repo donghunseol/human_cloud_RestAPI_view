@@ -1,16 +1,17 @@
 package com.example.project_v2.resume;
 
+import com.example.project_v2.user.User;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class ResumeJPARepositoryTest {
@@ -21,6 +22,25 @@ public class ResumeJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
+    @Test
+    public void save_test() {
+        // given
+        User sessionUser = User.builder().id(1).build();
+        Resume resume = Resume.builder()
+                .user(sessionUser)
+                .title("제목5")
+                .career("1년")
+                .license("정보처리기사, SQLD")
+                .education("쌀대학교, 졸업")
+                .major("컴퓨터공학과")
+                .build();
+
+        // when
+        resumeJPARepository.save(resume);
+
+        // then
+        Assertions.assertThat(resume.getId()).isEqualTo(7);
+    }
     @Test
     public void findByIdJoinUser_test() {
         // Given
@@ -50,16 +70,24 @@ public class ResumeJPARepositoryTest {
 
     }
 
+    public void findByUser_test() {
+        // Given
+        User user = new User();
+        user.setId(1);
+
+        // When
+        List<Resume> result = resumeJPARepository.findByUser(user, Sort.unsorted());
+
+        // Then
+        assertEquals(4, result.size()); // 해당 사용자에 대한 이력서 개수를 확인
+    }
+
     @Test
-    public void findAll_test(){
-        // given
+    public void findAll_test() {
+        // When
+        List<Resume> result = resumeJPARepository.findAll();
 
-
-        // when
-        List<Resume> resumeList = resumeJPARepository.findAll();
-
-        // then
-        Assertions.assertThat(resumeList.size()).isEqualTo(6);
-
+        // Then
+        assertEquals(6, result.size()); // 전체 이력서 개수를 확인
     }
 }

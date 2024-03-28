@@ -1,6 +1,7 @@
 package com.example.project_v2.notice;
 
 import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.board.BoardResponse;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillRequest;
 import com.example.project_v2.skill.SkillService;
@@ -24,7 +25,8 @@ public class NoticeController {
     // 공고 목록 보기
     @GetMapping("/notices")
     public ResponseEntity<?> index() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        List<NoticeResponse.MainDTO> respDTO = noticeService.noticeMain();
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 공고 작성
@@ -45,7 +47,9 @@ public class NoticeController {
 
     // 공고 삭제
     @DeleteMapping("/api/notices/{id}")
-    public ResponseEntity<?> delete() {
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        noticeService.delete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 

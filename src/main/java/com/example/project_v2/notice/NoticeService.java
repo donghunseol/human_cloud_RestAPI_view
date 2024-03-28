@@ -1,10 +1,14 @@
 package com.example.project_v2.notice;
 
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2.board.Board;
+import com.example.project_v2.board.BoardResponse;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +27,16 @@ public class NoticeService {
                 .orElseThrow(() -> new Exception404("공고 글을 찾을 수 없음"));
 
         return new NoticeResponse.DetailDTO(notice, sessionUser);
+    }
+
+    public void delete(Integer noticeId, Integer sessionUserId){
+        Notice notice = noticeJPARepository.findById(noticeId)
+                .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
+
+        if(sessionUserId != notice.getUser().getId()){
+            throw new Exception403("공고를 삭제할 권한이 없습니다");
+        }
+        noticeJPARepository.deleteById(noticeId);
     }
 
     @Transactional
@@ -49,5 +63,11 @@ public class NoticeService {
         notice.setSkills(skills);
 
         return noticeJPARepository.save(notice);
+    }
+
+    public List<NoticeResponse.MainDTO> noticeMain() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Notice> noticeList = noticeJPARepository.findAll(sort);
+        return noticeList.stream().map(notice -> new NoticeResponse.MainDTO(notice)).toList();
     }
 }
