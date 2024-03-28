@@ -22,6 +22,7 @@ public class Notice {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)
