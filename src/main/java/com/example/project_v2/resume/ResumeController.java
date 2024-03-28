@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 public class ResumeController {
@@ -46,6 +48,21 @@ public class ResumeController {
     public ResponseEntity<?> detail(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ResumeResponse.DetailDTO reqDTO = resumeService.resumeDetail(id, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+    }
+
+    // 이력서 리스트
+    @GetMapping("/api/resumes")
+    public ResponseEntity<?> resumeList() {
+        List<ResumeResponse.ResumeListDTO> reqDTO = resumeService.resumeList();
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+    }
+
+    // 이력서 리스트(개인)
+    @GetMapping("/api/my-resumes")
+    public ResponseEntity<?> myResumeList() {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<ResumeResponse.ResumeListDTO> reqDTO = resumeService.resumeListByUser(sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 }

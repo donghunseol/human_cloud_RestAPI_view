@@ -19,7 +19,7 @@ public class ResumeResponse {
         private String license;
         private String education;
         private String major;
-        private int userId;
+        private Integer userId;
         private boolean isResumeOwner;
 
         private List<SkillDTO> skills = new ArrayList<>();
@@ -45,17 +45,38 @@ public class ResumeResponse {
             this.skills = resume.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
 
-        @Data
-        public class SkillDTO {
-            private Integer id;
-            private int resumeId;
-            private String name;
 
-            public SkillDTO(Skill skill) {
-                this.id = skill.getId();
-                this.resumeId = skill.getResume().getId();
-                this.name = skill.getName();
-            }
+    }
+
+    @Data
+    public static class ResumeListDTO {
+        private Integer id;
+        private String title;
+        private String username;
+        private Integer userId;
+
+        private List<SkillDTO> skills = new ArrayList<>();
+
+        public ResumeListDTO(Resume resume) {
+            this.id = resume.getId();
+            this.title = resume.getTitle();
+            this.username = resume.getUser().getUsername();
+            this.userId = resume.getUser().getId();
+
+            this.skills = resume.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
+        }
+    }
+
+    @Data
+    public static class SkillDTO {
+        private Integer id;
+        private int resumeId;
+        private String name;
+
+        public SkillDTO(Skill skill) {
+            this.id = skill.getId();
+            this.resumeId = skill.getResume().getId();
+            this.name = skill.getName();
         }
     }
 }
