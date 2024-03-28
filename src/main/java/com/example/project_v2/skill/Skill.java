@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @NoArgsConstructor
 @Table(name = "skill_tb")
@@ -19,9 +20,11 @@ public class Skill {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Resume resume;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Notice notice;
 
     @Column(nullable = false)

@@ -23,8 +23,10 @@ public class ResumeController {
 
     // 이력서 작성
     @PostMapping("/api/resumes")
-    public ResponseEntity<?> save() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Resume resume = resumeService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(resume));
     }
 
     // 이력서 삭제
