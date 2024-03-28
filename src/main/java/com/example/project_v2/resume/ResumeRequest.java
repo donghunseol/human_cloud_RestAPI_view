@@ -37,4 +37,24 @@ public class ResumeRequest {
             return resume;
         }
     }
+
+    @Data
+    public static class UpdateDTO{
+        private Integer id; // resume의 pk
+        private User user;
+        private String title;
+        private String career;
+        private String license;
+        private String education;
+        private String major;
+        private List<SkillDTO> skills = new ArrayList<>();
+
+        @Data
+        public static class SkillDTO{
+            private Integer id;
+            private String name;
+            private Integer role;
+            private Integer resumeId;
+        }
+    }
 }
