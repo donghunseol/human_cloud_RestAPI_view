@@ -49,7 +49,7 @@ public class User {
     private Timestamp created_at;
 
     @Builder
-    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String image, Integer role, Timestamp created_at) {
+    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String image, Integer role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -60,6 +60,5 @@ public class User {
         this.address = address;
         this.image = image;
         this.role = role;
-        this.created_at = created_at;
     }
 }

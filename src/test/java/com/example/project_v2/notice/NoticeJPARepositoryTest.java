@@ -1,8 +1,7 @@
 package com.example.project_v2.notice;
 
+import com.example.project_v2.user.UserJPARepository;
 import jakarta.persistence.EntityManager;
-import org.assertj.core.api.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -18,7 +17,27 @@ public class NoticeJPARepositoryTest {
     private NoticeJPARepository noticeJPARepository;
 
     @Autowired
+    private UserJPARepository userJPARepository;
+
+    @Autowired
     private EntityManager em;
+
+    @Test
+    public void findByIdJoinSkill_test(){
+        // given
+        int id = 2;
+
+        // when
+        Optional<Notice> noticeOP = noticeJPARepository.findByIdJoinSkill(id);
+        System.out.println("save_test/skills/size : " + noticeOP.get().getSkills().size());
+        System.out.println("save_test/skills/first/name : " + noticeOP.get().getSkills().getFirst().getName());
+        System.out.println("save_test/skills/last/name : " + noticeOP.get().getSkills().getLast().getName());
+
+        // then
+        assertTrue(noticeOP.isPresent());
+        assertEquals(id, noticeOP.get().getId());
+        assertNotNull(noticeOP.get().getUser());
+    }
 
     @Test
     public void findByIdJoinUser_test(){

@@ -2,6 +2,7 @@ package com.example.project_v2.skill;
 
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.resume.Resume;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "skill_tb")
 @Data
 @Entity
+@JsonIgnoreProperties({"resume", "notice"})
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
