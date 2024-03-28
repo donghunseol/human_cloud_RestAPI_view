@@ -55,6 +55,21 @@ public class ResumeJPARepositoryTest {
     }
 
     @Test
+    public void delete_test(){
+        // given
+        int id = 1;
+
+        // when
+        resumeJPARepository.deleteById(1);
+        em.flush();
+
+        List<Resume> resumeList = resumeJPARepository.findAll();
+
+        // then
+        Assertions.assertThat(resumeList.size()).isEqualTo(5);
+
+    }
+
     public void findByUser_test() {
         // Given
         User user = new User();
