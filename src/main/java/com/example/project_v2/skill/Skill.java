@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "skill_tb")
 @Data
 @Entity
+@JsonIgnoreProperties({"resume", "notice"})
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
