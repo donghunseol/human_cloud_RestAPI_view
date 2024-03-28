@@ -45,7 +45,9 @@ public class NoticeController {
 
     // 공고 삭제
     @DeleteMapping("/api/notices/{id}")
-    public ResponseEntity<?> delete() {
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        noticeService.delete(id, sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
