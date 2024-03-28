@@ -17,12 +17,16 @@ public class NoticeResponse {
         private String deadline;
         private String image;
 
+        private List<SkillDTO> skills = new ArrayList<>();
+
         public MainDTO(Notice notice) {
-            this.noticeId = noticeId;
-            this.username = username;
-            this.title = title;
-            this.deadline = deadline;
-            this.image = image;
+            this.noticeId = notice.getId();
+            this.username = notice.getUser().getUsername();
+            this.title = notice.getTitle();
+            this.deadline = notice.getDeadline();
+            this.image = notice.getUser().getImage();
+
+            this.skills = notice.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
     }
 
