@@ -2,12 +2,13 @@ package com.example.project_v2.skill;
 
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.resume.Resume;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@JsonIgnoreProperties({"resume", "notice"})
 @NoArgsConstructor
 @Table(name = "skill_tb")
 @Data
@@ -18,11 +19,9 @@ public class Skill {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
     private Resume resume;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
     private Notice notice;
 
     @Column(nullable = false)

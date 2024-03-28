@@ -48,7 +48,7 @@ public class NoticeResponse {
 
 
         public DetailDTO(Notice notice, User sessionUser) {
-            this.userId = notice.getUserId();
+            this.userId = notice.getUser().getId();
             this.username = notice.getUser().getUsername();
             this.address = notice.getUser().getAddress();
             this.birth = notice.getUser().getBirth();
