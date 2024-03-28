@@ -42,7 +42,7 @@ public class NoticeJPARepositoryTest {
     @Test
     public void findByIdJoinUser_test(){
         //given
-        int id =7;
+        int id = 5;
         //when
         Optional<Notice> noticeOP = noticeJPARepository.findByIdJoinUser(id);
         //then
