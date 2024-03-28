@@ -12,5 +12,4 @@ public class SkillJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
-
 }

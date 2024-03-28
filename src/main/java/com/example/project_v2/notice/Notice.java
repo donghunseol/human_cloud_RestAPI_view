@@ -57,6 +57,13 @@ public class Notice {
         this.workPlace = workPlace;
         this.content = content;
         this.deadline = deadline;
-        this.skills = skills;
+        if (skills != null) { // Builder를 사용할 때 skills 리스트가 제공되면 해당 리스트의 각 Skill에 현재 Notice를 설정
+            skills.forEach(this::addSkill);
+        }
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+        skill.setNotice(this);
     }
 }
