@@ -19,6 +19,40 @@ public class NoticeService {
     private final NoticeJPARepository noticeJPARepository;
     private final SkillJPARepository skillJPARepository;
 
+    @Transactional
+    public Notice update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO) {
+        Notice notice = noticeJPARepository.findById(noticeId)
+                .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다"));
+        notice.setTitle(reqDTO.getTitle());
+        notice.setType(reqDTO.getType());
+        notice.setField(reqDTO.getField());
+        notice.setWorkPlace(reqDTO.getWorkPlace());
+        notice.setDeadline(reqDTO.getDeadline());
+        notice.setContent(reqDTO.getContent());
+
+        System.out.println("skills/size/after : " + reqDTO.getSkills().size());
+
+        skillJPARepository.deleteAllByNoticeId(noticeId);
+
+        System.out.println("skills/size/before : " + reqDTO.getSkills().size());
+
+        List<Skill> skills = new ArrayList<>();
+        for (NoticeRequest.UpdateDTO.SkillDTO skill : reqDTO.getSkills()) {
+            Skill skillBuild = Skill.builder()
+                    .name(skill.getName())
+                    .role(skill.getRole())
+                    .notice(notice)
+                    .build();
+            skills.add(skillBuild);
+            System.out.println("skillBuild/id : " + skillBuild.getId());
+        }
+
+        skills = skillJPARepository.saveAll(skills);
+        notice.setSkills(skills);
+
+        return notice;
+    }
+
     public NoticeResponse.DetailDTO noticeDetail(Integer noticeId, User sessionUser) {
         Notice notice = noticeJPARepository.findByIdJoinUser(noticeId)
                 .orElseThrow(() -> new Exception404("공고 글을 찾을 수 없음"));
@@ -26,11 +60,12 @@ public class NoticeService {
         return new NoticeResponse.DetailDTO(notice, sessionUser);
     }
 
-    public void delete(Integer noticeId, Integer sessionUserId){
+    @Transactional
+    public void delete(Integer noticeId, Integer sessionUserId) {
         Notice notice = noticeJPARepository.findById(noticeId)
                 .orElseThrow(() -> new Exception404("공고를 찾을 수 없습니다"));
 
-        if(sessionUserId != notice.getUser().getId()){
+        if (sessionUserId != notice.getUser().getId()) {
             throw new Exception403("공고를 삭제할 권한이 없습니다");
         }
         noticeJPARepository.deleteById(noticeId);

@@ -53,8 +53,10 @@ public class NoticeController {
 
     // 공고 수정
     @PutMapping("/api/notices/{id}")
-    public ResponseEntity<?> update() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        reqDTO.toEntity(sessionUser);
+        noticeService.update(id, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
-
 }
