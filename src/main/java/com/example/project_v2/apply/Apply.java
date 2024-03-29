@@ -1,5 +1,7 @@
 package com.example.project_v2.apply;
 
+import com.example.project_v2.notice.Notice;
+import com.example.project_v2.resume.Resume;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,12 @@ public class Apply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Notice notice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Resume resume;
 
     @Column(nullable = false)
     private Integer resumeId; // 1
