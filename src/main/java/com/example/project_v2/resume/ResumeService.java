@@ -49,7 +49,7 @@ public class ResumeService {
 
         // 이력서에 스킬 정보 삭제 후, 추가
         if(skillJPARepository.findByResumeId(resumeId).isPresent()){
-            skillQueryRepository.deleteByResumeId(resumeId);
+            skillJPARepository.deleteAllByResumeId(resumeId);
         }
         skills = skillJPARepository.saveAll(skills);
         resume.setSkills(skills);
