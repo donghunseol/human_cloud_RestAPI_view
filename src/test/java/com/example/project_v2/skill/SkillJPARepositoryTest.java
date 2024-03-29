@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,19 @@ public class SkillJPARepositoryTest {
     private EntityManager em;
 
     @Test
+
+    public void deleteAllByNoticeId_test(){
+        // given
+        int id = 2;
+
+        // when
+        skillJPARepository.deleteAllByNoticeId(id);
+        em.flush();
+
+        // then
+
+    }
+
     public void saveAll_test(){
         // given
         Resume resume = Resume.builder().id(1).build();
@@ -49,5 +63,4 @@ public class SkillJPARepositoryTest {
         Assertions.assertThat(resume.getSkills().get(1).getName()).isEqualTo("C++");
 
     }
-
 }
