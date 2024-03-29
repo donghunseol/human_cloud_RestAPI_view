@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -89,11 +90,16 @@ public class BoardJPARepositoryTest {
     @Test
     public void findAll_test() {
         //given
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
         //when
         List<Board> boardList = boardJPARepository.findAll();
+
         //then
-        System.out.println("findAll_test : " + boardList);
+        System.out.println("findAll_test/size : " + boardList.size()); // 게시판 게시글 수
+        System.out.println("findAll_test/username : " + boardList.get(2).getUser().getUsername()); //게시판 글 유저 확인
+
+        assertThat(boardList.size()).isEqualTo(15);
+        assertThat(boardList.get(2).getUser().getUsername()).isEqualTo("cos");
     }
 
 }

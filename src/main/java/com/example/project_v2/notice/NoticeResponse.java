@@ -11,7 +11,7 @@ public class NoticeResponse {
 
     @Data
     public static class MainDTO{
-        private Integer noticeId;
+        private Integer id;
         private String username;
         private String title;
         private String deadline;
@@ -20,7 +20,7 @@ public class NoticeResponse {
         private List<SkillDTO> skills = new ArrayList<>();
 
         public MainDTO(Notice notice) {
-            this.noticeId = notice.getId();
+            this.id = notice.getId();
             this.username = notice.getUser().getUsername();
             this.title = notice.getTitle();
             this.deadline = notice.getDeadline();
@@ -32,6 +32,7 @@ public class NoticeResponse {
 
     @Data
     public static class DetailDTO{
+        private Integer id; // 공고 번호
         private Integer userId; // 기업 번호
         private String username; // 기업 이름
         private String address; // 기업 주소
@@ -45,13 +46,13 @@ public class NoticeResponse {
         private String email; // 기업 이메일
         private String tel; // 기업 연락처
         private Integer role; // 회원 구분
-        private Integer noticeId; // 공고 번호
         private boolean isNoticeOwner;
 
         private List<SkillDTO> skills = new ArrayList<>();
 
 
         public DetailDTO(Notice notice, User sessionUser) {
+            this.id = notice.getId();
             this.userId = notice.getUser().getId();
             this.username = notice.getUser().getUsername();
             this.address = notice.getUser().getAddress();
@@ -65,10 +66,11 @@ public class NoticeResponse {
             this.email = notice.getUser().getEmail();
             this.tel = notice.getUser().getTel();
             this.role = notice.getUser().getRole();
-            this.noticeId = notice.getId();
             this.isNoticeOwner = false;
             if (sessionUser != null){
-                if (sessionUser.getId() == userId) isNoticeOwner = true;
+                if (sessionUser.getId() == userId) {
+                    isNoticeOwner = true;
+                }
             }
             this.skills = notice.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
