@@ -36,11 +36,13 @@ public class UserController {
 
     // 로그인
     @PostMapping("/users/login")
-    public String login(UserRequest.LoginDTO reqDTO) {
+    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
         User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
-        return "redirect:/";
+        // return "redirect:/";
+        return ResponseEntity.ok(new ApiUtil<>(sessionUser));
     }
+
 
     // 로그인 화면
     @GetMapping("/users/login-form")

@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class ReplyController {
     private final ReplyService replyService;
-    private final ReplyJPARepository replyJPARepository;
     private final HttpSession session;
+
     // 댓글 작성
     @PostMapping("/api/replies")
     public ResponseEntity<?> save(@RequestBody ReplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Reply reply = replyService.댓글쓰기(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(reply));
+        Reply reply = replyService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
     }
 
     // 댓글 삭제
     @DeleteMapping("/api/replies/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        replyService.댓글삭제(id,sessionUser.getId());
+        replyService.delete(id,sessionUser.getId());
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
