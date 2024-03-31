@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 
@@ -38,7 +39,7 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    private String image;
+    private String image; // 이미지 경로만 저장
 
     @Column(nullable = false)
     private Integer role;
