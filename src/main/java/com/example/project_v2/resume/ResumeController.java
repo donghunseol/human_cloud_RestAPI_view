@@ -40,9 +40,11 @@ public class ResumeController {
     }
 
     // 이력서 수정
-    @PutMapping("/api/resumes/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id) {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    @PutMapping("/api/resumes/{id}/updateTest")
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        Resume resume = resumeService.update(id, sessionUser, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(resume));
     }
 
     // 이력서 상세 보기
