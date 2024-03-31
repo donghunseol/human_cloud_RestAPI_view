@@ -19,4 +19,16 @@ public class LoveService {
         Love love = loveJPARepository.save(reqDTO.toEntity(sessionUser));
         return love;
     }
+
+    @Transactional
+    public void delete(Integer loveId, User sessionUser){
+        Love love = loveJPARepository.findById(loveId)
+                .orElseThrow(() -> new Exception401("존재하지 않는 좋아요 입니다"));
+
+        if (love.getUser().getId() != sessionUser.getId()){
+            throw new Exception403("좋아요 삭제할 권한이 없습니다");
+        }
+
+        loveJPARepository.deleteById(loveId);
+    }
 }

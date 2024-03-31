@@ -17,14 +17,16 @@ public class LoveController {
     // 좋아요 입력
     @PostMapping("/api/loves")
     public ResponseEntity<?> save(@RequestBody LoveRequest.SaveDTO reqDTO){
-        User user = (User) session.getAttribute("sessionUser");
-        loveService.save(reqDTO, user);
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        loveService.save(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
     // 좋아요 삭제
     @DeleteMapping("/api/loves/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        loveService.delete(id, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
