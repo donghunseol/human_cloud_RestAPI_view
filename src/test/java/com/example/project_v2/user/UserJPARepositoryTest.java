@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Optional;
+
 @DataJpaTest
 public class UserJPARepositoryTest {
 
@@ -15,6 +17,18 @@ public class UserJPARepositoryTest {
 
     @Autowired
     private EntityManager em;
+
+    @Test
+    public void findByUsername_test(){
+        // given
+        String username = "ssar";
+
+        // when
+        Optional<User> user = userJPARepository.findByUsername(username);
+
+        // then
+        Assertions.assertThat(user.get().getUsername()).isEqualTo(username);
+    }
 
     @Test
     public void findByUsernameAndPassword_test(){
