@@ -23,13 +23,6 @@ values ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.
         now());
 
 
--- apply
-insert into apply_tb(resume_id, notice_id, pass, created_at)
-values (1, 1, false, now());
-insert into apply_tb(resume_id, notice_id, pass, created_at)
-values (2, 1, false, now());
-insert into apply_tb(resume_id, notice_id, pass, created_at)
-values (2, 2, false, now());
 
 -- board
 insert into board_tb(user_id, title, content, created_at)
@@ -169,3 +162,11 @@ insert into skill_tb(resume_id, notice_id, name, role)
 values (null, 2, 'java', 0);
 insert into skill_tb(resume_id, notice_id, name, role)
 values (null, 2, 'sql', 0);
+
+-- apply
+insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
+values (1 ,1, 1, false, now());
+insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
+values (1, 2, 1, false, now());
+insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
+values (2, 2, 2, false, now());
