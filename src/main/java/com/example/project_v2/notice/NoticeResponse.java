@@ -79,7 +79,6 @@ public class NoticeResponse {
 
     @Data
     public static class SkillDTO{
-
         private Integer id;
         private Integer noticeId;
         private String name;
@@ -90,4 +89,6 @@ public class NoticeResponse {
             this.name = skill.getName();
         }
     }
+
+
 }

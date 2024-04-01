@@ -32,12 +32,9 @@ public class NoticeService {
         notice.setWorkPlace(reqDTO.getWorkPlace());
         notice.setDeadline(reqDTO.getDeadline());
         notice.setContent(reqDTO.getContent());
-
-        System.out.println("skills/size/after : " + reqDTO.getSkills().size());
+        notice.setUser(reqDTO.getUser());
 
         skillJPARepository.deleteAllByNoticeId(noticeId);
-
-        System.out.println("skills/size/before : " + reqDTO.getSkills().size());
 
         List<Skill> skills = new ArrayList<>();
         for (NoticeRequest.UpdateDTO.SkillDTO skill : reqDTO.getSkills()) {

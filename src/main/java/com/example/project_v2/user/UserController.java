@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final UserJPARepository userJPARepository;
     private final HttpSession session;
 
     // 메인 화면

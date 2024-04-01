@@ -58,7 +58,7 @@ public class NoticeController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        noticeService.update(id, reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        Notice notice = noticeService.update(id, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(notice));
     }
 }
