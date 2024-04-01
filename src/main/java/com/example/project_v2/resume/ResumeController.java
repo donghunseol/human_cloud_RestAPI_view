@@ -43,6 +43,7 @@ public class ResumeController {
     @PutMapping("/api/resumes/{id}/updateTest")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        reqDTO.toEntity(sessionUser);
         Resume resume = resumeService.update(id, sessionUser, reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(resume));
     }
