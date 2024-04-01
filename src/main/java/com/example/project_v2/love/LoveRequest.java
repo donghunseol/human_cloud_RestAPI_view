@@ -11,7 +11,7 @@ public class LoveRequest {
         private User user;
         private Board board;
 
-        public Love toEntity(User sessionUser){
+        public Love toEntity(User sessionUser, Board board){
             return Love.builder()
                     .user(sessionUser)
                     .board(board)
