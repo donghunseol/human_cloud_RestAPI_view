@@ -28,9 +28,9 @@ public class UserController {
 
     // 회원 가입
     @PostMapping("/users/join")
-    public String join(UserRequest.JoinDTO reqDTO) {
+    public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO) {
         User user = userService.join(reqDTO);
-        return "user/login-form";
+        return ResponseEntity.ok(new ApiUtil<>(user));
     }
 
     // 회원 가입 페이지
@@ -57,7 +57,7 @@ public class UserController {
 
     // 회원 정보 수정
     // Put 으로 전환 필요
-    @PostMapping("/api/users/{id}/update")
+    @PutMapping("/api/users/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
