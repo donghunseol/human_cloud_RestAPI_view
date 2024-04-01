@@ -123,21 +123,21 @@ values (5, '구글', '고용형태4', '개발분야4', '근무지4', '공고 내
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (6, '(주)KAKAO', '고용형태5', '개발분야5', '근무지5', '공고 내용5', '20240707', now());
 
-
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (1, null, 1, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (1, null, 2, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (2, null, 3, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (4, 1, null, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (4, 2, null, 0, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (5, 2, null, 1, now());
-insert into scrap_tb(user_id, resume_id, notice_id, role, created_at)
-values (5, 3, null, 1, now());
+-- scrap
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (1, null, 1, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (1, null, 2, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (2, null, 3, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (4, 1, null, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (4, 2, null, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (5, 2, null, now());
+insert into scrap_tb(user_id, resume_id, notice_id, created_at)
+values (5, 3, null, now());
 
 
 
