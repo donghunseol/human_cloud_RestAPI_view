@@ -33,7 +33,7 @@ public class ApplyController {
     }
 
     // 지원 취소
-    @DeleteMapping("/api/applies/{id}")
+    @DeleteMapping("/api/applies/{id}/delete")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }

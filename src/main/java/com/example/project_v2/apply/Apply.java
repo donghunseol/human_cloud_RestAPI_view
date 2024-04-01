@@ -3,6 +3,7 @@ package com.example.project_v2.apply;
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.resume.Resume;
 import com.example.project_v2.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -20,13 +21,16 @@ public class Apply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "notice_fk", nullable = false)
     private Notice notice;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "resume_fk", nullable = false)
     private Resume resume;
