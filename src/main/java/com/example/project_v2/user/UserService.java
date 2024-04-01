@@ -2,7 +2,14 @@ package com.example.project_v2.user;
 
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2.notice.Notice;
+import com.example.project_v2.notice.NoticeJPARepository;
+import com.example.project_v2.notice.NoticeResponse;
+import com.example.project_v2.resume.Resume;
+import com.example.project_v2.resume.ResumeJPARepository;
+import com.example.project_v2.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +18,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -18,6 +27,8 @@ import java.util.UUID;
 public class UserService {
 
     private final UserJPARepository userJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
+    private final NoticeJPARepository noticeJPARepository;
 
     public User sameCheck(String username) {
         User user = userJPARepository.findByUsername(username)
@@ -62,5 +73,30 @@ public class UserService {
         }
 
         return user;
+    }
+
+    // 사용자의 role 에 따라 메인페이지 화면 변경
+    public List<?> getMainPageByUserRole(User sessionUser) {
+        List<?> resultList = new ArrayList<>();
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        if (sessionUser != null) { // 로그인시
+            if (sessionUser.getRole() == 1) {
+                // Role이 1인 경우 Resume 리스트 반환
+                resultList = resumeJPARepository.findAll(sort).stream()
+                        .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
+                        .toList();
+            } else {
+                // Role이 0인 경우 Notice 리스트 반환
+                resultList = noticeJPARepository.findAll(sort).stream()
+                        .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                        .toList();
+            }
+        } else { // 로그인하지 않은 경우 Notice 리스트 반환
+            resultList = noticeJPARepository.findAll(sort).stream()
+                    .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                    .toList();
+        }
+        return resultList;
     }
 }

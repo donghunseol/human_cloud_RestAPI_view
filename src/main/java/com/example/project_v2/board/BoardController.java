@@ -54,8 +54,8 @@ public class BoardController {
     @GetMapping("/api/boards/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        BoardResponse.DetailDTO reqDTO = boardService.boardDetail(id, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
 

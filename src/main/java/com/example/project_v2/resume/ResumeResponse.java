@@ -15,6 +15,7 @@ public class ResumeResponse {
         private String email;
         private String tel;
         private String address;
+        private String image;
         private String career;
         private String license;
         private String education;
@@ -31,6 +32,7 @@ public class ResumeResponse {
             this.email = resume.getUser().getEmail();
             this.tel = resume.getUser().getTel();
             this.address = resume.getUser().getAddress();
+            this.image = resume.getUser().getImage();
             this.career = resume.getCareer();
             this.license = resume.getLicense();
             this.education = resume.getEducation();
@@ -51,6 +53,7 @@ public class ResumeResponse {
         private Integer id;
         private String title;
         private String username;
+        private String image;
         private Integer userId;
 
         private List<SkillDTO> skills = new ArrayList<>();
@@ -59,6 +62,7 @@ public class ResumeResponse {
             this.id = resume.getId();
             this.title = resume.getTitle();
             this.username = resume.getUser().getUsername();
+            this.image = resume.getUser().getImage();
             this.userId = resume.getUser().getId();
 
             this.skills = resume.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
