@@ -48,6 +48,6 @@ public class ScrapController {
                 scrap = scrapService.save(resume, reqDTO, sessionUser);
             }
         }
-        return ResponseEntity.ok(new ApiUtil<>(scrap));
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
