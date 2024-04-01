@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SkillJPARepository extends JpaRepository<Skill, Integer> {
     @Query("select s from Skill s where s.resume.id = :resume_id")
-    Optional<Skill> findByResumeId(@Param("resume_id") int resume_id);
+    List<Skill> findByResumeId(@Param("resume_id") int resume_id);
 
     @Modifying
     @Query("delete from Skill s where s.resume.id = :id")

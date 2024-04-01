@@ -31,7 +31,6 @@ public class NoticeRequest {
 
             public Skill toEntity(){
                 return Skill.builder()
-                        .id(id)
                         .notice(notice)
                         .name(name)
                         .role(role)

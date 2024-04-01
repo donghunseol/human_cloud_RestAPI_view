@@ -22,10 +22,18 @@ public class NoticeController {
     private final NoticeService noticeService;
     private final HttpSession session;
 
+    // 공고 회원 목록 보기
+    @GetMapping("/notices/{id}")
+    public ResponseEntity<?> myNoticeList(){
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<NoticeResponse.NoticeListDTO> respDTO = noticeService.noticeListByUser(sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+    }
+
     // 공고 목록 보기
     @GetMapping("/notices")
     public ResponseEntity<?> index() {
-        List<NoticeResponse.MainDTO> respDTO = noticeService.noticeMain();
+        List<NoticeResponse.NoticeListDTO> respDTO = noticeService.noticeList();
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
@@ -58,7 +66,7 @@ public class NoticeController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        noticeService.update(id, reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        Notice notice = noticeService.update(id, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(notice));
     }
 }

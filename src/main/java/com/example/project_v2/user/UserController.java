@@ -1,6 +1,7 @@
 package com.example.project_v2.user;
 
 import com.example.project_v2._core.util.ApiUtil;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final UserJPARepository userJPARepository;
     private final HttpSession session;
 
     // 메인 화면
@@ -53,11 +53,11 @@ public class UserController {
     // 회원 정보 수정
     // Put 으로 전환 필요
     @PostMapping("/api/users/{id}/update")
-    public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
-        return "/myPage/main";
+        return ResponseEntity.ok(new ApiUtil<>(newSessionUser));
     }
 
     // 회원 정보 수정 화면

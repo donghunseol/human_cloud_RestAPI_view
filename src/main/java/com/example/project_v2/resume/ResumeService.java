@@ -18,7 +18,6 @@ import java.util.List;
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
     private final SkillJPARepository skillJPARepository;
-    private final SkillQueryRepository skillQueryRepository;
 
     @Transactional
     public Resume update(Integer resumeId, User sessionUser, ResumeRequest.UpdateDTO reqDTO) {
@@ -31,10 +30,15 @@ public class ResumeService {
 
         resume.setUser(sessionUser);
         resume.setTitle(reqDTO.getTitle());
+        resume.setCareer(reqDTO.getCareer());
+        resume.setLicense(reqDTO.getLicense());
         resume.setEducation(reqDTO.getEducation());
         resume.setMajor(reqDTO.getMajor());
-        resume.setLicense(reqDTO.getLicense());
-        resume.setCareer(reqDTO.getCareer());
+
+        // 이력서에 스킬 정보 삭제 후, 추가
+        if(!skillJPARepository.findByResumeId(resumeId).isEmpty()){
+            skillJPARepository.deleteAllByResumeId(resumeId);
+        }
 
         // 스킬 정보를 생성
         List<Skill> skills = new ArrayList<>();
@@ -47,10 +51,7 @@ public class ResumeService {
             skills.add(skill);
         }
 
-        // 이력서에 스킬 정보 삭제 후, 추가
-        if(skillJPARepository.findByResumeId(resumeId).isPresent()){
-            skillJPARepository.deleteAllByResumeId(resumeId);
-        }
+
         skills = skillJPARepository.saveAll(skills);
         resume.setSkills(skills);
 
@@ -103,8 +104,8 @@ public class ResumeService {
         List<Resume> resumeList = resumeJPARepository.findAll(sort);
         return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
     }
-    // 이력서 리스트(개인)
 
+    // 이력서 리스트(개인)
     public List<ResumeResponse.ResumeListDTO> resumeListByUser(User user) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Resume> resumeList = resumeJPARepository.findByUser(user, sort);

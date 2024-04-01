@@ -10,7 +10,7 @@ import java.util.List;
 public class NoticeResponse {
 
     @Data
-    public static class MainDTO{
+    public static class NoticeListDTO{
         private Integer id;
         private String username;
         private String title;
@@ -19,7 +19,7 @@ public class NoticeResponse {
 
         private List<SkillDTO> skills = new ArrayList<>();
 
-        public MainDTO(Notice notice) {
+        public NoticeListDTO(Notice notice) {
             this.id = notice.getId();
             this.username = notice.getUser().getUsername();
             this.title = notice.getTitle();
@@ -79,7 +79,6 @@ public class NoticeResponse {
 
     @Data
     public static class SkillDTO{
-
         private Integer id;
         private Integer noticeId;
         private String name;
@@ -90,4 +89,6 @@ public class NoticeResponse {
             this.name = skill.getName();
         }
     }
+
+
 }
