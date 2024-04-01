@@ -26,6 +26,6 @@ public class ScrapController {
     public ResponseEntity<?> save(@PathVariable Integer id, @RequestBody ScrapRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Scrap scrap = scrapService.save(id, reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(scrap));
+        return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }
