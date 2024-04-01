@@ -27,6 +27,8 @@ public class ScrapController {
     // 스크랩 삭제
     @DeleteMapping("/api/scraps/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        scrapService.delete(id, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 

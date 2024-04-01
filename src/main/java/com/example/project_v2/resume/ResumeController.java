@@ -52,22 +52,22 @@ public class ResumeController {
     @GetMapping("/api/resumes/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ResumeResponse.DetailDTO reqDTO = resumeService.resumeDetail(id, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        ResumeResponse.DetailDTO respDTO = resumeService.resumeDetail(id, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 이력서 리스트
     @GetMapping("/api/resumes")
     public ResponseEntity<?> resumeList() {
-        List<ResumeResponse.ResumeListDTO> reqDTO = resumeService.resumeList();
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        List<ResumeResponse.ResumeListDTO> respDTO = resumeService.resumeList();
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 이력서 리스트(개인)
     @GetMapping("/api/my-resumes")
     public ResponseEntity<?> myResumeList() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<ResumeResponse.ResumeListDTO> reqDTO = resumeService.resumeListByUser(sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        List<ResumeResponse.ResumeListDTO> respDTO = resumeService.resumeListByUser(sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
