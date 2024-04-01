@@ -44,8 +44,6 @@ public class ResumeResponse {
             }
             this.skills = resume.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
-
-
     }
 
     @Data

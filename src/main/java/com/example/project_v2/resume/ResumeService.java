@@ -104,8 +104,8 @@ public class ResumeService {
         List<Resume> resumeList = resumeJPARepository.findAll(sort);
         return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
     }
-    // 이력서 리스트(개인)
 
+    // 이력서 리스트(개인)
     public List<ResumeResponse.ResumeListDTO> resumeListByUser(User user) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Resume> resumeList = resumeJPARepository.findByUser(user, sort);
