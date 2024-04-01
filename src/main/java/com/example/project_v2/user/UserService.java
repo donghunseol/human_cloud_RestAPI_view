@@ -109,4 +109,29 @@ public class UserService {
         }
         return resultList;
     }
+
+    // 메인페이지 스킬 검색 서비스
+    public List<?> getMainPageByUserRoleAndSkill(User sessionUser, String skillName) {
+        List<?> resultList = new ArrayList<>();
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        if (sessionUser != null) { // 로그인시
+            if (sessionUser.getRole() == 1) {
+                // Role이 1인 경우 Resume 리스트 반환
+                resultList = resumeJPARepository.findBySkill(skillName, sort).stream()
+                        .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
+                        .toList();
+            } else {
+                // Role이 0인 경우 Notice 리스트 반환
+                resultList = noticeJPARepository.findBySkill(skillName, sort).stream()
+                        .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                        .toList();
+            }
+        } else { // 로그인하지 않은 경우 Notice 리스트 반환
+            resultList = noticeJPARepository.findBySkill(skillName, sort).stream()
+                    .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                    .toList();
+        }
+        return resultList;
+    }
 }

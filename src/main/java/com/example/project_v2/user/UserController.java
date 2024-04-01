@@ -5,10 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +17,15 @@ public class UserController {
 
     // 메인 화면
     @GetMapping("/")
-    public ResponseEntity<?> index() {
+    public ResponseEntity<?> index(@RequestParam(required = false) String skillName) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<?> mainPageList = userService.getMainPageByUserRole(sessionUser);
+        List<?> mainPageList;
+
+        if (skillName != null && !skillName.isEmpty()) {
+            mainPageList = userService.getMainPageByUserRoleAndSkill(sessionUser, skillName);
+        } else {
+            mainPageList = userService.getMainPageByUserRole(sessionUser);
+        }
         return ResponseEntity.ok(new ApiUtil<>(mainPageList));
     }
 
