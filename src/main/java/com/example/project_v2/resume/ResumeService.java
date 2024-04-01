@@ -2,14 +2,14 @@ package com.example.project_v2.resume;
 
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
-import com.example.project_v2.skill.SkillQueryRepository;
+import com.example.project_v2.skill.Skill;
+import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import com.example.project_v2.skill.Skill;
-import com.example.project_v2.skill.SkillJPARepository;
-import jakarta.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ResumeService {
         Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
 
-        if(sessionUser.getId() != resume.getUser().getId()){
+        if (sessionUser.getId() != resume.getUser().getId()) {
             throw new Exception403("이력서를 수정할 권한이 없습니다.");
         }
 
@@ -36,7 +36,7 @@ public class ResumeService {
         resume.setMajor(reqDTO.getMajor());
 
         // 이력서에 스킬 정보 삭제 후, 추가
-        if(!skillJPARepository.findByResumeId(resumeId).isEmpty()){
+        if (!skillJPARepository.findByResumeId(resumeId).isEmpty()) {
             skillJPARepository.deleteAllByResumeId(resumeId);
         }
 
@@ -59,17 +59,17 @@ public class ResumeService {
     }
 
     @Transactional
-    public void delete(Integer resumeId, Integer sessionUserId){
+    public void delete(Integer resumeId, Integer sessionUserId) {
         Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
-        if(sessionUserId != resume.getUser().getId()){
+        if (sessionUserId != resume.getUser().getId()) {
             throw new Exception403("이력서를 삭제할 권한이 없습니다.");
         }
         resumeJPARepository.deleteById(resumeId);
     }
 
     @Transactional
-    public Resume save(ResumeRequest.SaveDTO reqDTO, User sessionUser){
+    public Resume save(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
         // 이력서 정보 저장
         Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
 
@@ -90,15 +90,15 @@ public class ResumeService {
 
         return resumeJPARepository.save(resume);
     }
-    // 이력서 상세보기
 
+    // 이력서 상세보기
     public ResumeResponse.DetailDTO resumeDetail(int resumeId, User sessionUser) {
         Resume resume = resumeJPARepository.findByIdJoinUser(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
         return new ResumeResponse.DetailDTO(resume, sessionUser);
     }
-    // 이력서 리스트
 
+    // 이력서 리스트
     public List<ResumeResponse.ResumeListDTO> resumeList() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Resume> resumeList = resumeJPARepository.findAll(sort);
