@@ -3,6 +3,7 @@ package com.example.project_v2.user;
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception404;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -47,20 +49,22 @@ public class UserService {
         user.setEmail(reqDTO.getEmail());
         user.setAddress(reqDTO.getAddress());
 
-        // 이미지 파일 넣기
-        MultipartFile imgFile = reqDTO.getImage(); // 이미지 파일 데이터 저장
-        String imgFilename = UUID.randomUUID() + "_" + imgFile.getOriginalFilename(); // 이미지 파일 오리지널 이름
-
-        // 파일 저장 위치 설정
-        Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
-
         try {
-            Files.write(imgPath, imgFile.getBytes());
+            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImage().getBytes());
+
+            // 이미지 파일 넣기
+            MultipartFile imgFile = reqDTO.getImage(); // 이미지 파일 데이터 저장
+            String imgFilename = UUID.randomUUID().toString() + "_" + imgFile.getOriginalFilename(); // 이미지 파일 오리지널 이름
+
+            // 파일 저장 위치 설정
+            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
+
+            Files.write(imgPath, decodedBytes);
             user.setImage(imgFilename);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         return user;
     }
 }
