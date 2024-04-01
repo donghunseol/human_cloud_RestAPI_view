@@ -28,7 +28,7 @@ public class UserServiceTest {
         reqDTO.setTel("01012345678");
         reqDTO.setEmail("happy@nate.com");
         reqDTO.setAddress("경남 창원시 성산구 상남동");
-        reqDTO.setImage("/Images/happy.png");
+        //reqDTO.setImage("/Images/happy.png");
 
         // when
         User user = userJPARepository.findById(id).orElseThrow(() -> new Exception404("존재하지 않는 회원 입니다"));

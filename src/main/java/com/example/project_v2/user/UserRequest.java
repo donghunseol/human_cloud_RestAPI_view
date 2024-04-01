@@ -1,8 +1,10 @@
 package com.example.project_v2.user;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserRequest {
+
     @Data
     public static class JoinDTO{
         private Integer id; // 유저 번호 (PK)
@@ -44,6 +46,6 @@ public class UserRequest {
         private String tel; // 전화번호
         private String email; // 이메일
         private String address; // 주소
-        private String image; // 사진
+        private MultipartFile image; // 사진
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @DataJpaTest
 public class SkillJPARepositoryTest {
@@ -20,8 +21,24 @@ public class SkillJPARepositoryTest {
     @Autowired
     private EntityManager em;
 
-    @Test
 
+    @Test
+    public void deleteAllByResumeId_test(){
+        // given
+        int id = 6;
+
+        // when
+        skillJPARepository.deleteAllByResumeId(id);
+        em.flush();
+
+        // then
+        Optional<Skill> SkillOP = skillJPARepository.findByResumeId(id);
+
+        Assertions.assertThat(SkillOP.isPresent()).isEqualTo(false);
+
+    }
+
+    @Test
     public void deleteAllByNoticeId_test(){
         // given
         int id = 2;

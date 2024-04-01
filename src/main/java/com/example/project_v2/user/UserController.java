@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -16,15 +17,21 @@ public class UserController {
 
     // 메인 화면
     @GetMapping("/")
-    public ResponseEntity<?> index() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public String index() {
+        return "/index";
     }
 
     // 회원 가입
     @PostMapping("/users/join")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
+    public String join(UserRequest.JoinDTO reqDTO) {
         User user = userService.join(reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(user));
+        return "user/login-form";
+    }
+
+    // 회원 가입 페이지
+    @GetMapping("/users/join-form")
+    public String joinForm() {
+        return "user/join-form";
     }
 
     // 로그인
@@ -32,17 +39,33 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
         User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        // return "redirect:/";
+        return ResponseEntity.ok(new ApiUtil<>(sessionUser));
+    }
+
+
+    // 로그인 화면
+    @GetMapping("/users/login-form")
+    public String login() {
+        return "/user/login-form";
     }
 
     // 회원 정보 수정
-    @PutMapping("/api/users/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
+    // Put 으로 전환 필요
+    @PostMapping("/api/users/{id}/update")
+    public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        return "/myPage/main";
     }
+
+    // 회원 정보 수정 화면
+    @GetMapping("/api/users/{id}/update-form")
+    public String updateForm(@PathVariable Integer id) {
+        return "/user/update-form";
+    }
+
 
     // 로그아웃
     @GetMapping("/api/users/logout")
@@ -65,8 +88,13 @@ public class UserController {
 
     // 회원가입(username) 중복 확인
     @GetMapping("/api/username-same-checks")
-    public ResponseEntity<?> usernameSameCheck() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+    public ApiUtil<?> usernameSameCheck(String username) {
+        User user = userService.sameCheck(username);
+        if (user == null) {
+            return new ApiUtil<>(true);
+        } else {
+            return new ApiUtil<>(false);
+        }
     }
 
     // 스크랩 여부 확인
