@@ -1,5 +1,8 @@
 package com.example.project_v2.scrap;
 
+import com.example.project_v2.notice.Notice;
+import com.example.project_v2.resume.Resume;
+import com.example.project_v2.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -11,30 +14,38 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "scrap_tb")
+@Table(name="scrap_tb", uniqueConstraints = {
+        @UniqueConstraint(
+                name="scrap_notice_uk",
+                columnNames={"notice_id","user_id"}
+        ),
+        @UniqueConstraint(
+                name="scrap_resume_uk",
+                columnNames={"resume_id","user_id"}
+        )})
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // 스크랩 ID
 
-    @Column(nullable = false)
-    private Integer userId; // 스크랩한 유저 번호
-    private Integer resumeId; // 이력서 번호 (null 허용)
-    private Integer noticeId; // 공고 번호 (null 허용)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user; // 스크랩한 유저 번호, 스크랩한 유저의 role 값
 
-    @Column(nullable = false)
-    private Integer role; // 기업인지 개인인지 구별 0, 1
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Resume resume; // 이력서 번호
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Notice notice; // 공고 번호
 
     @CreationTimestamp
     private Timestamp createdAt; // 생성 일자
 
     @Builder
-    public Scrap(Integer id, Integer userId, Integer resumeId, Integer noticeId, Integer role, Timestamp createdAt) {
+    public Scrap(Integer id, User user, Resume resume, Notice notice, Timestamp createdAt) {
         this.id = id;
-        this.userId = userId;
-        this.resumeId = resumeId;
-        this.noticeId = noticeId;
-        this.role = role;
+        this.user = user;
+        this.resume = resume;
+        this.notice = notice;
         this.createdAt = createdAt;
     }
 }
