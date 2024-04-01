@@ -1,5 +1,6 @@
 package com.example.project_v2.resume;
 
+import com.example.project_v2.skill.Skill;
 import com.example.project_v2.user.User;
 import lombok.Data;
 import java.util.ArrayList;
@@ -52,9 +53,33 @@ public class ResumeRequest {
         @Data
         public static class SkillDTO{
             private Integer id;
+            private Resume resume;
             private String name;
             private Integer role;
-            private Integer resumeId;
+
+            public Skill toEntity(){
+                return Skill.builder()
+                        .resume(resume)
+                        .name(name)
+                        .role(role)
+                        .build();
+            }
+        }
+
+        public Resume toEntity(User sessionUser){
+            List<Skill> skillList = this.skills.stream()
+                    .map(SkillDTO::toEntity) // SkillDTO를 Skill 엔티티로 변환
+                    .toList();
+
+            return Resume.builder()
+                    .user(sessionUser)
+                    .title(title)
+                    .career(career)
+                    .license(license)
+                    .education(education)
+                    .major(major)
+                    .skills(skillList)
+                    .build();
         }
     }
 }
