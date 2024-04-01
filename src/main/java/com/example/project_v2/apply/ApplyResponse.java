@@ -49,11 +49,11 @@ public class ApplyResponse {
 
         public SelectResumeDTO(Apply apply, User sessionUser) {
             this.id = apply.getId();
+            // 가정: Apply 객체가 Resume 객체에 대한 참조를 가지고 있다고 가정
+            this.resumeId = apply.getResume().getId(); // 수정된 부분
             this.isResumeOwner = false;
-            if (sessionUser != null) {
-                if (sessionUser.getId() == resumeId) {
-                    isResumeOwner = true;
-                }
+            if (sessionUser != null && sessionUser.getId().equals(this.resumeId)) { // 객체 비교 방식 수정
+                isResumeOwner = true;
             }
         }
     }
