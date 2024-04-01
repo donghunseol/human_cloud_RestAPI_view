@@ -3,6 +3,7 @@ package com.example.project_v2.scrap;
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.resume.Resume;
 import com.example.project_v2.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -14,15 +15,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name="scrap_tb", uniqueConstraints = {
-        @UniqueConstraint(
-                name="scrap_notice_uk",
-                columnNames={"notice_id","user_id"}
-        ),
-        @UniqueConstraint(
-                name="scrap_resume_uk",
-                columnNames={"resume_id","user_id"}
-        )})
+@Table(name="scrap_tb")
+@JsonIgnoreProperties({"user","resume", "notice"})
 public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

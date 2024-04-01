@@ -123,7 +123,7 @@ values (5, '구글', '고용형태4', '개발분야4', '근무지4', '공고 내
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (6, '(주)KAKAO', '고용형태5', '개발분야5', '근무지5', '공고 내용5', '20240707', now());
 
-
+-- scrap
 insert into scrap_tb(user_id, resume_id, notice_id, created_at)
 values (1, null, 1, now());
 insert into scrap_tb(user_id, resume_id, notice_id, created_at)
