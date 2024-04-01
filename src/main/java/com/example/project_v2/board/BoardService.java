@@ -15,6 +15,12 @@ import java.util.List;
 public class BoardService {
     private final BoardJPARepository boardJPARepository;
 
+    @Transactional
+    public Board findById(Integer id){
+        Board board = boardJPARepository.findById(id)
+                .orElseThrow(() -> new Exception404("존재하지 않는 게시물 입니다"));
+        return board;
+    }
 
     @Transactional
     public Board update(Integer boardId, Integer sessionUserId, BoardRequest.UpdateDTO reqDTO){
