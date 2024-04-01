@@ -97,9 +97,15 @@ public class NoticeService {
         return noticeJPARepository.save(notice);
     }
 
-    public List<NoticeResponse.MainDTO> noticeMain() {
+    public List<NoticeResponse.NoticeListDTO> noticeList() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         List<Notice> noticeList = noticeJPARepository.findAll(sort);
-        return noticeList.stream().map(notice -> new NoticeResponse.MainDTO(notice)).toList();
+        return noticeList.stream().map(notice -> new NoticeResponse.NoticeListDTO(notice)).toList();
+    }
+
+    public List<NoticeResponse.NoticeListDTO> noticeListByUser(User sessionUser) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+        List<Notice> noticeList = noticeJPARepository.findByUser(sessionUser, sort);
+        return noticeList.stream().map(notice -> new NoticeResponse.NoticeListDTO(notice)).toList();
     }
 }
