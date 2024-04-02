@@ -60,11 +60,10 @@ public class UserController {
     }
 
     // 회원 정보 수정
-    // Put 으로 전환 필요
     @PutMapping("/api/users/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
         return ResponseEntity.ok(new ApiUtil<>(newSessionUser));
     }

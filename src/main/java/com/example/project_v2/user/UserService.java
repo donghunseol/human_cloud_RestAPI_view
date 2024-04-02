@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public User update(Integer id, UserRequest.UpdateDTO reqDTO) {
+    public SessionUser update(Integer id, UserRequest.UpdateDTO reqDTO) {
         User user = userJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다"));
 
@@ -81,7 +81,7 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return user;
+        return new SessionUser(user);
     }
 
     // 사용자의 role 에 따라 메인페이지 화면 변경
