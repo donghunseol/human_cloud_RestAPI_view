@@ -37,7 +37,7 @@ public class BoardController {
     }
 
     // 게시글 작성
-    @PostMapping("/boards/test")
+    @PostMapping("/api/boards")
     public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 로그인 여부 체크
