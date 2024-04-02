@@ -3,15 +3,17 @@ package com.example.project_v2.user;
 import com.example.project_v2._core.util.ApiUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
@@ -19,14 +21,20 @@ public class UserController {
 
     // 메인 화면
     @GetMapping("/")
-    public ResponseEntity<?> index(@RequestParam(required = false) String skillName) {
+    public ResponseEntity<?> index(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "10") int size,
+                                   @RequestParam(defaultValue = "id") String sortBy,
+                                   @RequestParam(defaultValue = "desc") String direction,
+                                   @RequestParam(required = false) String skillName) {
         User sessionUser = (User) session.getAttribute("sessionUser");
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
         List<?> mainPageList;
 
         if (skillName != null && !skillName.isEmpty()) {
-            mainPageList = userService.getMainPageByUserRoleAndSkill(sessionUser, skillName);
+            mainPageList = userService.getMainPageByUserRoleAndSkill(sessionUser, skillName, pageable);
         } else {
-            mainPageList = userService.getMainPageByUserRole(sessionUser);
+            mainPageList = userService.getMainPageByUserRole(sessionUser, pageable);
         }
         return ResponseEntity.ok(new ApiUtil<>(mainPageList));
     }
@@ -84,9 +92,15 @@ public class UserController {
 
     // 마이페이지 메인 (공고, 이력서 출력)
     @GetMapping("/api/myPages")
-    public ResponseEntity<?> myPage() {
+    public ResponseEntity<?> myPage(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "10") int size,
+                                    @RequestParam(defaultValue = "id") String sortBy,
+                                    @RequestParam(defaultValue = "desc") String direction) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        List<?> myPageList = userService.getMyPage(sessionUser);
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        List<?> myPageList = userService.getMyPage(sessionUser, pageable);
         return ResponseEntity.ok(new ApiUtil<>(myPageList));
     }
 
