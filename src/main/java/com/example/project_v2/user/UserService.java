@@ -9,11 +9,7 @@ import com.example.project_v2.resume.Resume;
 import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
-import lombok.SneakyThrows;
-=======
 import org.springframework.data.domain.Sort;
->>>>>>> e3078c52f29e663e7b8f226ad87fbae4361dabb8
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,12 +18,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-<<<<<<< HEAD
 import java.util.Base64;
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> e3078c52f29e663e7b8f226ad87fbae4361dabb8
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -67,15 +60,15 @@ public class UserService {
         user.setAddress(reqDTO.getAddress());
 
         try {
-            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImage().getBytes());
+            // 베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+            // 1. 데이터 전달
+            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getEncodedData());
 
             // 이미지 파일 넣기
-            MultipartFile imgFile = reqDTO.getImage(); // 이미지 파일 데이터 저장
-            String imgFilename = UUID.randomUUID().toString() + "_" + imgFile.getOriginalFilename(); // 이미지 파일 오리지널 이름
+            String imgFilename = UUID.randomUUID() + "_" + reqDTO.getImageName(); // 이미지 파일 오리지널 이름
 
             // 파일 저장 위치 설정
-            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
+            Path imgPath = Paths.get("./src/main/resources/static/images/"+ imgFilename);
 
             Files.write(imgPath, decodedBytes);
             user.setImage(imgFilename);

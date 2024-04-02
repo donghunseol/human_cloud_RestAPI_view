@@ -40,12 +40,12 @@ public class UserRequest {
 
     @Data
     public static class UpdateDTO {
-        private Integer id; // 유저 번호 (PK)
         private String username; // 로그인 ID
         private String password; // 비밀번호
         private String tel; // 전화번호
         private String email; // 이메일
         private String address; // 주소
-        private MultipartFile image; // 사진
+        private String imageName; // 사진 이름
+        private String encodedData; // base64 저장
     }
 }
