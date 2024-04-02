@@ -22,6 +22,16 @@ public class ApplyService {
     private final NoticeJPARepository noticeJPARepository;
     private final ResumeJPARepository resumeJPARepository;
 
+    // 합격, 불합격
+    @Transactional
+    public Apply resumePass(ApplyRequest.PassDTO passDTO, User user){
+        Apply apply = applyJPARepository.findById(passDTO.getId())
+                .orElseThrow(() -> new Exception404("지원 번호를 찾을 수 없습니다"));
+        apply.setPass(passDTO.isPass());
+        return applyJPARepository.save(apply);
+    }
+
+
 
     // 이력서 조회
     public ApplyResponse.SelectResumeDTO findById(Integer applyId, User sessionUser){
