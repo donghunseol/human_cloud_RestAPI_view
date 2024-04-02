@@ -1,17 +1,15 @@
 package com.example.project_v2.apply;
 
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
-import com.example.project_v2.board.BoardResponse;
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.notice.NoticeJPARepository;
 import com.example.project_v2.resume.Resume;
 import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.user.User;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -21,6 +19,18 @@ public class ApplyService {
     private final ApplyJPARepository applyJPARepository;
     private final NoticeJPARepository noticeJPARepository;
     private final ResumeJPARepository resumeJPARepository;
+
+    @Transactional
+    public void delete(Integer applyId, Integer sessionUserId){
+        Apply apply  = applyJPARepository.findById(applyId)
+                .orElseThrow(() -> new Exception404("지원번호 찾을 수 없음"));
+
+        if (apply.getUser().getId().equals(sessionUserId)) {
+            applyJPARepository.deleteById(applyId);
+        } else {
+            throw new Exception403("삭제할 권한이 없습니다.");
+        }
+    }
 
     // 합격, 불합격
     @Transactional
