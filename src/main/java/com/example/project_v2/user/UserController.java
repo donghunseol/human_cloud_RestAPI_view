@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("/users/login")
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", sessionUser);
+        session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
         return ResponseEntity.ok(new ApiUtil<>(sessionUser));
     }
 
