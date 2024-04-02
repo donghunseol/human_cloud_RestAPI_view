@@ -18,8 +18,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+<<<<<<< HEAD
 import java.util.Base64;
+=======
+>>>>>>> a924a3bab903e6e30221b91b187757ffdcdf2ff0
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -126,5 +130,28 @@ public class UserService {
                     .toList();
         }
         return resultList;
+    }
+
+    // 마이페이지
+    public List<?> getMyPage(User sessionUser) {
+        List<?> myPageList = new ArrayList<>();
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
+
+        if (sessionUser != null) { // 로그인시
+            if (sessionUser.getRole() == 1) { // 기업
+                // Role이 1인 경우 Resume 리스트 반환
+                myPageList = noticeJPARepository.findByUser(sessionUser, sort).stream()
+                        .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                        .toList();
+            } else {
+                // Role이 0인 경우 Notice 리스트 반환
+                myPageList = resumeJPARepository.findByUser(sessionUser, sort).stream()
+                        .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
+                        .toList();
+            }
+        } else { // 로그인을 하지 않을 경우
+            throw new Exception401("회원정보를 찾을 수 없습니다.");
+        }
+        return myPageList;
     }
 }
