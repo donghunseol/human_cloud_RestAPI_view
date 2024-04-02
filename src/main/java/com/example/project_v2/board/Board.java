@@ -29,19 +29,19 @@ public class Board {
     @Column(nullable = false)
     private String content;
 
-    //@JsonIgnore
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @CreationTimestamp
     private Timestamp created_at;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OrderBy("id desc")
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Reply> replies = new ArrayList<>();
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Love> loves = new ArrayList<>();
 
