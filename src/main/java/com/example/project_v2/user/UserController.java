@@ -85,7 +85,9 @@ public class UserController {
     // 마이페이지 메인 (공고, 이력서 출력)
     @GetMapping("/api/myPages")
     public ResponseEntity<?> myPage() {
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        List<?> myPageList = userService.getMyPage(sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(myPageList));
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
