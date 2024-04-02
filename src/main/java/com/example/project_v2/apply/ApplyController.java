@@ -35,12 +35,6 @@ public class ApplyController {
         return ResponseEntity.ok(new ApiUtil<>(apply));
     }
 
-    // 지원 합격 불합격 (지원하기 결과 값 입력)
-    @PostMapping("/api/applies/pass/{id}")
-    public ResponseEntity<?> resumePass(@PathVariable Integer id) {
-        return ResponseEntity.ok(new ApiUtil<>(null));
-    }
-
     // 지원할 이력서 선택
     @GetMapping("/api/applies/{id}/resume-save")
     public ResponseEntity<?> resumeSave(@PathVariable Integer id) {
