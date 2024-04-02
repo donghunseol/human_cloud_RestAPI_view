@@ -1,7 +1,6 @@
 package com.example.project_v2.resume;
 
 import com.example.project_v2._core.util.ApiUtil;
-import com.example.project_v2.user.SessionUser;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,6 @@ public class ResumeController {
     @PostMapping("/api/resumes")
     public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        SessionUser su = new SessionUser(sessionUser);
         ResumeResponse.DTO respDTO = resumeService.save(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
