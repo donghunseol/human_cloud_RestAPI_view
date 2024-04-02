@@ -17,8 +17,8 @@ public class ReplyController {
     @PostMapping("/api/replies")
     public ResponseEntity<?> save(@RequestBody ReplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Reply reply = replyService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(reqDTO));
+        ReplyResponse.DTO respDTO = replyService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 댓글 삭제

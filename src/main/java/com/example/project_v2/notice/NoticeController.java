@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 public class NoticeController {
 
-    private final SkillService skillService;
     private final NoticeService noticeService;
     private final HttpSession session;
 
@@ -50,8 +49,8 @@ public class NoticeController {
     @PostMapping("/api/notices")
     public ResponseEntity<?> save(@RequestBody NoticeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Notice notice = noticeService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(notice));
+        NoticeResponse.DTO respDTO = noticeService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 공고 상세 보기
@@ -75,7 +74,7 @@ public class NoticeController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        Notice notice = noticeService.update(id, reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(notice));
+        NoticeResponse.DTO respDTO = noticeService.update(id, reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
