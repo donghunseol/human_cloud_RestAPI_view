@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class ScrapResponse {
 
     @Data
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL) // null이 뜨는 json은 출력안하게 하는 어노테이션
     public static class DTO {
         private Integer id;
         private Integer userId;
