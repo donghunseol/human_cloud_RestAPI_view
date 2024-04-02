@@ -2,14 +2,11 @@ package com.example.project_v2.notice;
 
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
-import com.example.project_v2.board.Board;
-import com.example.project_v2.board.BoardResponse;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +20,7 @@ public class NoticeService {
     private final SkillJPARepository skillJPARepository;
 
     @Transactional
-    public Notice update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO) {
+    public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser) {
         Notice notice = noticeJPARepository.findById(noticeId)
                 .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다"));
         notice.setTitle(reqDTO.getTitle());
@@ -44,13 +41,12 @@ public class NoticeService {
                     .notice(notice)
                     .build();
             skills.add(skillBuild);
-            System.out.println("skillBuild/id : " + skillBuild.getId());
         }
 
         skills = skillJPARepository.saveAll(skills);
         notice.setSkills(skills);
 
-        return notice;
+        return new NoticeResponse.DTO(notice, sessionUser);
     }
 
     public NoticeResponse.DetailDTO noticeDetail(Integer noticeId, User sessionUser) {
@@ -72,7 +68,7 @@ public class NoticeService {
     }
 
     @Transactional
-    public Notice save(NoticeRequest.SaveDTO reqDTO, User sessionUser) {
+    public NoticeResponse.DTO save(NoticeRequest.SaveDTO reqDTO, User sessionUser) {
         Notice notice = noticeJPARepository.save(reqDTO.toEntity(sessionUser));
 
         // 1번 방법 -> skill 로 안받으면 reqDTO 의 id 값이 null 로 json이 뜬다
@@ -94,7 +90,9 @@ public class NoticeService {
         skills = skillJPARepository.saveAll(skills);
         notice.setSkills(skills);
 
-        return noticeJPARepository.save(notice);
+        Notice newNotice = noticeJPARepository.save(notice);
+
+        return new NoticeResponse.DTO(newNotice, sessionUser);
     }
 
     public List<NoticeResponse.NoticeListDTO> noticeList() {
