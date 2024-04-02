@@ -21,7 +21,7 @@ public class BoardController {
 
 
     // 게시글 수정
-    @PutMapping("/boards/{id}/updateTest")
+    @PutMapping("/boards/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Board board = boardService.update(id, sessionUser.getId(), reqDTO);
