@@ -31,8 +31,12 @@ public class NoticeService {
         notice.setContent(reqDTO.getContent());
         notice.setUser(reqDTO.getUser());
 
-        skillJPARepository.deleteAllByNoticeId(noticeId);
+        // 공고 스킬 정보 삭제 후, 추가 (스킬이 없는 경우에는 삭제 안함)
+        if (!skillJPARepository.findByNoticeId(noticeId).isEmpty()) {
+            skillJPARepository.deleteAllByNoticeId(noticeId);
+        }
 
+        // 스킬 정보 생성
         List<Skill> skills = new ArrayList<>();
         for (NoticeRequest.UpdateDTO.SkillDTO skill : reqDTO.getSkills()) {
             Skill skillBuild = Skill.builder()

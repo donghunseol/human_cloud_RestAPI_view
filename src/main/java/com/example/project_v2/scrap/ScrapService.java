@@ -3,9 +3,7 @@ package com.example.project_v2.scrap;
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2.notice.Notice;
-import com.example.project_v2.notice.NoticeJPARepository;
 import com.example.project_v2.resume.Resume;
-import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.user.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +17,16 @@ public class ScrapService {
     private final ScrapJPARepository scrapJPARepository;
 
     @Transactional
-    public Scrap save(Resume resume, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
+    public ScrapResponse.DTO save(Resume resume, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
         Scrap scrap = scrapJPARepository.save(reqDTO.toEntity(sessionUser, resume));
-        return scrap;
+        return new ScrapResponse.DTO(scrap);
     }
 
     @Transactional
-    public Scrap save(Notice notice, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
+    public ScrapResponse.DTO save(Notice notice, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
         Scrap scrap = scrapJPARepository.save(reqDTO.toEntity(sessionUser, notice));
-        return scrap;
+
+        return new ScrapResponse.DTO(scrap);
     }
 
     @Transactional
