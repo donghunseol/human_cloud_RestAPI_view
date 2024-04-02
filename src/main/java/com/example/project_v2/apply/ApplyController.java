@@ -7,6 +7,7 @@ import com.example.project_v2.apply.ApplyService;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,22 @@ public class ApplyController {
 
     private final ApplyService applyService;
     private final HttpSession session;
+
+    // 합격 불합격
+    @PostMapping("/api/applies/pass/{id}")
+    public ResponseEntity<?> resumePass(@PathVariable Integer id, @RequestBody ApplyRequest.PassDTO passDTO) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        if (sessionUser == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiUtil<>(401, "로그인이 필요합니다."));
+        } // 로그인 안되어 있으면 로그인 해야함
+
+        if (sessionUser.getRole() != 1){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiUtil<>(403, "권한이 없습니다."));
+        } // 권한(기업 로그인 했을때만 유효)이 없으면 안됨
+
+        Apply apply = applyService.resumePass(passDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(apply));
+    }
 
     // 지원 합격 불합격 (지원하기 결과 값 입력)
     @PostMapping("/api/applies/pass/{id}")

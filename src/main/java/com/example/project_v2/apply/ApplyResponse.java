@@ -43,9 +43,9 @@ public class ApplyResponse {
 
     @Data
     public static class SelectResumeDTO{
-        private Integer id;
-        private Integer resumeId;
-        private Boolean isResumeOwner;
+        private Integer id; // 지원 번호
+        private Integer resumeId; // 이력서 번호
+        private Boolean isResumeOwner; // 이력서의 주인
 
         public SelectResumeDTO(Apply apply, User sessionUser) {
             this.id = apply.getId();
