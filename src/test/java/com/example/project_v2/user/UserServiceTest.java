@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
+
 @Import({UserService.class})
 @DataJpaTest
 public class UserServiceTest {
@@ -19,7 +24,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void update_test(){
+    public void update_test() {
         // given
         int id = 1;
         UserRequest.UpdateDTO reqDTO = new UserRequest.UpdateDTO();
@@ -39,5 +44,4 @@ public class UserServiceTest {
         // then
         Assertions.assertThat(user.getUsername()).isEqualTo("happy");
     }
-
 }

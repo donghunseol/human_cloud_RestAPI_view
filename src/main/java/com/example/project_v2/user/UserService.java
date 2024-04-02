@@ -18,6 +18,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+<<<<<<< HEAD
+import java.util.Base64;
+=======
+>>>>>>> a924a3bab903e6e30221b91b187757ffdcdf2ff0
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -60,15 +64,15 @@ public class UserService {
         user.setAddress(reqDTO.getAddress());
 
         try {
-            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImage().getBytes());
+            // 베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+            // 1. 데이터 전달
+            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getEncodedData());
 
             // 이미지 파일 넣기
-            MultipartFile imgFile = reqDTO.getImage(); // 이미지 파일 데이터 저장
-            String imgFilename = UUID.randomUUID().toString() + "_" + imgFile.getOriginalFilename(); // 이미지 파일 오리지널 이름
+            String imgFilename = UUID.randomUUID() + "_" + reqDTO.getImageName(); // 이미지 파일 오리지널 이름
 
             // 파일 저장 위치 설정
-            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
+            Path imgPath = Paths.get("./src/main/resources/static/images/"+ imgFilename);
 
             Files.write(imgPath, decodedBytes);
             user.setImage(imgFilename);
