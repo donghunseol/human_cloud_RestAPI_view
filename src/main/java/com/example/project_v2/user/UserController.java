@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+    private final UserJPARepository userJPARepository;
 
     // 메인 화면
     @GetMapping("/")
@@ -31,9 +33,9 @@ public class UserController {
 
     // 회원 가입
     @PostMapping("/users/join")
-    public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO) {
-        User user = userService.join(reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(user));
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
+        UserResponse.DTO respDTO = userService.join(reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 회원 가입 페이지
@@ -45,9 +47,8 @@ public class UserController {
     // 로그인
     @PostMapping("/users/login")
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userService.login(reqDTO);
+        SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
-        // return "redirect:/";
         return ResponseEntity.ok(new ApiUtil<>(sessionUser));
     }
 
@@ -59,11 +60,10 @@ public class UserController {
     }
 
     // 회원 정보 수정
-    // Put 으로 전환 필요
     @PutMapping("/api/users/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
         return ResponseEntity.ok(new ApiUtil<>(newSessionUser));
     }

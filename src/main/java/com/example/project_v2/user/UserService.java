@@ -1,5 +1,6 @@
 package com.example.project_v2.user;
 
+import com.example.project_v2._core.errors.exception.Exception400;
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception404;
 import com.example.project_v2.notice.Notice;
@@ -18,10 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -38,18 +36,26 @@ public class UserService {
     }
 
     @Transactional
-    public User join(UserRequest.JoinDTO reqDTO) {
-        return userJPARepository.save(reqDTO.toEntity());
+    public UserResponse.DTO join(UserRequest.JoinDTO reqDTO) {
+        Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
+
+        if(userOP.isPresent()){
+            throw new Exception400("중복된 유저네임입니다");
+        }
+
+        User user = userJPARepository.save(reqDTO.toEntity());
+
+        return new UserResponse.DTO(user);
     }
 
-    public User login(UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+    public SessionUser login(UserRequest.LoginDTO reqDTO) {
+        User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
-        return sessionUser;
+        return new SessionUser(user);
     }
 
     @Transactional
-    public User update(Integer id, UserRequest.UpdateDTO reqDTO) {
+    public SessionUser update(Integer id, UserRequest.UpdateDTO reqDTO) {
         User user = userJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다"));
 
@@ -75,7 +81,7 @@ public class UserService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return user;
+        return new SessionUser(user);
     }
 
     // 사용자의 role 에 따라 메인페이지 화면 변경
