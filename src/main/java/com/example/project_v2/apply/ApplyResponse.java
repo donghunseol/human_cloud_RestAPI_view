@@ -5,7 +5,28 @@ import com.example.project_v2.resume.Resume;
 import com.example.project_v2.user.User;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 public class ApplyResponse {
+
+    @Data
+    public static class DTO{
+        private Integer id;
+        private Integer userId;
+        private Integer noticeId;
+        private Integer resumeId;
+        private Boolean pass;
+        private Timestamp createdAt;
+
+        public DTO(Apply apply) {
+            this.id = apply.getId();
+            this.userId = apply.getUser().getId();
+            this.noticeId = apply.getNotice().getId();
+            this.resumeId = apply.getResume().getId();
+            this.pass = apply.getPass();
+            this.createdAt = apply.getCreatedAt();
+        }
+    }
 
     @Data
     public static class ApplyDTO{
