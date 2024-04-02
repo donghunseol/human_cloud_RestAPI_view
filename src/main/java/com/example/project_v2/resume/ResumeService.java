@@ -7,7 +7,8 @@ import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -99,16 +100,14 @@ public class ResumeService {
     }
 
     // 이력서 리스트
-    public List<ResumeResponse.ResumeListDTO> resumeList() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Resume> resumeList = resumeJPARepository.findAll(sort);
+    public List<ResumeResponse.ResumeListDTO> resumeList(Pageable pageable) {
+        Page<Resume> resumeList = resumeJPARepository.findAll(pageable);
         return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
     }
 
     // 이력서 리스트(개인)
-    public List<ResumeResponse.ResumeListDTO> resumeListByUser(User user) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Resume> resumeList = resumeJPARepository.findByUser(user, sort);
+    public List<ResumeResponse.ResumeListDTO> resumeListByUser(User user, Pageable pageable) {
+        List<Resume> resumeList = resumeJPARepository.findByUser(user, pageable);
         return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
     }
 }

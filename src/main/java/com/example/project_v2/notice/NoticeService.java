@@ -2,14 +2,12 @@ package com.example.project_v2.notice;
 
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
-import com.example.project_v2.board.Board;
-import com.example.project_v2.board.BoardResponse;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -97,15 +95,13 @@ public class NoticeService {
         return noticeJPARepository.save(notice);
     }
 
-    public List<NoticeResponse.NoticeListDTO> noticeList() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Notice> noticeList = noticeJPARepository.findAll(sort);
+    public List<NoticeResponse.NoticeListDTO> noticeList(Pageable pageable) {
+        Page<Notice> noticeList = noticeJPARepository.findAll(pageable);
         return noticeList.stream().map(notice -> new NoticeResponse.NoticeListDTO(notice)).toList();
     }
 
-    public List<NoticeResponse.NoticeListDTO> noticeListByUser(User sessionUser) {
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Notice> noticeList = noticeJPARepository.findByUser(sessionUser, sort);
+    public List<NoticeResponse.NoticeListDTO> noticeListByUser(User sessionUser, Pageable pageable) {
+        List<Notice> noticeList = noticeJPARepository.findByUser(sessionUser, pageable);
         return noticeList.stream().map(notice -> new NoticeResponse.NoticeListDTO(notice)).toList();
     }
 }

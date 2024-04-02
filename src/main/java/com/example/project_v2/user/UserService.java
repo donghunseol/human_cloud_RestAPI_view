@@ -9,10 +9,9 @@ import com.example.project_v2.resume.Resume;
 import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -68,7 +67,7 @@ public class UserService {
             String imgFilename = UUID.randomUUID() + "_" + reqDTO.getImageName(); // 이미지 파일 오리지널 이름
 
             // 파일 저장 위치 설정
-            Path imgPath = Paths.get("./src/main/resources/static/images/"+ imgFilename);
+            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
 
             Files.write(imgPath, decodedBytes);
             user.setImage(imgFilename);
@@ -79,24 +78,23 @@ public class UserService {
     }
 
     // 사용자의 role 에 따라 메인페이지 화면 변경
-    public List<?> getMainPageByUserRole(User sessionUser) {
+    public List<?> getMainPageByUserRole(User sessionUser, Pageable pageable) {
         List<?> resultList = new ArrayList<>();
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
 
         if (sessionUser != null) { // 로그인시
             if (sessionUser.getRole() == 1) {
                 // Role이 1인 경우 Resume 리스트 반환
-                resultList = resumeJPARepository.findAll(sort).stream()
+                resultList = resumeJPARepository.findAll(pageable).stream()
                         .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
                         .toList();
             } else {
                 // Role이 0인 경우 Notice 리스트 반환
-                resultList = noticeJPARepository.findAll(sort).stream()
+                resultList = noticeJPARepository.findAll(pageable).stream()
                         .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
                         .toList();
             }
         } else { // 로그인하지 않은 경우 Notice 리스트 반환
-            resultList = noticeJPARepository.findAll(sort).stream()
+            resultList = noticeJPARepository.findAll(pageable).stream()
                     .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
                     .toList();
         }
@@ -104,24 +102,23 @@ public class UserService {
     }
 
     // 메인페이지 스킬 검색 서비스
-    public List<?> getMainPageByUserRoleAndSkill(User sessionUser, String skillName) {
+    public List<?> getMainPageByUserRoleAndSkill(User sessionUser, String skillName, Pageable pageable) {
         List<?> resultList = new ArrayList<>();
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
 
         if (sessionUser != null) { // 로그인시
             if (sessionUser.getRole() == 1) {
                 // Role이 1인 경우 Resume 리스트 반환
-                resultList = resumeJPARepository.findBySkill(skillName, sort).stream()
+                resultList = resumeJPARepository.findBySkill(skillName, pageable).stream()
                         .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
                         .toList();
             } else {
                 // Role이 0인 경우 Notice 리스트 반환
-                resultList = noticeJPARepository.findBySkill(skillName, sort).stream()
+                resultList = noticeJPARepository.findBySkill(skillName, pageable).stream()
                         .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
                         .toList();
             }
         } else { // 로그인하지 않은 경우 Notice 리스트 반환
-            resultList = noticeJPARepository.findBySkill(skillName, sort).stream()
+            resultList = noticeJPARepository.findBySkill(skillName, pageable).stream()
                     .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
                     .toList();
         }
@@ -129,19 +126,18 @@ public class UserService {
     }
 
     // 마이페이지
-    public List<?> getMyPage(User sessionUser) {
+    public List<?> getMyPage(User sessionUser, Pageable pageable) {
         List<?> myPageList = new ArrayList<>();
-        Sort sort = Sort.by(Sort.Direction.DESC, "id");
 
         if (sessionUser != null) { // 로그인시
             if (sessionUser.getRole() == 1) { // 기업
                 // Role이 1인 경우 Resume 리스트 반환
-                myPageList = noticeJPARepository.findByUser(sessionUser, sort).stream()
+                myPageList = noticeJPARepository.findByUser(sessionUser, pageable).stream()
                         .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
                         .toList();
             } else {
                 // Role이 0인 경우 Notice 리스트 반환
-                myPageList = resumeJPARepository.findByUser(sessionUser, sort).stream()
+                myPageList = resumeJPARepository.findByUser(sessionUser, pageable).stream()
                         .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
                         .toList();
             }

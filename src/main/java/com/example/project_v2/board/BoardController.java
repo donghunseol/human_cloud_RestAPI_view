@@ -4,14 +4,16 @@ import com.example.project_v2._core.util.ApiUtil;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
 public class BoardController {
 
     private final BoardService boardService;
@@ -45,8 +47,13 @@ public class BoardController {
 
     // 게시글 목록 보기
     @GetMapping("/boards")
-    public ResponseEntity<?> index() {
-        List<BoardResponse.MainDTO> respDTO = boardService.boardMain();
+    public ResponseEntity<?> index(@RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "10") int size,
+                                   @RequestParam(defaultValue = "id") String sortBy,
+                                   @RequestParam(defaultValue = "desc") String direction) {
+        Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        List<BoardResponse.MainDTO> respDTO = boardService.boardMain(pageable);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
