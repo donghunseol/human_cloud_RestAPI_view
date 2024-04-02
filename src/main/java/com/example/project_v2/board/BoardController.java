@@ -29,7 +29,7 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/boards/{id}")
+    @DeleteMapping("/api/boards/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
         User sessionUSer = (User) session.getAttribute("sessionUser");
         boardService.delete(id, sessionUSer.getId());
