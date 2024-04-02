@@ -34,11 +34,12 @@ public class ApplyService {
 
     // 합격, 불합격
     @Transactional
-    public Apply resumePass(ApplyRequest.PassDTO passDTO, User user){
+    public ApplyResponse.DTO resumePass(ApplyRequest.PassDTO passDTO, User user){
         Apply apply = applyJPARepository.findById(passDTO.getId())
                 .orElseThrow(() -> new Exception404("지원 번호를 찾을 수 없습니다"));
         apply.setPass(passDTO.isPass());
-        return applyJPARepository.save(apply);
+        Apply passApply = applyJPARepository.save(apply);
+        return new ApplyResponse.DTO(passApply);
     }
 
 
@@ -51,7 +52,7 @@ public class ApplyService {
     }
 
     @Transactional
-    public Apply save(ApplyRequest.SaveDTO reqDTO, User sessionUser) {
+    public ApplyResponse.DTO save(ApplyRequest.SaveDTO reqDTO, User sessionUser) {
         Optional<Notice> optionalNotice = reqDTO.getNoticeId() == null ? Optional.empty() : noticeJPARepository.findById(reqDTO.getNoticeId());
         if (!optionalNotice.isPresent()) {
             // 공고 ID가 null이 아니지만 찾을 수 없는 경우의 처리 로직
@@ -66,7 +67,7 @@ public class ApplyService {
 
         // Apply 엔티티 생성 시, Notice와 Resume이 null일 수 있으므로 Optional의 orElse(null)을 사용하여 처리
         Apply apply = applyJPARepository.save(reqDTO.toEntity(sessionUser, optionalNotice.orElse(null), optionalResume.orElse(null)));
-        return apply;
+        return new ApplyResponse.DTO(apply);
     }
 
 

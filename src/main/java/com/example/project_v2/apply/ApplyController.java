@@ -27,8 +27,8 @@ public class ApplyController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiUtil<>(403, "권한이 없습니다."));
         } // 권한(기업 로그인 했을때만 유효)이 없으면 안됨
 
-        Apply apply = applyService.resumePass(passDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(apply));
+        ApplyResponse.DTO respDTO = applyService.resumePass(passDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 지원할 이력서 선택
@@ -51,8 +51,8 @@ public class ApplyController {
     @PostMapping("/api/applies/{id}")
     public ResponseEntity<?> save(@RequestBody ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Apply apply = applyService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(apply));
+        ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 }
 
