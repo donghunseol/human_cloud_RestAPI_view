@@ -69,7 +69,7 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume save(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
+    public ResumeResponse.DTO save(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
         // 이력서 정보 저장
         Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
 
@@ -88,7 +88,9 @@ public class ResumeService {
         skills = skillJPARepository.saveAll(skills);
         resume.setSkills(skills);
 
-        return resumeJPARepository.save(resume);
+        Resume newResume = resumeJPARepository.save(resume);
+
+        return new ResumeResponse.DTO(newResume, sessionUser);
     }
 
     // 이력서 상세보기
