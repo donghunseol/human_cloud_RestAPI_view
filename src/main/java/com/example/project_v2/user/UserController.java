@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+    private final UserJPARepository userJPARepository;
 
     // 메인 화면
     @GetMapping("/")
@@ -31,9 +33,9 @@ public class UserController {
 
     // 회원 가입
     @PostMapping("/users/join")
-    public ResponseEntity<?> join(UserRequest.JoinDTO reqDTO) {
-        User user = userService.join(reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(user));
+    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
+        UserResponse.DTO respDTO = userService.join(reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 회원 가입 페이지
