@@ -21,7 +21,7 @@ public class UserResponse {
         private String address;
         private String image; // 이미지 경로만 저장
         private Integer role;
-        private Timestamp created_at;
+        private Timestamp createdAt;
 
         public DTO(User user) {
             this.id = user.getId();
@@ -33,7 +33,7 @@ public class UserResponse {
             this.address = user.getAddress();
             this.image = user.getImage();
             this.role = user.getRole();
-            this.created_at = user.getCreated_at();
+            this.createdAt = user.getCreatedAt();
         }
     }
 }

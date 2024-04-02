@@ -48,10 +48,10 @@ public class UserService {
         return new UserResponse.DTO(user);
     }
 
-    public User login(UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+    public SessionUser login(UserRequest.LoginDTO reqDTO) {
+        User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
-        return sessionUser;
+        return new SessionUser(user);
     }
 
     @Transactional

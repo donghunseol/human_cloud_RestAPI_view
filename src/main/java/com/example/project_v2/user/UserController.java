@@ -47,9 +47,8 @@ public class UserController {
     // 로그인
     @PostMapping("/users/login")
     public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userService.login(reqDTO);
+        SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
-        // return "redirect:/";
         return ResponseEntity.ok(new ApiUtil<>(sessionUser));
     }
 
