@@ -24,7 +24,7 @@ public class BoardService {
     }
 
     @Transactional
-    public Board update(Integer boardId, Integer sessionUserId, BoardRequest.UpdateDTO reqDTO) {
+    public BoardResponse.DTO update(Integer boardId, Integer sessionUserId, BoardRequest.UpdateDTO reqDTO) {
         Board board = boardJPARepository.findById(boardId)
                 .orElseThrow(() -> new Exception404("게시글을 찾을 수 없습니다."));
 
@@ -35,7 +35,7 @@ public class BoardService {
         board.setTitle(reqDTO.getTitle());
         board.setContent(reqDTO.getContent());
 
-        return board;
+        return new BoardResponse.DTO(board);
     } // 더티 체킹
 
     @Transactional
@@ -49,9 +49,9 @@ public class BoardService {
     }
 
     @Transactional
-    public Board save(BoardRequest.SaveDTO reqDTO, User sessionUser) {
+    public BoardResponse.DTO save(BoardRequest.SaveDTO reqDTO, User sessionUser) {
         Board board = boardJPARepository.save(reqDTO.toEntity(sessionUser));
-        return board;
+        return new BoardResponse.DTO(board);
     }
 
     // 게시글 상세보기
