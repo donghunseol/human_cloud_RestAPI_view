@@ -9,11 +9,7 @@ import com.example.project_v2.resume.Resume;
 import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.resume.ResumeResponse;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
-import lombok.SneakyThrows;
-=======
 import org.springframework.data.domain.Sort;
->>>>>>> e3078c52f29e663e7b8f226ad87fbae4361dabb8
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,12 +18,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-<<<<<<< HEAD
 import java.util.Base64;
-=======
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> e3078c52f29e663e7b8f226ad87fbae4361dabb8
 import java.util.UUID;
 
 @RequiredArgsConstructor
