@@ -1,6 +1,7 @@
 package com.example.project_v2.resume;
 
 import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.user.SessionUser;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,13 @@ public class ResumeController {
     @PostMapping("/api/resumes")
     public ResponseEntity<?> save(@RequestBody ResumeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Resume resume = resumeService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(resume));
+        SessionUser su = new SessionUser(sessionUser);
+        ResumeResponse.DTO respDTO = resumeService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 이력서 삭제
-    @DeleteMapping("/api/resumes/{id}/deleteTest")
+    @DeleteMapping("/api/resumes/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.delete(id, sessionUser.getId());
@@ -40,12 +42,12 @@ public class ResumeController {
     }
 
     // 이력서 수정
-    @PutMapping("/api/resumes/{id}/updateTest")
+    @PutMapping("/api/resumes/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ResumeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        Resume resume = resumeService.update(id, sessionUser, reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(resume));
+        ResumeResponse.DTO respDTO = resumeService.update(id, sessionUser, reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 이력서 상세 보기
