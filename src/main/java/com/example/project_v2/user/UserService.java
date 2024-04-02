@@ -1,5 +1,6 @@
 package com.example.project_v2.user;
 
+import com.example.project_v2._core.errors.exception.Exception400;
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception404;
 import com.example.project_v2.notice.Notice;
@@ -18,10 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -38,18 +36,26 @@ public class UserService {
     }
 
     @Transactional
-    public User join(UserRequest.JoinDTO reqDTO) {
-        return userJPARepository.save(reqDTO.toEntity());
+    public UserResponse.DTO join(UserRequest.JoinDTO reqDTO) {
+        Optional<User> userOP = userJPARepository.findByUsername(reqDTO.getUsername());
+
+        if(userOP.isPresent()){
+            throw new Exception400("중복된 유저네임입니다");
+        }
+
+        User user = userJPARepository.save(reqDTO.toEntity());
+
+        return new UserResponse.DTO(user);
     }
 
-    public User login(UserRequest.LoginDTO reqDTO) {
-        User sessionUser = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
+    public SessionUser login(UserRequest.LoginDTO reqDTO) {
+        User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
-        return sessionUser;
+        return new SessionUser(user);
     }
 
     @Transactional
-    public User update(Integer id, UserRequest.UpdateDTO reqDTO) {
+    public SessionUser update(Integer id, UserRequest.UpdateDTO reqDTO) {
         User user = userJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다"));
 
@@ -60,22 +66,22 @@ public class UserService {
         user.setAddress(reqDTO.getAddress());
 
         try {
-            //베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getImage().getBytes());
+            // 베이스 64로 들어오는 문자열을 바이트로 디코딩하기
+            // 1. 데이터 전달
+            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getEncodedData());
 
             // 이미지 파일 넣기
-            MultipartFile imgFile = reqDTO.getImage(); // 이미지 파일 데이터 저장
-            String imgFilename = UUID.randomUUID().toString() + "_" + imgFile.getOriginalFilename(); // 이미지 파일 오리지널 이름
+            String imgFilename = UUID.randomUUID() + "_" + reqDTO.getImageName(); // 이미지 파일 오리지널 이름
 
             // 파일 저장 위치 설정
-            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
+            Path imgPath = Paths.get("./src/main/resources/static/images/"+ imgFilename);
 
             Files.write(imgPath, decodedBytes);
             user.setImage(imgFilename);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return user;
+        return new SessionUser(user);
     }
 
     // 사용자의 role 에 따라 메인페이지 화면 변경
