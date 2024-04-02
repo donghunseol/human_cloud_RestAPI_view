@@ -24,8 +24,8 @@ public class BoardController {
     @PutMapping("/api/boards/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        Board board = boardService.update(id, sessionUser.getId(), reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(board));
+        BoardResponse.DTO respDTO = boardService.update(id, sessionUser.getId(), reqDTO);
+        return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
 
     // 게시글 삭제
@@ -41,8 +41,8 @@ public class BoardController {
     public ResponseEntity<?> save(@RequestBody BoardRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         // 로그인 여부 체크
-        Board board = boardService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil(board));
+        BoardResponse.DTO respDTO = boardService.save(reqDTO, sessionUser);
+        return ResponseEntity.ok(new ApiUtil(respDTO));
     }
 
     // 게시글 목록 보기

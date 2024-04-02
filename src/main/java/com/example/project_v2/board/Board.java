@@ -34,7 +34,7 @@ public class Board {
     private User user;
 
     @CreationTimestamp
-    private Timestamp created_at;
+    private Timestamp createdAt;
 
     @JsonIgnore
     @OrderBy("id desc")
@@ -46,12 +46,12 @@ public class Board {
     private List<Love> loves = new ArrayList<>();
 
     @Builder
-    public Board(Integer id, String title, String content, User user, Timestamp created_at, List<Reply> replies, List<Love> loves) {
+    public Board(Integer id, String title, String content, User user, Timestamp createdAt, List<Reply> replies, List<Love> loves) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.user = user;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.replies = replies;
         this.loves = loves;
     }
