@@ -5,6 +5,8 @@ import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +57,7 @@ public class NoticeController {
 
     // 공고 작성
     @PostMapping("/api/notices")
-    public String save(@RequestBody NoticeRequest.SaveDTO reqDTO) {
+    public String save(NoticeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         noticeService.save(reqDTO, sessionUser);
         return "redirect:/";
