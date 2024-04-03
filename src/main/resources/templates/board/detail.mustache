@@ -33,11 +33,16 @@
 
                 </div>
                 <div class="bt_wrap" style="text-align: end; margin-top: 15px">
+                {{#boardDetail.boardOwner}}
                     <a href="/board/{{boardDetail.id}}/update-form" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: 2px solid; margin-right: 10px;">수정</a>
-                    <form action="/board/{{boardDetail.id}}/delete" method="post" style="display: inline-block; margin-right: 10px;">
-                        <button class="on text-white border-white" style="padding: 9px 18px; background-color: #f999b7">삭제</button>
+                    <form action="/board/{{boardDetail.id}}/delete" method="post"
+                          style="display: inline-block; margin-right: 10px;">
+                        <button class="on text-white border-white" style="padding: 9px 18px; background-color: #f999b7">
+                            삭제
+                        </button>
                     </form>
+                {{/boardDetail.boardOwner}}
                 </div>
 
                 <div class="card-body" style="margin-top: 30px;">
@@ -60,13 +65,16 @@
                         <!-- 댓글아이템 -->
                         <div class="list-group-item d-flex justify-content-between align-items-center">
                             <div class="d-flex">
-                                <div class="px-1 me-1 text-white rounded" style="background-color: #9adbc5">{{username}}</div>
+                                <div class="px-1 me-1 text-white rounded"
+                                     style="background-color: #9adbc5">{{username}}</div>
                                 <div>{{comment}}</div>
                             </div>
 
                             {{#replyOwner}}
                                 <form action="/reply/{{id}}/delete" method="post">
-                                    <button class="btn text-white" style="padding: 1px 1px 1px 1px; background-color: #f886a8;">삭제</button>
+                                    <button class="btn text-white"
+                                            style="padding: 1px 1px 1px 1px; background-color: #f886a8;">삭제
+                                    </button>
                                 </form>
                             {{/replyOwner}}
                         </div>
