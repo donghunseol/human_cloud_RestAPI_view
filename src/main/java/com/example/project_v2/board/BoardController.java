@@ -42,7 +42,7 @@ public class BoardController {
     public String update(@PathVariable Integer id, BoardRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         boardService.update(id, sessionUser.getId(), reqDTO);
-        return "redirect:/boards/" + id + "/detail";
+        return "redirect:/boards/" + id;
     }
 
     // 게시글 삭제
