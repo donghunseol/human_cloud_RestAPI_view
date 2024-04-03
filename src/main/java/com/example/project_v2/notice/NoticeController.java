@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Controller
 public class NoticeController {
@@ -82,18 +85,21 @@ public class NoticeController {
     @GetMapping("/notice/{id}/update-form")
     public String updateForm(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        NoticeResponse.DetailDTO responseDTO = noticeService.noticeDetail(id,sessionUser);
+        NoticeResponse.DetailDTO responseDTO = noticeService.noticeDetail(id, sessionUser);
         request.setAttribute("notice", responseDTO);
-
         return "/notice/update-form";
     }
 
     // 공고 수정
     @PostMapping("/api/notices/{id}")
-    public String update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO) {
+    public String update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO, @RequestParam("skillNames") List<String> skillNames) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        reqDTO.toEntity(sessionUser);
+        reqDTO.setSkills(skillNames.stream().map(skillName -> {
+            NoticeRequest.UpdateDTO.SkillDTO skillDTO = new NoticeRequest.UpdateDTO.SkillDTO();
+            skillDTO.setName(skillName);
+            return skillDTO;
+        }).collect(Collectors.toList()));
         noticeService.update(id, reqDTO, sessionUser);
-        return "redirect:/notices/"+id;
+        return "redirect:/notices/" + id;
     }
 }
