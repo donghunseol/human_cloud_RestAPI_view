@@ -45,8 +45,8 @@ public class ApplyService {
 
 
     // 이력서 조회
-    public ApplyResponse.SelectResumeDTO findById(Integer applyId, User sessionUser){
-       Apply apply = applyJPARepository.findById(applyId)
+    public ApplyResponse.SelectResumeDTO findById(Integer id, User sessionUser){
+       Apply apply = applyJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
         return new ApplyResponse.SelectResumeDTO(apply, sessionUser);
     }

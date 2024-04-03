@@ -34,10 +34,10 @@ public class ApplyController {
 
     // 지원할 이력서 선택
     @GetMapping("/applies/{id}/resume-save")
-    public ResponseEntity<?> resumeSave(@PathVariable Integer id) {
+    public String resumeSave(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        ApplyResponse.SelectResumeDTO selectResumeDTO = applyService.findById(id, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(selectResumeDTO));
+        applyService.findById(id, sessionUser);
+        return "redirect:/index";
     }
 
     // 지원 취소

@@ -15,6 +15,7 @@ public class NoticeController {
 
     private final NoticeService noticeService;
     private final HttpSession session;
+
 //
 //    // 로그인한 유저가 작성한 공고 목록 보기
 //    @GetMapping("/notices/my-notices")
@@ -55,34 +56,44 @@ public class NoticeController {
 
     // 공고 작성
     @PostMapping("/api/notices")
-    public String save(@RequestBody NoticeRequest.SaveDTO reqDTO) {
+    public String save(NoticeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         noticeService.save(reqDTO, sessionUser);
         return "redirect:/";
     }
 
     // 공고 상세 보기
-    @GetMapping("/notices/{id}/detail")
-    public ResponseEntity<?> detail(@PathVariable Integer id) {
+    @GetMapping("/notices/{id}")
+    public String detail(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         NoticeResponse.DetailDTO respDTO = noticeService.noticeDetail(id, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        request.setAttribute("notice", respDTO);
+        return "notice/detail";
     }
 
     // 공고 삭제
-    @DeleteMapping("/api/notices/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    @PostMapping("/notice/{id}/delete")
+    public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         noticeService.delete(id, sessionUser.getId());
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        return "redirect:/";
+    }
+
+    @GetMapping("/notice/{id}/update-form")
+    public String updateForm(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        NoticeResponse.DetailDTO responseDTO = noticeService.noticeDetail(id,sessionUser);
+        request.setAttribute("notice", responseDTO);
+
+        return "/notice/update-form";
     }
 
     // 공고 수정
-    @PutMapping("/api/notices/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
+    @PostMapping("/api/notices/{id}")
+    public String update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        NoticeResponse.DTO respDTO = noticeService.update(id, reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        noticeService.update(id, reqDTO, sessionUser);
+        return "redirect:/notices/"+id;
     }
 }

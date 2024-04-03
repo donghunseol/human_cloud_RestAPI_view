@@ -66,7 +66,7 @@ public class UserController {
 
     // 회원 정보 수정
     @PutMapping("/api/users/{id}")
-    public String update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
+    public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
