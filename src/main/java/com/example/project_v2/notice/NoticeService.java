@@ -26,7 +26,7 @@ public class NoticeService {
     private final ScrapJPARepository scrapJPARepository;
 
     @Transactional
-    public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser) throws Exception404 {
+    public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser, List<String> skillNames) throws Exception404 {
         Notice notice = noticeJPARepository.findById(noticeId)
                 .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다."));
         notice.setTitle(reqDTO.getTitle());
@@ -47,11 +47,10 @@ public class NoticeService {
 
         // 스킬 정보 생성
         List<Skill> skills = new ArrayList<>();
-        for (NoticeRequest.UpdateDTO.SkillDTO skillDTO : reqDTO.getSkills()) {
+        for (String skillName : skillNames) {
             // 새로운 Skill 객체 생성
             Skill skill = new Skill();
-            skill.setName(skillDTO.getName());
-            skill.setRole(skillDTO.getRole());
+            skill.setName(skillName);
             skill.setNotice(notice);
             skills.add(skill);
         }
@@ -64,6 +63,7 @@ public class NoticeService {
 
         return new NoticeResponse.DTO(notice, sessionUser);
     }
+
 
 
 
