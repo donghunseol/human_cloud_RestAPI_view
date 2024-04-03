@@ -7,16 +7,30 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
+
+    // 로그인
+    @PostMapping("/users/login")
+    public String login(UserRequest.LoginDTO reqDTO) {
+        SessionUser sessionUser = userService.login(reqDTO);
+        session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
+        return "redirect:/";
+    }
+
+    // 로그인 화면
+    @GetMapping("/users/login-form")
+    public String login() {
+        return "/user/login-form";
+    }
 
     // 메인 화면
     @GetMapping("/")
@@ -35,6 +49,7 @@ public class UserController {
         } else {
             mainPageList = userService.getMainPageByUserRole(sessionUser, pageable);
         }
+
         return ResponseEntity.ok(new ApiUtil<>(mainPageList));
     }
 
@@ -48,23 +63,9 @@ public class UserController {
     // 회원 가입 페이지
     @GetMapping("/users/join-form")
     public String joinForm() {
-        return "user/join-form";
+        return "/user/join-form";
     }
 
-    // 로그인
-    @PostMapping("/users/login")
-    public ResponseEntity<?> login(@RequestBody UserRequest.LoginDTO reqDTO) {
-        SessionUser sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
-        return ResponseEntity.ok(new ApiUtil<>(sessionUser));
-    }
-
-
-    // 로그인 화면
-    @GetMapping("/users/login-form")
-    public String login() {
-        return "/user/login-form";
-    }
 
     // 회원 정보 수정
     @PutMapping("/api/users/{id}")
@@ -124,9 +125,6 @@ public class UserController {
     @GetMapping("/api/scraps/{id}")
     public ResponseEntity<?> scrapList(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-
-        //List<ScrapResponse.ScrapDTO> scrapList= scrapRepository.findByIdList(id, user.getRole());
-        //session.setAttribute("scrapList", scrapList);
 
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
