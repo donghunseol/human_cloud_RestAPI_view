@@ -20,7 +20,7 @@ public class UserController {
     private final HttpSession session;
 
     // 로그인
-    @PostMapping("/user/login")
+    @PostMapping("/users/login")
     public String login(UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
@@ -28,22 +28,55 @@ public class UserController {
     }
 
     // 로그인 화면
-    @GetMapping("/user/login-form")
+    @GetMapping("/users/login-form")
     public String login() {
         return "/user/login-form";
     }
 
     // 회원 가입
-    @PostMapping("/user/join")
+    @PostMapping("/users/join")
     public String join(UserRequest.JoinDTO reqDTO) {
         userService.join(reqDTO);
         return "redirect:/user/login-form";
     }
 
+    // 회원가입(username) 중복 확인
+    @GetMapping("/api/username-same-checks")
+    public ApiUtil<?> usernameSameCheck(String username) {
+        User user = userService.sameCheck(username);
+        if (user == null) {
+            return new ApiUtil<>(true);
+        } else {
+            return new ApiUtil<>(false);
+        }
+    }
+
     // 회원 가입 페이지
-    @GetMapping("/user/join-form")
+    @GetMapping("/users/join-form")
     public String joinForm() {
         return "/user/join-form";
+    }
+
+    // 회원 정보 수정
+    @PutMapping("/api/users/{id}")
+    public String update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
+        session.setAttribute("sessionUser", newSessionUser);
+        return "redirect:/api/myPages";
+    }
+
+    // 회원 정보 수정 화면
+    @GetMapping("/api/users/{id}/update-form")
+    public String updateForm(@PathVariable Integer id) {
+        return "/user/update-form";
+    }
+
+    // 로그아웃
+    @GetMapping("/api/users/logout")
+    public String logout() {
+        session.invalidate();
+        return "redirect:/";
     }
 
     // 메인 화면
@@ -61,47 +94,28 @@ public class UserController {
 
         if (skillName != null && !skillName.isEmpty()) {
             mainPageList = userService.getMainPageByUserRoleAndSkill(sessionUser, skillName, pageable);
+            if (sessionUser != null) {
+                if (sessionUser.getRole() == 1) {
+                    request.setAttribute("resumeList", mainPageList);
+                } else {
+                    request.setAttribute("noticeList", mainPageList);
+                }
+            } else {
+                request.setAttribute("noticeList", mainPageList);
+            }
         } else {
             mainPageList = userService.getMainPageByUserRole(sessionUser, pageable);
+            if (sessionUser != null) {
+                if (sessionUser.getRole() == 1) {
+                    request.setAttribute("resumeList", mainPageList);
+                } else {
+                    request.setAttribute("noticeList", mainPageList);
+                }
+            } else {
+                request.setAttribute("noticeList", mainPageList);
+            }
         }
-
-        request.setAttribute("mainPageList", mainPageList);
-
         return "/index";
-    }
-
-
-    // 회원 정보 수정
-    @PutMapping("/api/users/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
-        session.setAttribute("sessionUser", newSessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(newSessionUser));
-    }
-
-    // 회원 정보 수정 화면
-    @GetMapping("/api/users/{id}/update-form")
-    public String updateForm(@PathVariable Integer id) {
-        return "/user/update-form";
-    }
-
-    // 회원가입(username) 중복 확인
-    @GetMapping("/api/username-same-checks")
-    public ApiUtil<?> usernameSameCheck(String username) {
-        User user = userService.sameCheck(username);
-        if (user == null) {
-            return new ApiUtil<>(true);
-        } else {
-            return new ApiUtil<>(false);
-        }
-    }
-
-    // 로그아웃
-    @GetMapping("/api/users/logout")
-    public String logout() {
-        session.invalidate();
-        return "redirect:/";
     }
 
     // 마이페이지 메인 (공고, 이력서 출력)
@@ -119,11 +133,10 @@ public class UserController {
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
-    @GetMapping("/api/myPages/selectList")
+    @GetMapping("/api/myPages/select-list")
     public ResponseEntity<?> myPageList() {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
-
 
 
     // 스크랩 여부 확인
