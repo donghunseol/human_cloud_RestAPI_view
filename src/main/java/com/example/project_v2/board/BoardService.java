@@ -61,9 +61,9 @@ public class BoardService {
         return new BoardResponse.DetailDTO(board, sessionUser);
     }
 
-    public List<BoardResponse.MainDTO> boardMain(Pageable pageable) {
-        Page<Board> boardList = boardJPARepository.findAll(pageable);
-        return boardList.stream().map(board -> new BoardResponse.MainDTO(board)).toList();
+    public Page<BoardResponse.MainDTO> boardMain(Pageable pageable) {
+        return boardJPARepository.findAll(pageable)
+                .map(board -> new BoardResponse.MainDTO(board));
     }
 
 }

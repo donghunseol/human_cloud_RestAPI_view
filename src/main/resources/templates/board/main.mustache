@@ -23,22 +23,30 @@
                 <tr style="border-bottom: 1px solid #ddd;">
                     <td style="padding: 10px; text-align: center;">{{id}}</td>
 
-                    <td style="padding: 10px; text-align: center;"><a href="/board/{{id}}">{{title}}</a></td>
-                    <td style="padding: 10px; text-align: center;">{{userId}}</td>
+                    <td style="padding: 10px; text-align: center;"><a href="/boards/{{id}}">{{title}}</a></td>
+                    <td style="padding: 10px; text-align: center;">{{username}}</td>
 
-                    <td style="padding: 10px; text-align: center;">{{created_at}}</td>
+                    <td style="padding: 10px; text-align: center;">{{createdAt}}</td>
                 </tr>
             {{/boardList}}
         </table>
 
         <ul class="pagination d-flex justify-content-center">
-            <li class="page-item {{#first}}disabled{{/first}}"><a class="page-link text-black" href="?page={{prev}}&keyword={{keyword}}">이전</a></li>
-            <li class="page-item"><a class="page-link text-black" href="?page=0">1</a></li>
-            <li class="page-item"><a class="page-link text-black" href="?page=1">2</a></li>
-            <li class="page-item {{#last}}disabled{{/last}}"><a class="page-link text-black" href="?page={{next}}&keyword={{keyword}}">다음</a></li>
+                <li class="page-item {{#hasNext}}disabled{{/hasNext}}"><a class="page-link text-black" href="?page={{previousPage}}&size={{size}}&sortBy={{sortBy}}&direction={{direction}}">이전</a></li>
+
+            {{#pages}}
+                {{#current}}
+                    <li class="page-item active"><a class="page-link text-black" href="#">{{.}}</a></li>
+                {{/current}}
+                {{^current}}
+                    <li class="page-item"><a class="page-link text-black" href="?page={{.}}&size={{size}}&sortBy={{sortBy}}&direction={{direction}}">{{.}}</a></li>
+                {{/current}}
+            {{/pages}}
+                <li class="page-item {{#hasPrevious}}disabled{{/hasPrevious}}"><a class="page-link text-black" href="?page={{nextPage}}&size={{size}}&sortBy={{sortBy}}&direction={{direction}}">다음</a></li>
+
         </ul>
         <div class="bt_wrap" style="text-align: center;">
-            <a href="/board/saveForm" class="on"
+            <a href="/board/save-form" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none; margin-right: 10px;">등록</a>
             <a href="/" class="on"
                style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: none;">홈</a>

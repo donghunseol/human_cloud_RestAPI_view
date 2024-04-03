@@ -16,14 +16,14 @@
             <div class="board_view">
                 <div class="title"
                      style="padding: 20px 15px; border-top: 2px solid; border-bottom: 1px dashed #ddd; font-size: 2rem;">
-                    {{board.title}}
+                    {{boardDetail.title}}
                 </div>
                 <div class="info d-flex justify-content-between"
                      style="padding: 15px; border-bottom: 1px solid #999; font-size: 18px;">
                 </div>
                 <div class="content"
                      style="padding: 15px; line-height: 160%; font-size: 25px;">
-                    {{board.content}}<br>
+                    {{boardDetail.content}}<br>
                     <br>
                     <br>
                 </div>
@@ -33,75 +33,22 @@
 
                 </div>
                 <div class="bt_wrap" style="text-align: end; margin-top: 15px">
-                    <a href="/board/{{board.id}}/updateForm" class="on"
+                {{#boardDetail.boardOwner}}
+                    <a href="/board/{{boardDetail.id}}/update-form" class="on"
                        style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border: 2px solid; margin-right: 10px;">수정</a>
-                    <form action="/board/{{board.id}}/delete" method="post" style="display: inline-block; margin-right: 10px;">
-                        <button class="on text-white border-white" style="padding: 9px 18px; background-color: #f999b7">삭제</button>
+                    <form action="/board/{{boardDetail.id}}/delete" method="post"
+                          style="display: inline-block; margin-right: 10px;">
+                        <button class="on text-white border-white" style="padding: 9px 18px; background-color: #f999b7">
+                            삭제
+                        </button>
                     </form>
+                {{/boardDetail.boardOwner}}
                 </div>
-
-                <!--좋아요 -->
-                <div>
-                    {{#love.isLove}}
-                        <i id="love" onclick="loveToggle({{board.id}})" class="fas fa-regular fa-thumbs-up text-primary"></i>
-                    {{/love.isLove}}
-                    {{^love.isLove}}
-                        <i id="love" onclick="loveToggle({{board.id}})" class="far fa-regular fa-thumbs-up"></i>
-                    {{/love.isLove}}
-                    <input type="hidden" id="love-id" value="{{love.id}}">
-                    <span id="loveCount">{{love.loveCount}}</span>
-                </div>
-
-                <script>
-                    function loveToggle(boardId){
-                        if ($("#love").hasClass("far")){
-                            let love = {
-                                boardId: boardId
-                            }
-
-                            $.ajax({
-                                url: "/api/love",
-                                type: "post",
-                                data: JSON.stringify(love),
-                                contentType: "application/json; charset=utf-8"
-                            }).done((res) => {
-                                console.log(res)
-                                $("#love").removeClass("far");
-                                $("#love").addClass("text-primary");
-                                $("#love").addClass("fas");
-                                let loveCount = $("#loveCount").text();
-                                $("#loveCount").text(Number(loveCount) + 1);
-
-                                $("#love-id").val(res.body.id);
-                            }).fail((res) =>{
-                                alert(res.responseJSON.msg);
-                            });
-                        }else {
-                            let loveId = $("#love-id").val();
-                            $.ajax({
-                                url: "/api/love/" + loveId,
-                                type: "delete"
-                            }).done((res) =>{
-                                console.log(res);
-                                $("#love").removeClass("fas");
-                                $("#love").removeClass("text-primary");
-                                $("#love").addClass("far");
-                                let loveCount = $("#loveCount").text();
-                                $("#loveCount").text(Number(loveCount) - 1);
-
-                                $("#love-id").val(0);
-                            }).fail((res)=>{
-                                alert(res.responseJSON.msg)
-                            });
-                        }
-                    }
-                </script>
-
 
                 <div class="card-body" style="margin-top: 30px;">
                     <!--댓글-->
                     <form action="/reply/save" method="post">
-                        <input type="hidden" name="boardId" value="{{board.id}}">
+                        <input type="hidden" name="boardId" value="{{boardDetail.id}}">
                         <textarea class="form-control" rows="2" name="comment"></textarea>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="btn btn-outline-primary mt-1">댓글등록</button>
@@ -114,21 +61,24 @@
                 </div>
                 <div class="list-group">
 
-                    {{#replyList}}
+                    {{#boardDetail.replies}}
                         <!-- 댓글아이템 -->
                         <div class="list-group-item d-flex justify-content-between align-items-center">
                             <div class="d-flex">
-                                <div class="px-1 me-1 text-white rounded" style="background-color: #9adbc5">{{username}}</div>
+                                <div class="px-1 me-1 text-white rounded"
+                                     style="background-color: #9adbc5">{{username}}</div>
                                 <div>{{comment}}</div>
                             </div>
 
                             {{#replyOwner}}
                                 <form action="/reply/{{id}}/delete" method="post">
-                                    <button class="btn text-white" style="padding: 1px 1px 1px 1px; background-color: #f886a8;">삭제</button>
+                                    <button class="btn text-white"
+                                            style="padding: 1px 1px 1px 1px; background-color: #f886a8;">삭제
+                                    </button>
                                 </form>
                             {{/replyOwner}}
                         </div>
-                    {{/replyList}}
+                    {{/boardDetail.replies}}
                 </div>
             </div>
         </div>

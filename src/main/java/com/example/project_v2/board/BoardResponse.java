@@ -84,6 +84,7 @@ public class BoardResponse {
             private int userId;
             private int boardId;
             private boolean isLoveOwner;
+            private int loveCount; // loveCount 필드 추가
 
             public LoveDTO(Love love, User sessionUser) {
                 this.id = love.getId();
@@ -95,6 +96,8 @@ public class BoardResponse {
                         isLoveOwner = true;
                     }
                 }
+                // loveCount를 설정합니다.
+                this.loveCount = love.getBoard().getLoves().size(); // 임시로 모든 좋아요 수를 가져옵니다.
             }
         }
     }
@@ -105,12 +108,14 @@ public class BoardResponse {
         private int id; // 게시판 번호
         private String title; // 게시글 제목
         private String username; // 작성자
+        private Timestamp createdAt; // 작성일
 
 
         public MainDTO(Board board) {
             this.id = board.getId();
             this.title = board.getTitle();
             this.username = board.getUser().getUsername();
+            this.createdAt = board.getCreatedAt();
         }
     }
 }
