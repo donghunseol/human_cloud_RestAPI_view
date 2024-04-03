@@ -1,6 +1,7 @@
 package com.example.project_v2.user;
 
 import com.example.project_v2._core.util.ApiUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -47,11 +48,12 @@ public class UserController {
 
     // 메인 화면
     @GetMapping("/")
-    public ResponseEntity<?> index(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "10") int size,
-                                   @RequestParam(defaultValue = "id") String sortBy,
-                                   @RequestParam(defaultValue = "desc") String direction,
-                                   @RequestParam(required = false) String skillName) {
+    public String index(@RequestParam(defaultValue = "0") int page,
+                        @RequestParam(defaultValue = "10") int size,
+                        @RequestParam(defaultValue = "id") String sortBy,
+                        @RequestParam(defaultValue = "desc") String direction,
+                        @RequestParam(required = false) String skillName,
+                        HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
@@ -63,9 +65,10 @@ public class UserController {
             mainPageList = userService.getMainPageByUserRole(sessionUser, pageable);
         }
 
-        return ResponseEntity.ok(new ApiUtil<>(mainPageList));
-    }
+        request.setAttribute("mainPageList", mainPageList);
 
+        return "/index";
+    }
 
 
     // 회원 정보 수정
@@ -83,12 +86,22 @@ public class UserController {
         return "/user/update-form";
     }
 
+    // 회원가입(username) 중복 확인
+    @GetMapping("/api/username-same-checks")
+    public ApiUtil<?> usernameSameCheck(String username) {
+        User user = userService.sameCheck(username);
+        if (user == null) {
+            return new ApiUtil<>(true);
+        } else {
+            return new ApiUtil<>(false);
+        }
+    }
 
     // 로그아웃
     @GetMapping("/api/users/logout")
-    public ResponseEntity<?> logout() {
+    public String logout() {
         session.invalidate();
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        return "redirect:/";
     }
 
     // 마이페이지 메인 (공고, 이력서 출력)
@@ -111,16 +124,7 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 
-    // 회원가입(username) 중복 확인
-    @GetMapping("/api/username-same-checks")
-    public ApiUtil<?> usernameSameCheck(String username) {
-        User user = userService.sameCheck(username);
-        if (user == null) {
-            return new ApiUtil<>(true);
-        } else {
-            return new ApiUtil<>(false);
-        }
-    }
+
 
     // 스크랩 여부 확인
     @GetMapping("/api/scraps/{id}")

@@ -8,7 +8,7 @@
                 <span class="resume_correction h5 fw-bold">공고 목록</span>
                 <div class="correction_list p-3 pt-0 border-top pt-3 mt-3">
 
-                    {{#resumeList}}
+                    {{#mainPageList}}
                         <div class="w-100">
                             <div class="card mb-3">
                                 <div class="card-body d-flex justify-content-between text-secondary m-2">
@@ -19,7 +19,7 @@
                                         </div>
                                         <div>
                                             <p class="card-title mb-0"><strong>{{title}}</strong></p>
-                                            <p class="card-text mb-0"><small>이름 : {{name}}</small></p>
+<!--                                            <p class="card-text mb-0"><small>이름 : </small></p>-->
                                             <p class="card-text"><small>보유 기술 : {{#skills}}
                                                 [ {{name}} ] {{/skills}}</small></p>
                                         </div>
@@ -32,11 +32,11 @@
                                 </div>
                             </div>
                         </div>
-                    {{/resumeList}}
+                    {{/mainPageList}}
 
                 </div>
 
-                {{#noticeList}}
+                {{#mainPageList}}
                     <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
                         <div class="content_logo h-100" style="width: 100px;">
                             <img class="logo_size mw-100 w-100"
@@ -46,7 +46,7 @@
                             <div class="item_box d-flex justify-content-between ml-5" style="min-height: 10px;">
                                 <div class="logo_name">
                                     <a class="name_company h5 fs-5 text-black text-decoration-none"
-                                       href="/notice/{{noticeId}}">{{title}}</a>
+                                       href="/notice/{{id}}">{{title}}</a>
                                     <div class="name_intrd text-black-50">회사소개</div>
                                 </div>
                             </div>
@@ -54,13 +54,13 @@
                             <div class="content_detail">
                                 <div class="detail_job_name">
                                     <a class="text-black text-decoration-none"
-                                       href="/notice/{{noticeId}}">{{title}}</a>
+                                       href="/notice/{{id}}">{{title}}</a>
                                 </div>
                                 <div class="detail_job_dates">마감일 : {{deadline}}</div>
                             </div>
                         </div>
                     </div>
-                {{/noticeList}}
+                {{/mainPageList}}
 
             </div>
             <nav class="d-flex justify-content-center pt-3" aria-label="Page navigation example">
