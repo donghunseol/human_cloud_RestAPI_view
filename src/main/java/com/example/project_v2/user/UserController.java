@@ -17,7 +17,6 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
     private final HttpSession session;
-    private final UserJPARepository userJPARepository;
 
     // 메인 화면
     @GetMapping("/")
@@ -124,6 +123,11 @@ public class UserController {
     // 스크랩 여부 확인
     @GetMapping("/api/scraps/{id}")
     public ResponseEntity<?> scrapList(@PathVariable Integer id) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        //List<ScrapResponse.ScrapDTO> scrapList= scrapRepository.findByIdList(id, user.getRole());
+        //session.setAttribute("scrapList", scrapList);
+
         return ResponseEntity.ok(new ApiUtil<>(null));
     }
 }

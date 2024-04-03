@@ -1,7 +1,6 @@
 package com.example.project_v2.notice;
 
 import com.example.project_v2._core.util.ApiUtil;
-import com.example.project_v2.skill.SkillService;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
