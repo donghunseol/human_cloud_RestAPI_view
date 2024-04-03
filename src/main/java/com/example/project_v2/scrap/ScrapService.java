@@ -2,6 +2,7 @@ package com.example.project_v2.scrap;
 
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception403;
+import com.example.project_v2._core.errors.exception.Exception404;
 import com.example.project_v2.notice.Notice;
 import com.example.project_v2.resume.Resume;
 import com.example.project_v2.user.User;
@@ -16,6 +17,12 @@ import java.util.Optional;
 public class ScrapService {
     private final ScrapJPARepository scrapJPARepository;
 
+    public Scrap scrapList(User sessionUser){
+        Scrap scrap = scrapJPARepository.findByIdList(sessionUser.getId())
+                .orElseThrow(() -> new Exception404("스크랩이 존재하지 않습니다"));
+        return scrap;
+    }
+
     @Transactional
     public ScrapResponse.DTO save(Resume resume, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
         Scrap scrap = scrapJPARepository.save(reqDTO.toEntity(sessionUser, resume));
@@ -25,7 +32,6 @@ public class ScrapService {
     @Transactional
     public ScrapResponse.DTO save(Notice notice, ScrapRequest.SaveDTO reqDTO, User sessionUser) {
         Scrap scrap = scrapJPARepository.save(reqDTO.toEntity(sessionUser, notice));
-
         return new ScrapResponse.DTO(scrap);
     }
 

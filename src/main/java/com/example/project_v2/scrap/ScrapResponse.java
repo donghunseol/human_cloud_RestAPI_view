@@ -1,11 +1,33 @@
 package com.example.project_v2.scrap;
 
+import com.example.project_v2.user.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 public class ScrapResponse {
+
+    @Data
+    public static class ScrapListDTO{
+        private Integer id; // 스크랩 번호
+        private Integer userId; // 스크랩 유저 번호
+        private Integer noticeId; // 공고 주인 번호
+        private String noticeUsername; // 공고 주인 이름
+        private String deadline; // 공고 마감일
+        private String title; // 공고 제목
+        private String type; // 고용 형태
+
+        public ScrapListDTO(Scrap scrap, User sessionUser) {
+            this.id = scrap.getId();
+            this.userId = sessionUser.getId();
+            this.noticeId = scrap.getNotice().getId();
+            this.noticeUsername = scrap.getNotice().getUser().getUsername();
+            this.deadline = scrap.getNotice().getDeadline();
+            this.title = scrap.getNotice().getTitle();
+            this.type = scrap.getNotice().getType();
+        }
+    }
 
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL) // null이 뜨는 json은 출력안하게 하는 어노테이션
