@@ -19,7 +19,7 @@ public class UserController {
     private final HttpSession session;
 
     // 로그인
-    @PostMapping("/users/login")
+    @PostMapping("/user/login")
     public String login(UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
@@ -27,9 +27,22 @@ public class UserController {
     }
 
     // 로그인 화면
-    @GetMapping("/users/login-form")
+    @GetMapping("/user/login-form")
     public String login() {
         return "/user/login-form";
+    }
+
+    // 회원 가입
+    @PostMapping("/user/join")
+    public String join(UserRequest.JoinDTO reqDTO) {
+        userService.join(reqDTO);
+        return "redirect:/user/login-form";
+    }
+
+    // 회원 가입 페이지
+    @GetMapping("/user/join-form")
+    public String joinForm() {
+        return "/user/join-form";
     }
 
     // 메인 화면
@@ -53,18 +66,6 @@ public class UserController {
         return ResponseEntity.ok(new ApiUtil<>(mainPageList));
     }
 
-    // 회원 가입
-    @PostMapping("/users/join")
-    public ResponseEntity<?> join(@RequestBody UserRequest.JoinDTO reqDTO) {
-        UserResponse.DTO respDTO = userService.join(reqDTO);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
-    }
-
-    // 회원 가입 페이지
-    @GetMapping("/users/join-form")
-    public String joinForm() {
-        return "/user/join-form";
-    }
 
 
     // 회원 정보 수정
