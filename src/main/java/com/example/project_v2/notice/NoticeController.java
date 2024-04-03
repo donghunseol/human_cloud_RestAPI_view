@@ -72,16 +72,16 @@ public class NoticeController {
     }
 
     // 공고 삭제
-    @DeleteMapping("/api/notices/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    @PostMapping("/notice/{id}/delete")
+    public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         noticeService.delete(id, sessionUser.getId());
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        return "redirect:/";
     }
 
     // 공고 수정
     @PutMapping("/api/notices/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody NoticeRequest.UpdateDTO reqDTO) {
+    public ResponseEntity<?> update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
         NoticeResponse.DTO respDTO = noticeService.update(id, reqDTO, sessionUser);
