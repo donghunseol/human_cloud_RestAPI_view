@@ -51,6 +51,7 @@ public class SkillJPARepositoryTest {
 
     }
 
+    @Test
     public void saveAll_test(){
         // given
         Resume resume = Resume.builder().id(1).build();

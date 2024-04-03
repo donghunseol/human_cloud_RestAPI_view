@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -34,28 +35,36 @@ public class NoticeService {
         notice.setWorkPlace(reqDTO.getWorkPlace());
         notice.setDeadline(reqDTO.getDeadline());
         notice.setContent(reqDTO.getContent());
-        // notice.setUser(reqDTO.getUser()); 이 줄을 제거하세요
-        notice.setUser(sessionUser); // 이 줄을 추가하세요
+        notice.setUser(sessionUser); // 세션 사용자를 공고의 사용자로 설정
+
+        // 여기까지 공고 정보 업데이트
+        noticeJPARepository.save(notice); // 변경된 공고 정보를 저장
 
         // 공고 스킬 정보 삭제 후, 추가 (스킬이 없는 경우에는 삭제 안함)
         if (!skillJPARepository.findByNoticeId(noticeId).isEmpty()) {
             skillJPARepository.deleteAllByNoticeId(noticeId);
         }
+
         // 스킬 정보 생성
         List<Skill> skills = new ArrayList<>();
-        for (NoticeRequest.UpdateDTO.SkillDTO skill : reqDTO.getSkills()) {
-            Skill skillBuild = Skill.builder()
-                    .name(skill.getName())
-                    .role(skill.getRole())
-                    .notice(notice)
-                    .build();
-            skills.add(skillBuild);
+        for (NoticeRequest.UpdateDTO.SkillDTO skillDTO : reqDTO.getSkills()) {
+            // 새로운 Skill 객체 생성
+            Skill skill = new Skill();
+            skill.setName(skillDTO.getName());
+            skill.setRole(skillDTO.getRole());
+            skill.setNotice(notice);
+            skills.add(skill);
         }
-        skills = skillJPARepository.saveAll(skills);
-        notice.setSkills(skills);
-        noticeJPARepository.save(notice);
+
+        // 스킬 정보를 저장하고 저장된 스킬 목록을 반환받음
+        List<Skill> savedSkills = skillJPARepository.saveAll(skills);
+
+        // 공고에 저장된 스킬 목록을 설정
+        notice.setSkills(savedSkills);
+
         return new NoticeResponse.DTO(notice, sessionUser);
     }
+
 
 
     public NoticeResponse.DetailDTO noticeDetail(Integer noticeId, User sessionUser) {

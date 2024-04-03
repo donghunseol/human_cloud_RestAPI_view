@@ -70,17 +70,17 @@ public class ResumeJPARepositoryTest {
 
     }
 
-    public void findByUser_test() {
-        // Given
-        User user = new User();
-        user.setId(1);
-
-        // When
-        List<Resume> result = resumeJPARepository.findByUser(user, Sort.unsorted());
-
-        // Then
-        assertEquals(4, result.size()); // 해당 사용자에 대한 이력서 개수를 확인
-    }
+//    public void findByUser_test() {
+//        // Given
+//        User user = new User();
+//        user.setId(1);
+//
+//        // When
+//        List<Resume> result = resumeJPARepository.findByUser(user, Sort.unsorted());
+//
+//        // Then
+//        assertEquals(4, result.size()); // 해당 사용자에 대한 이력서 개수를 확인
+//    }
 
     @Test
     public void findAll_test() {
