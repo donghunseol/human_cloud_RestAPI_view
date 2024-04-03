@@ -31,6 +31,7 @@ public class ApplyResponse {
             this.resumeId = apply.getNotice().getId();
             this.name = apply.getUser().getName();
             this.title = apply.getNotice().getTitle();
+            this.deadLine = apply.getNotice().getDeadline();
             this.type = apply.getNotice().getType();
             this.pass = apply.getPass();
         }

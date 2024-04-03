@@ -6,17 +6,18 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class ApplyController {
 
     private final ApplyService applyService;
     private final HttpSession session;
 
     // 합격 불합격
-    @PostMapping("/api/applies/pass/{id}")
+    @PostMapping("/applies/pass/{id}")
     public ResponseEntity<?> resumePass(@PathVariable Integer id, @RequestBody ApplyRequest.PassDTO passDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
@@ -32,7 +33,7 @@ public class ApplyController {
     }
 
     // 지원할 이력서 선택
-    @GetMapping("/api/applies/{id}/resume-save")
+    @GetMapping("/applies/{id}/resume-save")
     public ResponseEntity<?> resumeSave(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.SelectResumeDTO selectResumeDTO = applyService.findById(id, sessionUser);
@@ -40,15 +41,15 @@ public class ApplyController {
     }
 
     // 지원 취소
-    @DeleteMapping("/api/applies/{id}/delete")
-    public ResponseEntity<?> delete(@PathVariable Integer id) {
+    @PostMapping("/applies/{id}/delete")
+    public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.delete(id, sessionUser.getId());
-        return ResponseEntity.ok(new ApiUtil<>(null));
+        return "/myPage/select-list";
     }
 
     // 지원하기
-    @PostMapping("/api/applies/{id}")
+    @PostMapping("/applies/{id}")
     public ResponseEntity<?> save(@RequestBody ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);

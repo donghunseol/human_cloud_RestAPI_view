@@ -167,6 +167,4 @@ values (null, 2, 'sql', 0);
 insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
 values (1 ,1, 1, false, now());
 insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
-values (1, 2, 1, false, now());
-insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
 values (2, 2, 2, false, now());
