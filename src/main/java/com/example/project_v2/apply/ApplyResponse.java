@@ -18,7 +18,7 @@ public class ApplyResponse {
         private Integer noticeId; // 공고 번호
         private String name; // 공고 올린 회사 이름
         private String title; // 공고 타이틀
-        private String deadline; // 마감일
+        private String deadLine; // 마감일
         private String type;
         private boolean pass;
 
@@ -31,7 +31,7 @@ public class ApplyResponse {
             this.noticeId = apply.getNotice().getId();
             this.name = apply.getNotice().getUser().getName();
             this.title = apply.getNotice().getTitle();
-            this.deadline = apply.getNotice().getDeadline();
+            this.deadLine = apply.getNotice().getDeadline();
             this.type = apply.getNotice().getType();
             this.pass = apply.getPass();
         }
