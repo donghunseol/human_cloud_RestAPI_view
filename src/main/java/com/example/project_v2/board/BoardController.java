@@ -109,7 +109,7 @@ public class BoardController {
     }
 
     // 게시글 상세 보기
-    @GetMapping("/boards/{id}/detail")
+    @GetMapping("/boards/{id}")
     public String detail(HttpServletRequest request, @PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         BoardResponse.DetailDTO respDTO = boardService.boardDetail(id, sessionUser);
