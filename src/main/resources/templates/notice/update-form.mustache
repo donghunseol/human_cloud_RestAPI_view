@@ -2,7 +2,7 @@
 
 <div class="mw-100 bg-light" style="padding: 30px 200px;">
     <div class="d-flex">
-        <form action="/notice/{{notice.noticeId}}/update" method="post" class="container">
+        <form action="/api/notices/{{notice.id}}" method="post" class="container">
             <h3 class="container d-flex pb-3">기업 공고 수정</h3>
             <!-- 기본 정보 -->
             <div class="container bg-white rounded-3 border border-white pt-3 pb-1">
@@ -120,7 +120,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-center mt-3">
                 <button type="submit" class="btn btn-secondary">수정 완료
                 </button>
-                <button onclick="location.href='/notice/{{notice.noticeId}}'"
+                <button onclick="location.href='/notice/{{notice.id}}'"
                         type="button"
                         class="btn btn-outline-secondary">취소
                 </button>

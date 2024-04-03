@@ -49,7 +49,6 @@ public class ResumeController {
         ResumeResponse.DTO respDTO = resumeService.update(id, sessionUser, reqDTO);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));
     }
-
     // 이력서 상세 보기
     @GetMapping("/api/resumes/{id}/detail")
     public ResponseEntity<?> detail(@PathVariable Integer id) {

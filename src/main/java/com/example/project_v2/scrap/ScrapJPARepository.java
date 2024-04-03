@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ScrapJPARepository extends JpaRepository<Scrap, Integer> {
+    void deleteByNoticeId(Integer noticeId);
     @Query("select s from Scrap s where s.user.id = :uid")
     List<Scrap> findById(@Param("uid") int uid, Pageable pageable);
 
