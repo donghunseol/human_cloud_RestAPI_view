@@ -5,8 +5,6 @@ import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +15,7 @@ public class NoticeController {
 
     private final NoticeService noticeService;
     private final HttpSession session;
+
 //
 //    // 로그인한 유저가 작성한 공고 목록 보기
 //    @GetMapping("/notices/my-notices")
@@ -65,10 +64,11 @@ public class NoticeController {
 
     // 공고 상세 보기
     @GetMapping("/notices/{id}/detail")
-    public ResponseEntity<?> detail(@PathVariable Integer id) {
+    public String detail(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         NoticeResponse.DetailDTO respDTO = noticeService.noticeDetail(id, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        request.setAttribute("notice", respDTO);
+        return "notice/detail";
     }
 
     // 공고 삭제

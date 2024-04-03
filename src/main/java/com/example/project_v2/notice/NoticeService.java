@@ -57,7 +57,6 @@ public class NoticeService {
     public NoticeResponse.DetailDTO noticeDetail(Integer noticeId, User sessionUser) {
         Notice notice = noticeJPARepository.findByIdJoinUser(noticeId)
                 .orElseThrow(() -> new Exception404("공고 글을 찾을 수 없음"));
-
         return new NoticeResponse.DetailDTO(notice, sessionUser);
     }
 

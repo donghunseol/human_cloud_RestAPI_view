@@ -4,6 +4,7 @@ import com.example.project_v2.skill.Skill;
 import com.example.project_v2.user.User;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,10 +70,11 @@ public class NoticeResponse {
         private String type; // 고용 형태
         private String field; // 개발 분야
         private String content; // 공고 내용
-        private String workplace; // 기업 주소지
+        private String workPlace; // 기업 주소지
         private String email; // 기업 이메일
         private String tel; // 기업 연락처
         private Integer role; // 회원 구분
+        private Timestamp createdAt; // 생성 또는 수정 날짜
         private boolean isNoticeOwner;
 
         private List<SkillDTO> skills = new ArrayList<>();
@@ -89,10 +91,11 @@ public class NoticeResponse {
             this.type = notice.getType();
             this.field = notice.getField();
             this.content = notice.getContent();
-            this.workplace = notice.getWorkPlace();
+            this.workPlace = notice.getWorkPlace();
             this.email = notice.getUser().getEmail();
             this.tel = notice.getUser().getTel();
             this.role = notice.getUser().getRole();
+            this.createdAt = notice.getCreatedAt();
             this.isNoticeOwner = false;
             if (sessionUser != null){
                 if (sessionUser.getId() == userId) {

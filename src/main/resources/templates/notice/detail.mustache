@@ -76,27 +76,27 @@
         </div>
     </form>
 
-    {{#notice.role}}
+    {{#notice.isNoticeOwner}}
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
-            <form action="/notice/{{noticeId}}/updateForm">
+            <form action="/notice/{{notice.id}}/updateForm">
                 <button class="btn btn-secondary">공고 수정</button>
             </form>
 
-            <form action="/notice/{{noticeId}}/delete" method="post">
+            <form action="/notice/{{notice.id}}/delete" method="post">
                 <button class="btn btn-secondary">공고 삭제</button>
             </form>
         </div>
         <!--스크랩 부분-->
         <div>
             {{#scrap.isScrap}}
-                <i id="scrap" onclick="scrapToggle({{notice.noticeId}})"
+                <i id="scrap" onclick="scrapToggle({{notice.id}})"
                    class="fa-solid fa-star text-warning border-0">></i>
             {{/scrap.isScrap}}
             {{^scrap.isScrap}}
-                <i id="scrap" onclick="scrapToggle({{notice.noticeId}})"
+                <i id="scrap" onclick="scrapToggle({{notice.id}})"
                    class="fa-regular fa-star text-warning border-0"></i>
             {{/scrap.isScrap}}
-            <input type="hidden" id="noticeId" value="{{notice.noticeId}}">
+            <input type="hidden" id="noticeId" value="{{notice.id}}">
             <input id="role" name="role" type="hidden" value="{{notice.role}}">
         </div>
         <script>
@@ -139,7 +139,7 @@
                 }
             }
         </script>
-    {{/notice.role}}
+    {{/notice.isNoticeOwner}}
 {{/notice}}
 
 {{> layout/footer}}
