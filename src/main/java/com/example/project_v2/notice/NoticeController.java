@@ -63,7 +63,7 @@ public class NoticeController {
     }
 
     // 공고 상세 보기
-    @GetMapping("/notices/{id}/detail")
+    @GetMapping("/notices/{id}")
     public String detail(@PathVariable Integer id, HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         NoticeResponse.DetailDTO respDTO = noticeService.noticeDetail(id, sessionUser);
@@ -79,12 +79,21 @@ public class NoticeController {
         return "redirect:/";
     }
 
+    @GetMapping("/notice/{id}/update-form")
+    public String updateForm(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        NoticeResponse.DetailDTO responseDTO = noticeService.noticeDetail(id,sessionUser);
+        request.setAttribute("notice", responseDTO);
+
+        return "/notice/update-form";
+    }
+
     // 공고 수정
-    @PutMapping("/api/notices/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO) {
+    @PostMapping("/api/notices/{id}")
+    public String update(@PathVariable Integer id, NoticeRequest.UpdateDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        NoticeResponse.DTO respDTO = noticeService.update(id, reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        noticeService.update(id, reqDTO, sessionUser);
+        return "redirect:/notices/"+id;
     }
 }

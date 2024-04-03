@@ -25,22 +25,22 @@ public class NoticeService {
     private final ScrapJPARepository scrapJPARepository;
 
     @Transactional
-    public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser) {
+    public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser) throws Exception404 {
         Notice notice = noticeJPARepository.findById(noticeId)
-                .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다"));
+                .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다."));
         notice.setTitle(reqDTO.getTitle());
         notice.setType(reqDTO.getType());
         notice.setField(reqDTO.getField());
         notice.setWorkPlace(reqDTO.getWorkPlace());
         notice.setDeadline(reqDTO.getDeadline());
         notice.setContent(reqDTO.getContent());
-        notice.setUser(reqDTO.getUser());
+        // notice.setUser(reqDTO.getUser()); 이 줄을 제거하세요
+        notice.setUser(sessionUser); // 이 줄을 추가하세요
 
         // 공고 스킬 정보 삭제 후, 추가 (스킬이 없는 경우에는 삭제 안함)
         if (!skillJPARepository.findByNoticeId(noticeId).isEmpty()) {
             skillJPARepository.deleteAllByNoticeId(noticeId);
         }
-
         // 스킬 정보 생성
         List<Skill> skills = new ArrayList<>();
         for (NoticeRequest.UpdateDTO.SkillDTO skill : reqDTO.getSkills()) {
@@ -51,12 +51,12 @@ public class NoticeService {
                     .build();
             skills.add(skillBuild);
         }
-
         skills = skillJPARepository.saveAll(skills);
         notice.setSkills(skills);
-
+        noticeJPARepository.save(notice);
         return new NoticeResponse.DTO(notice, sessionUser);
     }
+
 
     public NoticeResponse.DetailDTO noticeDetail(Integer noticeId, User sessionUser) {
         Notice notice = noticeJPARepository.findByIdJoinUser(noticeId)
