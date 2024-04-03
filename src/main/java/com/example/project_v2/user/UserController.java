@@ -28,7 +28,7 @@ public class UserController {
 
     // 로그인
     @PostMapping("/users/login")
-    public String login(@RequestBody UserRequest.LoginDTO reqDTO) {
+    public String login(UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
         return "redirect:/";
