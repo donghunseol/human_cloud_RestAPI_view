@@ -55,7 +55,7 @@ public class NoticeController {
 
     // 공고 작성
     @PostMapping("/api/notices")
-    public String save(@RequestBody NoticeRequest.SaveDTO reqDTO) {
+    public String save(NoticeRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         noticeService.save(reqDTO, sessionUser);
         return "redirect:/";

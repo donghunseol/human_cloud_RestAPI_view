@@ -28,7 +28,7 @@ public class UserController {
 
     // 로그인
     @PostMapping("/users/login")
-    public String login(@RequestBody UserRequest.LoginDTO reqDTO) {
+    public String login(UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
         return "redirect:/";
@@ -66,7 +66,7 @@ public class UserController {
 
     // 회원 정보 수정
     @PutMapping("/api/users/{id}")
-    public String update(@PathVariable Integer id, @RequestBody UserRequest.UpdateDTO reqDTO) {
+    public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
