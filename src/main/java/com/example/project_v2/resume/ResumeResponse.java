@@ -63,7 +63,7 @@ public class ResumeResponse {
             this.email = resume.getUser().getEmail();
             this.tel = resume.getUser().getTel();
             this.address = resume.getUser().getAddress();
-            this.image = resume.getUser().getImage();
+            this.image = resume.getUser().getEncodedData();
             this.career = resume.getCareer();
             this.license = resume.getLicense();
             this.education = resume.getEducation();
@@ -93,9 +93,8 @@ public class ResumeResponse {
             this.id = resume.getId();
             this.title = resume.getTitle();
             this.username = resume.getUser().getUsername();
-            this.image = resume.getUser().getImage();
+            this.image = resume.getUser().getEncodedData();
             this.userId = resume.getUser().getId();
-
             this.skills = resume.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
     }

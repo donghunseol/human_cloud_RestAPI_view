@@ -3,6 +3,7 @@ package com.example.project_v2.user;
 import com.example.project_v2._core.errors.exception.Exception400;
 import com.example.project_v2._core.errors.exception.Exception401;
 import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2._core.util.ImageSave;
 import com.example.project_v2.apply.Apply;
 import com.example.project_v2.apply.ApplyJPARepository;
 import com.example.project_v2.notice.Notice;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,6 +32,7 @@ public class UserService {
     private final ResumeJPARepository resumeJPARepository;
     private final NoticeJPARepository noticeJPARepository;
     private final ApplyJPARepository applyJPARepository;
+    private final ImageSave imageSave;
 
     public User sameCheck(String username) {
         User user = userJPARepository.findByUsername(username)
@@ -50,40 +53,26 @@ public class UserService {
         return new UserResponse.DTO(user);
     }
 
-    public SessionUser login(UserRequest.LoginDTO reqDTO) {
+    public User login(UserRequest.LoginDTO reqDTO) {
         User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
-        return new SessionUser(user);
+        return user;
     }
 
+    //TODO: 프로필 완료
     @Transactional
-    public SessionUser update(Integer id, UserRequest.UpdateDTO reqDTO) {
+    public User update(Integer id, UserRequest.UpdateDTO reqDTO) {
         User user = userJPARepository.findById(id)
-                .orElseThrow(() -> new Exception404("회원정보를 찾을 수 없습니다"));
+                .orElseThrow(() -> new Exception404("수정할 프로필이 없습니다."));
 
-        user.setUsername(reqDTO.getUsername());
-        user.setPassword(reqDTO.getPassword());
-        user.setTel(reqDTO.getTel());
-        user.setEmail(reqDTO.getEmail());
-        user.setAddress(reqDTO.getAddress());
-
-        try {
-            // 베이스 64로 들어오는 문자열을 바이트로 디코딩하기
-            // 1. 데이터 전달
-            byte[] decodedBytes = Base64.getDecoder().decode(reqDTO.getEncodedData());
-
-            // 이미지 파일 넣기
-            String imgFilename = UUID.randomUUID() + "_" + reqDTO.getImageName(); // 이미지 파일 오리지널 이름
-
-            // 파일 저장 위치 설정
-            Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
-
-            Files.write(imgPath, decodedBytes);
-            user.setImage(imgFilename);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        // 사진이 변경되었는지 여부 확인 후 세이브
+        String webImgPath = null;
+        if (imageSave.ImageCheck(reqDTO.getEncodedData())) {
+            webImgPath = imageSave.saveImageFile(reqDTO.getEncodedData(), reqDTO.getImageName());
         }
-        return new SessionUser(user);
+
+        user.setUpdateDTO(reqDTO, webImgPath != null ? webImgPath : user.getEncodedData());
+        return user;
     }
 
     // 사용자의 role 에 따라 메인페이지 화면 변경

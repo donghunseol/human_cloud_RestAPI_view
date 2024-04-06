@@ -52,7 +52,7 @@ public class NoticeResponse {
             this.username = notice.getUser().getUsername();
             this.title = notice.getTitle();
             this.deadline = notice.getDeadline();
-            this.image = notice.getUser().getImage();
+            this.image = notice.getUser().getEncodedData();
 
             this.skills = notice.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }
