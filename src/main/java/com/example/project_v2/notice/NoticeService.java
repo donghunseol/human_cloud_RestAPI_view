@@ -95,7 +95,7 @@ public class NoticeService {
     }
 
     @Transactional
-    public NoticeResponse.DTO save(NoticeRequest.SaveDTO reqDTO, User sessionUser) {
+    public NoticeResponse.DTO save(NoticeRequest.SaveDTO reqDTO, User sessionUser, List<String> skillNames) {
         Notice notice = noticeJPARepository.save(reqDTO.toEntity(sessionUser));
 
         // 1번 방법 -> skill 로 안받으면 reqDTO 의 id 값이 null 로 json이 뜬다
@@ -105,17 +105,22 @@ public class NoticeService {
 //        });
 
         // 2번 방법
+        // 스킬 정보 생성
         List<Skill> skills = new ArrayList<>();
-        for (NoticeRequest.SaveDTO.SkillDTO skill : reqDTO.getSkills()) {
-            Skill skillBuild = Skill.builder()
-                    .name(skill.getName())
-                    .role(skill.getRole())
-                    .notice(notice)
-                    .build();
-            skills.add(skillBuild);
+        for (String skillName : skillNames) {
+            // 새로운 Skill 객체 생성
+            Skill skill = new Skill();
+            skill.setName(skillName);
+            skill.setRole(sessionUser.getRole());
+            skill.setNotice(notice);
+            skills.add(skill);
         }
-        skills = skillJPARepository.saveAll(skills);
-        notice.setSkills(skills);
+
+        // 스킬 정보를 저장하고 저장된 스킬 목록을 반환받음
+        List<Skill> savedSkills = skillJPARepository.saveAll(skills);
+
+        // 공고에 저장된 스킬 목록을 설정
+        notice.setSkills(savedSkills);
 
         Notice newNotice = noticeJPARepository.save(notice);
 
