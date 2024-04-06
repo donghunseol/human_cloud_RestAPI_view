@@ -19,12 +19,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     // 외부 폴더에서 이미지파일 리소스를 가져오는 방법
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
 
-        registry.addResourceHandler("/api/user/**") // user 정보를 수정 할때 개방 폴더를 찾기
-                .addResourceLocations("file:./images/")// 파일 경로 수정 및 해당 폴더 개방
-                .setCachePeriod(60*60)
+        registry.addResourceHandler("/image/**")
+                .addResourceLocations("file:./image/")
+                .setCachePeriod(60 * 60) // 초 단위 => 한시간
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
     }

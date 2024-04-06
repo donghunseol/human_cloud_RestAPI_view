@@ -50,10 +50,10 @@ public class UserService {
         return new UserResponse.DTO(user);
     }
 
-    public SessionUser login(UserRequest.LoginDTO reqDTO) {
+    public User login(UserRequest.LoginDTO reqDTO) {
         User user = userJPARepository.findByUsernameAndPassword(reqDTO.getUsername(), reqDTO.getPassword())
                 .orElseThrow(() -> new Exception401("인증되지 않았습니다"));
-        return new SessionUser(user);
+        return user;
     }
 
     @Transactional
@@ -79,7 +79,7 @@ public class UserService {
             Path imgPath = Paths.get("./src/main/resources/static/images/" + imgFilename);
 
             Files.write(imgPath, decodedBytes);
-            user.setImage(imgFilename);
+            user.setEncodedData(imgFilename);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

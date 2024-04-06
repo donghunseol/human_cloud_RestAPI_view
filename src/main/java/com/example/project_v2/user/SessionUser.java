@@ -13,19 +13,21 @@ public class SessionUser {
     private String birth;
     private String email;
     private String address;
-    private String image; // 이미지 경로만 저장
+    private String imageName; // 사진 이름
+    private String encodedData; // base64 저장경로
     private Integer role;
     private Timestamp createdAt;
 
     public SessionUser(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.name = user.getEmail();
+        this.name = user.getName();
         this.tel = user.getTel();
         this.birth = user.getBirth();
         this.email = user.getEmail();
         this.address = user.getAddress();
-        this.image = user.getImage();
+        this.imageName = user.getImageName();
+        this.encodedData = user.getEncodedData();
         this.role = user.getRole();
         this.createdAt = user.getCreatedAt();
     }
@@ -39,7 +41,7 @@ public class SessionUser {
         user.setBirth(sessionUser.getBirth());
         user.setEmail(sessionUser.getEmail());
         user.setAddress(sessionUser.getAddress());
-        user.setImage(sessionUser.getImage());
+        user.setEncodedData(sessionUser.getEncodedData());
         user.setRole(sessionUser.getRole());
         user.setCreatedAt(sessionUser.getCreatedAt());
 

@@ -19,7 +19,7 @@ public class UserResponse {
         private String birth;
         private String email;
         private String address;
-        private String image; // 이미지 경로만 저장
+        private String encodedData; // base64 저장경로
         private Integer role;
         private Timestamp createdAt;
 
@@ -31,7 +31,7 @@ public class UserResponse {
             this.birth = user.getBirth();
             this.email = user.getEmail();
             this.address = user.getAddress();
-            this.image = user.getImage();
+            this.encodedData = user.getEncodedData();
             this.role = user.getRole();
             this.createdAt = user.getCreatedAt();
         }
