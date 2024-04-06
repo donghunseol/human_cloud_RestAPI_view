@@ -25,7 +25,7 @@ public class ResumeService {
     private final ScrapJPARepository scrapJPARepository;
 
     @Transactional
-    public ResumeResponse.DTO update(Integer resumeId, User sessionUser, ResumeRequest.UpdateDTO reqDTO) {
+    public ResumeResponse.DTO update(Integer resumeId, User sessionUser, ResumeRequest.UpdateDTO reqDTO, List<String> skillNames) {
         Resume resume = resumeJPARepository.findById(resumeId)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다."));
 
@@ -51,22 +51,23 @@ public class ResumeService {
 
         // 스킬 정보를 생성
         List<Skill> skills = new ArrayList<>();
-        for (ResumeRequest.UpdateDTO.SkillDTO skillDTO : reqDTO.getSkills()) {
-            Skill skill = Skill.builder()
-                    .name(skillDTO.getName())
-                    .role(skillDTO.getRole())
-                    .resume(resume)
-                    .build();
+        for (String skillName : skillNames) {
+            Skill skill = new Skill();
+            skill.setName(skillName);
+            skill.setRole(sessionUser.getRole());
+            skill.setResume(resume);
             skills.add(skill);
         }
 
         // 스킬 정보를 저장하고 저장된 스킬 목록을 반환받음
-        skills = skillJPARepository.saveAll(skills);
+        List<Skill> skillList = skillJPARepository.saveAll(skills);
 
         // 이력서에 저장된 스킬 목록을 설정
-        resume.setSkills(skills);
+        resume.setSkills(skillList);
 
-        return new ResumeResponse.DTO(resume, sessionUser);
+        Resume newResume = resumeJPARepository.save(resume);
+
+        return new ResumeResponse.DTO(newResume, sessionUser);
     }
 
     @Transactional
@@ -84,24 +85,23 @@ public class ResumeService {
     }
 
     @Transactional
-    public ResumeResponse.DTO save(ResumeRequest.SaveDTO reqDTO, User sessionUser) {
+    public ResumeResponse.DTO save(ResumeRequest.SaveDTO reqDTO, User sessionUser, List<String> skillNames) {
         // 이력서 정보 저장
         Resume resume = resumeJPARepository.save(reqDTO.toEntity(sessionUser));
 
         // 스킬 정보를 생성
         List<Skill> skills = new ArrayList<>();
-        for (ResumeRequest.SaveDTO.SkillDTO skillDTO : reqDTO.getSkills()) {
-            Skill skill = Skill.builder()
-                    .name(skillDTO.getName())
-                    .role(skillDTO.getRole())
-                    .resume(resume)
-                    .build();
+        for (String skillName : skillNames) {
+            Skill skill = new Skill();
+            skill.setName(skillName);
+            skill.setRole(sessionUser.getRole());
+            skill.setResume(resume);
             skills.add(skill);
         }
 
         // 이력서에 스킬 정보 추가
-        skills = skillJPARepository.saveAll(skills);
-        resume.setSkills(skills);
+        List<Skill> skillList = skillJPARepository.saveAll(skills);
+        resume.setSkills(skillList);
 
         Resume newResume = resumeJPARepository.save(resume);
 

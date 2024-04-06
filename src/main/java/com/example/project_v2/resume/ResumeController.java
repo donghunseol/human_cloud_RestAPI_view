@@ -62,9 +62,9 @@ public class ResumeController {
 
     // 이력서 작성
     @PostMapping("/resumes/save")
-    public String save(ResumeRequest.SaveDTO reqDTO) {
+    public String save(ResumeRequest.SaveDTO reqDTO, @RequestParam("skillNames") List<String> skillNames) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        resumeService.save(reqDTO, sessionUser);
+        resumeService.save(reqDTO, sessionUser, skillNames);
         return "redirect:/";
     }
 
@@ -87,10 +87,10 @@ public class ResumeController {
 
     // 이력서 수정
     @PostMapping("/resumes/{id}/update")
-    public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO) {
+    public String update(@PathVariable Integer id, ResumeRequest.UpdateDTO reqDTO, @RequestParam("skillNames") List<String> skillNames) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
-        resumeService.update(id, sessionUser, reqDTO);
+        resumeService.update(id, sessionUser, reqDTO, skillNames);
         return "myPage/main";
     }
 
