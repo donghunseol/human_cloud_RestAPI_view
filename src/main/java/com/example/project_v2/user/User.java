@@ -39,7 +39,7 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    //TODO: image 필드값 사진이름 = imageName, base64 저장경로 = encodeData로 변경
+    //TODO: ImageSave 필드값 사진이름 = imageName, base64 저장경로 = encodeData로 변경
     private String imageName; // 사진 이름
     private String encodedData; // base64 저장경로
 
@@ -64,4 +64,17 @@ public class User {
         this.role = role;
         this.createdAt = createdAt;
     }
+
+    //프로필 업데이트 setter
+    public void setUpdateDTO(UserRequest.UpdateDTO reqDTO, String encodedData) {
+        this.username = reqDTO.getUsername();
+        this.password = reqDTO.getPassword();
+        this.tel = reqDTO.getTel();
+        this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
+        this.imageName = reqDTO.getImageName();
+        this.encodedData = encodedData;
+    }
+
+
 }

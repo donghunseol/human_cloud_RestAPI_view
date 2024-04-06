@@ -46,16 +46,7 @@ public class UserRequest {
         private String email; // 이메일
         private String address; // 주소
         private String imageName; // 사진 이름
-        private String encodedData; // base64 저장경로
+        private MultipartFile  encodedData; // base64 저장경로
 
-        public UpdateDTO(String username, String password, String tel, String email, String address, String imageName, String encodedData) {
-            this.username = username;
-            this.password = password;
-            this.tel = tel;
-            this.email = email;
-            this.address = address;
-            this.imageName = imageName;
-            this.encodedData = encodedData;
-        }
     }
 }

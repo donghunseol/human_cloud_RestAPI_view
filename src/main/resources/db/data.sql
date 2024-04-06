@@ -1,5 +1,5 @@
 -- user
--- //TODO: 더미 변경 image 삭제 후 imageName, encodedData 추가.
+-- //TODO: 더미 변경 image 컬럼 삭제 후 imageName, encodedData 추가.
 -- 개인
 insert into user_tb(username, password, name, tel, birth, email, address, image_name, encoded_data, role, created_at)
 values
