@@ -1,6 +1,7 @@
 package com.example.project_v2.apply;
 
 import com.example.project_v2._core.util.ApiUtil;
+import com.example.project_v2.resume.ResumeService;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApplyController {
 
     private final ApplyService applyService;
+    private final ResumeService resumeService;
     private final HttpSession session;
 
     // 합격 불합격
@@ -33,11 +35,11 @@ public class ApplyController {
     }
 
     // 지원할 이력서 선택
-    @GetMapping("/applies/{id}/resume-save")
-    public String resumeSave(@PathVariable Integer id) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        applyService.findById(id, sessionUser);
-        return "redirect:/index";
+    @GetMapping("/applies/{resumeId}/resume-save")
+    public String resumeSave(@PathVariable Integer resumeId) {
+        session.setAttribute("selectResume", resumeId);
+
+        return "redirect:/";
     }
 
     // 지원 취소
@@ -50,7 +52,7 @@ public class ApplyController {
 
     // 지원하기
     @PostMapping("/applies/{id}")
-    public ResponseEntity<?> save(@RequestBody ApplyRequest.SaveDTO reqDTO) {
+    public ResponseEntity<?> save(ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);
         return ResponseEntity.ok(new ApiUtil<>(respDTO));

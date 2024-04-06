@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 {{#notice}}
-    <form action="/apply/{{id}}/save" class="bg-light" method="post">
+    <form action="/applies/{{id}}" class="bg-light" method="post">
         <input hidden="hidden" id="noticeId" name="noticeId" value="{{id}}"></input>
         <div class="d-flex justify-content-center" style="padding: 30px 200px;">
             <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
@@ -66,7 +66,7 @@
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-5">
             {{#selectResume}}
-                <input id="resumeId" name="resumeId" value="{{selectResume.id}}" type="hidden">
+                <input id="resumeId" name="resumeId" value="{{selectResume}}" type="hidden">
                 <button type="submit" class="btn btn-secondary">이력서 제출</button>
             {{/selectResume}}
             {{^selectResume}}
