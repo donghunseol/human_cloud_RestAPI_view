@@ -36,7 +36,8 @@ public class ApplyController {
     @GetMapping("/applies/{id}/resume-save")
     public String resumeSave(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        applyService.findById(id, sessionUser);
+        ApplyResponse.SelectResumeDTO respDTO = applyService.findById(id, sessionUser);
+        session.setAttribute("apply", respDTO);
         return "redirect:/index";
     }
 

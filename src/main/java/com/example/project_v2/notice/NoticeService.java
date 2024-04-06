@@ -29,6 +29,11 @@ public class NoticeService {
     public NoticeResponse.DTO update(Integer noticeId, NoticeRequest.UpdateDTO reqDTO, User sessionUser, List<String> skillNames) throws Exception404 {
         Notice notice = noticeJPARepository.findById(noticeId)
                 .orElseThrow(() -> new Exception404("존재하지 않는 공고입니다."));
+
+        if (sessionUser.getId() != notice.getUser().getId()) {
+            throw new Exception403("공고를 수정할 권한이 없습니다.");
+        }
+
         notice.setTitle(reqDTO.getTitle());
         notice.setType(reqDTO.getType());
         notice.setField(reqDTO.getField());

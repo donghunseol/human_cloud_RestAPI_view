@@ -34,14 +34,14 @@
 
                 <div class="mb-3 mt-1">
                     <label class="form-label" disabled>이미지 업로드</label><br>
-                    <input type="file" id="image" accept="image/*" name="image">
+                    <input type="file" id="image" accept="image/*" name="image" disabled>
                 </div>
                 <div class="mb-3 mt-1">
                     <span class="fw-small color-danger">※기본 정보는 회원정보 수정에서 변경하여 주세요</span>
                 </div>
             </div>
 
-            <form action="/resume/{{updateDetail.id}}/updateForm" method="post">
+            <form action="/resumes/{{updateDetail.id}}/update" method="post">
                 <!-- 이력서 제목 -->
                 <div class="container bg-white rounded-3 border border-white pt-3 pb-1 mt-4">
                     <h4>제목</h4>

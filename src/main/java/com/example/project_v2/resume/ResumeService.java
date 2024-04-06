@@ -2,6 +2,8 @@ package com.example.project_v2.resume;
 
 import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.errors.exception.Exception404;
+import com.example.project_v2.apply.ApplyJPARepository;
+import com.example.project_v2.scrap.ScrapJPARepository;
 import com.example.project_v2.skill.Skill;
 import com.example.project_v2.skill.SkillJPARepository;
 import com.example.project_v2.user.User;
@@ -19,6 +21,8 @@ import java.util.List;
 public class ResumeService {
     private final ResumeJPARepository resumeJPARepository;
     private final SkillJPARepository skillJPARepository;
+    private final ApplyJPARepository applyJPARepository;
+    private final ScrapJPARepository scrapJPARepository;
 
     @Transactional
     public ResumeResponse.DTO update(Integer resumeId, User sessionUser, ResumeRequest.UpdateDTO reqDTO) {
@@ -35,6 +39,10 @@ public class ResumeService {
         resume.setLicense(reqDTO.getLicense());
         resume.setEducation(reqDTO.getEducation());
         resume.setMajor(reqDTO.getMajor());
+        resume.setUser(sessionUser); // 세션 사용자를 공고의 사용자로 설정
+
+        // 여기까지 이력서 정보 업데이트
+        resumeJPARepository.save(resume); // 변경된 이력서 정보를 저장
 
         // 이력서에 스킬 정보 삭제 후, 추가
         if (!skillJPARepository.findByResumeId(resumeId).isEmpty()) {
@@ -52,8 +60,10 @@ public class ResumeService {
             skills.add(skill);
         }
 
-
+        // 스킬 정보를 저장하고 저장된 스킬 목록을 반환받음
         skills = skillJPARepository.saveAll(skills);
+
+        // 이력서에 저장된 스킬 목록을 설정
         resume.setSkills(skills);
 
         return new ResumeResponse.DTO(resume, sessionUser);
@@ -66,6 +76,10 @@ public class ResumeService {
         if (sessionUserId != resume.getUser().getId()) {
             throw new Exception403("이력서를 삭제할 권한이 없습니다.");
         }
+        // 공고에 연관된 모든 지원 정보 삭제
+        applyJPARepository.deleteByResumeId(resumeId);
+        scrapJPARepository.deleteByResumeId(resumeId);
+
         resumeJPARepository.deleteById(resumeId);
     }
 

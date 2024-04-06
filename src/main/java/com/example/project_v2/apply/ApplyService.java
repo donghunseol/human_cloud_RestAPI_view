@@ -21,8 +21,8 @@ public class ApplyService {
     private final ResumeJPARepository resumeJPARepository;
 
     @Transactional
-    public void delete(Integer applyId, Integer sessionUserId){
-        Apply apply  = applyJPARepository.findById(applyId)
+    public void delete(Integer applyId, Integer sessionUserId) {
+        Apply apply = applyJPARepository.findById(applyId)
                 .orElseThrow(() -> new Exception404("지원번호 찾을 수 없음"));
 
         if (apply.getUser().getId().equals(sessionUserId)) {
@@ -34,7 +34,7 @@ public class ApplyService {
 
     // 합격, 불합격
     @Transactional
-    public ApplyResponse.DTO resumePass(ApplyRequest.PassDTO passDTO, User user){
+    public ApplyResponse.DTO resumePass(ApplyRequest.PassDTO passDTO, User user) {
         Apply apply = applyJPARepository.findById(passDTO.getId())
                 .orElseThrow(() -> new Exception404("지원 번호를 찾을 수 없습니다"));
         apply.setPass(passDTO.isPass());
@@ -42,12 +42,15 @@ public class ApplyService {
         return new ApplyResponse.DTO(passApply);
     }
 
-
-
     // 이력서 조회
-    public ApplyResponse.SelectResumeDTO findById(Integer id, User sessionUser){
-       Apply apply = applyJPARepository.findById(id)
+    public ApplyResponse.SelectResumeDTO findById(Integer id, User sessionUser) {
+        Apply apply = applyJPARepository.findById(id)
                 .orElseThrow(() -> new Exception404("이력서를 찾을 수 없습니다"));
+
+        if (sessionUser.getId() != apply.getUser().getId()){
+            throw new Exception403("이력서를 조회할 권한이 없습니다");
+        }
+
         return new ApplyResponse.SelectResumeDTO(apply, sessionUser);
     }
 
