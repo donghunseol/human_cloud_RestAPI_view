@@ -126,7 +126,7 @@ public class UserController {
     }
 
     // 마이페이지 메인 (공고, 이력서 출력)
-    @GetMapping("/api/myPages")
+    @GetMapping("/myPages")
     public String myPage(@RequestParam(defaultValue = "0") int page,
                          @RequestParam(defaultValue = "10") int size,
                          @RequestParam(defaultValue = "id") String sortBy,
@@ -152,7 +152,7 @@ public class UserController {
     }
 
     // 스크랩 여부 확인
-    @GetMapping("/api/scraps/{id}")
+    @GetMapping("/scraps/{id}")
     public String scrapList(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(defaultValue = "10") int size,
                             @RequestParam(defaultValue = "id") String sortBy,
