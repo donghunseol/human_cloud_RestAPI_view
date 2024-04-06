@@ -32,7 +32,7 @@ public class SessionUser {
         this.createdAt = user.getCreatedAt();
     }
 
-    public static User toEntity(SessionUser sessionUser){
+    public static User toEntity(SessionUser sessionUser) {
         User user = new User();
         user.setId(sessionUser.getId());
         user.setUsername(sessionUser.getUsername());
@@ -44,7 +44,6 @@ public class SessionUser {
         user.setEncodedData(sessionUser.getEncodedData());
         user.setRole(sessionUser.getRole());
         user.setCreatedAt(sessionUser.getCreatedAt());
-
         return user;
     }
 }

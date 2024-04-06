@@ -13,12 +13,12 @@ import java.util.UUID;
 public class ImageSave {
 
     //TODO: 이미지 저장 메소드
-    public String saveImageFile(MultipartFile imgFilename,String imageName) {
+    public String saveImageFile(MultipartFile imgFilename, String imageName) {
         // 이미지 파일의 저장 경로 설정
         String webImgPath = null;
         if (imgFilename != null && !imgFilename.isEmpty()) {
             String guestImgFilename = UUID.randomUUID() + "_" + imageName;
-            Path imgPath = Paths.get("./image/" + guestImgFilename);
+            Path imgPath = Paths.get("./images/" + guestImgFilename);
             try {
                 Files.write(imgPath, imgFilename.getBytes());
                 webImgPath = imgPath.toString().replace("\\", "/");
@@ -32,6 +32,6 @@ public class ImageSave {
 
     //TODO: 이미지 체크 로직
     public boolean ImageCheck(MultipartFile imgFilename) {
-       return  imgFilename != null && !imgFilename.isEmpty();
+        return imgFilename != null && !imgFilename.isEmpty();
     }
 }

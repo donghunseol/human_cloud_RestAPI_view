@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 
@@ -39,7 +38,7 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    //TODO: ImageSave 필드값 사진이름 = imageName, base64 저장경로 = encodeData로 변경
+    //TODO: ImageSave 필드값 사진이름 = imageName, base64 저장경로 = encodeData로 변경, 이미지 사용하는 곳 컬럼명 머스태치 터질 예정
     private String imageName; // 사진 이름
     private String encodedData; // base64 저장경로
 
