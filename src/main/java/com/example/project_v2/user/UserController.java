@@ -37,6 +37,14 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqDTO) {
         User sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", sessionUser);
+        boolean isLoginUser = false;
+        // true 면 기업, false 면 개인
+        if (sessionUser.getRole() == 0) {
+            isLoginUser = false;
+        } else {
+            isLoginUser = true;
+        }
+        session.setAttribute("isLoginUser", isLoginUser);
         return "redirect:/";
     }
 
@@ -161,7 +169,7 @@ public class UserController {
         return "myPage/main";
     }
 
-    // 스크랩 여부 확인
+    // 스크랩 목록 확인
     @GetMapping("/scraps/{id}")
     public String scrapList(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(defaultValue = "10") int size,
@@ -171,13 +179,12 @@ public class UserController {
                             HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-
         Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
         List<ScrapResponse.ScrapListDTO> respDTO = scrapService.scrapList(sessionUser.getId(), id, pageable);
         request.setAttribute("scrapList", respDTO);
 
-        return "/scrap/main";
+        return "scrap/main";
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
