@@ -72,7 +72,7 @@ public class UserService {
             webImgPath = imageSave.saveImageFile(reqDTO.getEncodedData(), reqDTO.getImageName());
         }
 
-        user.setUpdateDTO(reqDTO, webImgPath != null ? webImgPath : user.getEncodedData());
+        user.setUpdateDTO(reqDTO, webImgPath != null ? webImgPath : user.getImageFileName());
         return user;
     }
 
@@ -126,18 +126,19 @@ public class UserService {
 
     // 마이페이지
     public List<?> getMyPage(User sessionUser, Pageable pageable) {
+
         List<?> myPageList = new ArrayList<>();
 
         if (sessionUser != null) { // 로그인시
             if (sessionUser.getRole() == 1) { // 기업
                 // Role이 1인 경우 Resume 리스트 반환
                 myPageList = noticeJPARepository.findByUser(sessionUser, pageable).stream()
-                        .map(notice -> new NoticeResponse.NoticeListDTO((Notice) notice))
+                        .map(NoticeResponse.NoticeListDTO::new)
                         .toList();
             } else {
                 // Role이 0인 경우 Notice 리스트 반환
                 myPageList = resumeJPARepository.findByUser(sessionUser, pageable).stream()
-                        .map(resume -> new ResumeResponse.ResumeListDTO((Resume) resume))
+                        .map(ResumeResponse.ResumeListDTO::new)
                         .toList();
             }
         } else { // 로그인을 하지 않을 경우

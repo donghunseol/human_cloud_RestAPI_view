@@ -41,11 +41,11 @@
 
 <!--                                TODO: 이미지 카드 클래스 추가 ,style="width: 60%;"추가 뷰 수정필요-->
                                 <div class="card" style="width: 30%;">
-                                    <img class="card-img-top" id="imgPreview" src="/images/{{user.encodedData}}">
+                                    <img class="card-img-top" id="imgPreview" src="/images/{{user.imageFileName}}">
                                     <div class="card-body">
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="encodedData"
-                                                   value="{{user.encodedData}}" onchange="previewImage(this)">
+                                                   value="{{user.imageFileName}}" onchange="previewImage(this)">
                                         </div>
                                     </div>
                                 </div>
