@@ -1,5 +1,6 @@
 package com.example.project_v2.user;
 
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.util.ApiUtil;
 import com.example.project_v2.apply.Apply;
 import com.example.project_v2.apply.ApplyResponse;
@@ -192,8 +193,13 @@ public class UserController {
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
     @GetMapping("/myPages/{id}/select-list")
-    public String myPageList(@PathVariable("id") Integer userId, HttpServletRequest request) {// 사용자가 지원한 공고 정보 조회
-        List<Apply> applies = userService.findAppliesByUserId(userId);
+    public String myPageList(@PathVariable("id") Integer userId, HttpServletRequest request) {// 사용자가 지원한 공고 정보
+        User sessionUser = (User) session.getAttribute("sessionUser");
+
+        if(sessionUser.getId() != userId){
+            throw new Exception403("권한이 없습니다");
+        }
+        List<Apply> applies = userService.findAppliesByUserId(sessionUser);
 
         // 응답 객체 구성
         List<ApplyResponse.UserListDTO> responseList = applies.stream()

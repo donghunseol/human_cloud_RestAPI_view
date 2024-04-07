@@ -23,4 +23,10 @@ public interface ApplyJPARepository extends JpaRepository<Apply, Integer> {
 
     @Query("SELECT a FROM Apply a JOIN FETCH a.user u JOIN FETCH a.notice n WHERE a.user.id = :userId")
     List<Apply> findAppliesByUserId(@Param("userId") Integer userId);
+
+    @Query("SELECT a FROM Apply a JOIN FETCH a.user u JOIN FETCH a.notice n WHERE a.notice.user.id = :userId")
+    List<Apply> findAppliesByNoticeUserId(@Param("userId") Integer userId);
+
+    @Query("SELECT a FROM Apply a JOIN FETCH a.user u JOIN FETCH a.notice n WHERE a.resume.user.id = :userId")
+    List<Apply> findAppliesByResumeUserId(@Param("userId") Integer userId);
 }

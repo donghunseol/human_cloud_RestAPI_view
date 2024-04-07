@@ -97,11 +97,11 @@ values (1, '생각하고 배울 자세가 되어있습니다.', '5년', '정보�
 
 -- notice
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
-values (7, '(주)네이버', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303', now());
+values (5, '(주)네이버', '고용형태1', '개발분야1', '근무지1', '공고 내용1', '20240303', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '구글', '고용형태2', '개발분야2', '근무지2', '공고 내용2', '20240404', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
-values (7, '(주)네이버', '고용형태3', '개발분야3', '근무지3', '공고 내용3', '20240505', now());
+values (6, '(주)네이버', '고용형태3', '개발분야3', '근무지3', '공고 내용3', '20240505', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
 values (5, '구글', '고용형태4', '개발분야4', '근무지4', '공고 내용4', '20240606', now());
 insert into notice_tb(user_id, title, type, field, work_place, content, deadline, created_at)
@@ -156,5 +156,9 @@ values (null, 2, 'sql', 0);
 -- apply
 insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
 values (1, 1, 1, false, now());
+insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
+values (2, 1, 1, false, now());
+insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
+values (1, 2, 2, false, now());
 insert into apply_tb(user_id, resume_id, notice_id, pass, created_at)
 values (2, 2, 2, false, now());

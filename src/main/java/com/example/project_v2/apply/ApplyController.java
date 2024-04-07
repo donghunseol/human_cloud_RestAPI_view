@@ -45,15 +45,15 @@ public class ApplyController {
     public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.delete(id, sessionUser.getId());
-        return "/myPage/select-list";
+        return "myPage/select-list";
     }
 
     // 지원하기
     @PostMapping("/applies/{id}")
-    public ResponseEntity<?> save(ApplyRequest.SaveDTO reqDTO) {
+    public String save(ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        return "myPage/select-list";
     }
 }
 
