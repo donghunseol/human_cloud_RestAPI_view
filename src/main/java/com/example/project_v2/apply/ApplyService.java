@@ -24,7 +24,6 @@ public class ApplyService {
     public void delete(Integer applyId, Integer sessionUserId) {
         Apply apply = applyJPARepository.findById(applyId)
                 .orElseThrow(() -> new Exception404("지원번호 찾을 수 없음"));
-
         if (apply.getUser().getId().equals(sessionUserId)) {
             applyJPARepository.deleteById(applyId);
         } else {

@@ -45,7 +45,7 @@ public class ApplyController {
     public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.delete(id, sessionUser.getId());
-        return "myPage/select-list";
+        return "redirect:/myPages/" + sessionUser.getId() + "/select-list";
     }
 
     // 지원하기
@@ -53,7 +53,7 @@ public class ApplyController {
     public String save(ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);
-        return "myPage/select-list";
+        return "redirect:/myPages/{id}/select-list";
     }
 }
 
