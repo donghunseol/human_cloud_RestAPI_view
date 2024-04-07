@@ -67,9 +67,7 @@
         {{#sessionUser}}
             {{#selectResume}}
                 <form action="/applies/{{id}}" class="bg-light" method="post">
-                    <input type="hidden" name="resumeId" value="{{id}}">
                     <input type="hidden" name="noticeId" value="{{notice.id}}">
-                    <input type="hidden" name="pass" value="{{pass}}">
                     <input type="hidden" name="resumeId" value="{{selectResume}}" id="resumeId">
                     <button type="submit" class="btn btn-secondary">이력서 제출</button>
                 </form>
