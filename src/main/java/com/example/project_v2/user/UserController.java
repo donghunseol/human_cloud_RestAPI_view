@@ -84,7 +84,8 @@ public class UserController {
     public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
 
         User sessionUser = (User) session.getAttribute("sessionUser");
-        userService.update(sessionUser.getId(), reqDTO);
+        User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
+        session.setAttribute("sessionUser", newSessionUser);
         return "redirect:/myPages";
     }
 
