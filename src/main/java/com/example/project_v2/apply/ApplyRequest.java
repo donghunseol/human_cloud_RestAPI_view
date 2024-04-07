@@ -19,7 +19,7 @@ public class ApplyRequest {
         public Apply toEntity(User user, Notice notice, Resume resume){
             return Apply.builder()
                     .user(user)
-                    .pass(pass)
+                    .pass(true)
                     .resume(resume)
                     .notice(notice)
                     .build();
