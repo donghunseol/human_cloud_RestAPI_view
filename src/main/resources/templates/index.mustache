@@ -5,7 +5,12 @@
         <div class="content_list" style="width: calc(100% - 300px);">
             <div class="list_item d-flex justify-content-center flex-column w-100 bg-white rounded-3"
                  style="margin-right: 20px;padding: 20px;">
-                <span class="resume_correction h5 fw-bold">공고 목록</span>
+                {{#isLoginUser}}
+                    <span class="resume_correction h5 fw-bold">이력서 목록</span>
+                {{/isLoginUser}}
+                {{^isLoginUser}}
+                    <span class="resume_correction h5 fw-bold">공고 목록</span>
+                {{/isLoginUser}}
                 <div class="correction_list p-3 pt-0 border-top pt-3 mt-3">
 
                     {{#resumeList}}
@@ -15,7 +20,7 @@
                                     <div class="d-flex justify-content-start">
                                         <div class="content_logo h-100" style="width: 100px;">
                                             <img class="logo_size mw-100 w-100"
-                                                 src="/images/{{image}}">
+                                                 src="/images/{{imageFileName}}">
                                         </div>
                                         <div>
                                             <p class="card-title mb-0"><strong>{{title}}</strong></p>
@@ -25,7 +30,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <a href="api/resumes/{{id}}/detail"
+                                        <a href="/resumes/{{id}}/detail"
                                            class="btn btn-outline-secondary">상세보기
                                         </a>
                                     </div>
@@ -40,7 +45,7 @@
                     <div class="item_result border-0 w-100 d-flex border-top border-dark" style="padding: 20px 0px;">
                         <div class="content_logo h-100" style="width: 100px;">
                             <img class="logo_size mw-100 w-100"
-                                 src="/images/{{image}}">
+                                 src="/images/{{imageFileName}}">
                         </div>
                         <div class="content_item" style="width: calc(100% - 120px);">
                             <div class="item_box d-flex justify-content-between ml-5" style="min-height: 10px;">
@@ -75,7 +80,7 @@
              style="width: 300px;height: 120px;margin: 0px 20px;padding: 20px;">
             <span class="h5 fw-bold">보유 기술 검색</span>
             <form class="sidebar_box d-flex justify-content-center" action="/" method="get">
-                <input type="search" class="sidebar_box_input form-control mr-5" placeholder="검색" name="keyword">
+                <input type="search" class="sidebar_box_input form-control mr-5" placeholder="검색" name="skillName">
                 <button class="btn btn-outline-success border-0" type="submit">
                     <i class="fas fa-search text-black"></i>
                 </button>

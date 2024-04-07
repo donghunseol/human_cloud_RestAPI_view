@@ -33,12 +33,11 @@ public class ApplyController {
     }
 
     // 지원할 이력서 선택
-    @GetMapping("/applies/{id}/resume-save")
-    public String resumeSave(@PathVariable Integer id) {
-        User sessionUser = (User) session.getAttribute("sessionUser");
-        ApplyResponse.SelectResumeDTO respDTO = applyService.findById(id, sessionUser);
-        session.setAttribute("apply", respDTO);
-        return "redirect:/index";
+    @GetMapping("/applies/{resumeId}/resume-save")
+    public String resumeSave(@PathVariable Integer resumeId) {
+        session.setAttribute("selectResume", resumeId);
+
+        return "redirect:/";
     }
 
     // 지원 취소
@@ -46,15 +45,15 @@ public class ApplyController {
     public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.delete(id, sessionUser.getId());
-        return "/myPage/select-list";
+        return "myPage/select-list";
     }
 
     // 지원하기
     @PostMapping("/applies/{id}")
-    public ResponseEntity<?> save(@RequestBody ApplyRequest.SaveDTO reqDTO) {
+    public String save(ApplyRequest.SaveDTO reqDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         ApplyResponse.DTO respDTO = applyService.save(reqDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        return "myPage/select-list";
     }
 }
 

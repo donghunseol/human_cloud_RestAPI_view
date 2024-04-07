@@ -1,7 +1,6 @@
 package com.example.project_v2.love;
 
-import com.example.project_v2.board.Board;
-import com.example.project_v2.user.User;
+import com.example.project_v2.board.Board;import com.example.project_v2.user.User;
 import lombok.Data;
 
 public class LoveRequest {
