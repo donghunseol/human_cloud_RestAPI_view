@@ -30,7 +30,7 @@ public class ApplyController {
             throw new Exception403("권한이 없습니다.");
         } // 권한(기업 로그인 했을때만 유효)이 없으면 안됨
 
-        ApplyResponse.DTO respDTO = applyService.resumePass(passDTO, sessionUser);
+        ApplyResponse.DTO respDTO = applyService.resumePass(passDTO);
         return "redirect:/myPages/"+sessionUser.getId()+"/select-list";
     }
 
