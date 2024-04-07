@@ -10,12 +10,18 @@
     <hr>
     <span class="h5 fw-bold pb-2">내 목록</span>
     <form class="sidebar_box d-flex flex-column mb-3" action="#">
-        <a href="/api/users/{{sessionUser.id}}/update-form"
+        <a href="/users/{{sessionUser.id}}/update-form"
            class="sidebar_link text-black text-decoration-none pb-3">회원 정보 수정</a>
-        <a href="/api/notices"
-           class="sidebar_link text-black text-decoration-none pb-3">공고 작성</a>
-        <a href="/api/scraps/{{sessionUser.id}}" class="sidebar_link text-black text-decoration-none pb-3">스크랩</a>
-        <a href="/api/myPages/{{sessionUser.id}}/select-list"
+        {{#isLoginUser}}
+            <a href="/notices/save-form"
+               class="sidebar_link text-black text-decoration-none pb-3">공고 작성</a>
+        {{/isLoginUser}}
+        {{^isLoginUser}}
+            <a href="/resumes/save-form"
+               class="sidebar_link text-black text-decoration-none pb-3">이력서 작성</a>
+        {{/isLoginUser}}
+        <a href="/scraps/{{sessionUser.id}}" class="sidebar_link text-black text-decoration-none pb-3">스크랩</a>
+        <a href="/myPages/{{sessionUser.id}}/select-list"
            class="sidebar_link text-black text-decoration-none pb-3">지원 현황</a>
         <a href="/" class="sidebar_link text-black text-decoration-none">회원탈퇴</a>
     </form>

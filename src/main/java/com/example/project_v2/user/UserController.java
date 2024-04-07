@@ -31,6 +31,14 @@ public class UserController {
     public String login(UserRequest.LoginDTO reqDTO) {
         SessionUser sessionUser = userService.login(reqDTO);
         session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
+        boolean isLoginUser = false;
+        // true 면 기업, false 면 개인
+        if (sessionUser.getRole() == 0) {
+            isLoginUser = false;
+        } else {
+            isLoginUser = true;
+        }
+        session.setAttribute("isLoginUser", isLoginUser);
         return "redirect:/";
     }
 
@@ -65,7 +73,7 @@ public class UserController {
     }
 
     // 회원 정보 수정
-    @PutMapping("/api/users/{id}")
+    @PutMapping("/users/{id}/update")
     public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
         SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
         SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
@@ -74,13 +82,13 @@ public class UserController {
     }
 
     // 회원 정보 수정 화면
-    @GetMapping("/api/users/{id}/update-form")
+    @GetMapping("/users/{id}/update-form")
     public String updateForm(@PathVariable Integer id) {
-        return "/user/update-form";
+        return "user/update-form";
     }
 
     // 로그아웃
-    @GetMapping("/api/users/logout")
+    @GetMapping("/users/logout")
     public String logout() {
         session.invalidate();
         return "redirect:/";
@@ -122,7 +130,7 @@ public class UserController {
                 request.setAttribute("noticeList", mainPageList);
             }
         }
-        return "/index";
+        return "index";
     }
 
     // 마이페이지 메인 (공고, 이력서 출력)
@@ -145,13 +153,13 @@ public class UserController {
                 request.setAttribute("resumeList", myPageList);
             }
         } else {
-            return "/user/login-form";
+            return "user/login-form";
         }
 
-        return "/myPage/main";
+        return "myPage/main";
     }
 
-    // 스크랩 여부 확인
+    // 스크랩 목록 확인
     @GetMapping("/scraps/{id}")
     public String scrapList(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(defaultValue = "10") int size,
@@ -161,17 +169,16 @@ public class UserController {
                             HttpServletRequest request) {
         User sessionUser = (User) session.getAttribute("sessionUser");
 
-
         Sort sort = Sort.by(Sort.Direction.fromString(direction), sortBy);
         Pageable pageable = PageRequest.of(page, size, sort);
         List<ScrapResponse.ScrapListDTO> respDTO = scrapService.scrapList(sessionUser.getId(), id, pageable);
         request.setAttribute("scrapList", respDTO);
 
-        return "/scrap/main";
+        return "scrap/main";
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
-    @GetMapping("/api/myPages/{id}/select-list")
+    @GetMapping("/myPages/{id}/select-list")
     public String myPageList(@PathVariable("id") Integer userId, HttpServletRequest request) {// 사용자가 지원한 공고 정보 조회
         List<Apply> applies = userService.findAppliesByUserId(userId);
 
@@ -182,7 +189,7 @@ public class UserController {
 
         request.setAttribute("applyList", responseList);
 
-        return "/myPage/select-list";
+        return "myPage/select-list";
     }
 }
 
