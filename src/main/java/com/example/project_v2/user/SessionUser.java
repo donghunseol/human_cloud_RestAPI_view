@@ -17,7 +17,6 @@ public class SessionUser {
     private String imageName;  // 사진 이름
     private String imageFileName; // 저장경로
     private Integer role;
-    private boolean isLoginUser;
     private Timestamp createdAt;
 
     public SessionUser(User user) {
@@ -32,11 +31,6 @@ public class SessionUser {
         this.imageFileName = user.getImageFileName();
         this.role = user.getRole();
         this.createdAt = user.getCreatedAt();
-        this.isLoginUser = false;
-        // true 면 기업, false 면 개인
-        if (user.getRole() == 1) {
-            isLoginUser = true;
-        }
     }
 
     public static User toEntity(SessionUser sessionUser) {

@@ -39,6 +39,14 @@ public class UserController {
         User sessionUser = userService.login(reqDTO);
         System.out.println("sessionUser = " + sessionUser);
         session.setAttribute("sessionUser", sessionUser);
+        boolean isLoginUser = false;
+        // true 면 기업, false 면 개인
+        if (sessionUser.getRole() == 0) {
+            isLoginUser = false;
+        } else {
+            isLoginUser = true;
+        }
+        session.setAttribute("isLoginUser", isLoginUser);
         return "redirect:/";
     }
 
