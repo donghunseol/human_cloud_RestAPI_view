@@ -91,7 +91,7 @@ public class ResumeController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         reqDTO.toEntity(sessionUser);
         resumeService.update(id, sessionUser, reqDTO, skillNames);
-        return "myPage/main";
+        return "redirect:/resumes/{id}/detail";
     }
 
     // 이력서 상세 보기

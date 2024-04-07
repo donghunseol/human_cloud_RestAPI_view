@@ -37,6 +37,7 @@ public class ApplyRequest {
                     .user(user)
                     .notice(notice)
                     .resume(resume)
+                    .pass(false)
                     .build();
         }
     }
