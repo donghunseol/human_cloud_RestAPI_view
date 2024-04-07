@@ -59,7 +59,7 @@ public class UserController {
     @PostMapping("/users/join")
     public String join(UserRequest.JoinDTO reqDTO) {
         userService.join(reqDTO);
-        return "redirect:/user/login-form";
+        return "redirect:/users/login-form";
     }
 
     // 회원가입(username) 중복 확인

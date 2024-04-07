@@ -73,7 +73,7 @@ public class ResumeController {
     public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         resumeService.delete(id, sessionUser.getId());
-        return "myPage/main";
+        return "redirect:/myPages";
     }
 
     // 이력서 수정 페이지

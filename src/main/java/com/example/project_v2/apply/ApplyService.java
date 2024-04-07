@@ -72,6 +72,4 @@ public class ApplyService {
         Apply apply = applyJPARepository.save(reqDTO.toEntity(sessionUser, optionalNotice.orElse(null), optionalResume.orElse(null)));
         return new ApplyResponse.DTO(apply);
     }
-
-
 }
