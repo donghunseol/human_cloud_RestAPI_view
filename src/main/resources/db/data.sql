@@ -1,7 +1,7 @@
 -- user
--- //TODO: 더미 변경 image 컬럼 삭제 후 imageName, encodedData 추가.
+-- //TODO: 더미 변경 image 컬럼 삭제 후 image_name,image_file_name 추가.
 -- 개인
-insert into user_tb(username, password, name, tel, birth, email, address, image_name, encoded_data, role, created_at)
+insert into user_tb(username, password, name, tel, birth, email, address, image_name, image_file_name, role, created_at)
 values
     ('ssar', '1234', '김진환', '01012345678', '010101', 'ssar@nate.com', '쌀도 쌀시 쌀구 쌀동', 'person11.jpg', 'person11.jpg', 0, now()),
     ('cos', '1234', '온빛나', '01087654321', '020202', 'cos@nate.com', '코스도 코스시 코스구 코스동', 'person02.jpg', 'person02.jpg', 0, now()),
@@ -9,7 +9,7 @@ values
     ('hello', '1234', '남궁채', '01012341234', '030303', 'love@nate.com', '러브도 러브시 러브구 러브동', 'person04.jpg', 'person04.jpg', 0, now());
 
 -- 기업
-insert into user_tb(username, password, name, tel, birth, email, address, image_name, encoded_data, role, created_at)
+insert into user_tb(username, password, name, tel, birth, email, address, image_name, image_file_name, role, created_at)
 values ('comssar', '1234', '쌀회사', '01012344321', '111111', 'ssar@naver.com', '쌀도 쌀시 쌀구 쌀동', 'google.png', 'google.png', 1, now()),
     ('comcos', '1234', '코스회사', '01043211234', '110222', 'cos@naver.com', '코스도 코스시 코스구 코스동', 'kakao.jpg', 'kakao.jpg', 1, now()),
     ('comlove', '1234', '러브회사', '01011111111', '130313', 'love@naver.com', '러브도 러브시 러브구 러브동', 'naver.png', 'naver.png', 1, now());

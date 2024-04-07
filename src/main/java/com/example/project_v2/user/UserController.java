@@ -36,6 +36,7 @@ public class UserController {
     @PostMapping("/users/login")
     public String login(UserRequest.LoginDTO reqDTO) {
         User sessionUser = userService.login(reqDTO);
+        System.out.println("sessionUser = " + sessionUser);
         session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
@@ -82,7 +83,8 @@ public class UserController {
     // 회원 정보 수정 화면
     @GetMapping("/users/{id}/update-form")
     public String updateForm(@PathVariable Integer id,HttpServletRequest request) {
-        //TODO: 서비스 빼야함.
+
+        //TODO: 서비스로 빼야함
         User user = userJPARepository.findById(id).get();
         request.setAttribute("user",user);
         return "user/update-form";
