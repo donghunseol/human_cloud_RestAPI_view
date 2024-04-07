@@ -45,7 +45,7 @@ public class ApplyController {
     public String delete(@PathVariable Integer id) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         applyService.delete(id, sessionUser.getId());
-        return "redirect:/myPages/{id}/select-list";
+        return "redirect:/myPages/" + sessionUser.getId() + "/select-list";
     }
 
     // 지원하기
