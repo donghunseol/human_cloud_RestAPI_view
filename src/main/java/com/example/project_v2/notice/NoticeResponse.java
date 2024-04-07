@@ -43,7 +43,7 @@ public class NoticeResponse {
         private String username;
         private String title;
         private String deadline;
-        private String image;
+        private String imageFileName;
 
         private List<SkillDTO> skills = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class NoticeResponse {
             this.username = notice.getUser().getUsername();
             this.title = notice.getTitle();
             this.deadline = notice.getDeadline();
-            this.image = notice.getUser().getImage();
+            this.imageFileName = notice.getUser().getImageFileName();
 
             this.skills = notice.getSkills().stream().map(skill -> new SkillDTO(skill)).toList();
         }

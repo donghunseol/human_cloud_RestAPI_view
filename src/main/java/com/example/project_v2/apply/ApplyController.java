@@ -1,7 +1,6 @@
 package com.example.project_v2.apply;
 
 import com.example.project_v2._core.util.ApiUtil;
-import com.example.project_v2.resume.ResumeService;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class ApplyController {
 
     private final ApplyService applyService;
-    private final ResumeService resumeService;
     private final HttpSession session;
 
     // 합격 불합격

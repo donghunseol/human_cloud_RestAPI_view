@@ -48,7 +48,7 @@ public class NoticeController {
 //        return "index";
 //    }
 
-    @GetMapping("/api/notice/save-form")
+    @GetMapping("/notices/save-form")
     public String saveForm(HttpServletRequest request) {
         User userInfo = (User) session.getAttribute("sessionUser");
         request.setAttribute("userInfo", userInfo);
@@ -57,10 +57,10 @@ public class NoticeController {
     }
 
     // 공고 작성
-    @PostMapping("/api/notices")
-    public String save(NoticeRequest.SaveDTO reqDTO) {
+    @PostMapping("/notices/save")
+    public String save(NoticeRequest.SaveDTO reqDTO, @RequestParam("skillNames") List<String> skillNames) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        noticeService.save(reqDTO, sessionUser);
+        noticeService.save(reqDTO, sessionUser, skillNames);
         return "redirect:/";
     }
 
