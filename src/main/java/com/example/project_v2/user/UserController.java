@@ -3,6 +3,8 @@ package com.example.project_v2.user;
 import com.example.project_v2._core.util.ApiUtil;
 import com.example.project_v2.apply.Apply;
 import com.example.project_v2.apply.ApplyResponse;
+import com.example.project_v2.resume.Resume;
+import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.scrap.ScrapResponse;
 import com.example.project_v2.scrap.ScrapService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,12 +27,16 @@ public class UserController {
     private final UserService userService;
     private final ScrapService scrapService;
     private final HttpSession session;
+    private final UserJPARepository userJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
+
+
 
     // 로그인
     @PostMapping("/users/login")
     public String login(UserRequest.LoginDTO reqDTO) {
-        SessionUser sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
+        User sessionUser = userService.login(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
         boolean isLoginUser = false;
         // true 면 기업, false 면 개인
         if (sessionUser.getRole() == 0) {
@@ -69,21 +75,24 @@ public class UserController {
     // 회원 가입 페이지
     @GetMapping("/users/join-form")
     public String joinForm() {
-        return "/user/join-form";
+        return "user/join-form";
     }
 
     // 회원 정보 수정
-    @PutMapping("/users/{id}/update")
+    @PostMapping("/users/{id}/update")
     public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
-        session.setAttribute("sessionUser", newSessionUser);
-        return "redirect:/api/myPages";
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        userService.update(sessionUser.getId(), reqDTO);
+        return "redirect:/myPages";
     }
 
     // 회원 정보 수정 화면
     @GetMapping("/users/{id}/update-form")
-    public String updateForm(@PathVariable Integer id) {
+    public String updateForm(@PathVariable Integer id,HttpServletRequest request) {
+        //TODO: 서비스 빼야함.
+        User user = userJPARepository.findById(id).get();
+        request.setAttribute("user",user);
         return "user/update-form";
     }
 
@@ -132,6 +141,7 @@ public class UserController {
         }
         return "index";
     }
+
 
     // 마이페이지 메인 (공고, 이력서 출력)
     @GetMapping("/myPages")

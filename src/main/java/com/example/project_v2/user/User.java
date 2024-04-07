@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
 
@@ -39,18 +38,18 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    private String image; // 이미지 경로만 저장
+    //TODO: ImageSave 필드값 사진이름 = imageName, base64 저장경로 = encodeData로 변경, 이미지 사용하는 곳 컬럼명 머스태치 터질 예정
+    private String imageName; // 사진 이름
+    private String encodedData; // base64 저장경로
 
     @Column(nullable = false)
     private Integer role;
-
-    @Column(nullable = false)
 
     @CreationTimestamp
     private Timestamp createdAt;
 
     @Builder
-    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String image, Integer role) {
+    public User(Integer id, String username, String password, String name, String tel, String birth, String email, String address, String imageName, String encodedData, Integer role, Timestamp createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -59,7 +58,22 @@ public class User {
         this.birth = birth;
         this.email = email;
         this.address = address;
-        this.image = image;
+        this.imageName = imageName;
+        this.encodedData = encodedData;
         this.role = role;
+        this.createdAt = createdAt;
     }
+
+    //프로필 업데이트 setter
+    public void setUpdateDTO(UserRequest.UpdateDTO reqDTO, String encodedData) {
+        this.username = reqDTO.getUsername();
+        this.password = reqDTO.getPassword();
+        this.tel = reqDTO.getTel();
+        this.email = reqDTO.getEmail();
+        this.address = reqDTO.getAddress();
+        this.imageName = reqDTO.getImageName();
+        this.encodedData = encodedData;
+    }
+
+
 }
