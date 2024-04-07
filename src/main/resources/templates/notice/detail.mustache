@@ -67,15 +67,15 @@
         {{#sessionUser}}
             {{#selectResume}}
                 <form action="/applies/{{id}}" class="bg-light" method="post">
+                    <input type="hidden" name="resumeId" value="{{id}}">
+                    <input type="hidden" name="noticeId" value="{{notice.id}}">
                     <input id="resumeId" name="resumeId" value="{{selectResume}}" type="hidden">
                     <button type="submit" class="btn btn-secondary">이력서 제출</button>
                 </form>
             {{/selectResume}}
             {{^selectResume}}
                 <form action="/applies/{{id}}">
-                    <input type="hidden" name="resumeId" value="{{id}}">
-                    <input type="hidden" name="noticeId" value="{{notice.id}}">
-                    <button type="submit" class="btn btn-secondary">이력서 제출</button>
+                    <button type="submit" class="btn btn-secondary" disabled>이력서 제출</button>
                     <span>※ 마이페이지에서 이력서를 선택해주세요.</span>
                 </form>
             {{/selectResume}}
