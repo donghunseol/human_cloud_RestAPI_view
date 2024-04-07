@@ -16,7 +16,7 @@
                                             <div class="d-flex justify-content-start">
                                                 <div class="content_logo h-100" style="width: 100px;">
                                                     <img class="logo_size mw-100 w-100"
-                                                         src="/images/{{image}}">
+                                                         src="/images/{{imageFileName}}">
                                                 </div>
                                                 <div>
                                                     <p class="card-title mb-0"><strong>{{title}}
@@ -30,10 +30,10 @@
                                                 <form class="mb-2" action="/applies/{{id}}/resume-save" method="get">
                                                     <button id="resumeBtn" class="btn btn-outline-secondary w-100">선택하기</button>
                                                 </form>
-                                                <a href="/resume/{{id}}/detailForm"
+                                                <a href="/resumes/{{id}}/detail"
                                                    class="btn btn-outline-secondary w-100 mb-2">상세보기
                                                 </a>
-                                                <form action=" resume/{{id}}/delete" method="post">
+                                                <form action="/resumes/{{id}}/delete" method="post">
                                                     <button class="btn btn-outline-secondary w-100">삭제
                                                     </button>
                                                 </form>

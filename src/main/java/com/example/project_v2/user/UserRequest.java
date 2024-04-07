@@ -15,6 +15,8 @@ public class UserRequest {
         private String birth; // 생년월일
         private String email; // 이메일
         private String address; // 주소
+        private String imageName; // 이미지 이름
+        private String imageFileName; // 이미지 파일 이름
         private Integer role; // 개인, 기업 구분
 
         public User toEntity(){
@@ -26,6 +28,8 @@ public class UserRequest {
                     .birth(birth)
                     .email(email)
                     .address(address)
+                    .imageName(imageName)
+                    .imageFileName(imageFileName)
                     .role(role)
                     .build();
         }

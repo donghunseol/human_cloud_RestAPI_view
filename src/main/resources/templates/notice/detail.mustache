@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 {{#notice}}
     <input hidden="hidden" id="noticeId" name="noticeId" value="{{id}}"></input>
-    <div class="d-flex justify-content-center" style="padding: 30px 200px;">
+    <div class="d-flex justify-content-center bg-light" style="padding: 30px 200px;">
         <div class="d-flex flex-column justify-content-center p-4 border rounded-3 border-white bg-white">
             <div>
                 <h2><b>{{title}}</b></h2>
@@ -72,7 +72,9 @@
                 </form>
             {{/selectResume}}
             {{^selectResume}}
-                <form action="/api/myPages">
+                <form action="/applies/{{id}}">
+                    <input type="hidden" name="resumeId" value="{{id}}">
+                    <input type="hidden" name="noticeId" value="{{notice.id}}">
                     <button type="submit" class="btn btn-secondary">이력서 제출</button>
                     <span>※ 마이페이지에서 이력서를 선택해주세요.</span>
                 </form>
