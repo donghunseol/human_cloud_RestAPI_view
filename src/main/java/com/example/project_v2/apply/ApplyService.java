@@ -24,7 +24,7 @@ public class ApplyService {
     public void delete(Integer applyId, Integer sessionUserId) {
         Apply apply = applyJPARepository.findById(applyId)
                 .orElseThrow(() -> new Exception404("지원번호 찾을 수 없음"));
-        if (apply.getUser().getId().equals(sessionUserId)) {
+        if (apply.getUser().getId().equals(sessionUserId) || apply.getNotice().getUser().getId().equals(sessionUserId)) {
             applyJPARepository.deleteById(applyId);
         } else {
             throw new Exception403("삭제할 권한이 없습니다.");
@@ -33,10 +33,10 @@ public class ApplyService {
 
     // 합격, 불합격
     @Transactional
-    public ApplyResponse.DTO resumePass(ApplyRequest.PassDTO passDTO, User user) {
+    public ApplyResponse.DTO resumePass(ApplyRequest.PassDTO passDTO) {
         Apply apply = applyJPARepository.findById(passDTO.getId())
                 .orElseThrow(() -> new Exception404("지원 번호를 찾을 수 없습니다"));
-        apply.setPass(passDTO.isPass());
+        apply.setPass(true);
         Apply passApply = applyJPARepository.save(apply);
         return new ApplyResponse.DTO(passApply);
     }

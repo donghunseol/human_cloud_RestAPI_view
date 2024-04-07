@@ -1,5 +1,7 @@
 package com.example.project_v2.apply;
 
+import com.example.project_v2._core.errors.exception.Exception401;
+import com.example.project_v2._core.errors.exception.Exception403;
 import com.example.project_v2._core.util.ApiUtil;
 import com.example.project_v2.user.User;
 import jakarta.servlet.http.HttpSession;
@@ -16,20 +18,20 @@ public class ApplyController {
     private final ApplyService applyService;
     private final HttpSession session;
 
-    // 합격 불합격
+    // 합격
     @PostMapping("/applies/pass/{id}")
-    public ResponseEntity<?> resumePass(@PathVariable Integer id, @RequestBody ApplyRequest.PassDTO passDTO) {
+    public String resumePass(@PathVariable Integer id, ApplyRequest.PassDTO passDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiUtil<>(401, "로그인이 필요합니다."));
+            throw new Exception401("로그인이 필요합니다.");
         } // 로그인 안되어 있으면 로그인 해야함
 
         if (sessionUser.getRole() != 1) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ApiUtil<>(403, "권한이 없습니다."));
+            throw new Exception403("권한이 없습니다.");
         } // 권한(기업 로그인 했을때만 유효)이 없으면 안됨
 
-        ApplyResponse.DTO respDTO = applyService.resumePass(passDTO, sessionUser);
-        return ResponseEntity.ok(new ApiUtil<>(respDTO));
+        ApplyResponse.DTO respDTO = applyService.resumePass(passDTO);
+        return "redirect:/myPages/"+sessionUser.getId()+"/select-list";
     }
 
     // 지원할 이력서 선택

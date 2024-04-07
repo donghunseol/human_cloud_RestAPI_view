@@ -72,7 +72,7 @@
                                                 {{#isLoginUser}}
                                                     <div class="d-flex flex-column w-100">
                                                         <form class="d-flex justify-content-end"
-                                                              action="/applies/{{id}}/delete" method="post">
+                                                              action="/applies/pass/{{id}}" method="post">
                                                             <button type="submit" class="btn btn-outline-secondary mb-1  w-50">합격
                                                             </button>
                                                         </form>
@@ -82,7 +82,7 @@
                                                             </button>
                                                         </form>
                                                         <form class="d-flex justify-content-end"
-                                                              action="/resumes/{{resumeId}}"
+                                                              action="/resumes/{{resumeId}}/detail"
                                                               method="get">
                                                             <button type="submit"
                                                                     class="btn btn-outline-secondary w-50">
