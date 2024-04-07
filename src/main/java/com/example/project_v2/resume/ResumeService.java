@@ -122,8 +122,8 @@ public class ResumeService {
     }
 
     // 이력서 리스트(개인)
-    public List<ResumeResponse.ResumeListDTO> resumeListByUser(User user, Pageable pageable) {
-        List<Resume> resumeList = resumeJPARepository.findByUser(user, pageable);
+    public List<ResumeResponse.ResumeListDTO> resumeListByUser(User sessionUser, Pageable pageable) {
+        List<Resume> resumeList = resumeJPARepository.findByUser(sessionUser, pageable);
         return resumeList.stream().map(resume -> new ResumeResponse.ResumeListDTO(resume)).toList();
     }
 }

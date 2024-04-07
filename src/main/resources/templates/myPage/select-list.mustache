@@ -22,29 +22,29 @@
                                                 <p class="card-text"><small>마감일 : {{deadLine}}</small></p>
                                             </div>
 
-                                            {{#sessionUser.isLoginUser}}
+                                            {{#isLoginUser}}
                                                 <div class="d-flex flex-column w-100">
                                                     <form class="d-flex justify-content-end"
                                                           action="/applies/{{id}}/delete" method="post">
-                                                        <button type="submit" class="btn btn-outline-secondary w-50">합격
+                                                        <button type="submit" class="btn btn-outline-secondary mb-1  w-50">합격
                                                         </button>
                                                     </form>
                                                     <form class="d-flex justify-content-end"
                                                           action="/applies/{{id}}/delete" method="post">
-                                                        <button type="submit" class="btn btn-outline-secondary w-50">불합격
+                                                        <button type="submit" class="btn btn-outline-secondary mb-1  w-50">불합격
                                                         </button>
                                                     </form>
                                                     <form class="d-flex justify-content-end"
                                                           action="/resumes/{{resumeId}}"
                                                           method="get">
                                                         <button type="submit"
-                                                                class="btn btn-outline-secondary mb-1 w-50">
+                                                                class="btn btn-outline-secondary w-50">
                                                             상세보기
                                                         </button>
                                                     </form>
                                                 </div>
-                                            {{/sessionUser.isLoginUser}}
-                                            {{^sessionUser.isLoginUser}}
+                                            {{/isLoginUser}}
+                                            {{^isLoginUser}}
                                                 <div class="d-flex flex-column w-100">
                                                     <form class="d-flex justify-content-end"
                                                           action="/notices/{{noticeId}}"
@@ -60,7 +60,7 @@
                                                         </button>
                                                     </form>
                                                 </div>
-                                            {{/sessionUser.isLoginUser}}
+                                            {{/isLoginUser}}
                                         </div>
                                     </div>
                                 {{/applyList}}

@@ -74,6 +74,4 @@ public class User {
         this.imageName = reqDTO.getImageName();
         this.imageFileName = imageFileName;
     }
-
-
 }
