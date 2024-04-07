@@ -13,15 +13,15 @@
         <a href="/users/{{sessionUser.id}}/update-form"
            class="sidebar_link text-black text-decoration-none pb-3">회원 정보 수정</a>
 
-        {{#isLoginUser}}
+        {{#sessoinUser.isLoginUser}}
             <a href="/notices/save-form"
                class="sidebar_link text-black text-decoration-none pb-3">공고 작성</a>
             <a href="/scraps/{{sessionUser.id}}" class="sidebar_link text-black text-decoration-none pb-3">스크랩</a>
-        {{/isLoginUser}}
-        {{^isLoginUser}}
+        {{/sessoinUser.isLoginUser}}
+        {{^sessoinUser.isLoginUser}}
             <a href="/resumes/save-form"
                class="sidebar_link text-black text-decoration-none pb-3">이력서 작성</a>
-        {{/isLoginUser}}
+        {{/sessoinUser.isLoginUser}}
         <a href="/myPages/{{sessionUser.id}}/select-list"
            class="sidebar_link text-black text-decoration-none pb-3">지원 현황</a>
     </form>

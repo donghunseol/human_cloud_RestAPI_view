@@ -39,14 +39,6 @@ public class UserController {
         User sessionUser = userService.login(reqDTO);
         System.out.println("sessionUser = " + sessionUser);
         session.setAttribute("sessionUser", sessionUser);
-        boolean isLoginUser = false;
-        // true 면 기업, false 면 개인
-        if (sessionUser.getRole() == 0) {
-            isLoginUser = false;
-        } else {
-            isLoginUser = true;
-        }
-        session.setAttribute("isLoginUser", isLoginUser);
         return "redirect:/";
     }
 
@@ -83,7 +75,6 @@ public class UserController {
     // 회원 정보 수정
     @PostMapping("/users/{id}/update")
     public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
-
         User sessionUser = (User) session.getAttribute("sessionUser");
         User newSessionUser = userService.update(sessionUser.getId(), reqDTO);
         session.setAttribute("sessionUser", newSessionUser);
