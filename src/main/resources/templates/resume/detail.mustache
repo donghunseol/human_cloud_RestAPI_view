@@ -144,13 +144,21 @@
                         <!--                        </div>-->
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-center mt-3 pb-3 mt-4">
-                        <form action="/resumes/{{resumeDetail.id}}/update-form" method="get">
-                            <button class="btn btn-secondary">수정하기</button>
-                        </form>
-                        <button onclick="location.href='/myPages'"
-                                type="button"
-                                class="btn btn-outline-secondary"> 목록 보기
-                        </button>
+                        {{#resumeDetail.isComp}}
+                            <button onclick="history.back()"
+                                    type="button"
+                                    class="btn btn-outline-secondary"> 이전
+                            </button>
+                        {{/resumeDetail.isComp}}
+                        {{^resumeDetail.isComp}}
+                            <form action="/resumes/{{resumeDetail.id}}/update-form" method="get">
+                                <button class="btn btn-secondary">수정하기</button>
+                            </form>
+                            <button onclick="location.href='/myPages'"
+                                    type="button"
+                                    class="btn btn-outline-secondary"> 목록 보기
+                            </button>
+                        {{/resumeDetail.isComp}}
                     </div>
                 </div>
             </div>
