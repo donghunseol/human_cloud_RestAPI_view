@@ -46,6 +46,7 @@ public class UserRequest {
         private String email; // 이메일
         private String address; // 주소
         private String imageName; // 사진 이름
-        private String encodedData; // base64 저장
+        private MultipartFile  encodedData; // base64 저장경로
+
     }
 }

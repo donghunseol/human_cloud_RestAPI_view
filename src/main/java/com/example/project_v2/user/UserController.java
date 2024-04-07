@@ -3,6 +3,8 @@ package com.example.project_v2.user;
 import com.example.project_v2._core.util.ApiUtil;
 import com.example.project_v2.apply.Apply;
 import com.example.project_v2.apply.ApplyResponse;
+import com.example.project_v2.resume.Resume;
+import com.example.project_v2.resume.ResumeJPARepository;
 import com.example.project_v2.scrap.ScrapResponse;
 import com.example.project_v2.scrap.ScrapService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,12 +27,16 @@ public class UserController {
     private final UserService userService;
     private final ScrapService scrapService;
     private final HttpSession session;
+    private final UserJPARepository userJPARepository;
+    private final ResumeJPARepository resumeJPARepository;
+
+
 
     // 로그인
     @PostMapping("/users/login")
     public String login(UserRequest.LoginDTO reqDTO) {
-        SessionUser sessionUser = userService.login(reqDTO);
-        session.setAttribute("sessionUser", SessionUser.toEntity(sessionUser));
+        User sessionUser = userService.login(reqDTO);
+        session.setAttribute("sessionUser", sessionUser);
         return "redirect:/";
     }
 
@@ -61,26 +67,29 @@ public class UserController {
     // 회원 가입 페이지
     @GetMapping("/users/join-form")
     public String joinForm() {
-        return "/user/join-form";
+        return "user/join-form";
     }
 
     // 회원 정보 수정
-    @PutMapping("/api/users/{id}")
+    @PostMapping("/users/{id}/update")
     public String update(@PathVariable Integer id, UserRequest.UpdateDTO reqDTO) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-        SessionUser newSessionUser = userService.update(sessionUser.getId(), reqDTO);
-        session.setAttribute("sessionUser", newSessionUser);
-        return "redirect:/api/myPages";
+
+        User sessionUser = (User) session.getAttribute("sessionUser");
+        userService.update(sessionUser.getId(), reqDTO);
+        return "redirect:/myPages";
     }
 
     // 회원 정보 수정 화면
-    @GetMapping("/api/users/{id}/update-form")
-    public String updateForm(@PathVariable Integer id) {
-        return "/user/update-form";
+    @GetMapping("/users/{id}/update-form")
+    public String updateForm(@PathVariable Integer id,HttpServletRequest request) {
+        //TODO: 서비스 빼야함.
+        User user = userJPARepository.findById(id).get();
+        request.setAttribute("user",user);
+        return "user/update-form";
     }
 
     // 로그아웃
-    @GetMapping("/api/users/logout")
+    @GetMapping("/users/logout")
     public String logout() {
         session.invalidate();
         return "redirect:/";
@@ -122,8 +131,9 @@ public class UserController {
                 request.setAttribute("noticeList", mainPageList);
             }
         }
-        return "/index";
+        return "index";
     }
+
 
     // 마이페이지 메인 (공고, 이력서 출력)
     @GetMapping("/myPages")
@@ -145,10 +155,10 @@ public class UserController {
                 request.setAttribute("resumeList", myPageList);
             }
         } else {
-            return "/user/login-form";
+            return "user/login-form";
         }
 
-        return "/myPage/main";
+        return "myPage/main";
     }
 
     // 스크랩 여부 확인
@@ -171,7 +181,7 @@ public class UserController {
     }
 
     // 마이 페이지 - 지원한 공고 (공고 출력 / 이력서 신청 여부)
-    @GetMapping("/api/myPages/{id}/select-list")
+    @GetMapping("/myPages/{id}/select-list")
     public String myPageList(@PathVariable("id") Integer userId, HttpServletRequest request) {// 사용자가 지원한 공고 정보 조회
         List<Apply> applies = userService.findAppliesByUserId(userId);
 
@@ -182,7 +192,7 @@ public class UserController {
 
         request.setAttribute("applyList", responseList);
 
-        return "/myPage/select-list";
+        return "myPage/select-list";
     }
 }
 
