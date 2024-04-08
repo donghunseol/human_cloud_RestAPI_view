@@ -60,7 +60,15 @@ public class UserService {
         return user;
     }
 
-    //TODO: 프로필 완료
+
+    // 회원 정보 수정 유저 가져오기
+    public User getUser(Integer id) {
+        User user = userJPARepository.findById(id)
+                .orElseThrow(() -> new Exception404("존재 하지 않는 계정입니다"));
+        return user;
+    }
+
+    //프로필 완료
     @Transactional
     public User update(Integer id, UserRequest.UpdateDTO reqDTO) {
         User user = userJPARepository.findById(id)
