@@ -92,9 +92,7 @@ public class UserController {
     // 회원 정보 수정 화면
     @GetMapping("/users/{id}/update-form")
     public String updateForm(@PathVariable Integer id,HttpServletRequest request) {
-
-        //TODO: 서비스로 빼야함
-        User user = userJPARepository.findById(id).get();
+        User user = userService.getUser(id);
         request.setAttribute("user",user);
         return "user/update-form";
     }

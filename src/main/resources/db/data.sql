@@ -1,5 +1,4 @@
 -- user
--- //TODO: 더미 변경 image 컬럼 삭제 후 image_name,image_file_name 추가.
 -- 개인
 insert into user_tb(username, password, name, tel, birth, email, address, image_name, image_file_name, role, created_at)
 values

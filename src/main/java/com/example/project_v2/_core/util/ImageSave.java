@@ -12,7 +12,7 @@ import java.util.UUID;
 @Controller
 public class ImageSave {
 
-    //TODO: 이미지 저장 메소드
+    //이미지 저장 메소드
     public String saveImageFile(MultipartFile imgFilename, String imageName) {
         // 이미지 파일의 저장 경로 설정
         String webImgPath = null;
@@ -30,7 +30,7 @@ public class ImageSave {
         return webImgPath;
     }
 
-    //TODO: 이미지 체크 로직
+    //이미지 체크 로직
     public boolean ImageCheck(MultipartFile imgFilename) {
         return imgFilename != null && !imgFilename.isEmpty();
     }

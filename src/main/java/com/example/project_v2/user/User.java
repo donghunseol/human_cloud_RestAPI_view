@@ -38,7 +38,7 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-    //TODO: ImageSave 필드값 사진이름 = imageName, 저장경로 = imageFileName 변경
+    //ImageSave 필드값 사진이름 = imageName, 저장경로 = imageFileName 변경
     private String imageName; // 사진 이름
     private String imageFileName; // 저장경로
 
