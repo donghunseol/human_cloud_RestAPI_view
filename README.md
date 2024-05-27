@@ -12,7 +12,7 @@
 - image base64로 변환
 
 # 시연영상
-
+[3조 시연 영상](https://youtu.be/imRPNsESinA?si=MiTCwWKLbCOJd-Ni)
 
 # 발표자료
 [3조_이력서_홈페이지_제작_PPT.pdf](https://drive.usercontent.google.com/u/0/uc?id=1MbFXF5yFTtzqYftx6La-jFZwx9N559hm&export=download)
